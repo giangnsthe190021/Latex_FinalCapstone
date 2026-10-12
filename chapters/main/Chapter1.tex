@@ -1,59 +1,9 @@
 \chapter{Introduction}
-Provides background information, introduces the research problem, and outlines the purpose and significance of the study.
-\textit{Below are suggested section names, project groups and instructors can change to suit their project.}
+
 \section{Background}
-Illustration for list of tables:
+The Internet of Things (IoT) connects physical objects, sensors, and various devices through communication networks, enabling data-driven services in domains such as healthcare, industrial automation, and smart environments. Alongside the expansion of IoT deployments, the number of connected components exposed to cybersecurity threats increases correspondingly~\cite{atzori2010}. The Message Queuing Telemetry Transport (MQTT) protocol is commonly used for lightweight publish-subscribe communication in IoT environments. However, MQTT-based systems can become targets for denial-of-service (DoS) and distributed denial-of-service (DDoS) attacks. The DoS/DDoS-MQTT-IoT dataset, collected from a physical IoT testbed, provides normal MQTT traffic alongside ten DoS attack scenarios to facilitate the study of attacks in this context~\cite{alatram2023}. Intrusion Detection Systems (IDS) monitor network activity to identify traffic or behavior exhibiting malicious signs. Machine learning and deep learning methods have been utilized and researched for this task due to their ability to learn characteristic patterns directly from network traffic. Their effectiveness depends partly on the availability and representativeness of the training data~\cite{he2009}. Federated Learning (FL) allows multiple clients to collaboratively train a shared model while keeping their data local; a central server distributes the global model and aggregates updates from clients across training rounds~\cite{mcmahan2017}. This approach is highly suitable when IoT data is distributed across multiple devices or locations, although communication and computational costs remain critical factors to consider in resource-constrained environments~\cite{shi2016, imteaj2022}. Keeping data local also does not equate to completely eliminating privacy concerns arising from the exchange of model updates~\cite{zhu2019}.
 
-\begin{table}
-	\centering
-	\renewcommand{\arraystretch}{1.4}
-	\begin{tabular}{|p{3.5cm}|p{6cm}|p{5cm}|}
-		\hline
-		\textbf{Type of Threat} & \textbf{Description} & \textbf{Impact} \\ \hline
-		
-		Hacking &
-		Unauthorized access to systems or networks &
-		Data theft, loss of confidentiality \\ \hline
-		
-		Phishing &
-		Fraudulent attempts to obtain sensitive information &
-		Identity theft, financial loss \\ \hline
-		
-		Malware &
-		Malicious software designed to damage or disrupt systems &
-		Data loss, system downtime \\ \hline
-		
-		Insider Attacks &
-		Security breaches from within the organization &
-		Compromised data, reputational damage \\ \hline
-		
-	\end{tabular}
-	
-	\caption{ Types of Cyber Threats and Their Impact on Organizations.}
-\end{table}
-
-Illustration for list of figures:
-\begin{figure}
-	\centering
-	\includegraphics[scale=0.7]{graphics/chapter1/Stratergy}
-	\caption{The Layers of Information Security.}
-	\label{fig:1}
-\end{figure}
-
-The image illustrates a five-level cybersecurity protection pyramid, showing how different layers of security build upon each other.
-
-At the base, the pyramid starts with Basic Security Protection, which emphasizes cyber hygiene and ensuring the safety of everyday internet users.
-
-Above this is Critical Asset Protection, focusing on compliance with the NIS directive for \gls{dsp} and \gls{oes}.
-
-The third layer, Digital Single Market Protection, covers threats such as cyber attacks, cyber crime, cyber espionage, and cyber sabotage.
-
-The next tier, \gls{gsp}, broadens the scope to cyber norms, cyber diplomacy, cyber defence, and cyber warfare, highlighting their importance for international cybersecurity cooperation.
-At the top of the pyramid, Democracy and Human Rights Protection addresses areas such as cyber ethics, cyber democracy, and cyber human rights, reinforcing the \gls{eu}’s core values in a digital society.
-
-
-
-This layered structure demonstrates how essential security fundamentals support higher-level societal protections in the digital ecosystem \cite{R1,R2}.
+Privacy-preserving synthetic data generation is a potential solution to address the shortage of training data for rare attack classes in IoT networks while still ensuring strict security guarantees. Rather than relying on deep neural networks that require substantial computational resources and face convergence difficulties on edge devices~\cite{behera2022fedsyn}, the probabilistic graphical model paradigm (Probabilistic Graphical Models) approaches the problem by decomposing tabular data into low-dimensional marginal frequency distribution slices (low-dimensional marginals)~\cite{zhang2017privbayes}. Through the Chow-Liu dependency tree structure (Chow-Liu Tree)~\cite{chow1968}, this approach effectively captures the core correlations between traffic features and attack labels without being affected by the curse of dimensionality. When combined with Differential Privacy (DP)~\cite{zhang2017privbayes} on contingency tables and consistent graphical inference mechanisms (such as Private-PGM), the system can reconstruct a valid global distribution to generate conditional traffic data, establishing a foundation to enhance the performance of downstream intrusion detection systems (IDS)~\cite{mckenna2019pgm, mckenna2024aim}.
 \section{Problem Statement}
 \section{Research Objectives}
 \section{Significance of the Study}
