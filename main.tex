@@ -39,9 +39,17 @@
 {\Large\bfseries}                        % Title format
 
 \titlespacing*{\chapter}{0pt}{\chaptertopmargin}{30pt}
-%===========using package===============
 \usepackage{multirow}
 \usepackage[numbers,sort&compress]{natbib}
+\usepackage{microtype}
+\DeclareMicrotypeSet{allfonts}{encoding=*}
+\UseMicrotypeSet[expansion]{allfonts}
+% ========== CHỐNG GẠCH NỐI TỰ ĐỘNG TÁCH TỪ CUỐI DÒNG ==========
+\hyphenpenalty=10000      % Tắt tự động tách từ (như pro-tected, communica-tion)
+\exhyphenpenalty=10000    % Tắt tách từ tại dấu gạch nối (không để gạch nối ở cuối dòng)
+\tolerance=1200
+\emergencystretch=1.5em
+\frenchspacing            % Đồng nhất khoảng cách sau dấu câu (dấu hai chấm, dấu chấm) giống khoảng cách giữa các từ
 % ========== BỎ HEADER TRÊN TRANG CHAPTER ==========
 \copypagestyle{chapter}{plain}
 \makeoddhead{chapter}{}{}{}

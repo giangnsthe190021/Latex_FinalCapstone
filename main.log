@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.5)  12 OCT 2026 22:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.5)  12 OCT 2026 22:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1882,52 +1882,81 @@ Package: natbib 2010/09/13 8.31b (PWD, AO)
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count472
 )
-(chapters/front/glossaries.tex)
+(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype.sty
+Package: microtype 2026/03/01 v3.2d Micro-typographical refinements (RS)
+\MT@toks=\toks62
+\MT@tempbox=\box86
+\MT@count=\count473
+LaTeX Info: Redefining \noprotrusionifhmode on input line 1084.
+LaTeX Info: Redefining \leftprotrusion on input line 1085.
+\MT@prot@toks=\toks63
+LaTeX Info: Redefining \rightprotrusion on input line 1104.
+LaTeX Info: Redefining \textls on input line 1449.
+\MT@outer@kern=\dimen397
+LaTeX Info: Redefining \microtypecontext on input line 2053.
+LaTeX Info: Redefining \textmicrotypecontext on input line 2070.
+\MT@listname@count=\count474
+
+(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype-pdf
+tex.def
+File: microtype-pdftex.def 2026/03/01 v3.2d Definitions specific to pdftex (RS)
+
+LaTeX Info: Redefining \lsstyle on input line 944.
+LaTeX Info: Redefining \lslig on input line 944.
+\MT@outer@space=\skip291
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+
+(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype.cfg
+File: microtype.cfg 2026/03/01 v3.2d microtype main configuration file (RS)
+)
+LaTeX Info: Redefining \microtypesetup on input line 3065.
+) (chapters/front/glossaries.tex)
 \glswrite=\write5
 \glo@main@file=\write6
 \openout6 = `main.glo'.
 
-Package glossaries Info: Writing glossary file main.glo on input line 53.
+Package glossaries Info: Writing glossary file main.glo on input line 61.
 \glo@acronym@file=\write7
 \openout7 = `main.acn'.
 
-Package glossaries Info: Writing glossary file main.acn on input line 53.
+Package glossaries Info: Writing glossary file main.acn on input line 61.
  (main.aux (chapters/front/head.aux)
 (chapters/front/thanks.aux))
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for T5/cmr/m/n on input line 57.
-LaTeX Font Info:    Trying to load font information for T5+cmr on input line 57
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for T5/cmr/m/n on input line 65.
+LaTeX Font Info:    Trying to load font information for T5+cmr on input line 65
 .
 
 (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/vntex\t5cmr.fd
 File: t5cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
 
 
 Class memoir Warning: \addtodef is marked deprecated and will be
 (memoir)              removed in 2026, use instead \patchcmd,
 (memoir)              \pretocmd or \apptocmd from the etoolbox package
-(memoir)              (which is autoloaded by the class) on input line 57.
+(memoir)              (which is autoloaded by the class) on input line 65.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1967,17 +1996,17 @@ Class memoir Warning: \addtodef is marked deprecated and will be
 (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count473
-\scratchdimen=\dimen397
-\scratchbox=\box86
-\nofMPsegments=\count474
-\nofMParguments=\count475
-\everyMPshowfont=\toks62
-\MPscratchCnt=\count476
-\MPscratchDim=\dimen398
-\MPnumerator=\count477
-\makeMPintoPDFobject=\count478
-\everyMPtoPDFconversion=\toks63
+\scratchcounter=\count475
+\scratchdimen=\dimen398
+\scratchbox=\box87
+\nofMPsegments=\count476
+\nofMParguments=\count477
+\everyMPshowfont=\toks64
+\MPscratchCnt=\count478
+\MPscratchDim=\dimen399
+\MPnumerator=\count479
+\makeMPintoPDFobject=\count480
+\everyMPtoPDFconversion=\toks65
 )
 (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
 ase.sty
@@ -2007,21 +2036,52 @@ Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
 )
 Package caption Info: rotating package is loaded.
 Package caption Info: scrextend package is loaded.
-\caption@addmargin@hsize=\dimen399
-\caption@addmargin@linewidth=\dimen400
+\caption@addmargin@hsize=\dimen400
+\caption@addmargin@linewidth=\dimen401
 Package caption Info: supertabular package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring ON on input line 57.
+Package hyperref Info: Link coloring ON on input line 65.
 
 (main.out) (main.out)
 \@outlinefile=\write8
 \openout8 = `main.out'.
 
-\c@lstlisting=\count479
+\c@lstlisting=\count481
+Package microtype Info: Patching varwidth to enable character protrusion.
+\MT@vwid@leftmargin=\dimen402
+\MT@vwid@rightmargin=\dimen403
+LaTeX Info: Redefining \microtypecontext on input line 65.
+Package microtype Info: Applying patch `item' on input line 65.
+Package microtype Info: Applying patch `toc' on input line 65.
+Package microtype Info: Applying patch `eqnum' on input line 65.
+
+
+Package microtype Warning: Unable to apply patch `footnote' on input line 65.
+
+Package microtype Info: Applying patch `verbatim' on input line 65.
+LaTeX Info: Redefining \microtypesetup on input line 65.
+Package microtype Info: Generating PDF output.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using default protrusion set `alltext'.
+Package microtype Info: Automatic font expansion enabled (level 2),
+(microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
+Package microtype Info: Using expansion set `allfonts'.
+Package microtype Info: Patching command `\showhyphens'.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of interword spacing.
+Package microtype Info: No adjustment of character kerning.
+(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-ptm.cfg
+File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
+)
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/m/n/13'. Switching off
+(microtype)                protrusion for this font on input line 65.
+
 \openout2 = `chapters/front/head.aux'.
 
- (chapters/front/head.tex
-<graphics/Image/logo.jpg, id=154, 515.9275pt x 172.645pt>
+(chapters/front/head.tex
+<graphics/Image/logo.jpg, id=162, 515.9275pt x 172.645pt>
 File: graphics/Image/logo.jpg Graphic file (type jpg)
 <use graphics/Image/logo.jpg>
 Package pdftex.def Info: graphics/Image/logo.jpg  used on input line 11.
@@ -2031,12 +2091,46 @@ Overfull \hbox (43.5336pt too wide) in paragraph at lines 11--12
 [][] 
  []
 
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/b/n/13'. Switching off
+(microtype)                protrusion for this font on input line 16.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/m/n/22.46396'. Switching off
+(microtype)                protrusion for this font on input line 22.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/b/n/22.46396'. Switching off
+(microtype)                protrusion for this font on input line 22.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/m/n/20'. Switching off
+(microtype)                protrusion for this font on input line 24.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/b/n/20'. Switching off
+(microtype)                protrusion for this font on input line 24.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/m/n/15'. Switching off
+(microtype)                protrusion for this font on input line 27.
+
 LaTeX Font Info:    Calculating math sizes for size <15> on input line 31.
 LaTeX Font Info:    Trying to load font information for OT1+ztmcm on input line
  31.
 (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ztmcm.fd
 File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
 )
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `ztmcm' (encoding: OT1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
 LaTeX Font Info:    Trying to load font information for OML+ztmcm on input line
  31.
 
@@ -2067,6 +2161,13 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <11.10008> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 31.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9.00009> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 31.
+
+(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
+(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+)
 LaTeX Font Info:    Calculating math sizes for size <13> on input line 38.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <13> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 38.
@@ -2097,76 +2198,114 @@ pData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc} <./graphics/Image/logo
 
 
 
-] (main.toc [3
+]
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/m/n/32.34409'. Switching off
+(microtype)                protrusion for this font on input line 74.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/b/n/32.34409'. Switching off
+(microtype)                protrusion for this font on input line 74.
+
+(main.toc [3
 
 
 ]) [4] (main.lof) [5
 
-]
-(main.lot) [6
+] (main.lot) [6
 
-] (chapters/main/Abstract.tex) (main.gls) (main.acr [7
+] (chapters/main/Abstract.tex)
+(main.gls) (main.acr [7
 
 
 ]) [8
 
-]
-(chapters/main/Chapter1.tex
+] (chapters/main/Chapter1.tex
 Chapter 1.
+
+Underfull \hbox (badness 1178) in paragraph at lines 4--5
+\T5/ptm/m/n/13 (+20) through com-mu-ni-ca-tion net-works, en-abling data-driven
+ ser-vices in do-mains such as
+ []
+
 [1
 
 
-] [2]) (chapters/main/Chapter2.tex [3]
+] [2]
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/b/n/15'. Switching off
+(microtype)                protrusion for this font on input line 16.
+
+
+Underfull \hbox (badness 1215) in paragraph at lines 17--19
+[]\T5/ptm/m/n/13 (+20) This study pro-poses PP-FedData---a privacy-preserving f
+ed-er-ated data gen-er-a-tion
+ []
+
+[3]
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/b/n/13/-18ls'. Switching off
+(microtype)                protrusion for this font on input line 20.
+
+[4]) (chapters/main/Chapter2.tex [5]
 Chapter 2.
-) (chapters/main/Chapter3.tex [4
+) (chapters/main/Chapter3.tex [6
 
 ]
 Chapter 3.
-) (chapters/main/Chapter4.tex [5
+) (chapters/main/Chapter4.tex [7
 
 ]
 Chapter 4.
-) (chapters/main/Chapter5.tex [6
+) (chapters/main/Chapter5.tex [8
 
 ]
 Chapter 5.
-) (chapters/main/Chapter6.tex [7
+) (chapters/main/Chapter6.tex [9
 
 ]
 Chapter 6.
-) (chapters/back/apendixA.tex [8
+) (chapters/back/apendixA.tex [10
 
 ]
 Appendix A.
-) (main.bbl [9
+) (main.bbl [11
 
 ]
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/m/it/13'. Switching off
+(microtype)                protrusion for this font on input line 11.
+
 LaTeX Font Info:    Trying to load font information for T5+cmtt on input line 5
 3.
-
 (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/vntex\t5cmtt.fd
 File: t5cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-Underfull \hbox (badness 4543) in paragraph at lines 56--62
-[]\T5/ptm/m/n/13 Ligeng Zhu, Zhi-jian Liu, and Song Han.  Deep leak-age from gr
-a-di-ents.
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/cmtt/m/n/13'. Switching off
+(microtype)                protrusion for this font on input line 53.
+
+
+Underfull \hbox (badness 4048) in paragraph at lines 56--62
+[]\T5/ptm/m/n/13 (+20) Ligeng Zhu, Zhi-jian Liu, and Song Han.  Deep leak-age f
+rom gra-di-ents.
  []
 
 
-Underfull \hbox (badness 2158) in paragraph at lines 56--62
-\T5/ptm/m/n/13 In \T5/ptm/m/it/13 Ad-vances in Neu-ral In-for-ma-tion Pro-cess-
-ing Sys-tems (NeurIPS)\T5/ptm/m/n/13 , vol-ume 32,
+Underfull \hbox (badness 1297) in paragraph at lines 56--62
+\T5/ptm/m/n/13 (+20) In \T5/ptm/m/it/13 (+20) Ad-vances in Neu-ral In-for-ma-ti
+on Pro-cess-ing Sys-tems (NeurIPS)\T5/ptm/m/n/13 (+20) , vol-ume 32,
  []
 
+[12
 
-Underfull \hbox (badness 5245) in paragraph at lines 56--62
-\T5/ptm/m/n/13 2019.  URL [][]$\T5/cmtt/m/n/13 https : / / proceedings . neurip
-s . cc / paper _ files / paper / 2019 /
- []
-
-[10
-
-]) [11
+]) [13
 runsystem(makeindex -s "kpsewhich:majorissue:Sofar,youhavenotcheckedforMiKTeXup
 dates."\main.ist -t "kpsewhich:majorissue:Sofar,youhavenotcheckedforMiKTeXupdat
 es."\main.glg -o "kpsewhich:majorissue:Sofar,youhavenotcheckedforMiKTeXupdates.
@@ -2195,26 +2334,28 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2020/03/25>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 3CC084C0EC7521F40A4E769CEB2D22E2;5565.
+(rerunfilecheck)             Checksum: 9D1C2F3A66553B1A9687545DDA2D7CD5;5956.
  ) 
 Here is how much of TeX's memory you used:
- 41717 strings out of 467871
- 795802 string characters out of 5418376
- 1380941 words of memory out of 5000000
- 69793 multiletter control sequences out of 15000+600000
- 679170 words of font info for 114 fonts, out of 8000000 for 9000
+ 43733 strings out of 467871
+ 831338 string characters out of 5418376
+ 1445120 words of memory out of 5000000
+ 71661 multiletter control sequences out of 15000+600000
+ 692870 words of font info for 180 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 123i,12n,121p,2538b,689s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/symbol/usyr.pfb
-><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/urwvn/utmb8v.p
-fb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.p
-fb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/urwvn/utmr8v
-.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/urwvn/utmr
-i8v.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnt
-t12.pfb>
-Output written on main.pdf (19 pages, 165768 bytes).
+ 123i,12n,121p,2538b,698s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
+cmmi10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmr10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/ur
+w/symbol/usyr.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/vnt
+ex/urwvn/utmb8v.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/u
+rw/times/utmr8a.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/v
+ntex/urwvn/utmr8v.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1
+/vntex/urwvn/utmri8v.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/ty
+pe1/vntex/vnr/vntt12.pfb>
+Output written on main.pdf (21 pages, 191861 bytes).
 PDF statistics:
- 371 PDF objects out of 1000 (max. 8388607)
- 74 named destinations out of 1000 (max. 500000)
- 314 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 398 PDF objects out of 1000 (max. 8388607)
+ 78 named destinations out of 1000 (max. 500000)
+ 37194 words of extra memory for PDF output out of 42996 (max. 10000000)
 
