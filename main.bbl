@@ -5,6 +5,13 @@
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
+\bibitem[Atzori et~al.(2010)Atzori, Iera, and Morabito]{atzori2010}
+Luigi Atzori, Antonio Iera, and Giacomo Morabito.
+\newblock The {Internet of Things}: A survey.
+\newblock \emph{Computer Networks}, 54\penalty0 (15):\penalty0 2787--2805,
+  2010.
+\newblock \doi{10.1016/j.comnet.2010.05.010}.
+
 \bibitem[Alatram et~al.(2023)Alatram, Sikos, Johnstone, Szewczyk, and
   Kang]{alatram2023}
 Abdulmohsen Alatram, Leslie~F. Sikos, Michael Johnstone, Peter Szewczyk, and
@@ -14,61 +21,12 @@ Abdulmohsen Alatram, Leslie~F. Sikos, Michael Johnstone, Peter Szewczyk, and
 \newblock \emph{Computer Networks}, 231:\penalty0 109809, 2023.
 \newblock \doi{10.1016/j.comnet.2023.109809}.
 
-\bibitem[Atzori et~al.(2010)Atzori, Iera, and Morabito]{atzori2010}
-Luigi Atzori, Antonio Iera, and Giacomo Morabito.
-\newblock The {Internet of Things}: A survey.
-\newblock \emph{Computer Networks}, 54\penalty0 (15):\penalty0 2787--2805,
-  2010.
-\newblock \doi{10.1016/j.comnet.2010.05.010}.
-
-\bibitem[Behera et~al.(2022)Behera, Upadhyay, Shetty, Priyadarshini, Patel, and
-  Lee]{behera2022fedsyn}
-Monik~Raj Behera, Sudhir Upadhyay, Suresh Shetty, Sudha Priyadarshini, Palka
-  Patel, and Ker~Farn Lee.
-\newblock {FedSyn}: Synthetic data generation using federated learning.
-\newblock \emph{arXiv preprint arXiv:2203.05931}, 2022.
-\newblock \doi{10.48550/arXiv.2203.05931}.
-\newblock URL \url{https://arxiv.org/abs/2203.05931}.
-
-\bibitem[Chow and Liu(1968)]{chow1968}
-C.~K. Chow and C.~N. Liu.
-\newblock Approximating discrete probability distributions with dependence
-  trees.
-\newblock \emph{IEEE Transactions on Information Theory}, 14\penalty0
-  (3):\penalty0 462--467, 1968.
-\newblock \doi{10.1109/TIT.1968.1054142}.
-
 \bibitem[He and Garcia(2009)]{he2009}
 Haibo He and Edwardo~A. Garcia.
 \newblock Learning from imbalanced data.
 \newblock \emph{IEEE Transactions on Knowledge and Data Engineering},
   21\penalty0 (9):\penalty0 1263--1284, 2009.
 \newblock \doi{10.1109/TKDE.2008.239}.
-
-\bibitem[Imteaj et~al.(2022)Imteaj, Thakker, Wang, Li, and Amini]{imteaj2022}
-Ahmed Imteaj, Urmish Thakker, Shiqiang Wang, Jian Li, and M.~Hadi Amini.
-\newblock Federated learning for resource-constrained {IoT} devices: Panoramas
-  and state-of-the-art.
-\newblock \emph{Machine Learning and Knowledge Extraction}, 2022.
-\newblock URL \url{https://arxiv.org/abs/2002.10610}.
-
-\bibitem[McKenna et~al.(2019)McKenna, Sheldon, and Miklau]{mckenna2019pgm}
-Ryan McKenna, Daniel Sheldon, and Gerome Miklau.
-\newblock Graphical-model based estimation and inference for differential
-  privacy.
-\newblock In \emph{Proceedings of the 36th International Conference on Machine
-  Learning (ICML)}, volume~97 of \emph{Proceedings of Machine Learning
-  Research}, pages 4435--4444. PMLR, 2019.
-\newblock URL \url{https://arxiv.org/abs/1901.09136}.
-
-\bibitem[McKenna et~al.(2022)McKenna, Mullins, Sheldon, and
-  Miklau]{mckenna2024aim}
-Ryan McKenna, Brett Mullins, Daniel Sheldon, and Gerome Miklau.
-\newblock {AIM}: An adaptive and iterative mechanism for differentially private
-  synthetic data.
-\newblock \emph{Proceedings of the VLDB Endowment}, 15\penalty0 (11):\penalty0
-  2599--2612, 2022.
-\newblock \doi{10.14778/3551793.3551817}.
 
 \bibitem[McMahan et~al.(2017)McMahan, Moore, Ramage, Hampson, and
   y~Arcas]{mcmahan2017}
@@ -87,6 +45,30 @@ Weisong Shi, Jie Cao, Quan Zhang, Youhuizi Li, and Lanyu Xu.
   637--646, 2016.
 \newblock \doi{10.1109/JIOT.2016.2579198}.
 
+\bibitem[Imteaj et~al.(2022)Imteaj, Thakker, Wang, Li, and Amini]{imteaj2022}
+Ahmed Imteaj, Urmish Thakker, Shiqiang Wang, Jian Li, and M.~Hadi Amini.
+\newblock Federated learning for resource-constrained {IoT} devices: Panoramas
+  and state-of-the-art.
+\newblock \emph{Machine Learning and Knowledge Extraction}, 2022.
+\newblock URL \url{https://arxiv.org/abs/2002.10610}.
+
+\bibitem[Zhu et~al.(2019)Zhu, Liu, and Han]{zhu2019}
+Ligeng Zhu, Zhijian Liu, and Song Han.
+\newblock Deep leakage from gradients.
+\newblock In \emph{Advances in Neural Information Processing Systems
+  (NeurIPS)}, volume~32, 2019.
+\newblock URL
+  \url{https://proceedings.neurips.cc/paper_files/paper/2019/file/60a6c4002cc7b29142def8871531281a-Paper.pdf}.
+
+\bibitem[Behera et~al.(2022)Behera, Upadhyay, Shetty, Priyadarshini, Patel, and
+  Lee]{behera2022fedsyn}
+Monik~Raj Behera, Sudhir Upadhyay, Suresh Shetty, Sudha Priyadarshini, Palka
+  Patel, and Ker~Farn Lee.
+\newblock {FedSyn}: Synthetic data generation using federated learning.
+\newblock \emph{arXiv preprint arXiv:2203.05931}, 2022.
+\newblock \doi{10.48550/arXiv.2203.05931}.
+\newblock URL \url{https://arxiv.org/abs/2203.05931}.
+
 \bibitem[Zhang et~al.(2017)Zhang, Cormode, Procopiuc, Srivastava, and
   Xiao]{zhang2017privbayes}
 Jun Zhang, Graham Cormode, Cecilia~M. Procopiuc, Divesh Srivastava, and Xiaokui
@@ -96,12 +78,30 @@ Jun Zhang, Graham Cormode, Cecilia~M. Procopiuc, Divesh Srivastava, and Xiaokui
   (4):\penalty0 25:1--25:41, 2017.
 \newblock \doi{10.1145/3134428}.
 
-\bibitem[Zhu et~al.(2019)Zhu, Liu, and Han]{zhu2019}
-Ligeng Zhu, Zhijian Liu, and Song Han.
-\newblock Deep leakage from gradients.
-\newblock In \emph{Advances in Neural Information Processing Systems
-  (NeurIPS)}, volume~32, 2019.
-\newblock URL
-  \url{https://proceedings.neurips.cc/paper_files/paper/2019/file/60a6c4002cc7b29142def8871531281a-Paper.pdf}.
+\bibitem[Chow and Liu(1968)]{chow1968}
+C.~K. Chow and C.~N. Liu.
+\newblock Approximating discrete probability distributions with dependence
+  trees.
+\newblock \emph{IEEE Transactions on Information Theory}, 14\penalty0
+  (3):\penalty0 462--467, 1968.
+\newblock \doi{10.1109/TIT.1968.1054142}.
+
+\bibitem[McKenna et~al.(2019)McKenna, Sheldon, and Miklau]{mckenna2019pgm}
+Ryan McKenna, Daniel Sheldon, and Gerome Miklau.
+\newblock Graphical-model based estimation and inference for differential
+  privacy.
+\newblock In \emph{Proceedings of the 36th International Conference on Machine
+  Learning (ICML)}, volume~97 of \emph{Proceedings of Machine Learning
+  Research}, pages 4435--4444. PMLR, 2019.
+\newblock URL \url{https://arxiv.org/abs/1901.09136}.
+
+\bibitem[McKenna et~al.(2022)McKenna, Mullins, Sheldon, and
+  Miklau]{mckenna2024aim}
+Ryan McKenna, Brett Mullins, Daniel Sheldon, and Gerome Miklau.
+\newblock {AIM}: An adaptive and iterative mechanism for differentially private
+  synthetic data.
+\newblock \emph{Proceedings of the VLDB Endowment}, 15\penalty0 (11):\penalty0
+  2599--2612, 2022.
+\newblock \doi{10.14778/3551793.3551817}.
 
 \end{thebibliography}

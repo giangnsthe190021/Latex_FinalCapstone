@@ -6,47 +6,47 @@ A level-1 auxiliary file: chapters/front/head.aux
 Reallocating 'name_of_file' (item size: 1) to 26 items.
 A level-1 auxiliary file: chapters/front/thanks.aux
 Reallocating 'name_of_file' (item size: 1) to 9 items.
-The style file: plainnat.bst
+The style file: unsrtnat.bst
 Reallocating 'name_of_file' (item size: 1) to 21 items.
 Database file #1: references/reference.bib
 You've used 12 entries,
-            2773 wiz_defined-function locations,
-            686 strings with 7674 characters,
-and the built_in function-call counts, 7043 in all, are:
-= -- 640
-> -- 468
+            2481 wiz_defined-function locations,
+            645 strings with 7266 characters,
+and the built_in function-call counts, 5640 in all, are:
+= -- 484
+> -- 324
 < -- 6
-+ -- 156
-- -- 144
-* -- 639
-:= -- 1081
++ -- 120
+- -- 96
+* -- 489
+:= -- 902
 add.period$ -- 50
 call.type$ -- 12
-change.case$ -- 84
+change.case$ -- 24
 chr.to.int$ -- 12
-cite$ -- 24
-duplicate$ -- 280
-empty$ -- 511
-format.name$ -- 160
-if$ -- 1467
+cite$ -- 12
+duplicate$ -- 258
+empty$ -- 477
+format.name$ -- 112
+if$ -- 1193
 int.to.chr$ -- 1
-int.to.str$ -- 1
+int.to.str$ -- 13
 missing$ -- 12
 newline$ -- 80
-num.names$ -- 48
-pop$ -- 149
+num.names$ -- 36
+pop$ -- 89
 preamble$ -- 1
-purify$ -- 72
+purify$ -- 12
 quote$ -- 0
-skip$ -- 227
+skip$ -- 155
 stack$ -- 0
 substring$ -- 299
-swap$ -- 40
+swap$ -- 52
 text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 132
+type$ -- 84
 warning$ -- 0
-while$ -- 55
+while$ -- 43
 width$ -- 0
 write$ -- 188

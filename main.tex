@@ -41,7 +41,7 @@
 \titlespacing*{\chapter}{0pt}{\chaptertopmargin}{30pt}
 %===========using package===============
 \usepackage{multirow}
-\usepackage[numbers]{natbib}
+\usepackage[numbers,sort&compress]{natbib}
 % ========== BỎ HEADER TRÊN TRANG CHAPTER ==========
 \copypagestyle{chapter}{plain}
 \makeoddhead{chapter}{}{}{}
@@ -85,7 +85,7 @@
 	\input{chapters/back/apendixA.tex}
 	
 	% ========== REFERENCES ==========
-\bibliographystyle{plainnat} % hoặc alpha, ieeetr, acm...
+\bibliographystyle{unsrtnat} % Sắp xếp theo thứ tự xuất hiện [1], [2], ...
 \bibliography{references/reference}
 
 \end{document}
