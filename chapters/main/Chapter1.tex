@@ -31,6 +31,23 @@ To fulfill the four aforementioned objectives, this research focuses on addressi
     \item \textbf{RQ4:} Which protection configuration (combining DP, SecAgg$^+$, noise distribution, and privacy protection unit) should be selected for specific real-world deployment requirements?
 \end{itemize}
 \section{Significance of the Study}
+This study addresses two fundamental bottlenecks in collaborative intrusion detection across IoT-MQTT networks: (1)~rare attack classes are sparsely and non-identically distributed across IoT Gateway devices (Non-IID), and (2)~gateways cannot share raw packet traffic data due to privacy concerns.
+
+The study offers three primary scientific and practical contributions:
+\begin{itemize}
+    \item \textbf{Marginal-Based Distributed Generator (FedDP-Marginal):} Proposes a distributed synthetic data generation solution in which marginal statistics released by individual gateways are simultaneously protected by formal Differential Privacy (DP) and Secure Aggregation (SecAgg$^+$).
+    \item \textbf{Controlled Benchmark:} Conducts a direct, head-to-head empirical comparison between the marginal-based generator (FedDP-Marginal) and the deep generative baseline (Federated CVAE) under identical data partitioning schemes, consistent privacy-preserving mechanisms, and a rigorous evaluation protocol.
+    \item \textbf{Requirement-Driven Configuration Guide:} Proposes a transparent decision guideline to assist IoT system administrators in selecting the most suitable privacy configuration based on their specific threat model, mutual trust assumptions, and practical resource budgets.
+\end{itemize}
+
+\noindent\textbf{Explicitly Stated Limitations and Privacy Guarantees:}
+
+The privacy guarantees in this study are precisely and transparently defined:
+\begin{itemize}
+    \item \textbf{Differential Privacy (DP)} provides mathematical upper bounds limiting the amount of information that released statistical tables or models can leak regarding a single data record (by default at the packet level, or optionally at the TCP stream or capture session level under specific assumptions). The DP mechanism does not anonymize class labels and does not enforce privacy guarantees on the hyperparameter tuning process conducted on validation data.
+    \item \textbf{Secure Aggregation (SecAgg$^+$)} only guarantees the confidentiality of individual gateway updates/statistics with respect to the Aggregation Server; it does not prevent what the final model or generated synthetic data might leak about the aggregate dataset.
+\end{itemize}
+
 \section{Scope and Limitations}
 \section{Thesis Structure}
 
