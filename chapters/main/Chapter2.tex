@@ -1,5 +1,33 @@
 \chapter{Literature Review}
 Reviews relevant existing research and demonstrates how your thesis fits into the broader academic conversation.
+
 \section{Review of Previous Studies}
+
+\subsection{Overview of Privacy-Preserving Mechanisms in Federated Learning}
+
+\subsubsection*{Overall Landscape and Scope of Research}
+The integration of Federated Learning (FL) into Intrusion Detection Systems (IDS) for IoT environments has resolved the issue of raw data centralization, yet the model weight sharing process itself still harbors data leakage risks~\cite{vyas2024}. To counter this, current studies classify Privacy-Preserving Federated Learning (PPFL) techniques into five main categories: Differential Privacy (DP), Homomorphic Encryption (HE), Secure Multi-Party Computation (SMPC), Trusted Execution Environments (TEE), and Blockchain~\cite{vyas2024}. Although TEEs provide a secure execution environment and Blockchain ensures transparency, they require specialized hardware or complex consensus mechanisms, which are unsuitable for the constrained resources of edge/IoT devices~\cite{manzano2025}. Therefore, this study implements DP and SMPC-based secure aggregation (SecAgg$^+$); HE is reviewed as an alternative but not implemented, because of its computational cost on constrained devices~\cite{nakayiza2026}.
+
+\subsubsection*{Trusted Execution Environment (TEE)}
+The Trusted Execution Environment (TEE) provides a completely isolated and secure hardware computing area for processing sensitive data, effectively preserving privacy. However, this technology is heavily dependent on specialized hardware security mechanisms and verifiable components. This strict hardware requirement makes TEE cumbersome and unsuitable for deployment across lightweight IoT networks comprising massively resource-constrained devices~\cite{vyas2024}.
+
+\subsubsection*{Blockchain}
+Blockchain preserves data privacy through decentralized ledgers and cryptographic algorithms that ensure tamper-resistance and eliminate the need for intermediaries. However, this system suffers from fatal performance weaknesses due to low throughput, high latency, and expensive verification costs stemming from continuously growing immutable storage. These severe latency and massive storage overheads make blockchain highly impractical for lightweight, multi-device IoT environments that demand rapid response times~\cite{vyas2024}.
+
+\subsubsection*{Homomorphic Encryption (HE)}
+HE enables computations to be performed directly on encrypted data, ensuring absolute security for model updates from clients before server aggregation without the need for decryption~\cite{nakayiza2026}. However, the computational cost and communication requirements of HE algorithms are extremely immense and heavy, leading to a surge in system latency~\cite{nakayiza2026}. This renders HE less feasible for systems requiring real-time responses and operating under resource constraints, such as IoT-based IDS~\cite{nakayiza2026}.
+
+\subsubsection*{Differential Privacy (DP)}
+Unlike the cumbersomeness of HE, Differential Privacy (DP) offers excellent scalability. The core principle of DP is to mask the contribution of any single data point by adding random noise to the model update at each client~\cite{ruzafa2022}. DP is exceptionally lightweight, consumes no extra bandwidth, and easily scales to tens of thousands of participating clients~\cite{ruzafa2022}. The tradeoff of this method is that injecting noise into the model inevitably degrades data accuracy, forcing engineers to constantly seek an optimal balance for the privacy budget~\cite{ruzafa2022}.
+
+\subsubsection*{Secure Multi-Party Computation (SMPC/SecAgg)}
+Conversely, Secure Aggregation (SecAgg) protocols based on SMPC comprehensively resolve the weakness of DP. SMPC prevents the server from directly observing individual client updates by ensuring that the server only receives the aggregated model update~\cite{bessaa2026}. Secure aggregation adds no statistical noise; with the fixed-point quantisation used by SecAgg$^+$, the aggregate differs from the plain sum only by a bounded quantisation error~\cite{bell2020}. As a trade-off, the original Secure Aggregation protocol requires multiple rounds of complex interactions between clients to exchange secret shares, causing severe bandwidth bottlenecks as the client population grows~\cite{bonawitz2017}; however, the subsequent SecAgg$^+$ protocol successfully resolves these overhead issues by replacing the complete communication graph with a $k$-regular graph, thereby reducing the per-client communication and computation complexity to a polylogarithmic scale~\cite{bell2020}.
+
+\subsubsection*{Hybrid Privacy-Preserving Systems}
+The study by Gutti et~al.~\cite{gutti2024} (integrating DP and SecAgg via the HADA algorithm) demonstrates that combining DP (to prevent inference attacks) and SecAgg (to protect the transmission channel) is a promising trajectory. However, stacking these security layers generates immense complexity in computation and hyperparameter tuning~\cite{gutti2024}. Therefore, before advancing to hybrid architectures, independently measuring the performance trade-offs between the DP pipeline and the SecAgg pipeline serves as a mandatory stepping stone to evaluate the endurance of the network system.
+
+\subsubsection*{Distributed Differential Privacy}
+Distributed DP combines the two families: each client adds only a share of the noise, and secure aggregation reveals only the sum, which carries the full calibrated noise~\cite{kairouz2021, agarwal2021}. Because secure aggregation operates on integers modulo a large number, discrete noise is preferred; the sum of independent Skellam variables is again Skellam, which permits exact privacy accounting after modular aggregation~\cite{agarwal2021}. The guarantee assumes that enough clients add their share honestly; with fewer honest clients the effective noise is smaller. Distributed DP fits releases that are a single sum, such as count tables, but not multi-step local DP-SGD, where each client's noise passes through non-linear local training before aggregation.
+
 \section{Summary of the Literature Review}
 \section{Contribution of Research}
