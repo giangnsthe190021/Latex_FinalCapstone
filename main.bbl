@@ -1,4 +1,4 @@
-\begin{thebibliography}{22}
+\begin{thebibliography}{28}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -104,54 +104,53 @@ Ryan McKenna, Brett Mullins, Daniel Sheldon, and Gerome Miklau.
   2599--2612, 2022.
 \newblock \doi{10.14778/3551793.3551817}.
 
-\bibitem[Vyas et~al.(2024)Vyas, Lin, Hwang, and Tripathi]{vyas2024}
-Abhishek Vyas, Po-Ching Lin, Ren-Hung Hwang, and Meenakshi Tripathi.
+\bibitem[Vyas et~al.(2024)Vyas, Balamurugan, Kumar, and Kotecha]{vyas2024}
+Abhishek Vyas, S.~Balamurugan, P.~Kumar, and Ketan Kotecha.
 \newblock Privacy-preserving federated learning for intrusion detection in
   {IoT} environments: A survey.
-\newblock \emph{IEEE Access}, 12:\penalty0 127602--127631, 2024.
+\newblock \emph{IEEE Access}, 12:\penalty0 130452--130478, 2024.
 \newblock \doi{10.1109/ACCESS.2024.3454211}.
 
 \bibitem[Manzano et~al.(2025)Manzano, Zaman, Upadhyay, Goel, and
   Sampalli]{manzano2025}
-Ricardo Manzano, Marzia Zaman, Dhaval Upadhyay, Nishith Goel, and Srinivas
-  Sampalli.
+Ricardo Manzano, Marzia Zaman, D.~Upadhyay, N.~Goel, and S.~Sampalli.
 \newblock Federated learning framework based on distributed storage and
   diffusion model for intrusion detection on {IoT} networks.
-\newblock \emph{IEEE Access}, 13:\penalty0 1--16, 2025.
+\newblock \emph{IEEE Access}, 13:\penalty0 79571--79595, 2025.
+\newblock \doi{10.1109/ACCESS.2025.3565409}.
 
-\bibitem[Nakayiza et~al.(2026)Nakayiza, Ahakonye, Kim, and Lee]{nakayiza2026}
-Hope~Leticia Nakayiza, Love Allen~Chijioke Ahakonye, Dong-Seong Kim, and
-  Jae~Min Lee.
+\bibitem[Nakayiza and Park(2026)]{nakayiza2026}
+Judith Nakayiza and Jong~Hyuk Park.
 \newblock {PureFL}: Trust-weighted federated learning with noise-resilient
   homomorphic encryption for blockchain-based {IoV} networks.
-\newblock \emph{IEEE Internet of Things Journal}, 13:\penalty0 1--15, 2026.
+\newblock \emph{IEEE Internet of Things Journal}, 2026.
+\newblock \doi{10.1109/JIOT.2026.3691349}.
 
 \bibitem[Ruzafa-Alc{\'a}zar et~al.(2023)Ruzafa-Alc{\'a}zar,
-  Fern{\'a}ndez-Saura, M{\'a}rmol-Campos, Gonz{\'a}lez-Vidal,
-  Hern{\'a}ndez-Ramos, Bernal-Bernab{\'e}, and Skarmeta]{ruzafa2022}
-Pedro Ruzafa-Alc{\'a}zar, Pablo Fern{\'a}ndez-Saura, Enrique M{\'a}rmol-Campos,
-  Aurora Gonz{\'a}lez-Vidal, Jos{\'e}~L. Hern{\'a}ndez-Ramos, Jorge
-  Bernal-Bernab{\'e}, and Antonio~F. Skarmeta.
+  Fern{\'a}ndez-Maim{\'o}, G{\'o}mez~M{\'a}rmol, and
+  Mart{\'i}nez~P{\'e}rez]{ruzafa2022}
+Pedro Ruzafa-Alc{\'a}zar, Pedro Fern{\'a}ndez-Maim{\'o}, F{\'e}lix
+  G{\'o}mez~M{\'a}rmol, and Gregorio Mart{\'i}nez~P{\'e}rez.
 \newblock Intrusion detection based on privacy-preserving federated learning
   for the industrial {IoT}.
 \newblock \emph{IEEE Transactions on Industrial Informatics}, 19\penalty0
   (2):\penalty0 1145--1154, 2023.
-\newblock \doi{10.1109/TII.2021.3126830}.
+\newblock \doi{10.1109/TII.2021.3126728}.
 
-\bibitem[Bessaa et~al.(2026)Bessaa, Abou El~Houda, Khoukhi, and
-  Bentafat]{bessaa2026}
-Imene Bessaa, Zakaria Abou El~Houda, Lyes Khoukhi, and Elmahdi Bentafat.
+\bibitem[Bessaa et~al.(2026)Bessaa, Senouci, and Bouzefrane]{bessaa2026}
+Chemseddine Bessaa, Mustapha~Reda Senouci, and Samia Bouzefrane.
 \newblock {FL-SQMPC}: Secure quantized aggregation for mitigating gradient
   inversion attacks in federated {IoT} intrusion detection.
-\newblock \emph{IEEE Transactions on Information Forensics and Security}, 2026.
+\newblock \emph{IEEE Journal on Selected Areas in Sensors}, 2026.
+\newblock \doi{10.1109/JSAS.2026.3725190}.
 
 \bibitem[Bell et~al.(2020)Bell, Bonawitz, Gasc{\'o}n, Lepoint, and
   Raykova]{bell2020}
-James~H. Bell, Kallista~A. Bonawitz, Adri{\`a} Gasc{\'o}n, Tancr{\`e}de
+James~Henry Bell, Kallista~A. Bonawitz, Adri{\`a} Gasc{\'o}n, Tancr{\`e}de
   Lepoint, and Mariana Raykova.
-\newblock Secure single-server aggregation with lower communication overhead.
+\newblock Secure single-server aggregation with (poly)logarithmic overhead.
 \newblock In \emph{Proceedings of the 2020 ACM SIGSAC Conference on Computer
-  and Communications Security (CCS)}, pages 729--745, 2020.
+  and Communications Security (CCS '20)}, pages 1253--1269. ACM, 2020.
 \newblock \doi{10.1145/3372297.3417885}.
 
 \bibitem[Bonawitz et~al.(2017)Bonawitz, Ivanov, Kreuter, Marcedone, McMahan,
@@ -160,28 +159,77 @@ Keith Bonawitz, Vladimir Ivanov, Ben Kreuter, Antonio Marcedone, H.~Brendan
   McMahan, Sarvar Patel, Daniel Ramage, Aaron Segal, and Karn Seth.
 \newblock Practical secure aggregation for privacy-preserving machine learning.
 \newblock In \emph{Proceedings of the 2017 ACM SIGSAC Conference on Computer
-  and Communications Security (CCS)}, pages 1175--1191, 2017.
+  and Communications Security (CCS '17)}, pages 1175--1191. ACM, 2017.
 \newblock \doi{10.1145/3133956.3133982}.
 
-\bibitem[Gutti et~al.(2024)Gutti, Thumula, and Balbudhe]{gutti2024}
-Chandu Gutti, Karthik Thumula, and Parag Balbudhe.
+\bibitem[Gutti et~al.(2025)Gutti, Kumar, and Sharma]{gutti2024}
+Chandrasekhar Gutti, R.~Kumar, and S.~Sharma.
 \newblock Federated learning for distributed {IoT} security: A
   privacy-preserving approach to intrusion detection.
-\newblock \emph{IEEE Access}, 12:\penalty0 1--14, 2024.
+\newblock \emph{IEEE Access}, 13:\penalty0 25410--25425, 2025.
+\newblock \doi{10.1109/ACCESS.2025.3592481}.
 
 \bibitem[Kairouz et~al.(2021)Kairouz, Liu, and Steinke]{kairouz2021}
 Peter Kairouz, Ziyu Liu, and Thomas Steinke.
 \newblock The distributed discrete {Gaussian} mechanism for federated learning
-  with {Secure Aggregation}.
-\newblock In \emph{Proceedings of the 38th International Conference on Machine
-  Learning (ICML)}, volume 139 of \emph{Proceedings of Machine Learning
-  Research}, pages 5201--5212. PMLR, 2021.
+  with secure aggregation.
+\newblock In \emph{Proc. 38th Int. Conf. Mach. Learn. (ICML)}, volume 139,
+  pages 5201--5212. PMLR, 2021.
+\newblock URL \url{https://arxiv.org/abs/2102.06387}.
 
 \bibitem[Agarwal et~al.(2021)Agarwal, Kairouz, and Liu]{agarwal2021}
 Naman Agarwal, Peter Kairouz, and Ziyu Liu.
 \newblock The {Skellam} mechanism for differentially private federated
   learning.
-\newblock In \emph{Advances in Neural Information Processing Systems
-  (NeurIPS)}, volume~34, pages 5040--5052, 2021.
+\newblock In \emph{Adv. Neural Inf. Process. Syst. (NeurIPS)}, volume~34, pages
+  5037--5049. Curran Associates, Inc., 2021.
+\newblock URL \url{https://arxiv.org/abs/2110.04995}.
+
+\bibitem[Deng et~al.(2025)Deng, Torim, Ben~Yahia, and Bahsi]{deng2025}
+Zhe Deng, Ants Torim, Sadok Ben~Yahia, and Hayretdin Bahsi.
+\newblock Generative {AI} in intrusion detection systems for internet of
+  things: A systematic literature review.
+\newblock \emph{IEEE Open Journal of the Communications Society}, 6:\penalty0
+  4689--4717, 2025.
+\newblock \doi{10.1109/OJCOMS.2025.3573194}.
+
+\bibitem[Chawla et~al.(2002)Chawla, Bowyer, Hall, and Kegelmeyer]{chawla2002}
+Nitesh~V. Chawla, Kevin~W. Bowyer, Lawrence~O. Hall, and W.~Philip Kegelmeyer.
+\newblock {SMOTE}: Synthetic minority over-sampling technique.
+\newblock \emph{Journal of Artificial Intelligence Research}, 16:\penalty0
+  321--357, 2002.
+\newblock \doi{10.1613/jair.953}.
+
+\bibitem[Yang et~al.(2025)Yang, Govindarajan, Por, Shaikh, Xin, Bhattacharya,
+  Khan, and Wang]{yang2025}
+Jing Yang, Vijay Govindarajan, Lip~Yee Por, Zaffar~Ahmed Shaikh, Qin Xin,
+  Pronaya Bhattacharya, Abdullah~Ayub Khan, and Yiyu Wang.
+\newblock {DDoS} attack detection in consumer {IoT}-based healthcare systems
+  using improved off-policy proximal policy optimization and generative
+  adversarial network.
+\newblock \emph{IEEE Transactions on Consumer Electronics}, 71\penalty0
+  (4):\penalty0 11662--11675, November 2025.
+\newblock \doi{10.1109/TCE.2025.3605098}.
+
+\bibitem[Jacob and Sultana(2026)]{jacob2026}
+Sneha~Leela Jacob and H.~Parveen Sultana.
+\newblock {GBOA\_SR-ShuffleNet}: An explainable federated learning framework
+  for privacy-preserving intrusion detection in {IoT}.
+\newblock \emph{Scientific Reports}, 16:\penalty0 5621, 2026.
+\newblock \doi{10.1038/s41598-026-56215-z}.
+
+\bibitem[Anandhi and Srikanth(2026)]{anandhi2026}
+R.~Anandhi and G.~Umarani Srikanth.
+\newblock Federated sparse-learning framework for detecting low-rate stealth
+  attacks in resource-constrained {IoT} devices.
+\newblock \emph{Scientific Reports}, 16:\penalty0 21298, 2026.
+\newblock \doi{10.1038/s41598-026-46531-9}.
+
+\bibitem[Durga et~al.(2026)Durga, Shankar, Daniel, and Varghese~R.]{durga2026}
+S.~Durga, M.~Gobi Shankar, Esther Daniel, and Bright~Gee Varghese~R.
+\newblock Enhancing security in {IoMT} using federated {TinyGAN} for
+  lightweight and accurate malware detection.
+\newblock \emph{Scientific Reports}, 16:\penalty0 7116, 2026.
+\newblock \doi{10.1038/s41598-026-37830-2}.
 
 \end{thebibliography}

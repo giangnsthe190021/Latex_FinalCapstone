@@ -18,25 +18,26 @@
 \contentsline {chapter}{\chapternumberline {2}Literature Review}{9}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Review of Previous Studies}{9}{section.2.1}%
 \contentsline {subsection}{\numberline {2.1.1}Overview of Privacy-Preserving Mechanisms in Federated Learning}{9}{subsection.2.1.1}%
-\contentsline {section}{\numberline {2.2}Summary of the Literature Review}{12}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Contribution of Research}{12}{section.2.3}%
-\contentsline {chapter}{\chapternumberline {3}Methodology}{13}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Research Design}{13}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Data Collection Methods}{13}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Sampling Data Analysis Techniques}{13}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Limitations of the Methodology}{13}{section.3.4}%
-\contentsline {chapter}{\chapternumberline {4}Experimental and Results}{14}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Introduction}{14}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Presentation of Data}{14}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Analysis of Results}{14}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Interpretation of Results}{14}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Comparison with Literature}{14}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Implications of the Results}{14}{section.4.6}%
-\contentsline {chapter}{\chapternumberline {5}Discussion}{15}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Restate the Research Problem or Objectives}{15}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Summarize Key Findings}{15}{section.5.2}%
-\contentsline {chapter}{\chapternumberline {6}Conclusion and Future Work}{16}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Conclusion}{16}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Future Work}{16}{section.6.2}%
-\contentsline {appendix}{\chapternumberline {A}If Any}{17}{appendix.A}%
-\contentsline {chapter}{References}{18}{chapter*.11}%
+\contentsline {subsection}{\numberline {2.1.2}Data Generation}{12}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}Summary of the Literature Review}{15}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Contribution of Research}{15}{section.2.3}%
+\contentsline {chapter}{\chapternumberline {3}Methodology}{16}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Research Design}{16}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Data Collection Methods}{16}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Sampling Data Analysis Techniques}{16}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Limitations of the Methodology}{16}{section.3.4}%
+\contentsline {chapter}{\chapternumberline {4}Experimental and Results}{17}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Introduction}{17}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Presentation of Data}{17}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Analysis of Results}{17}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Interpretation of Results}{17}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Comparison with Literature}{17}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Implications of the Results}{17}{section.4.6}%
+\contentsline {chapter}{\chapternumberline {5}Discussion}{18}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Restate the Research Problem or Objectives}{18}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Summarize Key Findings}{18}{section.5.2}%
+\contentsline {chapter}{\chapternumberline {6}Conclusion and Future Work}{19}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Conclusion}{19}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Future Work}{19}{section.6.2}%
+\contentsline {appendix}{\chapternumberline {A}If Any}{20}{appendix.A}%
+\contentsline {chapter}{References}{21}{chapter*.11}%
