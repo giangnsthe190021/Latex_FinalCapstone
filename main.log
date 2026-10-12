@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.5)  12 OCT 2026 22:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.5)  12 OCT 2026 22:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2251,29 +2251,29 @@ Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/b/n/13/-18ls'. Switching off
 (microtype)                protrusion for this font on input line 20.
 
-[4] [5]) (chapters/main/Chapter2.tex [6]
+[4] [5] [6]) (chapters/main/Chapter2.tex [7]
 Chapter 2.
-) (chapters/main/Chapter3.tex [7
+) (chapters/main/Chapter3.tex [8
 
 ]
 Chapter 3.
-) (chapters/main/Chapter4.tex [8
+) (chapters/main/Chapter4.tex [9
 
 ]
 Chapter 4.
-) (chapters/main/Chapter5.tex [9
+) (chapters/main/Chapter5.tex [10
 
 ]
 Chapter 5.
-) (chapters/main/Chapter6.tex [10
+) (chapters/main/Chapter6.tex [11
 
 ]
 Chapter 6.
-) (chapters/back/apendixA.tex [11
+) (chapters/back/apendixA.tex [12
 
 ]
 Appendix A.
-) (main.bbl [12
+) (main.bbl [13
 
 ]
 
@@ -2303,9 +2303,9 @@ Underfull \hbox (badness 1297) in paragraph at lines 56--62
 on Pro-cess-ing Sys-tems (NeurIPS)\T5/ptm/m/n/13 (+20) , vol-ume 32,
  []
 
-[13
+[14
 
-]) [14
+]) [15
 runsystem(makeindex -s "kpsewhich:majorissue:Sofar,youhavenotcheckedforMiKTeXup
 dates."\main.ist -t "kpsewhich:majorissue:Sofar,youhavenotcheckedforMiKTeXupdat
 es."\main.glg -o "kpsewhich:majorissue:Sofar,youhavenotcheckedforMiKTeXupdates.
@@ -2337,25 +2337,26 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 9D1C2F3A66553B1A9687545DDA2D7CD5;5956.
  ) 
 Here is how much of TeX's memory you used:
- 43742 strings out of 467871
- 831415 string characters out of 5418376
+ 43753 strings out of 467871
+ 831496 string characters out of 5418376
  1445120 words of memory out of 5000000
  71661 multiletter control sequences out of 15000+600000
- 693430 words of font info for 184 fonts, out of 8000000 for 9000
+ 694670 words of font info for 191 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  123i,12n,121p,2538b,698s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
 cmmi10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmr10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/ur
-w/symbol/usyr.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/vnt
-ex/urwvn/utmb8v.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/u
-rw/times/utmr8a.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/v
-ntex/urwvn/utmr8v.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1
-/vntex/urwvn/utmri8v.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/ty
-pe1/vntex/vnr/vntt12.pfb>
-Output written on main.pdf (22 pages, 194798 bytes).
+fonts/cm/cmr10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/pu
+blic/amsfonts/cm/cmsy10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts
+/type1/urw/symbol/usyr.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/
+type1/vntex/urwvn/utmb8v.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/font
+s/type1/urw/times/utmr8a.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/font
+s/type1/vntex/urwvn/utmr8v.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fo
+nts/type1/vntex/urwvn/utmri8v.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX
+/fonts/type1/vntex/vnr/vntt12.pfb>
+Output written on main.pdf (23 pages, 208498 bytes).
 PDF statistics:
- 403 PDF objects out of 1000 (max. 8388607)
- 79 named destinations out of 1000 (max. 500000)
+ 412 PDF objects out of 1000 (max. 8388607)
+ 80 named destinations out of 1000 (max. 500000)
  37194 words of extra memory for PDF output out of 42996 (max. 10000000)
 

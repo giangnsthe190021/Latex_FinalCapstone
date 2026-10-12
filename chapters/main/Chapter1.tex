@@ -49,7 +49,27 @@ The privacy guarantees in this study are precisely and transparently defined:
 \end{itemize}
 
 \section{Scope and Limitations}
+This research is scoped within the following specific experimental and technical boundaries:
+\begin{itemize}
+    \item \textbf{Dataset and Data Granularity:} Utilizes the DoS/DDoS-MQTT-IoT dataset at the packet level (where each record corresponds to a single network packet and includes six traffic class labels: one Normal class and five DoS/DDoS attack families).
+    \item \textbf{Federated Simulation Architecture:} A network of five simulated IoT Gateway devices is deployed under an uneven data distribution across nodes (Dirichlet non-IID partitioning).
+    \item \textbf{Generative Models and Privacy Mechanisms:} Evaluates and compares two generators: the primary marginal-based federated generator (FedDP-Marginal) and the deep generative baseline (Federated CVAE). Enforces Differential Privacy (DP) across privacy budget levels $\varepsilon \in \{1, 5, 10\}$ with $\delta = 10^{-5}$, Secure Aggregation (SecAgg$^+$), as well as a hybrid configuration combining both mechanisms.
+    \item \textbf{Experimental Infrastructure:} The entire federated training workflow is simulated on a single physical host machine using the Flower framework.
+\end{itemize}
+
+Despite achieving rigorous empirical findings, this study is subject to several scientific limitations:
+\begin{itemize}
+    \item \textbf{Single-Dataset Reliance:} All empirical evaluation results and configuration selection guidelines are derived exclusively from the DoS/DDoS-MQTT-IoT dataset; therefore, generalizability to other IoT application protocols (such as CoAP or HTTP/2) requires further empirical validation.
+    \item \textbf{Packet-Level Independence Assumption:} Packets are modeled independently as tabular records, which does not fully capture the temporal/sequential dependencies inherent in an end-to-end communication session or stream.
+    \item \textbf{Default Record-Level Privacy Scope:} The Differential Privacy (DP) guarantee applies by default at the individual record level (a single packet). Extending protection to an entire TCP stream or a full packet capture session represents an advanced configuration option that necessitates a trade-off resulting in degraded synthetic data utility.
+    \item \textbf{Privacy Budget $\varepsilon$ Exclusions:} The privacy budget $\varepsilon$ covers only the released count statistics and trained models. Auxiliary metadata such as attack class labels, global preprocessing statistics, and validation-based hyperparameter tuning fall outside the theoretical guarantee of $\varepsilon$.
+    \item \textbf{Simulation Environment:} Conducting the simulation on a centralized physical machine does not fully capture real-world network latency, packet loss rates, or the physical hardware constraints of resource-limited edge IoT devices.
+    \item \textbf{Constrained Threat Model:} The study operates under an honest-but-curious threat model across all gateways. Sophisticated adversarial threat scenarios such as data/model poisoning attacks or Byzantine clients are outside the scope of this investigation.
+\end{itemize}
+
 \section{Thesis Structure}
+
+
 
 
 
