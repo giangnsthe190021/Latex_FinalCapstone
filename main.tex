@@ -1,0 +1,92 @@
+\documentclass[oneside]{FPTthesis}
+%=============tao bang mới================
+\usepackage{longtable} 
+\newglossarystyle{fpttable}{ 
+	\setglossarystyle{long} 
+	
+	\renewcommand*{\glossaryheader}{ 
+		\textbf{Acronym} & \textbf{Definition} \\ \hline 
+	} 
+	\renewcommand*{\glossentry}[2]{ 
+		\glossentryname{##1} & \glossentrydesc{##1} \\ \hline 
+	} 
+	
+	\renewcommand*{\glsgroupskip}{} 
+	
+	% 4. Định nghĩa môi trường bảng
+	\renewenvironment{theglossary}{
+		\begin{longtable}{|p{4cm}|p{11cm}|} \hline 
+		}{
+		\end{longtable} 
+	} 
+} 
+\setglossarystyle{fpttable}
+
+\renewcommand*{\glossarysection}[2][]{%
+	\chapter*{List of Abbreviations}
+	\addcontentsline{toc}{chapter}{List of Abbreviations}
+}
+
+%================================================
+\newenvironment{titlepage}
+{\thispagestyle{empty}}
+{}
+% ========== CONFIG CHAPTER FORMAT - CENTERED ==========
+\titleformat{\chapter}[display]
+{\normalfont\Large\bfseries\centering}  % Format: centered, bold
+{\chaptertitlename\ \thechapter}         % Label: "Chapter X"
+{20pt}                                   % Space between label and title
+{\Large\bfseries}                        % Title format
+
+\titlespacing*{\chapter}{0pt}{\chaptertopmargin}{30pt}
+%===========using package===============
+\usepackage{multirow}
+\usepackage[numbers]{natbib}
+% ========== BỎ HEADER TRÊN TRANG CHAPTER ==========
+\copypagestyle{chapter}{plain}
+\makeoddhead{chapter}{}{}{}
+\makeevenhead{chapter}{}{}{}
+\makeoddfoot{chapter}{}{\thepage}{}
+\makeevenfoot{chapter}{}{\thepage}{}
+
+\input{chapters/front/glossaries.tex}
+\makeglossaries
+% Bỏ trang trắng khi dùng cleardoublepage
+\let\cleardoublepage\clearpage
+
+\begin{document}
+	
+	% ========== FRONT MATTER ==========
+	\frontmatter
+	
+	% Dùng \input thay vì \include
+	\include{chapters/front/head.tex}
+	\include{chapters/front/thanks.tex}
+	\tableofcontents
+	\clearpage
+	\listoffigures
+	\clearpage
+	\listoftables
+	\clearpage
+	\input{chapters/main/Abstract.tex}
+	\printglossaries
+	% ========== MAIN MATTER ==========
+	\mainthesis
+	% Dùng \input, KHÔNG có \clearpage giữa các chapter
+	\input{chapters/main/Chapter1.tex}
+	\input{chapters/main/Chapter2.tex}
+	\input{chapters/main/Chapter3.tex}
+	\input{chapters/main/Chapter4.tex}
+	\input{chapters/main/Chapter5.tex}
+	\input{chapters/main/Chapter6.tex}
+	
+	% ========== APPENDIX ==========
+	\appendix
+	\input{chapters/back/apendixA.tex}
+	
+	% ========== REFERENCES ==========
+\bibliographystyle{plainnat} % hoặc alpha, ieeetr, acm...
+\bibliography{references/reference}
+
+\end{document}
+

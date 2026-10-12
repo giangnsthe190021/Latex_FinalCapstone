@@ -1,0 +1,21 @@
+\begin{thebibliography}{2}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Ahmad et~al.(2018)Ahmad, Mokhtar, Fariza Paizi~Fauzi, Othman,
+  Hakim~Yeop, and Huda Sheikh~Abdullah]{R1}
+Nazilah Ahmad, Umi~Asma Mokhtar, Wan Fariza Paizi~Fauzi, Zulaiha~Ali Othman,
+  Yusri Hakim~Yeop, and Siti~Norul Huda Sheikh~Abdullah.
+\newblock Cyber security situational awareness among parents.
+\newblock In \emph{2018 Cyber Resilience Conference (CRC)}, pages 1--3, 2018.
+
+\bibitem[Kumar et~al.(2016)Kumar, Yadav, Sharma, and Singh]{R2}
+Shipra~Ravi Kumar, Suman~Avdhesh Yadav, Smita Sharma, and Akansha Singh.
+\newblock Recommendations for effective cyber security execution.
+\newblock In \emph{2016 International Conference on Innovation and Challenges
+  in Cyber Security (ICICCS-INBUSH)}, pages 342--346, 2016.
+
+\end{thebibliography}
