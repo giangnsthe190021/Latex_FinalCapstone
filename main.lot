@@ -13,7 +13,11 @@
 \contentsline {table}{\numberline {3.9}{\ignorespaces Final feature schema ($D = 60$)}}{36}{table.caption.18}%
 \contentsline {table}{\numberline {3.10}{\ignorespaces Class quotas of the training, validation, and test splits}}{36}{table.caption.19}%
 \contentsline {table}{\numberline {3.11}{\ignorespaces Leakage and label-reliability checks}}{38}{table.caption.20}%
-\contentsline {table}{\numberline {3.12}{\ignorespaces Experimental environment specification}}{39}{table.caption.21}%
+\contentsline {table}{\numberline {3.12}{\ignorespaces Federated partition parameters}}{40}{table.caption.21}%
+\contentsline {table}{\numberline {3.13}{\ignorespaces Variants of FedDP-Marginal}}{47}{table.caption.23}%
+\contentsline {table}{\numberline {3.14}{\ignorespaces Configuration matrix of the baseline and proposed generators}}{54}{table.caption.24}%
+\contentsline {table}{\numberline {3.15}{\ignorespaces Hyper-parameter search spaces of the model components}}{57}{table.caption.25}%
+\contentsline {table}{\numberline {3.16}{\ignorespaces Experimental environment specification}}{59}{table.caption.26}%
 \addvspace {10pt}
 \addvspace {10pt}
 \addvspace {10pt}

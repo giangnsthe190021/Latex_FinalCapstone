@@ -36,20 +36,25 @@
 \contentsline {subsection}{\numberline {3.2.5}Preprocessing and Encoding}{37}{subsection.3.2.5}%
 \contentsline {subsection}{\numberline {3.2.6}Leakage and Label-Reliability Checks}{37}{subsection.3.2.6}%
 \contentsline {section}{\numberline {3.3}Sampling Data Analysis Techniques}{38}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Experimental Environment and Reproducibility}{38}{subsection.3.3.1}%
-\contentsline {section}{\numberline {3.4}Limitations of the Methodology}{40}{section.3.4}%
-\contentsline {chapter}{\chapternumberline {4}Experimental and Results}{44}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Introduction}{44}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Presentation of Data}{44}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Analysis of Results}{44}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Interpretation of Results}{44}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Comparison with Literature}{44}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Implications of the Results}{44}{section.4.6}%
-\contentsline {chapter}{\chapternumberline {5}Discussion}{45}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Restate the Research Problem or Objectives}{45}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Summarize Key Findings}{45}{section.5.2}%
-\contentsline {chapter}{\chapternumberline {6}Conclusion and Future Work}{46}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Conclusion}{46}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Future Work}{46}{section.6.2}%
-\contentsline {appendix}{\chapternumberline {A}If Any}{47}{appendix.A}%
-\contentsline {chapter}{References}{48}{chapter*.23}%
+\contentsline {subsection}{\numberline {3.3.1}Federated Partitioning}{38}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}FedDP-Marginal}{41}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Privacy Accounting}{47}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Federated CVAE, DP-SGD and SecAgg$^+$ (Baseline)}{51}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.5}Hyper-parameter Selection and Search Spaces}{54}{subsection.3.3.5}%
+\contentsline {subsection}{\numberline {3.3.6}Experimental Environment and Reproducibility}{58}{subsection.3.3.6}%
+\contentsline {section}{\numberline {3.4}Limitations of the Methodology}{60}{section.3.4}%
+\contentsline {chapter}{\chapternumberline {4}Experimental and Results}{63}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Introduction}{63}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Presentation of Data}{63}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Analysis of Results}{63}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Interpretation of Results}{63}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Comparison with Literature}{63}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Implications of the Results}{63}{section.4.6}%
+\contentsline {chapter}{\chapternumberline {5}Discussion}{64}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Restate the Research Problem or Objectives}{64}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Summarize Key Findings}{64}{section.5.2}%
+\contentsline {chapter}{\chapternumberline {6}Conclusion and Future Work}{65}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Conclusion}{65}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Future Work}{65}{section.6.2}%
+\contentsline {appendix}{\chapternumberline {A}If Any}{66}{appendix.A}%
+\contentsline {chapter}{References}{67}{chapter*.28}%

@@ -215,22 +215,125 @@
 \@writefile{lot}{\contentsline {table}{\numberline {3.10}{\ignorespaces Class quotas of the training, validation, and test splits}}{36}{table.caption.19}\protected@file@percent }
 \newlabel{tab:quota}{{3.10}{36}{Class quotas of the training, validation, and test splits}{table.caption.19}{}}
 \citation{breiman2001}
+\citation{hsu2019}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.5}Preprocessing and Encoding}{37}{subsection.3.2.5}\protected@file@percent }
 \newlabel{subsec:preprocessing}{{3.2.5}{37}{Preprocessing and Encoding}{subsection.3.2.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.6}Leakage and Label-Reliability Checks}{37}{subsection.3.2.6}\protected@file@percent }
 \newlabel{subsec:leakage_checks}{{3.2.6}{37}{Leakage and Label-Reliability Checks}{subsection.3.2.6}{}}
+\citation{hsu2019}
+\@writefile{lot}{\contentsline {table}{\numberline {3.11}{\ignorespaces Leakage and label-reliability checks}}{38}{table.caption.20}\protected@file@percent }
+\newlabel{tab:leakage_checks}{{3.11}{38}{Leakage and label-reliability checks}{table.caption.20}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Sampling Data Analysis Techniques}{38}{section.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Federated Partitioning}{38}{subsection.3.3.1}\protected@file@percent }
+\newlabel{subsec:partitioning}{{3.3.1}{38}{Federated Partitioning}{subsection.3.3.1}{}}
+\newlabel{eq:dirichlet}{{3.2}{38}{}{equation.3.2}{}}
+\citation{hsu2019}
+\citation{bell2020}
+\@writefile{lot}{\contentsline {table}{\numberline {3.12}{\ignorespaces Federated partition parameters}}{40}{table.caption.21}\protected@file@percent }
+\newlabel{tab:partition_params}{{3.12}{40}{Federated partition parameters}{table.caption.21}{}}
+\newlabel{eq:hist_sum}{{3.3}{40}{}{equation.3.3}{}}
+\citation{mckenna2021winning}
+\citation{zhang2017privbayes}
+\citation{bell2020}
+\citation{beutel2020}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}FedDP-Marginal}{41}{subsection.3.3.2}\protected@file@percent }
+\newlabel{subsec:feddp_marginal}{{3.3.2}{41}{FedDP-Marginal}{subsection.3.3.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Three-release protocol of FedDP-Marginal. The coarse cut-points (after Release~1) and the tree $T^\star $ (after Release~2) are sent back to the gateways before the next release.}}{41}{figure.caption.22}\protected@file@percent }
+\newlabel{fig:three_release}{{3.3}{41}{Three-release protocol of FedDP-Marginal. The coarse cut-points (after Release~1) and the tree $T^\star $ (after Release~2) are sent back to the gateways before the next release}{figure.caption.22}{}}
+\citation{bell2020}
+\citation{chow1968}
+\citation{kruskal1956}
+\citation{mckenna2021winning}
+\citation{dwork2014}
+\citation{miller1955}
+\newlabel{eq:chow_liu}{{3.4}{43}{}{equation.3.4}{}}
+\newlabel{eq:phat}{{3.5}{43}{}{equation.3.5}{}}
+\newlabel{eq:miller_madow}{{3.6}{43}{}{equation.3.6}{}}
+\citation{chow1968}
+\newlabel{eq:tree_factorisation}{{3.7}{44}{}{equation.3.7}{}}
+\citation{mckenna2021winning}
+\citation{deming1940,csiszar1975}
+\newlabel{eq:ivw_merge}{{3.8}{45}{}{equation.3.8}{}}
+\citation{zhang2017privbayes}
+\citation{bell2020}
+\citation{bun2016}
+\citation{bun2016}
+\citation{balle2020}
+\citation{skellam1946,agarwal2021}
+\citation{agarwal2021}
+\@writefile{lot}{\contentsline {table}{\numberline {3.13}{\ignorespaces Variants of FedDP-Marginal}}{47}{table.caption.23}\protected@file@percent }
+\newlabel{tab:mg_variants}{{3.13}{47}{Variants of FedDP-Marginal}{table.caption.23}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Privacy Accounting}{47}{subsection.3.3.3}\protected@file@percent }
+\newlabel{subsec:privacy_accounting}{{3.3.3}{47}{Privacy Accounting}{subsection.3.3.3}{}}
+\newlabel{eq:zcdp}{{3.9}{47}{}{equation.3.9}{}}
+\citation{agarwal2021}
+\citation{mironov2017}
+\citation{yousefpour2021}
+\citation{bell2020}
+\newlabel{eq:skellam_rdp}{{3.10}{48}{}{equation.3.10}{}}
+\citation{dwork2014}
+\citation{bun2016}
+\newlabel{eq:group_sens}{{3.11}{49}{}{equation.3.11}{}}
+\newlabel{eq:group_zcdp}{{3.12}{49}{}{equation.3.12}{}}
+\citation{abadi2016}
+\citation{yousefpour2021}
+\citation{mironov2019}
+\citation{mironov2019}
+\citation{bell2020}
+\newlabel{eq:eps_effective}{{3.13}{50}{}{equation.3.13}{}}
+\citation{dwork2014}
+\citation{sohn2015}
+\citation{yousefpour2021}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.4}Federated CVAE, DP-SGD and SecAgg$^+$ (Baseline)}{51}{subsection.3.3.4}\protected@file@percent }
+\newlabel{subsec:cvae}{{3.3.4}{51}{Federated CVAE, DP-SGD and SecAgg$^+$ (Baseline)}{subsection.3.3.4}{}}
+\citation{sohn2015,higgins2017}
+\citation{mcmahan2017}
+\citation{beutel2020}
+\citation{yousefpour2021}
+\citation{abadi2016}
+\newlabel{eq:cvae_loss}{{3.14}{52}{}{equation.3.14}{}}
+\newlabel{eq:fedavg}{{3.15}{52}{}{equation.3.15}{}}
+\newlabel{eq:dpsgd}{{3.16}{52}{}{equation.3.16}{}}
+\citation{bell2020}
+\citation{bell2020}
+\citation{sohn2015}
+\newlabel{eq:secagg_sum}{{3.17}{53}{}{equation.3.17}{}}
+\newlabel{eq:secagg_bound}{{3.18}{53}{}{equation.3.18}{}}
+\citation{mcmahan2017}
+\citation{abadi2016}
+\citation{mcmahan2017}
+\citation{bell2020}
+\citation{abadi2016}
+\citation{bell2020}
+\citation{agarwal2021}
+\citation{bell2020}
+\citation{akiba2019}
+\citation{bergstra2011}
+\citation{breiman2001}
+\@writefile{lot}{\contentsline {table}{\numberline {3.14}{\ignorespaces Configuration matrix of the baseline and proposed generators}}{54}{table.caption.24}\protected@file@percent }
+\newlabel{tab:generator_matrix}{{3.14}{54}{Configuration matrix of the baseline and proposed generators}{table.caption.24}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.5}Hyper-parameter Selection and Search Spaces}{54}{subsection.3.3.5}\protected@file@percent }
+\newlabel{subsec:hpo}{{3.3.5}{54}{Hyper-parameter Selection and Search Spaces}{subsection.3.3.5}{}}
+\citation{mcsherry2007,liu2019,papernot2022}
+\citation{miller1955}
+\citation{jaccard1912}
+\citation{miller1955}
+\citation{jaccard1912}
+\citation{hastie2009}
+\citation{efron1993}
+\newlabel{eq:jaccard}{{3.19}{56}{}{equation.3.19}{}}
+\newlabel{eq:screening}{{3.20}{56}{}{equation.3.20}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.15}{\ignorespaces Hyper-parameter search spaces of the model components}}{57}{table.caption.25}\protected@file@percent }
+\newlabel{tab:search_spaces}{{3.15}{57}{Hyper-parameter search spaces of the model components}{table.caption.25}{}}
 \citation{beutel2020}
 \citation{yousefpour2021}
 \citation{akiba2019}
 \citation{bergstra2011}
-\@writefile{lot}{\contentsline {table}{\numberline {3.11}{\ignorespaces Leakage and label-reliability checks}}{38}{table.caption.20}\protected@file@percent }
-\newlabel{tab:leakage_checks}{{3.11}{38}{Leakage and label-reliability checks}{table.caption.20}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Sampling Data Analysis Techniques}{38}{section.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Experimental Environment and Reproducibility}{38}{subsection.3.3.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3.12}{\ignorespaces Experimental environment specification}}{39}{table.caption.21}\protected@file@percent }
-\newlabel{tab:env_spec}{{3.12}{39}{Experimental environment specification}{table.caption.21}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.4}Limitations of the Methodology}{40}{section.3.4}\protected@file@percent }
-\newlabel{sec:methodology_limitations}{{3.4}{40}{Limitations of the Methodology}{section.3.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.6}Experimental Environment and Reproducibility}{58}{subsection.3.3.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.16}{\ignorespaces Experimental environment specification}}{59}{table.caption.26}\protected@file@percent }
+\newlabel{tab:env_spec}{{3.16}{59}{Experimental environment specification}{table.caption.26}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Limitations of the Methodology}{60}{section.3.4}\protected@file@percent }
+\newlabel{sec:methodology_limitations}{{3.4}{60}{Limitations of the Methodology}{section.3.4}{}}
 \citation{dwork2014}
 \citation{agarwal2021}
 \citation{yousefpour2021}
@@ -239,28 +342,28 @@
 \citation{zhang2017privbayes}
 \@writefile{lof}{\addvspace {10pt}}
 \@writefile{lot}{\addvspace {10pt}}
-\@writefile{toc}{\contentsline {chapter}{\chapternumberline {4}Experimental and Results}{44}{chapter.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Introduction}{44}{section.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Presentation of Data}{44}{section.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}Analysis of Results}{44}{section.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}Interpretation of Results}{44}{section.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.5}Comparison with Literature}{44}{section.4.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.6}Implications of the Results}{44}{section.4.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\chapternumberline {4}Experimental and Results}{63}{chapter.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Introduction}{63}{section.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Presentation of Data}{63}{section.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Analysis of Results}{63}{section.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Interpretation of Results}{63}{section.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}Comparison with Literature}{63}{section.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.6}Implications of the Results}{63}{section.4.6}\protected@file@percent }
 \@writefile{lof}{\addvspace {10pt}}
 \@writefile{lot}{\addvspace {10pt}}
-\@writefile{toc}{\contentsline {chapter}{\chapternumberline {5}Discussion}{45}{chapter.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Restate the Research Problem or Objectives}{45}{section.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}Summarize Key Findings}{45}{section.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\chapternumberline {5}Discussion}{64}{chapter.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Restate the Research Problem or Objectives}{64}{section.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Summarize Key Findings}{64}{section.5.2}\protected@file@percent }
 \@writefile{lof}{\addvspace {10pt}}
 \@writefile{lot}{\addvspace {10pt}}
-\@writefile{toc}{\contentsline {chapter}{\chapternumberline {6}Conclusion and Future Work}{46}{chapter.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6.1}Conclusion}{46}{section.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}Future Work}{46}{section.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\chapternumberline {6}Conclusion and Future Work}{65}{chapter.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Conclusion}{65}{section.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}Future Work}{65}{section.6.2}\protected@file@percent }
 \bibstyle{IEEEtranN}
 \bibdata{references/reference}
 \@writefile{lof}{\addvspace {10pt}}
 \@writefile{lot}{\addvspace {10pt}}
-\@writefile{toc}{\contentsline {appendix}{\chapternumberline {A}If Any}{47}{appendix.A}\protected@file@percent }
+\@writefile{toc}{\contentsline {appendix}{\chapternumberline {A}If Any}{66}{appendix.A}\protected@file@percent }
 \bibcite{atzori2010}{{1}{2010}{{Atzori et~al.}}{{Atzori, Iera, and Morabito}}}
 \bibcite{alatram2023}{{2}{2023{}}{{Alatram et~al.}}{{Alatram, Sikos, Johnstone, Szewczyk, and Kang}}}
 \bibcite{he2009}{{3}{2009}{{He and Garcia}}{{}}}
@@ -270,7 +373,7 @@
 \bibcite{zhu2019}{{7}{2019}{{Zhu et~al.}}{{Zhu, Liu, and Han}}}
 \bibcite{behera2022fedsyn}{{8}{2022}{{Behera et~al.}}{{Behera, Upadhyay, Shetty, Priyadarshini, Patel, and Lee}}}
 \bibcite{zhang2017privbayes}{{9}{2017}{{Zhang et~al.}}{{Zhang, Cormode, Procopiuc, Srivastava, and Xiao}}}
-\@writefile{toc}{\contentsline {chapter}{References}{48}{chapter*.23}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{References}{67}{chapter*.28}\protected@file@percent }
 \bibcite{chow1968}{{10}{1968}{{Chow and Liu}}{{}}}
 \bibcite{mckenna2019pgm}{{11}{2019}{{McKenna et~al.}}{{McKenna, Sheldon, and Miklau}}}
 \bibcite{mckenna2024aim}{{12}{2022}{{McKenna et~al.}}{{McKenna, Mullins, Sheldon, and Miklau}}}
@@ -320,6 +423,21 @@
 \bibcite{wireshark}{{56}{2025}{{Wireshark Foundation}}{{}}}
 \bibcite{kaufman2012}{{57}{2012}{{Kaufman et~al.}}{{Kaufman, Rosset, Perlich, and Stitelman}}}
 \bibcite{arp2022}{{58}{2022}{{Arp et~al.}}{{Arp, Quiring, Pendlebury, Warnecke, Pierazzi, Wressnegger, Cavallaro, and Rieck}}}
-\memsetcounter{lastsheet}{62}
-\memsetcounter{lastpage}{54}
-\gdef \@abspage@last{62}
+\bibcite{mckenna2021winning}{{59}{2021}{{McKenna et~al.}}{{McKenna, Miklau, and Sheldon}}}
+\bibcite{kruskal1956}{{60}{1956}{{Kruskal}}{{}}}
+\bibcite{miller1955}{{61}{1955}{{Miller}}{{}}}
+\bibcite{csiszar1975}{{62}{1975}{{Csisz{\'a}r}}{{}}}
+\bibcite{balle2020}{{63}{2020}{{Balle et~al.}}{{Balle, Barthe, Gaboardi, and Geumlek}}}
+\bibcite{skellam1946}{{64}{1946}{{Skellam}}{{}}}
+\bibcite{mironov2017}{{65}{2017}{{Mironov}}{{}}}
+\bibcite{mironov2019}{{66}{2019}{{Mironov et~al.}}{{Mironov, Talwar, and Zhang}}}
+\bibcite{higgins2017}{{67}{2017}{{Higgins et~al.}}{{Higgins, Matthey, Pal, Burgess, Glorot, Botvinick, Mohamed, and Lerchner}}}
+\bibcite{mcsherry2007}{{68}{2007}{{McSherry and Talwar}}{{}}}
+\bibcite{liu2019}{{69}{2019}{{Liu and Talwar}}{{}}}
+\bibcite{papernot2022}{{70}{2022}{{Papernot and Steinke}}{{}}}
+\bibcite{jaccard1912}{{71}{1912}{{Jaccard}}{{}}}
+\bibcite{hastie2009}{{72}{2009}{{Hastie et~al.}}{{Hastie, Tibshirani, and Friedman}}}
+\bibcite{efron1993}{{73}{1993}{{Efron and Tibshirani}}{{}}}
+\memsetcounter{lastsheet}{82}
+\memsetcounter{lastpage}{74}
+\gdef \@abspage@last{82}

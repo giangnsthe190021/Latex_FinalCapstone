@@ -523,6 +523,440 @@ C5 & Binary task separating the DoS and DDoS variants of the same attack family 
 
 \section{Sampling Data Analysis Techniques}
 
+\subsection{Federated Partitioning}\label{subsec:partitioning}
+
+\subsubsection*{Dirichlet Partition of the Training Data}
+To model non-identically distributed (non-IID) traffic across edge gateways, the training split is partitioned over a federation of gateways $\mathcal{K} = \{1, 2, \dots, K\}$, with $K = 5$ in the main study. The partition follows the label-skew model of Hsu et~al.~\cite{hsu2019}, which uses a symmetric Dirichlet distribution with concentration parameter $\alpha_{\text{dir}}$. For each class $c \in \{1, \dots, C\}$ ($C = 6$ in the six-class mode), the proportions assigned to the $K$ gateways are drawn independently:
+\begin{equation}
+\mathbf{p}_c = (p_{c,1}, p_{c,2}, \dots, p_{c,K}) \sim \mathrm{Dir}(\alpha_{\text{dir}} \mathbf{1}_K), \qquad \mathbf{1}_K = (1, \dots, 1) \in \mathbb{R}^K.
+\label{eq:dirichlet}
+\end{equation}
+The concentration parameter controls the heterogeneity between gateways~\cite{hsu2019}: small values ($\alpha_{\text{dir}} \to 0$) concentrate each class on few gateways, while large values ($\alpha_{\text{dir}} \to \infty$) approach an IID allocation. The main study uses $\alpha_{\text{dir}} = 0.5$. Under this allocation, some gateways receive few or no examples of the rare attack classes.
+
+\subsubsection*{Record-Level and Unit-Level Partition}
+Two partition modes are distinguished:
+\begin{itemize}
+    \item \textbf{Record-level partition (default):} Each packet record $(x, y)$ of class $c$ is assigned to gateway $k$ with probability $p_{c,k}$. Packets of the same TCP stream or capture group can therefore reach several gateways. This models an open edge network in which the packets of one flow pass through different regional routers.
+    \item \textbf{Unit-level partition (group DP):} Used only for the stream- and capture-level privacy evaluations (Section~\ref{subsec:privacy_accounting}). Capture groups or TCP streams are treated as indivisible units: the Dirichlet proportions are applied to the majority class of each unit, and all records of a unit go to one gateway. No protected unit is split across gateways, which gives a clear boundary for bounding each unit's contribution.
+\end{itemize}
+
+\subsubsection*{Constraints and Safeguards}
+The partition enforces the following constraints:
+\begin{itemize}
+    \item \textbf{Resampling floor:} If any gateway receives fewer than 500 records in total ($\sum_{c} n_{k,c} < 500$), the proportions are rejected and drawn again from $\mathrm{Dir}(\alpha_{\text{dir}} \mathbf{1}_K)$ until every gateway reaches the floor.
+    \item \textbf{Unit-level floor:} In the unit-level partition, each gateway must hold at least 200 rows, so that every gateway has enough local samples for aggregation.
+    \item \textbf{One partition per seed:} Each seed $s \in \{0, 1, 2\}$ draws an independent partition $\mathbf{p}_c^{(s)}$, and every model evaluated with seed $s$ uses that same partition, so the partition does not confound the comparison of models.
+    \item \textbf{Split before partition:} The global train/validation/test split is made before the allocation to gateways, so the validation and test rows never enter the federated training pool. Full session independence between splits is still limited by the data: for 8 of the 11 sub-classes, the validation and test rows are consecutive blocks of the capture used for training (Section~\ref{subsec:split} and Section~\ref{sec:methodology_limitations}).
+\end{itemize}
+Table~\ref{tab:partition_params} summarises the partition parameters.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Federated partition parameters}
+\label{tab:partition_params}
+\begin{tabularx}{\textwidth}{p{3.6cm}p{4.6cm}X}
+\toprule
+\textbf{Parameter} & \textbf{Value} & \textbf{Role} \\
+\midrule
+Number of gateways $K$ & 5 (main); $\{10, 20\}$ & Federation size; scalability branch \\
+\midrule
+Concentration $\alpha_{\text{dir}}$ & 0.5 (main); $\{0.1, 10\}$ & Non-IID setting; heterogeneity branch \\
+\midrule
+Partition mechanism & Per-class Dirichlet allocation~\cite{hsu2019} & By row (record DP); by unit (group DP) \\
+\midrule
+Resampling floor & $n_k \ge 500$ records & Rejection threshold, record-level partition \\
+\midrule
+Unit floor & $n_k \ge 200$ records & Rejection threshold, unit-level partition \\
+\midrule
+Seeds & $\{0, 1, 2\}$ & One partition per seed, shared by all models \\
+\midrule
+Training quota ($N = 88{,}500$) & NORMAL 60,000; BCF 20,000; DELAYED 3,000; SYN 3,000; INVALID 1,500; WILL 1,000 & Class distribution partitioned over the gateways (rare classes: quota $\le 5{,}000$) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection*{Invariance of the Summed Marginals to the Partition}
+For any count query summed through SecAgg$^+$~\cite{bell2020}, the global result is the exact, unweighted sum of the local integer count vectors:
+\begin{equation}
+\mathbf{h}_{\text{global}} = \sum_{k=1}^{K} \mathbf{h}_k = \sum_{k=1}^{K} \sum_{i \in \mathcal{D}_k} \mathbf{e}(x_i) = \sum_{i \in \bigcup_{k} \mathcal{D}_k} \mathbf{e}(x_i),
+\label{eq:hist_sum}
+\end{equation}
+where $\mathbf{e}(x_i)$ is the indicator vector of the bin that contains record $x_i$. Because integer addition is commutative and associative, the summed table without noise is identical to the table computed centrally, whatever the label skew $P_k(Y)$ or covariate shift $P_k(X \mid Y)$.
+
+Running FedDP-Marginal with $\alpha_{\text{dir}} \in \{0.1, 0.5, 10\}$ is therefore a null prediction, or sanity check: without client dropout or unit capping, its summed marginals and synthesis are in theory unaffected by the partition skew. In a real federation, heterogeneity affects FedDP-Marginal only in two cases:
+\begin{enumerate}
+    \item \textbf{Client dropout:} The counts of a dropped gateway are missing from the sum, and under small $\alpha_{\text{dir}}$ that gateway may hold class samples that no surviving gateway has.
+    \item \textbf{Record-level partition with a unit cap $m$:} A unit spread over several gateways is capped at $m$ rows by each of them, whereas on a single gateway it would be capped only once.
+\end{enumerate}
+
+\subsection{FedDP-Marginal}\label{subsec:feddp_marginal}
+
+\subsubsection*{Positioning and Overview}
+FedDP-Marginal adapts private marginal-based synthesis of tabular data, namely the MST method of McKenna et~al.~\cite{mckenna2021winning} and the graphical-model principles of PrivBayes~\cite{zhang2017privbayes}, to a federated setting. It is not a new generative method; it adapts marginal-based dependency modelling to federation through secure integer aggregation. Unlike deep federated models, which need many rounds of weight exchange, FedDP-Marginal uses three query releases coordinated through SecAgg$^+$~\cite{bell2020} in Flower~\cite{beutel2020} (Figure~\ref{fig:three_release}).
+
+\begin{figure}[htbp]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+    font=\small, >=stealth,
+    cbox/.style={rectangle, draw=blue!70!black, fill=blue!5, rounded corners=3pt, thick, text width=4.6cm, minimum height=1.7cm, align=center},
+    sbox/.style={rectangle, draw=red!60!black, fill=red!5, rounded corners=3pt, thick, text width=4.2cm, minimum height=1.7cm, align=center},
+    arr/.style={->, thick, draw=black!75},
+    lbl/.style={font=\scriptsize\bfseries, above}
+]
+\node[cbox] (c1) at (0, 0)    {\textbf{Release 1}\\1-way histograms\\{\scriptsize ($d$ tables, per class, fine bins)}};
+\node[cbox] (c2) at (0, -2.4) {\textbf{Release 2}\\Pairwise counts\\{\scriptsize ($\binom{d}{2}$ tables, pooled, coarse bins)}};
+\node[cbox] (c3) at (0, -4.8) {\textbf{Release 3}\\Tree-edge tables\\{\scriptsize ($d$ tables, per class)}};
+\node[rectangle, draw=teal!70!black, fill=teal!5, rounded corners=3pt, thick, text width=3.0cm, minimum height=6.5cm, align=center] (sa) at (5.9, -2.4) {\textbf{SecAgg}$^+$\\over $\mathbb{Z}_{2^{32}}$\\[6pt]{\scriptsize Sum modulo $2^{32}$}\\{\scriptsize Centred lift}\\{\scriptsize No rounding error}};
+\node[sbox] (s1) at (11.6, 0)    {Univariate densities\\{\scriptsize and coarse cut-points}};
+\node[sbox] (s2) at (11.6, -2.4) {Global MI graph\\{\scriptsize and Chow--Liu tree $T^\star$}};
+\node[sbox] (s3) at (11.6, -4.8) {Edge conditionals\\{\scriptsize and root-to-leaf sampling}};
+\node[font=\small\bfseries, text=blue!70!black, anchor=base] at (c1 |- 0, 1.25) {Gateways ($k = 1, \dots, K$)};
+\node[font=\small\bfseries, text=teal!70!black, anchor=base] at (sa |- 0, 1.25) {Secure channel};
+\node[font=\small\bfseries, text=red!60!black, anchor=base] at (s1 |- 0, 1.25) {Aggregation server};
+\foreach \i in {1,2,3} {
+    \draw[arr] (c\i.east) -- node[lbl] {uint32} (sa.west |- c\i.east);
+    \draw[arr] (sa.east |- s\i.west) -- node[lbl] {lift} (s\i.west);
+}
+\end{tikzpicture}%
+}
+\caption{Three-release protocol of FedDP-Marginal. The coarse cut-points (after Release~1) and the tree $T^\star$ (after Release~2) are sent back to the gateways before the next release.}
+\label{fig:three_release}
+\end{figure}
+
+\subsubsection*{Attribute Schema ($d = 37$) and One-Hot Representation ($D = 60$)}
+The marginal generator and the neural generator represent features differently:
+\begin{itemize}
+    \item \textbf{Tabular schema ($d = 37$ attributes):} FedDP-Marginal queries count tables over 37 discrete or discretised attributes:
+    \begin{itemize}
+        \item 13 numeric attributes (for example inter-arrival times, segment lengths, TCP window sizes), discretised into $B_{\text{fine}} = 64$ uniform bins over the normalised interval $[-5, 5]$, which matches the $\pm 5\sigma$ clipping of preprocessing;
+        \item 19 binary attributes: 7 protocol flags (\texttt{syn}, \texttt{reset}, \texttt{acknowledgment}, \texttt{retain}, \texttt{clean\_session\_flag\_2}, \texttt{will\_retain}, \texttt{will\_flag}) and 12 \texttt{\_is\_na} indicators;
+        \item 5 categorical attributes (\texttt{message\_type}, \texttt{qos\_level\_1}, \texttt{qos\_level\_2}, \texttt{requested\_qos}, \texttt{protocol}), kept as discrete variables in the tables.
+    \end{itemize}
+    \item \textbf{One-hot representation ($D = 60$):} The CVAE baseline works on $\mathbb{R}^{D}$ with $D = 60$, obtained by expanding the 5 categorical attributes into 28 one-hot columns ($13 + 19 + 28 = 60$; Table~\ref{tab:feature_schema}).
+\end{itemize}
+
+\subsubsection*{Three-Release Protocol}
+The protocol issues three releases in sequence and divides the privacy budget between them:
+\begin{itemize}
+    \item \textbf{Release 1 (fine univariate marginals per class):} Each gateway counts, for every attribute $X_i$ ($i = 1, \dots, d$) and class $c$, the rows in each of the $B_{\text{fine}} = 64$ fine bins, adds its share of discrete noise, and sends the result through SecAgg$^+$~\cite{bell2020}. From the summed noisy histograms, the server sets data-dependent coarse cut-points for the numeric attributes at empirical quantiles, with $B_{\text{coarse}} \in \{4, 8, 16, 32\}$ (default 16). The coarse cut-points coincide with edges of the fine bins.
+    \item \textbf{Release 2 (coarse pairwise marginals, pooled over classes):} Gateways count all $\binom{d}{2} = 666$ attribute pairs $(X_i, X_j)$ over the coarse bins, pooled over all classes. Pooling maximises the count per cell and bounds the table size to $B_{\text{coarse}}^2$, which limits the effect of the privacy noise on dependency estimation.
+    \item \textbf{Release 3 (tree-edge marginals per class):} Using the structure derived from Release~2, the server requests the joint tables of the $d - 1$ edges of the global Chow--Liu tree, conditioned on the class $y = c$, over the coarse bins (at most $B_{\text{coarse}}^2 \cdot C$ cells, so that the noise does not swamp the rare classes), together with the class-conditional table of the root attribute over the fine bins.
+\end{itemize}
+
+\subsubsection*{One Global Chow--Liu Tree}
+FedDP-Marginal builds a single global Chow--Liu dependency tree~\cite{chow1968}, pooled over all classes, rather than one tree per class. From the post-processed tables of Release~2, the server computes the empirical mutual information (MI) between attributes and extracts the maximum spanning tree $T^\star$ with Kruskal's algorithm~\cite{kruskal1956}:
+\begin{equation}
+T^\star = \arg\max_{T} \sum_{(i,j) \in T} \hat{I}(X_i; X_j), \qquad \hat{I}(X_i; X_j) = \sum_{a, b} \hat{p}(a, b) \log \frac{\hat{p}(a, b)}{\hat{p}(a)\, \hat{p}(b)}.
+\label{eq:chow_liu}
+\end{equation}
+Following the post-processing of McKenna et~al.~\cite{mckenna2021winning}, the probabilities are obtained from the noisy pairwise counts $c_{i,j}$ by truncation at zero, additive (Laplace) smoothing $\alpha_{\text{smooth}}$, and normalisation:
+\begin{equation}
+\hat{p}(a, b) = \frac{\max(0, c_{i,j}(a, b)) + \alpha_{\text{smooth}}}{\sum_{a', b'} \left[\max(0, c_{i,j}(a', b')) + \alpha_{\text{smooth}}\right]}.
+\label{eq:phat}
+\end{equation}
+The univariate terms $\hat{p}(a)$ and $\hat{p}(b)$ are obtained by summing out the other dimension. By the post-processing property of differential privacy~\cite{dwork2014}, deriving $T^\star$ spends no additional privacy budget.
+
+\textbf{Trade-off of pooling.} The class-conditional MI $\hat{I}(X_i; X_j \mid Y = c)$ would match class-conditional synthesis more closely. However, splitting Release~2 by class leaves the sensitivity per cell unchanged while dividing the signal per cell by about $C$, and the total noise over the $C\binom{d}{2}$ tables grows $C$-fold. The signal-to-noise ratio of each cell therefore drops by a factor of $C$, which corrupts the choice of edges. FedDP-Marginal deliberately pools the pairwise counts over classes to maximise the signal-to-noise ratio of the skeleton $T^\star$. The pooled MI then reflects the overall dependency structure, which is dominated by NORMAL traffic (67.8\% of the training quota); class-specific relations are captured afterwards by the class-conditional edge tables of Release~3.
+
+\textbf{Cardinality bias.} The plug-in MI on noisy tables has a finite-sample bias proportional to the degrees of freedom of the table, $(|X_i| - 1)(|X_j| - 1)$. Numeric attributes have a higher coarse cardinality ($B_{\text{coarse}} = 16$) than binary flags ($|\cdot| = 2$), so a pair of numeric attributes has up to $(16 - 1)^2 = 225$ degrees of freedom against $(2 - 1)^2 = 1$ for a pair of flags. Kruskal's algorithm on unnormalised plug-in MI therefore tends to favour edges between high-cardinality numeric attributes. Laplace smoothing adds a uniform pseudo-mass $\alpha_{\text{smooth}} |X_i||X_j|$, which dilutes the probabilities more in larger tables. The Miller--Madow correction~\cite{miller1955}
+\begin{equation}
+\hat{I}_{\text{MM}}(X_i; X_j) = \hat{I}(X_i; X_j) - \frac{(|X_i| - 1)(|X_j| - 1)}{2\hat{N}},
+\label{eq:miller_madow}
+\end{equation}
+where $\hat{N} = \sum_{a,b} \max(0, c_{i,j}(a,b))$ is the total truncated count, corrects the asymptotic multinomial sampling bias but not the additive Skellam noise or the non-linear truncation $\max(0, \cdot)$. The main pipeline keeps the uncorrected plug-in MI with coarse bins ($B_{\text{coarse}} \le 16$) as the baseline heuristic. To measure the effect of the cardinality bias on the structure, separately from downstream utility, search space~(d) (Section~\ref{subsec:hpo}) includes an ablation that compares plug-in MI, Miller--Madow MI, and normalised MI ($\hat{I}(X_i; X_j)/\sqrt{H(X_i) H(X_j)}$), together with a check of the stability of the tree edges across partition seeds.
+
+\subsubsection*{Class-Conditional Sampling}
+Synthetic records of class $c$ are generated by traversing $T^\star$ from the root to the leaves~\cite{chow1968}:
+\begin{equation}
+\hat{P}(\mathbf{x} \mid y = c) = \hat{P}(x_r \mid y = c) \prod_{(u,v) \in T^\star} \hat{P}(x_v \mid x_u, y = c),
+\label{eq:tree_factorisation}
+\end{equation}
+where $r$ is the root attribute. The steps are:
+\begin{enumerate}
+    \item \textbf{Root selection and sampling:} For MGs, the root is the attribute with the largest sum of noisy MI, $\sum_{j \ne r} \hat{I}(X_r; X_j)$. It is sampled from its class-conditional fine distribution of Release~1, $x_r \sim \hat{P}(X_r \mid y = c)$.
+    \item \textbf{Conditional propagation:} Each child is sampled given its parent, $x_v \sim \hat{P}(X_v \mid X_u = x_u, y = c)$. The noisy counts are truncated at zero and smoothed with $\alpha_{\text{smooth}}$.
+    \item \textbf{Refinement of numeric attributes:} The sampled coarse bin is refined to a fine bin in proportion to the fine class histogram of Release~1 (whose fine bins nest inside the coarse bins), and a value is drawn uniformly within the fine bin $[b_{\text{low}}, b_{\text{high}}]$.
+    \item \textbf{Inverse transformation:} The vectors pass through the same inverse pipeline as the CVAE baseline (inverse standardisation and inverse $\log(1+x)$).
+\end{enumerate}
+
+\subsubsection*{Sensitivity, Budget Split and Consistency Refinement (MGr)}
+\textbf{Neighbouring relation and sensitivity.} The accounting uses unbounded adjacency: two datasets $D \sim D'$ differ by the addition or removal of one packet record. One record increments exactly one cell in each of the $d$ tables of Release~1, the $\binom{d}{2}$ tables of Release~2, and the $d$ tables of Release~3 ($d - 1$ edge tables and one root table). For a release of $T$ tables, the global sensitivities are $\Delta_1 = T$ and $\Delta_2 = \sqrt{T}$. Under bounded DP (replacement of a record within a class), they become $\Delta_1^{\text{repl}} = 2T$ and $\Delta_2^{\text{repl}} = \sqrt{2T}$.
+
+\textbf{Budget split.} The budget is divided between releases by a split vector $\mathbf{s} = (s_1, s_2, s_3)$ with $s_1 + s_2 + s_3 = 1$, by default $(0.3, 0.1, 0.6)$:
+\begin{itemize}
+    \item For the Gaussian variant (MGd), the zCDP parameter is split as $\rho_r = s_r \rho$, which gives the noise standard deviation $\sigma_r = \Delta_{2,r}/\sqrt{2 s_r \rho}$ for release $r$.
+    \item For the Skellam variant (MGs), the noise parameter of release $r$ is $\mu_{\text{sk},r} = \Delta_{2,r}^2/(2 s_r \kappa)$, where the global factor $\kappa > 0$ is found by binary search.
+    \item With the default split, Release~2 has $\Delta_{2,2}^2 = \binom{37}{2} = 666$ with $s_2 = 0.1$, and Release~1 has $\Delta_{2,1}^2 = 37$ with $s_1 = 0.3$, so $\mu_{\text{sk},2}/\mu_{\text{sk},1} = (666/0.1)/(37/0.3) = 18 \times 3 = 54$. Release~2 thus adds about 54 times the noise variance per cell of Release~1, which makes coarse binning ($B_{\text{coarse}} \le 16$) necessary to keep a usable signal-to-noise ratio.
+\end{itemize}
+
+\textbf{Consistency refinement (MGr).} To make the tables consistent without spending budget, MGr applies the following post-processing:
+\begin{enumerate}
+    \item \textbf{Bin-wise minimum-variance merging:} Merging is done on counts, per class, before normalisation. The fine counts of Release~1 are collapsed to coarse bins; a coarse bin $b$ of $X_u$ that contains $k_b$ fine bins has variance $k_b \sigma_1^2$. Projecting an incident Release~3 edge table $(X_u, X_v)$ onto $X_u$, by summing over the $|X_v|$ coarse bins of $X_v$, gives an independent estimate with variance $|X_v| \sigma_3^2$. A non-root attribute with degree $d(u)$ in $T^\star$ therefore has $1 + d(u)$ independent estimators. For the root $r$, Release~3 also provides the class-conditional fine root table, a second univariate estimator with variance $k_b \sigma_3^2$, so the root merges $2 + d(r)$ estimators. Following McKenna et~al.~\cite{mckenna2021winning}, the estimators are merged bin by bin with inverse-variance weights:
+    \begin{equation}
+    \hat{C}_{\text{merged}}(X_u = b \mid y = c) = \frac{\sum_{j} w_{u,j}(b)\, \hat{C}_{u,j}(b \mid y = c)}{\sum_{j} w_{u,j}(b)},
+    \label{eq:ivw_merge}
+    \end{equation}
+    with weights $w_{u,j}(b) = 1/\mathrm{Var}\big(\hat{C}_{u,j}(b \mid y = c)\big)$. The merged counts are then normalised, $\hat{P}_{\text{merged}}(b) = \hat{C}_{\text{merged}}(b)/\sum_{b'} \hat{C}_{\text{merged}}(b')$.
+    \item \textbf{Truncation:} The merged marginals and the noisy Release~3 tables are truncated at zero and normalised to sum to 1.
+    \item \textbf{Iterative proportional fitting (IPF):} Each edge table $(X_u, X_v \mid y = c)$ is adjusted by IPF~\cite{deming1940, csiszar1975} to match the merged marginals of $X_u$ and $X_v$, which makes the margins consistent.
+    \item \textbf{Smoothing and root selection:} Laplace smoothing $\alpha_{\text{smooth}} \in \{0.1, 1, 10\}$ is applied, and the root is the attribute with the largest sum of noisy MI.
+\end{enumerate}
+
+\textbf{Second-order Bayesian network (MGb).} This ablation adapts PrivBayes~\cite{zhang2017privbayes}: pairs of parents $(u_1, u_2)$ are chosen greedily from the MI of Release~2 while keeping the graph acyclic. Each record still touches $d$ tables, so the record sensitivity is unchanged, while each table grows to accommodate two parents.
+
+\subsubsection*{Transport through SecAgg$^+$}
+For MGs and MGr, the tables are sent through Flower SecAgg$^+$~\cite{bell2020} over the integer ring $\mathbb{Z}_M$ with $M = 2^{32}$ (uint32):
+\begin{itemize}
+    \item Client updates are scaled with \texttt{max\_weight} (unit factor 1), and the quantisation range is set to twice the clipping range, so integers are transmitted exactly, without floating-point rounding.
+    \item Under record-level DP, \texttt{clipping\_range} is $100{,}000$, which exceeds the largest possible cell count ($N = 88{,}500$). Under group DP, it is set to $C_{\text{clip}} = N + 6\sqrt{\mu_{\text{sk}}^{\text{group}}/K}$, which covers both the data mass and $6\sigma$ of the discrete noise, so the probability that a noisy count exceeds $C_{\text{clip}}$ is below $10^{-9}$ by the Skellam tail bound.
+    \item The noisy counts $c_{k,j} = x_{k,j} + \xi_{k,j} \pmod{2^{32}}$ are sent as uint32 vectors and recovered at the server by a centred lift: $\mathrm{lift}(S) = S$ if $S < 2^{31}$, otherwise $S - 2^{32}$. The cell totals satisfy $\sum_k x_{k,j} \le N = 88{,}500$. Under record-level DP the aggregate noise has $\sigma_{\text{agg}} = \sqrt{\mu_{\text{sk}}} \le 400$. Under group DP with cap $m = 100$, the variance grows quadratically to $\mu_{\text{sk}}^{\text{group}} \le 1.6 \times 10^{9}$, so $\sigma_{\text{agg}} \le 4 \times 10^{4}$ (and $\sigma_k = \sqrt{\mu_{\text{sk}}/K} \le 1.8 \times 10^{4}$ per client share). The noisy total therefore satisfies $|S| \le N + 6\sigma_{\text{agg}} \le 88{,}500 + 2.4 \times 10^{5} \approx 3.3 \times 10^{5} \ll 2^{31} \approx 2.15 \times 10^{9}$; the largest sum lies tens of thousands of standard deviations below the overflow threshold, and the probability of a modular wrap-around is below $10^{-50}$.
+    \item The Gaussian variant MGd is simulated in one process over $\mathbb{R}$, and the local-DP variant MGl sends its noisy tables directly without SecAgg$^+$.
+\end{itemize}
+Table~\ref{tab:mg_variants} lists the variants of FedDP-Marginal.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Variants of FedDP-Marginal}
+\label{tab:mg_variants}
+\begin{tabularx}{\textwidth}{lp{2.1cm}p{2.4cm}p{3.1cm}X}
+\toprule
+\textbf{Code} & \textbf{Noise} & \textbf{Privacy target} & \textbf{Aggregation channel} & \textbf{Role} \\
+\midrule
+\textbf{MGs} & Skellam & Distributed $(\varepsilon, \delta)$ & SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$ & Main generator (noise shared under SecAgg$^+$) \\
+\textbf{MGr} & Skellam & Distributed $(\varepsilon, \delta)$ & SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$ & MGs with merging and IPF consistency refinement \\
+\textbf{MGd} & Gaussian & Distributed $(\varepsilon, \delta)$ & Simulated in one process over $\mathbb{R}$ & Continuous Gaussian comparator (analytical zCDP) \\
+\textbf{MGl} & Skellam or Gaussian & Local DP $(\varepsilon, \delta)$ & Direct sum, no SecAgg$^+$ & Local-DP baseline (sum of $K$ unshared noises) \\
+\textbf{MGb} & Skellam & Distributed $(\varepsilon, \delta)$ & SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$ & Second-order Bayesian network (PrivBayes-style) \\
+\textbf{MGs-nodp} & None ($\varepsilon = \infty$) & None & SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$ & Non-private reference with SecAgg$^+$ (counterpart of M2) \\
+\textbf{MGp-nodp} & None ($\varepsilon = \infty$) & None & Plain Flower FedAvg & Non-private reference in clear (counterpart of B3) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Privacy Accounting}\label{subsec:privacy_accounting}
+
+\subsubsection*{Analytical zCDP Accounting for the Gaussian Comparator (MGd)}
+To provide a continuous comparator for the discrete mechanism, MGd is accounted with analytical zero-concentrated differential privacy (zCDP)~\cite[Proposition~1.3]{bun2016}. For each release $r \in \{1, 2, 3\}$ with noise standard deviation $\sigma_r$ and $\ell_2$ sensitivity $\Delta_{2,r}$, the accumulated parameter $\rho$ and the resulting $(\varepsilon, \delta)$ guarantee are~\cite{bun2016}
+\begin{equation}
+\rho = \sum_{r=1}^{3} \frac{\Delta_{2,r}^2}{2\sigma_r^2}, \qquad \varepsilon = \rho + 2\sqrt{\rho \ln(1/\delta)}.
+\label{eq:zcdp}
+\end{equation}
+$\rho$ is divided between the three releases by the split $\mathbf{s} = (s_1, s_2, s_3)$, by default $(0.3, 0.1, 0.6)$. The analytical conversion from zCDP to $(\varepsilon, \delta)$ is looser than the numerical conversion from RDP~\cite{balle2020}. At the same nominal $\varepsilon$, part of the utility difference between MGd and MGs therefore comes from the tightness of the conversion and not from the noise mechanism itself.
+
+\subsubsection*{Skellam Mechanism and Accounting (MGs, MGr)}
+The nominal guarantees are $\varepsilon \in \{1, 5, 10\}$ with $\delta = 10^{-5}$. The Skellam distribution $\mathrm{Sk}(\mu_{\text{sk}}) = \mathrm{Pois}(\mu_{\text{sk}}/2) - \mathrm{Pois}(\mu_{\text{sk}}/2)$ is the difference of two independent Poisson variables with parameter $\mu_{\text{sk}}/2$; it has zero mean and variance $\mu_{\text{sk}}$~\cite{skellam1946, agarwal2021}. Because it is infinitely divisible, the integer noise shares drawn by the gateways add up exactly under addition modulo $2^{32}$~\cite{agarwal2021}.
+
+The accounting uses the Rényi differential privacy (RDP) bound of Agarwal et~al.~\cite[Corollary~3.6]{agarwal2021}. For an integer order $\lambda > 1$:
+\begin{equation}
+\varepsilon(\lambda) \le \frac{\lambda \Delta_2^2}{2\mu_{\text{sk}}} + \min\left( \frac{(2\lambda - 1)\Delta_2^2 + 6\Delta_1}{4\mu_{\text{sk}}^2}, \frac{3\Delta_1}{2\mu_{\text{sk}}} \right).
+\label{eq:skellam_rdp}
+\end{equation}
+Over the three releases, RDP composes additively~\cite{mironov2017}: $\varepsilon_{\text{total}}(\lambda) = \sum_{r=1}^{3} \varepsilon_r(\lambda)$. The composed RDP curve is converted to $(\varepsilon, \delta)$ with the numerical RDP accountant of Opacus~\cite{yousefpour2021}. Because Equation~\eqref{eq:skellam_rdp} holds only for integer orders, the accountant grid is restricted to $\lambda \in \{2, 3, \dots, 128\}$. A global calibration factor for $\mu_{\text{sk}}$ is found by binary search so that the composed guarantee matches the target $(\varepsilon, \delta)$.
+
+\subsubsection*{Trust Models and Division of the Noise}
+The noise is calibrated under three trust assumptions:
+\begin{itemize}
+    \item \textbf{Distributed DP ($t = K$, main setting):} Each gateway $k$ adds $1/K$ of the total noise variance, $\mu_{\text{sk},k} = \mu_{\text{sk}}/K$. The nominal guarantee holds when all $K$ gateways are honest. When only $h < K$ remain honest, the effective $\varepsilon(h)$ is recomputed with the Opacus RDP accountant from the reduced aggregate variance $\frac{h}{K}\mu_{\text{sk}}$, for $h \in \{1, \dots, K\}$.
+    \item \textbf{Threshold DP ($t \le K$):} Each gateway adds $\mu_{\text{sk},k} = \mu_{\text{sk}}/t$, so the target guarantee holds whenever at least $t$ gateways are honest. In SecAgg$^+$~\cite{bell2020}, the masks are shared by Shamir secret sharing with reconstruction threshold $T_{\text{recon}}$. To stop colluding gateways from reconstructing the masking seeds of honest gateways and exposing their individual updates to the server, the number of colluders $c = K - t$ must satisfy $c < T_{\text{recon}}$. The evaluated settings are:
+    \begin{itemize}
+        \item $t = 5$: distributed DP ($c = 0$, $T_{\text{recon}} = 3$), assuming full honest participation;
+        \item $t = 3$: threshold DP ($c \le 2 < T_{\text{recon}} = 3$), tolerating up to two dropouts or two semi-honest colluders while the server still sees only the aggregate;
+        \item $t = 2$ (hardened threshold DP): to tolerate $c = 3$ colluders, $T_{\text{recon}}$ must be raised to at least 4 (leaving one dropout of tolerance). With $T_{\text{recon}} = 3$, three colluders would hold three shares, enough to reconstruct the honest gateways' masks and reduce the distributed guarantee to local DP. Evaluating $t = 2$ therefore requires $T_{\text{recon}} = 4$.
+    \end{itemize}
+    \item \textbf{Local DP (MGl):} Each gateway adds the full noise variance, $\mu_{\text{sk},k} = \mu_{\text{sk}}$. No other gateway and not the server need to be trusted, and SecAgg$^+$ is not used, but the aggregate carries $K$ times the noise variance ($K\mu_{\text{sk}}$).
+\end{itemize}
+
+\subsubsection*{Group Privacy and Contribution Bounding}
+To protect against the tracing of a session or the re-identification of a capture, group differential privacy is enforced. The sensitivities are scaled by the cap $m$ on the records of one unit~\cite{dwork2014}:
+\begin{equation}
+\Delta_1^{\text{group}} = m \cdot \Delta_1, \qquad \Delta_2^{\text{group}} = m \cdot \Delta_2.
+\label{eq:group_sens}
+\end{equation}
+With Gaussian noise the standard deviation scales linearly, $\sigma^{\text{group}} = m\sigma$; with Skellam noise the parameter scales quadratically, $\mu_{\text{sk}}^{\text{group}} \approx m^2 \mu_{\text{sk}}$.
+
+Group DP holds when (1) each protected unit (TCP stream or capture group) is held entirely by one gateway, through the unit-level partition, and (2) each gateway keeps at most $m$ records of each unit. Under the default record-level DP ($m = 1$), a unit of $\ell$ records receives only an inflated group bound. With approximate $(\varepsilon, \delta)$ composition, the group relaxation $\ell e^{(\ell-1)\varepsilon}\delta$ becomes vacuous for $\ell \ge 3$ at $\varepsilon = 10$, so the group guarantee is computed by zCDP scaling for Gaussian mechanisms~\cite{bun2016},
+\begin{equation}
+\rho_{\text{group}} = \ell^2 \rho,
+\label{eq:group_zcdp}
+\end{equation}
+converted to $(\varepsilon_{\text{group}}, \delta)$ with Equation~\eqref{eq:zcdp}, or by recomputing Equation~\eqref{eq:skellam_rdp} with $\Delta \to \ell\Delta$ for Skellam mechanisms. The caps $m \in \{1, 2, 4\}$ for streams and $m \in \{25, 50, 100\}$ for capture groups are target privacy policies, not tuned model parameters.
+
+\subsubsection*{Validity Constraints and Verification}
+\begin{itemize}
+    \item \textbf{Linear aggregation:} Distributed DP under secure addition is valid only when each release is a single additive sum. It cannot be applied to the multi-epoch DP-SGD of the CVAE.
+    \item \textbf{Uniform protection:} The noise is never reduced selectively for the rare classes, as that would weaken the protection of minority-class records below the announced $\varepsilon$.
+    \item \textbf{Values sent in clear:} Flower sends the client sizes $n_i$ (\texttt{num\_examples}) in clear, outside the DP perimeter.
+    \item \textbf{Independent verification:} Every reported $(\varepsilon, \delta)$ is recomputed independently by \texttt{eval/dp\_check.py}. An audit flag (F5) is raised when the recomputed value differs from the reported one by more than 10\% ($|\varepsilon_{\text{recomp}} - \varepsilon|/\varepsilon > 0.10$).
+\end{itemize}
+
+\subsubsection*{DP-SGD Accounting for the Federated CVAE}
+The deep baseline is trained with differentially private stochastic gradient descent (DP-SGD)~\cite{abadi2016} adapted to federated learning. At each local step, each client clips the per-example gradients to norm $C$ and adds Gaussian noise to the mini-batch sum (Equation~\eqref{eq:dpsgd} in Section~\ref{subsec:cvae}), using Opacus 1.6.0~\cite{yousefpour2021}. Mini-batches are formed by Poisson sampling with rate $q_k = B_k/n_k$, where $B_k = \min(B_{\text{batch}}, n_k)$ keeps $q_k \le 1$. The local privacy loss $\varepsilon_k$ is accumulated over $R$ rounds and $E$ local epochs with the RDP accountant of the sampled Gaussian mechanism~\cite{mironov2019}.
+\begin{itemize}
+    \item \textbf{Per-client calibration and amplification by subsampling:} The noise multiplier $\sigma_k$ is calibrated per client from its size $n_k$ and its number of steps. Under a skewed partition, clients with very few rows ($n_k \approx 500 \le B_{\text{batch}}$) have $q_k = 1$ and lose the amplification by subsampling, so their $\sigma_k$ must be much larger to reach the target. Because steps are discrete and the calibration grid is finite, the realised $\varepsilon_k$ differ slightly between clients. The federation is reported conservatively as the worst client~\cite{mironov2019},
+    \begin{equation}
+    \varepsilon_{\text{effective}} = \max_{k \in \mathcal{K}} \varepsilon_k,
+    \label{eq:eps_effective}
+    \end{equation}
+    together with the median over clients; $\delta < 1/n_k$ holds for every client.
+    \item \textbf{Asymmetry between the routes:} In M3, SecAgg$^+$~\cite{bell2020} hides the updates from the server in transit, but the noise is still added locally by each client without sharing across clients. The CVAE therefore works under local DP-SGD, whereas FedDP-Marginal benefits from distributed DP under secure aggregation.
+\end{itemize}
+
+\subsubsection*{Formal Privacy Perimeter}
+The formal DP perimeter is as follows (see also Section~\ref{subsec:threat_model}):
+\begin{itemize}
+    \item \textbf{Protected by $\varepsilon$:} All 37 attributes (and their 64-bin discrete states) of the clients' training records. The coarse cut-points are derived from the noisy histograms of Release~1 and are therefore covered by post-processing~\cite{dwork2014}.
+    \item \textbf{Public side information outside $\varepsilon$:} Class labels $y$ and the global class quotas; client sizes $n_i$ (\texttt{num\_examples} sent in clear by Flower); and the global preprocessing parameters (means, standard deviations, $\log(1+x)$ choices, and $\pm 5\sigma$ clipping bounds) computed centrally on the training split. As stated in Section~\ref{sec:methodology_limitations}, treating normalisation parameters as public is a common convention in tabular benchmarks but lies outside the formal accounting.
+    \item \textbf{Leakage through selection:} Hyper-parameters are selected on the real validation split without a private selection mechanism (Section~\ref{subsec:hpo}). The reported $\varepsilon$ is the nominal guarantee of training, not an end-to-end guarantee that includes hyper-parameter selection.
+    \item \textbf{Relaxation parameter:} $\delta = 10^{-5}$ in all evaluations ($1/n \approx 1.13 \times 10^{-5}$ for $n = 88{,}500$).
+\end{itemize}
+
+\subsection{Federated CVAE, DP-SGD and SecAgg$^+$ (Baseline)}\label{subsec:cvae}
+
+\subsubsection*{CVAE Architecture and Loss}
+The deep baseline is a label-conditional variational autoencoder (CVAE)~\cite{sohn2015}. The encoder $q_\phi(z \mid x, y)$ maps the features $x \in \mathbb{R}^{D}$ ($D = 60$) and the one-hot label $y \in \{0, 1\}^{C}$ to latent parameters $(\mu_z, \log \sigma_z^2) \in \mathbb{R}^{2 d_z}$, and the decoder $p_\theta(x \mid z, y)$ reconstructs the input.
+\begin{itemize}
+    \item \textbf{No batch normalisation:} The CVAE has no batch-normalisation layers. This is required for per-example gradients to be independent, so that Opacus can clip each example's gradient without coupling between examples~\cite{yousefpour2021}. The parameters form a fixed-size vector, compatible with FedAvg and SecAgg$^+$.
+    \item \textbf{Loss:} The model minimises the $\beta$-weighted conditional variational loss~\cite{sohn2015, higgins2017}:
+    \begin{equation}
+    \begin{split}
+    \mathcal{L}_{\text{CVAE}}(\phi, \theta) ={}& \sum_{b \in \text{num}} \|x_b - \hat{x}_b\|_2^2 + \sum_{b \in \text{bin}} \mathrm{BCE}(x_b, \hat{x}_b) + \sum_{g \in \text{cat}} \mathrm{CE}(x_g, \hat{x}_g) \\
+    &+ \beta \cdot D_{\mathrm{KL}}\big(q_\phi(z \mid x, y) \,\|\, \mathcal{N}(0, \mathbf{I})\big),
+    \end{split}
+    \label{eq:cvae_loss}
+    \end{equation}
+    where num, bin, and cat denote the numeric, binary, and categorical feature blocks.
+    \item \textbf{Warm-up and early stopping:} $\beta$ rises linearly from 0 to its target 0.5 over the first 10 local epochs (the first 5 global rounds with $E = 2$). Training is monitored by early stopping on the validation loss.
+    \item \textbf{Default parameters:} latent dimension $d_z = 16$, hidden layers $[128, 64]$, learning rate $\eta = 10^{-3}$, batch size $B_{\text{batch}} = 256$, and $\beta = 0.5$.
+\end{itemize}
+
+\subsubsection*{Federated Optimisation}
+Training uses Federated Averaging (FedAvg)~\cite{mcmahan2017} over $R = 30$ global rounds with $E = 2$ local epochs per round:
+\begin{equation}
+w^{r+1} = \sum_{k=1}^{K} \frac{n_k}{\sum_{j} n_j} w_k^{r+1}.
+\label{eq:fedavg}
+\end{equation}
+\begin{itemize}
+    \item \textbf{Optimiser state:} The Adam states are re-initialised at the start of each global round.
+    \item \textbf{Deterministic order:} Client updates are aggregated in a fixed order of client identifiers, so that runs are exactly reproducible.
+    \item \textbf{Execution:} The federation is simulated with Flower 1.39.0~\cite{beutel2020} and Ray 2.59.0 actors that share the CPU of one machine.
+\end{itemize}
+
+\subsubsection*{DP-SGD at the Clients}
+When DP is used (M1 and M3), clients run DP-SGD with Opacus 1.6.0~\cite{yousefpour2021}. At each local step, the per-example gradients are clipped to norm $C$ and Gaussian noise is added before the update~\cite{abadi2016}:
+\begin{equation}
+\bar{g}_i = \frac{g_i}{\max(1, \|g_i\|_2 / C)}, \qquad \tilde{g} = \frac{1}{B_k}\left(\sum_{i=1}^{B_k} \bar{g}_i + \mathcal{N}(0, \sigma_k^2 C^2 \mathbf{I})\right),
+\label{eq:dpsgd}
+\end{equation}
+where $B_k = \min(B_{\text{batch}}, n_k)$ gives a valid normalising constant for small clients.
+
+\subsubsection*{SecAgg$^+$ Configuration and Bounds on the Weights}
+For M2 and M3, the updates are aggregated with Flower's \texttt{SecAggPlusWorkflow} and \texttt{secaggplus\_mod}~\cite{bell2020}:
+\begin{itemize}
+    \item \textbf{Protocol topology:} \texttt{num\_shares} $= 5$ and \texttt{reconstruction\_threshold} $= 3$, which tolerates up to two dropped clients per round.
+    \item \textbf{Bounds:} \texttt{clipping\_range} $= 16$ (checked against the largest absolute parameter value $|w|$), uniform quantisation over $Q = 2^{22}$ levels, \texttt{max\_weight} $= 100{,}000$ (above the largest client size, $n_k \le N = 88{,}500$), and modulus $M = 2^{32}$ (uint32).
+    \item \textbf{Weight scaling and modular bound:} To compute the exact weighted average of Equation~\eqref{eq:fedavg} without overflow in $\mathbb{Z}_{2^{32}}$, each client scales its update by its relative weight before quantisation. Let $\mathcal{K}_{\text{active}}$ be the clients active in the round, whose sizes $n_k$ are sent in clear (Section~\ref{subsec:privacy_accounting}). Each client computes $p_k = n_k / \sum_{j \in \mathcal{K}_{\text{active}}} n_j \in (0, 1]$ and scales its clipped update $\bar{\mathbf{w}}_k$ ($\|\bar{\mathbf{w}}_k\|_\infty \le 16$) to $\mathbf{u}_k = p_k \bar{\mathbf{w}}_k$, which still satisfies $\|\mathbf{u}_k\|_\infty \le 16$ because $p_k \le 1$. It then quantises $\mathbf{u}_k$ uniformly into integers $\tilde{\mathbf{u}}_k \in \{0, 1, \dots, Q - 1\}$. Through SecAgg$^+$, the server receives the modular sum~\cite{bell2020}
+    \begin{equation}
+    \mathbf{S} = \sum_{k \in \mathcal{K}_{\text{active}}} \tilde{\mathbf{u}}_k \pmod{2^{32}}.
+    \label{eq:secagg_sum}
+    \end{equation}
+    Since each entry is at most $Q - 1$, the unmasked sum over $K = 5$ clients satisfies
+    \begin{equation}
+    \sum_{k \in \mathcal{K}_{\text{active}}} \tilde{u}_k \le K (Q - 1) = 5 \times (2^{22} - 1) \approx 2.097 \times 10^{7} \ll 2^{31} < 2^{32}.
+    \label{eq:secagg_bound}
+    \end{equation}
+    The server applies the centred lift and the affine dequantisation to recover $\sum_{k} p_k \bar{\mathbf{w}}_k$ directly. Because $\sum_k p_k = 1$, the server does not divide by $\sum_k n_k$. This gives the exact weighted FedAvg while avoiding 32-bit wrap-around, which would occur if the updates were scaled by the raw counts $n_k$: $\sum_k n_k (Q - 1) \approx 88{,}500 \times 2^{22} \approx 3.71 \times 10^{11} > 2^{32}$.
+    \item \textbf{Protocol tests:} T-SA1 (deviation from plain FedAvg $\le 10^{-4}$), T-SA2 (masked vectors uncorrelated with the true weights and uniformly distributed), and T-SA3 (robustness to simulated client dropouts). SecAgg$^+$ provides transport privacy only and receives no credit in the DP accounting.
+\end{itemize}
+
+\subsubsection*{Generation of Synthetic Samples}
+After training, the encoder $q_\phi$ is discarded. Synthetic samples are generated by drawing $z \sim \mathcal{N}(0, \mathbf{I})$ and decoding with $p_\theta(x \mid z, y = c)$~\cite{sohn2015}:
+\begin{itemize}
+    \item \textbf{Sampling by block:} Bernoulli sampling for binary features, softmax sampling for categorical blocks, and inverse standardisation for numeric features.
+    \item \textbf{Plain decoder:} Uses the final decoder outputs directly. It stays within the formal DP guarantee and is the format used in all DP comparisons.
+    \item \textbf{Residual-noise decoder:} Restores class-conditional feature variances estimated on the centralised training data (outside $\varepsilon$). It is used only as a non-private reference.
+    \item \textbf{Options of round O1:} DP-computed residual statistics (budget fraction \texttt{stat\_frac}$\,\times\,\varepsilon$) and client class weighting (\texttt{cw\_power}).
+\end{itemize}
+Table~\ref{tab:generator_matrix} compares the CVAE configurations with the main marginal generator.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Configuration matrix of the baseline and proposed generators}
+\label{tab:generator_matrix}
+\begin{tabularx}{\textwidth}{lp{2.9cm}p{3.0cm}Xcp{2.4cm}}
+\toprule
+\textbf{Code} & \textbf{Architecture} & \textbf{Privacy guarantee} & \textbf{Transport privacy} & \textbf{Rounds} & \textbf{Payload per round} \\
+\midrule
+\textbf{B3} & CVAE & None ($\varepsilon = \infty$) & Plain FedAvg~\cite{mcmahan2017} & 30 & Dense weights $\theta$ \\
+\textbf{M1} & CVAE & DP-SGD ($\varepsilon$)~\cite{abadi2016} & Plain FedAvg~\cite{mcmahan2017} & 30 & Dense weights $\theta$ \\
+\textbf{M2} & CVAE & None ($\varepsilon = \infty$) & SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$~\cite{bell2020} & 30 & Ring tensors (uint32) \\
+\textbf{M3} & CVAE & DP-SGD ($\varepsilon$)~\cite{abadi2016} & SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$~\cite{bell2020} & 30 & Ring tensors (uint32) \\
+\textbf{MGs} & FedDP-Marginal & Distributed DP $(\varepsilon, \delta)$~\cite{agarwal2021} & SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$~\cite{bell2020} & 3 & Count vectors (uint32) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Hyper-parameter Selection and Search Spaces}\label{subsec:hpo}
+
+\subsubsection*{Optimisation Protocol and Integrity of Selection}
+Hyper-parameters are optimised with Optuna~\cite{akiba2019} using the Tree-structured Parzen Estimator (TPE)~\cite{bergstra2011}. All searches use the validation split only, so the test split is never touched. The objective is the utility for the downstream IDS: the validation macro-F1 of a Random Forest~\cite{breiman2001} (100 trees during tuning to save time, 200 trees in the final protocols) trained on synthetic records (5,000 rows per class) and evaluated on the real validation traffic (TSTR). The test split stays locked and is evaluated once, on the final configurations.
+
+Selecting hyper-parameters on the real validation split leaks information about the training data through the trial models. Private selection algorithms~\cite{mcsherry2007, liu2019, papernot2022} bound this extra privacy cost; this study reports the nominal $\varepsilon$ of training and documents the number of trials of each search so that the selection can be accounted for.
+
+\subsubsection*{Separate Search Spaces}
+Tuning is split into five search spaces (Table~\ref{tab:search_spaces}):
+\begin{enumerate}
+    \item \textbf{Space (a), centralised CVAE without DP (phase 7):} 30 TPE trials on centralised data over 30 epochs, exploring $d_z \in \{8, 16, 32\}$, hidden width $\in \{64, 128, 256\}$, $\beta \in [0.1, 2.0]$ (log-uniform), and $\eta \in [10^{-4}, 3 \times 10^{-3}]$ (log-uniform). Output: \texttt{configs/best\_cvae.yaml}.
+    \item \textbf{Space (b), CVAE with DP at proxy scale (\texttt{tune-dp}):} To limit the cost, initial DP-SGD tuning runs 30 trials on a single proxy client with 20\% of the data at $\varepsilon = 5$ (one seed per trial). The best candidates are verified in true federated training (\texttt{verify-dp}), selected by validation macro-F1, with ties within 0.01 broken by the lowest validation loss. It explores $d_z \in \{8, 16, 32\}$, hidden width $\in \{32, 64, 128, 256\}$, $B_{\text{batch}} \in \{128, 256, 512, 1024\}$, $\beta \in [0.1, 2.0]$, $\eta \in [2 \times 10^{-4}, 5 \times 10^{-3}]$ (log-uniform), and clipping norm $C \in [0.1, 20.0]$ (log-uniform). Output: \texttt{configs/best\_cvae\_dp.yaml} (family M1d-t21).
+    \item \textbf{Space (c), CVAE with DP at full federated scale (\texttt{tune-dp-full}, round O1):} Full federated optimisation over 5 clients with seed 0, with 30 trials for $\varepsilon = 5$, 28 for $\varepsilon = 1$, and 12 for $\varepsilon = 10$. It explores $d_z \in \{8, 16, 32\}$, hidden width $\in \{64, 128\}$ (256 removed for memory reasons), $B_{\text{batch}} \in \{256, 512, 1024, 2048\}$, $\beta \in [0.1, 2.0]$, $\eta \in [5 \times 10^{-4}, 2 \times 10^{-2}]$ (log-uniform), $C \in [0.5, 50.0]$ (log-uniform), rounds $R \in \{15, 30, 50\}$, local epochs $E \in \{1, 2, 4\}$, client class weighting \texttt{cw\_power} $\in \{0, 0.5, 1.0\}$, DP residual budget fraction \texttt{stat\_frac} $\in \{0.02, 0.05, 0.10\}$, and residual clipping \texttt{res\_clip} $\in \{0.5, 1.0, 2.0, 4.0\}$. Output: \texttt{configs/best\_cvae\_dp\_full.yaml} (M1o, M3o).
+    \item \textbf{Space (d), FedDP-Marginal:} Discrete grid search scored by the mean over three seeds on the validation split. It explores the coarse bins $B_{\text{coarse}} \in \{4, 8, 16, 32\}$ crossed with the budget splits $\mathbf{s} \in \{(0.3, 0.1, 0.6), (0.5, 0.1, 0.4), (0.15, 0.05, 0.8)\}$; the dependency measure (plug-in MI, Miller--Madow MI $\hat{I}_{\text{MM}}$~\cite{miller1955}, or normalised MI), with a stability check that measures the Jaccard similarity~\cite{jaccard1912} of the tree edges across partition seeds,
+    \begin{equation}
+    J(T_a^\star, T_b^\star) = \frac{|E(T_a^\star) \cap E(T_b^\star)|}{|E(T_a^\star) \cup E(T_b^\star)|};
+    \label{eq:jaccard}
+    \end{equation}
+    the second-order structure of MGb (parent search, bins specific to rare classes, number of fine bins); and the refinement options (inverse-variance merging, Laplace smoothing $\alpha_{\text{smooth}} \in \{0.1, 1.0, 10.0\}$, root chosen by noisy MI). The policy settings for unit caps ($m_{\text{stream}} \in \{1, 2, 4\}$, $m_{\text{capture}} \in \{25, 50, 100\}$) and honest thresholds ($t \in \{5, 3\}$, and $t = 2$ with $T_{\text{recon}} = 4$) are evaluated in \texttt{best\_group\_dp.yaml}.
+    \item \textbf{Space (e), downstream IDS:} Choice between Random Forest (200 trees) and MLP (hidden layers $[128, 64]$, early stopping) for each protocol by validation macro-F1; the rare-class augmentation ratio of TAugR $\in \{0.25, 0.5, 1.0, 2.0\}$ (seed 0); and class-probability weights $w_c \in \{0.25, 0.5, 1.0, 2.0, 4.0\}$, by a two-round coordinate search averaged over three seeds.
+\end{enumerate}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Hyper-parameter search spaces of the model components}
+\label{tab:search_spaces}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.0cm}>{\raggedright\arraybackslash}p{2.3cm}>{\raggedright\arraybackslash}p{3.0cm}>{\raggedright\arraybackslash}X}
+\toprule
+\textbf{Search space} & \textbf{Component} & \textbf{Method} & \textbf{Ranges} \\
+\midrule
+\textbf{(a) Centralised CVAE} (phase 7) & CVAE without DP & 30 TPE trials, centralised data & $d_z \in \{8, 16, 32\}$; hidden $\in \{64, 128, 256\}$; $\beta \in [0.1, 2.0]$ (log); $\eta \in [10^{-4}, 3 \times 10^{-3}]$ (log) \\
+\midrule
+\textbf{(b) CVAE DP proxy} (\texttt{tune-dp}) & CVAE with DP-SGD & 1 proxy client (20\% of data), 30 trials, $\varepsilon = 5$, 1 seed; checked by \texttt{verify-dp} & $d_z \in \{8, 16, 32\}$; hidden $\in \{32, 64, 128, 256\}$; $B_{\text{batch}} \in \{128, 256, 512, 1024\}$; $\beta \in [0.1, 2.0]$; $\eta \in [2 \times 10^{-4}, 5 \times 10^{-3}]$ (log); $C \in [0.1, 20.0]$ (log) \\
+\midrule
+\textbf{(c) Full federated DP CVAE} (\texttt{tune-dp-full}, O1) & Federated CVAE with DP-SGD & True federation (5 clients, seed 0); 30/28/12 trials for $\varepsilon \in \{5, 1, 10\}$ & $d_z \in \{8, 16, 32\}$; hidden $\in \{64, 128\}$; $B_{\text{batch}} \in \{256, 512, 1024, 2048\}$; $\beta \in [0.1, 2.0]$; $\eta \in [5 \times 10^{-4}, 2 \times 10^{-2}]$ (log); $C \in [0.5, 50.0]$ (log); $R \in \{15, 30, 50\}$; $E \in \{1, 2, 4\}$; \texttt{res\_clip} $\in \{0.5, 1, 2, 4\}$; \texttt{cw\_power} $\in \{0, 0.5, 1\}$; \texttt{stat\_frac} $\in \{0.02, 0.05, 0.1\}$ \\
+\midrule
+\textbf{(d) FedDP-Marginal} (grid on validation) & Marginal generator & Discrete grid; mean of 3 seeds on validation & $B_{\text{coarse}} \in \{4, 8, 16, 32\}$; $\mathbf{s} \in \{(0.3, 0.1, 0.6),$ $(0.5, 0.1, 0.4),$ $(0.15, 0.05, 0.8)\}$; MI: plug-in, Miller--Madow~\cite{miller1955}, NMI; tree stability (Jaccard~\cite{jaccard1912}); MGb order 2; refinement $\alpha_{\text{smooth}} \in \{0.1, 1, 10\}$; policy: $m_{\text{strm}} \in \{1, 2, 4\}$, $m_{\text{cap}} \in \{25, 50, 100\}$, $t \in \{5, 3\}$ (or $t = 2$, $T_{\text{recon}} = 4$) \\
+\midrule
+\textbf{(e) Downstream IDS} (IDS tuning) & Classifiers and balancing & Grid search on validation; mean of 3 seeds & Model: Random Forest (200 trees) or MLP; TAugR ratio $\in \{0.25, 0.5, 1.0, 2.0\}$; class weights $w_c \in \{0.25, 0.5, 1.0, 2.0, 4.0\}$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection*{Multi-Seed Screening Rule and Asymmetries}
+For the ablations within space (d), candidates are screened with an adaptation of the one-standard-error rule~\cite{hastie2009}:
+\begin{equation}
+\text{Macro-F1}_{\text{candidate}} > \text{Macro-F1}_{\text{baseline}} + \mathrm{std}_{\text{seeds}}(\text{baseline}),
+\label{eq:screening}
+\end{equation}
+where the means and sample standard deviations ($\text{ddof} = 1$) are computed over the validation seeds $\{0, 1, 2\}$, and the baseline is the main MGs generator at the same $\varepsilon$.
+\begin{itemize}
+    \item \textbf{A coarse filter, not a test:} This condition only prunes unpromising configurations during the validation search; it is not a formal hypothesis test. Formal comparisons between configurations use the paired bootstrap decision rule~\cite{efron1993} defined in Section~3.3.7.
+    \item \textbf{Unpaired comparison and expected false passes:} The rule compares candidate and baseline means over independent seeds rather than paired differences per seed. Under the null hypothesis of equal performance and equal variance ($\sigma_{\text{cand}} = \sigma_{\text{base}} = \sigma$), the difference of two three-seed means has variance $\mathrm{Var}(\bar{X}_{\text{cand}} - \bar{X}_{\text{base}}) = 2\sigma^2/3$. The offset $\mathrm{std}_{\text{seeds}}(\text{baseline}) \approx \sigma$ thus corresponds to a standard normal score $z = \sigma/(\sqrt{2/3}\,\sigma) = \sqrt{1.5} \approx 1.22$, that is $p = 1 - \Phi(1.22) \approx 0.11$. In a grid of at least 12 candidates, about 11\% of null candidates (about 1.3 candidates) are expected to pass by chance alone. Equation~\eqref{eq:screening} is therefore only a high-throughput sieve; the final statistical decision requires the paired bootstrap rule over shared partition seeds (Section~3.3.7).
+    \item \textbf{Asymmetry of the tuning protocols:} Because iterative DP-SGD is expensive, the CVAE searches used one seed per trial (space (c) was tuned on seed 0 and then evaluated on all seeds), whereas FedDP-Marginal was selected on the mean of three seeds on the validation split.
+    \item \textbf{Reporting:} The final test evaluations are run on the locked test split with seeds $\{0, 1, 2\}$. Validation and test scores are results and are reported in Chapter~4.
+\end{itemize}
+
 \subsection{Experimental Environment and Reproducibility}
 
 \subsubsection*{Environment}
