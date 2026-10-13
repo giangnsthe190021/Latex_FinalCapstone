@@ -3,22 +3,22 @@
 \addvspace {10pt}
 \contentsline {table}{\numberline {2.1}{\ignorespaces Unified comparison of the reviewed studies}}{19}{table.caption.8}%
 \addvspace {10pt}
-\contentsline {table}{\numberline {3.1}{\ignorespaces Research questions and their experimental design}}{23}{table.caption.9}%
-\contentsline {table}{\numberline {3.2}{\ignorespaces Comparison of the two generator routes}}{26}{table.caption.11}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces Comparison of protection mechanisms}}{28}{table.caption.13}%
-\contentsline {table}{\numberline {3.4}{\ignorespaces Experiment matrix of PP-FedData}}{30}{table.caption.14}%
-\contentsline {table}{\numberline {3.5}{\ignorespaces Robustness and sensitivity branches}}{31}{table.caption.15}%
-\contentsline {table}{\numberline {3.6}{\ignorespaces Deployment scenarios (inputs only)}}{34}{table.caption.16}%
-\contentsline {table}{\numberline {3.7}{\ignorespaces Composition of the DoS/DDoS-MQTT-IoT dataset}}{35}{table.caption.17}%
-\contentsline {table}{\numberline {3.8}{\ignorespaces Data provenance verification}}{36}{table.caption.18}%
-\contentsline {table}{\numberline {3.9}{\ignorespaces Final feature schema ($D = 60$)}}{38}{table.caption.19}%
-\contentsline {table}{\numberline {3.10}{\ignorespaces Class quotas of the training, validation, and test splits}}{38}{table.caption.20}%
-\contentsline {table}{\numberline {3.11}{\ignorespaces Leakage and label-reliability checks}}{40}{table.caption.21}%
-\contentsline {table}{\numberline {3.12}{\ignorespaces Federated partition parameters}}{42}{table.caption.22}%
-\contentsline {table}{\numberline {3.13}{\ignorespaces Variants of FedDP-Marginal}}{49}{table.caption.24}%
-\contentsline {table}{\numberline {3.14}{\ignorespaces Configuration matrix of the baseline and proposed generators}}{56}{table.caption.25}%
-\contentsline {table}{\numberline {3.15}{\ignorespaces Hyper-parameter search spaces of the model components}}{59}{table.caption.26}%
-\contentsline {table}{\numberline {3.16}{\ignorespaces Experimental environment specification}}{61}{table.caption.27}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces Research questions and their experimental design}}{25}{table.caption.9}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Comparison of the two generator routes}}{28}{table.caption.11}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Comparison of protection mechanisms}}{30}{table.caption.13}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Experiment matrix of PP-FedData}}{32}{table.caption.14}%
+\contentsline {table}{\numberline {3.5}{\ignorespaces Robustness and sensitivity branches}}{33}{table.caption.15}%
+\contentsline {table}{\numberline {3.6}{\ignorespaces Deployment scenarios (inputs only)}}{36}{table.caption.16}%
+\contentsline {table}{\numberline {3.7}{\ignorespaces Composition of the DoS/DDoS-MQTT-IoT dataset}}{37}{table.caption.17}%
+\contentsline {table}{\numberline {3.8}{\ignorespaces Data provenance verification}}{38}{table.caption.18}%
+\contentsline {table}{\numberline {3.9}{\ignorespaces Final feature schema ($D = 60$)}}{40}{table.caption.19}%
+\contentsline {table}{\numberline {3.10}{\ignorespaces Class quotas of the training, validation, and test splits}}{40}{table.caption.20}%
+\contentsline {table}{\numberline {3.11}{\ignorespaces Leakage and label-reliability checks}}{42}{table.caption.21}%
+\contentsline {table}{\numberline {3.12}{\ignorespaces Federated partition parameters}}{44}{table.caption.22}%
+\contentsline {table}{\numberline {3.13}{\ignorespaces Variants of FedDP-Marginal}}{51}{table.caption.24}%
+\contentsline {table}{\numberline {3.14}{\ignorespaces Configuration matrix of the baseline and proposed generators}}{58}{table.caption.25}%
+\contentsline {table}{\numberline {3.15}{\ignorespaces Hyper-parameter search spaces of the model components}}{61}{table.caption.26}%
+\contentsline {table}{\numberline {3.16}{\ignorespaces Experimental environment specification}}{63}{table.caption.27}%
 \addvspace {10pt}
 \addvspace {10pt}
 \addvspace {10pt}

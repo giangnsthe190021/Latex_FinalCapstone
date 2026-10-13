@@ -269,11 +269,39 @@ X.~Li, F.~Gao, X.~Wei, T.~Wang, C.~Shen, and J.~Yang, ``{HeteroFedSyn}:
   Differentially private tabular data synthesis for heterogeneous federated
   settings,'' \emph{arXiv preprint arXiv:2603.08832}, 2026.
 
-\bibitem[Duan et~al.(2022)Duan, Liu, Han, Jin, Zhang, He, Pan, and
-  Xiang]{duan2022}
+\bibitem[Duan et~al.(2023)Duan, Liu, Han, Jin, Zhang, He, Pan, and
+  Xiang]{duan2023}
 S.~Duan, C.~Liu, P.~Han, X.~Jin, X.~Zhang, T.~He, H.~Pan, and X.~Xiang,
   ``{HT-Fed-GAN}: Federated generative model for decentralized tabular data
-  synthesis,'' \emph{Entropy}, vol.~25, no.~1, p.~88, 2022.
+  synthesis,'' \emph{Entropy}, vol.~25, no.~1, p.~88, 2023.
+
+\bibitem[McKenna et~al.(2021)McKenna, Miklau, and Sheldon]{mckenna2021mst}
+R.~McKenna, G.~Miklau, and D.~Sheldon, ``Winning the {NIST} contest: A scalable
+  and general approach to differentially private synthetic data,''
+  \emph{Journal of Privacy and Confidentiality}, vol.~11, no.~3, pp. 1--35,
+  2021.
+
+\bibitem[Sohn et~al.(2015)Sohn, Lee, and Yan]{sohn2015cvae}
+\BIBentryALTinterwordspacing
+K.~Sohn, H.~Lee, and X.~Yan, ``Learning structured output representation using
+  deep conditional generative models,'' in \emph{Advances in Neural Information
+  Processing Systems (NeurIPS)}, vol.~28.\hskip 1em plus 0.5em minus
+  0.4em\relax Curran Associates, Inc., 2015, pp. 3483--3491. [Online].
+  Available:
+  \url{https://proceedings.neurips.cc/paper/2015/hash/8d55a249e6baa5c0677fbc52b95b178b-Abstract.html}
+\BIBentrySTDinterwordspacing
+
+\bibitem[Mironov(2017)]{mironov2017rdp}
+I.~Mironov, ``R{\'e}nyi differential privacy,'' in \emph{2017 IEEE 30th
+  Computer Security Foundations Symposium (CSF)}.\hskip 1em plus 0.5em minus
+  0.4em\relax IEEE, 2017, pp. 263--275.
+
+\bibitem[Abadi et~al.(2016)Abadi, Chu, Goodfellow, McMahan, Mironov, Talwar,
+  and Zhang]{abadi2016dpsgd}
+M.~Abadi, A.~Chu, I.~Goodfellow, H.~B. McMahan, I.~Mironov, K.~Talwar, and
+  L.~Zhang, ``Deep learning with differential privacy,'' in \emph{Proceedings
+  of the 2016 ACM SIGSAC Conference on Computer and Communications Security
+  (CCS '16)}.\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2016, pp. 308--318.
 
 \bibitem[Hsu et~al.(2019)Hsu, Qi, and Brown]{hsu2019}
 T.-M.~H. Hsu, H.~Qi, and M.~Brown, ``Measuring the effects of non-identical
@@ -284,24 +312,12 @@ T.-M.~H. Hsu, H.~Qi, and M.~Brown, ``Measuring the effects of non-identical
 L.~Breiman, ``Random forests,'' \emph{Machine Learning}, vol.~45, no.~1, pp.
   5--32, 2001.
 
-\bibitem[Sohn et~al.(2015)Sohn, Lee, and Yan]{sohn2015}
-K.~Sohn, H.~Lee, and X.~Yan, ``Learning structured output representation using
-  deep conditional generative models,'' in \emph{Advances in Neural Information
-  Processing Systems (NeurIPS)}, vol.~28, 2015, pp. 3483--3491.
-
 \bibitem[Beutel et~al.(2020)Beutel, Topal, Mathur, Qiu, Fernandez-Marques, Gao,
   Sani, Li, Parcollet, de~Gusm{\~a}o, and Lane]{beutel2020}
 D.~J. Beutel, T.~Topal, A.~Mathur, X.~Qiu, J.~Fernandez-Marques, Y.~Gao,
   L.~Sani, K.~Li, T.~Parcollet, P.~P.~B. de~Gusm{\~a}o, and N.~D. Lane,
   ``Flower: A friendly federated learning research framework,'' \emph{arXiv
   preprint arXiv:2007.14390}, 2020.
-
-\bibitem[Abadi et~al.(2016)Abadi, Chu, Goodfellow, McMahan, Mironov, Talwar,
-  and Zheng]{abadi2016}
-M.~Abadi, A.~Chu, I.~Goodfellow, H.~B. McMahan, I.~Mironov, K.~Talwar, and
-  L.~Zheng, ``Deep learning with differential privacy,'' in \emph{Proceedings
-  of the 2016 ACM SIGSAC Conference on Computer and Communications Security
-  (CCS '16)}.\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2016, pp. 308--318.
 
 \bibitem[Yousefpour et~al.(2021)Yousefpour, Shilov, Sablayrolles, Tian,
   Christofides, Gu, Ling, Yu, Wang, Gu, et~al.]{yousefpour2021}
@@ -391,11 +407,6 @@ D.~Arp, E.~Quiring, F.~Pendlebury, A.~Warnecke, F.~Pierazzi, C.~Wressnegger,
   Symposium}.\hskip 1em plus 0.5em minus 0.4em\relax USENIX Association, 2022,
   pp. 3971--3988.
 
-\bibitem[McKenna et~al.(2021)McKenna, Miklau, and Sheldon]{mckenna2021winning}
-R.~McKenna, G.~Miklau, and D.~Sheldon, ``Winning the {NIST} contest: A scalable
-  and general approach to differentially private synthetic data,''
-  \emph{Journal of Privacy and Confidentiality}, vol.~11, no.~3, 2021.
-
 \bibitem[Kruskal(1956)]{kruskal1956}
 J.~B. Kruskal, ``On the shortest spanning subtree of a graph and the traveling
   salesman problem,'' \emph{Proceedings of the American Mathematical Society},
@@ -424,11 +435,6 @@ J.~G. Skellam, ``The frequency distribution of the difference between two
   {Poisson} variates belonging to different populations,'' \emph{Journal of the
   Royal Statistical Society: Series A (General)}, vol. 109, no.~3, p. 296,
   1946.
-
-\bibitem[Mironov(2017)]{mironov2017}
-I.~Mironov, ``{R{\'e}nyi} differential privacy,'' in \emph{Proceedings of the
-  30th IEEE Computer Security Foundations Symposium (CSF)}.\hskip 1em plus
-  0.5em minus 0.4em\relax IEEE, 2017, pp. 263--275.
 
 \bibitem[Mironov et~al.(2019)Mironov, Talwar, and Zhang]{mironov2019}
 I.~Mironov, K.~Talwar, and L.~Zhang, ``{R{\'e}nyi} differential privacy of the

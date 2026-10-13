@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.30)  13 OCT 2026 20:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.30)  13 OCT 2026 20:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1902,9 +1902,9 @@ Underfull \hbox (badness 1622) in paragraph at lines 147--148
 \T5/ptm/m/n/13 (+20) sta-tis-ti-cal noise but in-curs com-mu-ni-ca-tion and round com-plex-ity. Con-versely,
  []
 
-[19]) (chapters/main/Chapter3.tex [20]
+[19] [20] [21]) (chapters/main/Chapter3.tex [22]
 Chapter 3.
-[21
+[23
 
 ]
 
@@ -2052,7 +2052,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 45--45
 \T5/ptm/m/n/11.86258 (+20) rule
  []
 
-[22]
+[24]
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/m/n/7'. Switching off
@@ -2072,7 +2072,7 @@ Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/cmtt/m/n/13'. Switching off
 (microtype)                protrusion for this font on input line 130.
 
-[23] [24]
+[25] [26]
 Underfull \hbox (badness 1796) in paragraph at lines 178--178
 \T5/ptm/m/n/11.86258 (+20) 1-way marginals, pair-wise ta-bles,
  []
@@ -2147,7 +2147,7 @@ Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/b/n/5'. Switching off
 (microtype)                protrusion for this font on input line 290.
 
-[25] [26]
+[27] [28]
 Underfull \hbox (badness 10000) in paragraph at lines 327--327
 []|\T5/ptm/m/n/11.86258 (+20) Server in-spect-ing an in-di-vid-ual
  []
@@ -2157,7 +2157,7 @@ Underfull \hbox (badness 5548) in paragraph at lines 327--327
 \T5/ptm/m/n/11.86258 (+20) it-self re-veals, so it re-ceives no
  []
 
-[27] [28]
+[29] [30]
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/m/n/8.66673'. Switching off
@@ -2268,12 +2268,12 @@ Underfull \hbox (badness 1406) in paragraph at lines 387--387
 \T5/ptm/m/n/8.66673 (+20) di-rectly with Fe-dAvg, no
  []
 
-[29] [30]
+[31] [32]
 Underfull \hbox (badness 1019) in paragraph at lines 422--422
 []|\T5/ptm/m/n/11.86258 (+20) 11-class mode sep-a-rat-ing DoS and
  []
 
-[31]
+[33]
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/m/n/9.62007'. Switching off
@@ -2284,7 +2284,7 @@ Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/m/n/7.80008'. Switching off
 (microtype)                protrusion for this font on input line 437.
 
-[32]
+[34]
 Underfull \hbox (badness 1259) in paragraph at lines 485--485
 []|\T5/ptm/m/n/11.86258 (+20) Server and clients trusted; no DP re-quired;
  []
@@ -2319,7 +2319,7 @@ Underfull \hbox (badness 1389) in paragraph at lines 485--485
 []|$\OML/ztmcm/m/it/11.86258 "$ \T5/ptm/m/n/11.86258 (+20) must cover a whole
  []
 
-[33] [34]
+[35] [36]
 Underfull \hbox (badness 4805) in paragraph at lines 540--540
 []|\T5/ptm/m/n/11.86258 (+20) 411/411 files match (49 at-tack
  []
@@ -2384,7 +2384,7 @@ Underfull \hbox (badness 2856) in paragraph at lines 540--540
 []|\T5/ptm/m/n/11.86258 (+20) Traced to the au-thors' two-pass
  []
 
-[35] [36]
+[37] [38]
 Underfull \hbox (badness 10000) in paragraph at lines 580--580
 []|\T5/ptm/m/n/11.86258 (+20) Missingness
  []
@@ -2394,7 +2394,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 580--580
 []|\T5/ptm/m/n/11.86258 (+20) Categorical
  []
 
-[37] [38]
+[39] [40]
 Underfull \hbox (badness 5008) in paragraph at lines 644--644
 []|\T5/ptm/m/n/11.86258 (+20) A col-umn is empty in
  []
@@ -2404,7 +2404,7 @@ Underfull \hbox (badness 1769) in paragraph at lines 644--644
 \T5/ptm/m/n/11.86258 (+20) F1 $\OML/ztmcm/m/it/11.86258 > \OT1/ztmcm/m/n/11.86258 0\OML/ztmcm/m/it/11.86258 :\OT1/ztmcm/m/n/11.86258 9$ \T5/ptm/m/n/11.86258 (+20) on any sin-gle
  []
 
-[39] [40]
+[41] [42]
 Underfull \hbox (badness 10000) in paragraph at lines 699--699
 []|\T5/ptm/m/n/11.86258 (+20) Per-class Dirich-let
  []
@@ -2424,17 +2424,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 699--699
 []|\T5/ptm/m/n/11.86258 (+20) Class dis-tri-bu-tion par-ti-tioned over the
  []
 
-[41] [42] [43]
+[43] [44] [45]
 Underfull \hbox (badness 6995) in paragraph at lines 758--759
 []\T5/ptm/m/n/13 (+20) 5 cat-e-gor-i-cal at-tributes (\T5/cmtt/m/n/13 (+20) message_type\T5/ptm/m/n/13 (+20) , \T5/cmtt/m/n/13 (+20) qos_level_1\T5/ptm/m/n/13 (+20) , \T5/cmtt/m/n/13 (+20) qos_level_2\T5/ptm/m/n/13 (+20) ,
  []
 
-[44]
+[46]
 Underfull \hbox (badness 1776) in paragraph at lines 784--785
 []\T5/ptm/b/n/13 (+20) Trade-off of pool-ing. \T5/ptm/m/n/13 (+20) The class-conditional MI $[]\OT1/ztmcm/m/n/13 (\OML/ztmcm/m/it/13 X[]\OT1/ztmcm/m/n/13 ; \OML/ztmcm/m/it/13 X[] \OMS/ztmcm/m/n/13 j \OML/ztmcm/m/it/13 Y \OT1/ztmcm/m/n/13 = \OML/ztmcm/m/it/13 c\OT1/ztmcm/m/n/13 )$ \T5/ptm/m/n/13 (+20) would match
  []
 
-[45] [46] [47]
+[47] [48] [49]
 Underfull \hbox (badness 10000) in paragraph at lines 859--859
 []|\T5/ptm/b/n/11.86258 (+20) Privacy
  []
@@ -2529,12 +2529,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 859--859
 []|\T5/ptm/m/n/11.86258 (+20) Plain Flower
  []
 
-[48] [49] [50] [51]
+[50] [51] [52] [53]
 Underfull \hbox (badness 1168) in paragraph at lines 919--921
 \T5/ptm/m/n/13 (+20) (DP-SGD) [[]] adapted to fed-er-ated learn-ing. At each lo-cal step, each client clips
  []
 
-[52]
+[54]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 939.
@@ -2547,7 +2547,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 939.
 
-[53] [54] [55]
+[55] [56] [57]
 Underfull \hbox (badness 10000) in paragraph at lines 1022--1022
 []|\T5/ptm/b/n/11.86258 (+20) Privacy
  []
@@ -2572,7 +2572,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1022--1022
 []|\T5/ptm/m/n/11.86258 (+20) Distributed DP
  []
 
-[56]
+[58]
 Underfull \hbox (badness 2343) in paragraph at lines 1035--1036
 \OML/ztmcm/m/it/13 ^^L \OMS/ztmcm/m/n/13 2 \OT1/ztmcm/m/n/13 [0\OML/ztmcm/m/it/13 :\OT1/ztmcm/m/n/13 1\OML/ztmcm/m/it/13 ; \OT1/ztmcm/m/n/13 2\OML/ztmcm/m/it/13 :\OT1/ztmcm/m/n/13 0]$ \T5/ptm/m/n/13 (+20) (log-uniform), and $\OML/ztmcm/m/it/13 ^^Q \OMS/ztmcm/m/n/13 2 \OT1/ztmcm/m/n/13 [10[]\OML/ztmcm/m/it/13 ; \OT1/ztmcm/m/n/13 3 \OMS/ztmcm/m/n/13 ^^B \OT1/ztmcm/m/n/13 10[]]$ \T5/ptm/m/n/13 (+20) (log-uniform). Out-put:
  []
@@ -2584,7 +2584,7 @@ Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/cmtt/m/n/13'. Switching off
 (microtype)                protrusion for this font on input line 1036.
 
-[57] [58] [59]
+[59] [60] [61]
 Underfull \hbox (badness 6110) in paragraph at lines 1107--1107
 []|\T5/ptm/m/n/11.86258 (+20) Machine learn-ing and
  []
@@ -2594,7 +2594,7 @@ Underfull \hbox (badness 1264) in paragraph at lines 1115--1116
 \T5/ptm/m/n/13 (+20) record of the ref-er-ence run shows com-mit \T5/cmtt/m/n/13 (+20) 9ee2a85e \T5/ptm/m/n/13 (+20) and con-fig-u-ra-tion hash
  []
 
-[60]
+[62]
 Underfull \hbox (badness 10000) in paragraph at lines 1118--1119
 []\T5/ptm/b/n/13 (+20) Reproducibility bun-dle: \T5/cmtt/m/n/13 (+20) results/repro/ \T5/ptm/m/n/13 (+20) holds the ex-act pack-age list
  []
@@ -2604,21 +2604,21 @@ Underfull \hbox (badness 6526) in paragraph at lines 1120--1121
 []\T5/ptm/b/n/13 (+20) Clean-copy re-execution: \T5/ptm/m/n/13 (+20) Phases 1--5 (in-ven-tory, har-mon-i-sa-tion, sam-pling,
  []
 
-[61] [62] [63]) (chapters/main/Chapter4.tex [64]
+[63] [64] [65]) (chapters/main/Chapter4.tex [66]
 Chapter 4.
-) (chapters/main/Chapter5.tex [65
+) (chapters/main/Chapter5.tex [67
 
 ]
 Chapter 5.
-) (chapters/main/Chapter6.tex [66
+) (chapters/main/Chapter6.tex [68
 
 ]
 Chapter 6.
-) (chapters/back/apendixA.tex [67
+) (chapters/back/apendixA.tex [69
 
 ]
 Appendix A.
-) (main.bbl [68
+) (main.bbl [70
 
 ]
 
@@ -2636,19 +2636,19 @@ Underfull \hbox (badness 5077) in paragraph at lines 43--48
 []\T5/ptm/m/n/13 (+20) B. McMa-han, E. Moore, D. Ra-m-age, S. Hamp-son, and B. A. y Ar-cas,
  []
 
-[69
+[71
 
 ]
 Underfull \hbox (badness 1810) in paragraph at lines 120--123
 []\T5/ptm/m/n/13 (+20) J. Nakay-iza and J. H. Park, ``PureFL: Trust-weighted fed-er-ated learn-ing with
  []
 
-[70] [71]
+[72] [73]
 Underfull \hbox (badness 1953) in paragraph at lines 249--253
 []\T5/ptm/m/n/13 (+20) D. Hamouda, M. A. Fer-rag, N. Ben-hamida, H. Seridi, and M. C. Ghanem,
  []
 
-[72] [73] [74] [75]) [76
+[74] [75] [76] [77]) [78
 runsystem(makeindex -s main.ist -t main.glg -o main.gls main.glo)...executed safely (allowed).
 
 runsystem(makeindex -s main.ist -t main.alg -o main.acr main.acn)...executed safely (allowed).
@@ -2672,17 +2672,17 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 5324FAFC8018546012F306D3CA6F5859;10717.
  ) 
 Here is how much of TeX's memory you used:
- 45715 strings out of 467871
- 867261 string characters out of 5418376
- 1500428 words of memory out of 5000000
- 73088 multiletter control sequences out of 15000+600000
- 799566 words of font info for 459 fonts, out of 8000000 for 9000
+ 45720 strings out of 467871
+ 867343 string characters out of 5418376
+ 1500480 words of memory out of 5000000
+ 73089 multiletter control sequences out of 15000+600000
+ 799698 words of font info for 460 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  123i,19n,121p,2576b,1487s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/rsfs/rsfs10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/symbol/usyr.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/symbol/usyr.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/urwvn/utmb8v.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/urwvn/utmr8v.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/urwvn/utmri8v.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/zapfding/uzdr.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vntt12.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vntt8.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vntt9.pfb>
-Output written on main.pdf (84 pages, 604757 bytes).
+Output written on main.pdf (86 pages, 615816 bytes).
 PDF statistics:
- 1340 PDF objects out of 1440 (max. 8388607)
- 281 named destinations out of 1000 (max. 500000)
+ 1369 PDF objects out of 1440 (max. 8388607)
+ 283 named destinations out of 1000 (max. 500000)
  84450 words of extra memory for PDF output out of 89155 (max. 10000000)
 

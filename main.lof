@@ -2,9 +2,9 @@
 \addvspace {10pt}
 \addvspace {10pt}
 \addvspace {10pt}
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Overall research workflow of PP-FedData.}}{24}{figure.caption.10}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces System architecture with both generator routes.}}{26}{figure.caption.12}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Three-release protocol of FedDP-Marginal. The coarse cut-points (after Release~1) and the tree $T^\star $ (after Release~2) are sent back to the gateways before the next release.}}{43}{figure.caption.23}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Overall research workflow of PP-FedData.}}{26}{figure.caption.10}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces System architecture with both generator routes.}}{28}{figure.caption.12}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Three-release protocol of FedDP-Marginal. The coarse cut-points (after Release~1) and the tree $T^\star $ (after Release~2) are sent back to the gateways before the next release.}}{45}{figure.caption.23}%
 \addvspace {10pt}
 \addvspace {10pt}
 \addvspace {10pt}

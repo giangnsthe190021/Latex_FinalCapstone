@@ -127,7 +127,7 @@ The research proceeds in five stages (Figure~\ref{fig:overall_workflow}): data p
 \end{figure}
 
 \subsubsection*{Evolution of the Design}
-The study was originally designed around a federated conditional variational autoencoder (CVAE)~\cite{sohn2015}, which is the premise of the project. After a first evaluation round, the framework adopted a marginal-based generator, FedDP-Marginal, as its primary generator and retained the CVAE as a baseline. The decision is recorded with its date and rationale in the project's deviation log (\texttt{docs/SPEC\_DEVIATIONS.md}, entries O1.9 and O2.3); Chapter~4 presents the evidence and Chapter~5 discusses it. The CVAE configurations remain in the matrix so that the comparison in RQ2 is made under identical federation, privacy, and secure-aggregation conditions.
+The study was originally designed around a federated conditional variational autoencoder (CVAE)~\cite{sohn2015cvae}, which is the premise of the project. After a first evaluation round, the framework adopted a marginal-based generator, FedDP-Marginal, as its primary generator and retained the CVAE as a baseline. The decision is recorded with its date and rationale in the project's deviation log (\texttt{docs/SPEC\_DEVIATIONS.md}, entries O1.9 and O2.3); Chapter~4 presents the evidence and Chapter~5 discusses it. The CVAE configurations remain in the matrix so that the comparison in RQ2 is made under identical federation, privacy, and secure-aggregation conditions.
 
 \subsection{System Architecture and the Two Generator Routes}
 
@@ -152,7 +152,7 @@ The visibility of client contributions depends on the configuration and must not
 \end{itemize}
 
 \subsubsection*{The Two Generator Routes}
-Table~\ref{tab:two_routes} contrasts the two routes. FedDP-Marginal exchanges counts of discrete attribute combinations in three releases; the CVAE exchanges continuous model weights over many FedAvg rounds. The difference matters for privacy accounting. Each marginal release is a single additive aggregate with bounded sensitivity, so the calibrated noise can be divided among the clients and the sum computed through secure aggregation. DP-SGD~\cite{abadi2016}, by contrast, performs many local non-linear steps per round, and noise added by one client passes through the other clients' training before aggregation; the project therefore does not claim distributed DP for the CVAE route (\texttt{SPEC\_DEVIATIONS.md}, O2.1).
+Table~\ref{tab:two_routes} contrasts the two routes. FedDP-Marginal exchanges counts of discrete attribute combinations in three releases; the CVAE exchanges continuous model weights over many FedAvg rounds. The difference matters for privacy accounting. Each marginal release is a single additive aggregate with bounded sensitivity, so the calibrated noise can be divided among the clients and the sum computed through secure aggregation. DP-SGD~\cite{abadi2016dpsgd}, by contrast, performs many local non-linear steps per round, and noise added by one client passes through the other clients' training before aggregation; the project therefore does not claim distributed DP for the CVAE route (\texttt{SPEC\_DEVIATIONS.md}, O2.1).
 
 \begin{table}[htbp]
 \centering
@@ -165,7 +165,7 @@ Table~\ref{tab:two_routes} contrasts the two routes. FedDP-Marginal exchanges co
 \midrule
 \textbf{Quantity shared} & Count tables (summed over clients) in three releases: class-conditional 1-way marginals, pairwise tables, tables for dependency tree edges & Model weights, 30 FedAvg rounds with 2 local epochs (default configuration) \\
 \midrule
-\textbf{Model structure} & Chow--Liu dependency tree~\cite{chow1968}; optional second-order Bayesian network (PrivBayes-style~\cite{zhang2017privbayes}, MGb) & Conditional VAE~\cite{sohn2015} with an encoder and a block-wise decoder \\
+\textbf{Model structure} & Chow--Liu dependency tree~\cite{chow1968}; optional second-order Bayesian network (PrivBayes-style~\cite{zhang2017privbayes}, MGb) & Conditional VAE~\cite{sohn2015cvae} with an encoder and a block-wise decoder \\
 \midrule
 \textbf{Where DP noise is added} & On each client's tables, once per release (Skellam~\cite{agarwal2021} or Gaussian share) & On each client's per-example gradients at every local step (DP-SGD via Opacus~\cite{yousefpour2021}) \\
 \midrule
@@ -716,7 +716,7 @@ Running FedDP-Marginal with $\alpha_{\text{dir}} \in \{0.1, 0.5, 10\}$ is theref
 \subsection{FedDP-Marginal}\label{subsec:feddp_marginal}
 
 \subsubsection*{Positioning and Overview}
-FedDP-Marginal adapts private marginal-based synthesis of tabular data, namely the MST method of McKenna et~al.~\cite{mckenna2021winning} and the graphical-model principles of PrivBayes~\cite{zhang2017privbayes}, to a federated setting. It is not a new generative method; it adapts marginal-based dependency modelling to federation through secure integer aggregation. Unlike deep federated models, which need many rounds of weight exchange, FedDP-Marginal uses three query releases coordinated through SecAgg$^+$~\cite{bell2020} in Flower~\cite{beutel2020} (Figure~\ref{fig:three_release}).
+FedDP-Marginal adapts private marginal-based synthesis of tabular data, namely the MST method of McKenna et~al.~\cite{mckenna2021mst} and the graphical-model principles of PrivBayes~\cite{zhang2017privbayes}, to a federated setting. It is not a new generative method; it adapts marginal-based dependency modelling to federation through secure integer aggregation. Unlike deep federated models, which need many rounds of weight exchange, FedDP-Marginal uses three query releases coordinated through SecAgg$^+$~\cite{bell2020} in Flower~\cite{beutel2020} (Figure~\ref{fig:three_release}).
 
 \begin{figure}[htbp]
 \centering
@@ -774,7 +774,7 @@ FedDP-Marginal builds a single global Chow--Liu dependency tree~\cite{chow1968},
 T^\star = \arg\max_{T} \sum_{(i,j) \in T} \hat{I}(X_i; X_j), \qquad \hat{I}(X_i; X_j) = \sum_{a, b} \hat{p}(a, b) \log \frac{\hat{p}(a, b)}{\hat{p}(a)\, \hat{p}(b)}.
 \label{eq:chow_liu}
 \end{equation}
-Following the post-processing of McKenna et~al.~\cite{mckenna2021winning}, the probabilities are obtained from the noisy pairwise counts $c_{i,j}$ by truncation at zero, additive (Laplace) smoothing $\alpha_{\text{smooth}}$, and normalisation:
+Following the post-processing of McKenna et~al.~\cite{mckenna2021mst}, the probabilities are obtained from the noisy pairwise counts $c_{i,j}$ by truncation at zero, additive (Laplace) smoothing $\alpha_{\text{smooth}}$, and normalisation:
 \begin{equation}
 \hat{p}(a, b) = \frac{\max(0, c_{i,j}(a, b)) + \alpha_{\text{smooth}}}{\sum_{a', b'} \left[\max(0, c_{i,j}(a', b')) + \alpha_{\text{smooth}}\right]}.
 \label{eq:phat}
@@ -816,7 +816,7 @@ where $r$ is the root attribute. The steps are:
 
 \textbf{Consistency refinement (MGr).} To make the tables consistent without spending budget, MGr applies the following post-processing:
 \begin{enumerate}
-    \item \textbf{Bin-wise minimum-variance merging:} Merging is done on counts, per class, before normalisation. The fine counts of Release~1 are collapsed to coarse bins; a coarse bin $b$ of $X_u$ that contains $k_b$ fine bins has variance $k_b \sigma_1^2$. Projecting an incident Release~3 edge table $(X_u, X_v)$ onto $X_u$, by summing over the $|X_v|$ coarse bins of $X_v$, gives an independent estimate with variance $|X_v| \sigma_3^2$. A non-root attribute with degree $d(u)$ in $T^\star$ therefore has $1 + d(u)$ independent estimators. For the root $r$, Release~3 also provides the class-conditional fine root table, a second univariate estimator with variance $k_b \sigma_3^2$, so the root merges $2 + d(r)$ estimators. Following McKenna et~al.~\cite{mckenna2021winning}, the estimators are merged bin by bin with inverse-variance weights:
+    \item \textbf{Bin-wise minimum-variance merging:} Merging is done on counts, per class, before normalisation. The fine counts of Release~1 are collapsed to coarse bins; a coarse bin $b$ of $X_u$ that contains $k_b$ fine bins has variance $k_b \sigma_1^2$. Projecting an incident Release~3 edge table $(X_u, X_v)$ onto $X_u$, by summing over the $|X_v|$ coarse bins of $X_v$, gives an independent estimate with variance $|X_v| \sigma_3^2$. A non-root attribute with degree $d(u)$ in $T^\star$ therefore has $1 + d(u)$ independent estimators. For the root $r$, Release~3 also provides the class-conditional fine root table, a second univariate estimator with variance $k_b \sigma_3^2$, so the root merges $2 + d(r)$ estimators. Following McKenna et~al.~\cite{mckenna2021mst}, the estimators are merged bin by bin with inverse-variance weights:
     \begin{equation}
     \hat{C}_{\text{merged}}(X_u = b \mid y = c) = \frac{\sum_{j} w_{u,j}(b)\, \hat{C}_{u,j}(b \mid y = c)}{\sum_{j} w_{u,j}(b)},
     \label{eq:ivw_merge}
@@ -877,7 +877,7 @@ The accounting uses the Rényi differential privacy (RDP) bound of Agarwal et~al
 \varepsilon(\lambda) \le \frac{\lambda \Delta_2^2}{2\mu_{\text{sk}}} + \min\left( \frac{(2\lambda - 1)\Delta_2^2 + 6\Delta_1}{4\mu_{\text{sk}}^2}, \frac{3\Delta_1}{2\mu_{\text{sk}}} \right).
 \label{eq:skellam_rdp}
 \end{equation}
-Over the three releases, RDP composes additively~\cite{mironov2017}: $\varepsilon_{\text{total}}(\lambda) = \sum_{r=1}^{3} \varepsilon_r(\lambda)$. The composed RDP curve is converted to $(\varepsilon, \delta)$ with the numerical RDP accountant of Opacus~\cite{yousefpour2021}. Because Equation~\eqref{eq:skellam_rdp} holds only for integer orders, the accountant grid is restricted to $\lambda \in \{2, 3, \dots, 128\}$. A global calibration factor for $\mu_{\text{sk}}$ is found by binary search so that the composed guarantee matches the target $(\varepsilon, \delta)$.
+Over the three releases, RDP composes additively~\cite{mironov2017rdp}: $\varepsilon_{\text{total}}(\lambda) = \sum_{r=1}^{3} \varepsilon_r(\lambda)$. The composed RDP curve is converted to $(\varepsilon, \delta)$ with the numerical RDP accountant of Opacus~\cite{yousefpour2021}. Because Equation~\eqref{eq:skellam_rdp} holds only for integer orders, the accountant grid is restricted to $\lambda \in \{2, 3, \dots, 128\}$. A global calibration factor for $\mu_{\text{sk}}$ is found by binary search so that the composed guarantee matches the target $(\varepsilon, \delta)$.
 
 \subsubsection*{Trust Models and Division of the Noise}
 The noise is calibrated under three trust assumptions:
@@ -916,7 +916,7 @@ converted to $(\varepsilon_{\text{group}}, \delta)$ with Equation~\eqref{eq:zcdp
 \end{itemize}
 
 \subsubsection*{DP-SGD Accounting for the Federated CVAE}
-The deep baseline is trained with differentially private stochastic gradient descent (DP-SGD)~\cite{abadi2016} adapted to federated learning. At each local step, each client clips the per-example gradients to norm $C$ and adds Gaussian noise to the mini-batch sum (Equation~\eqref{eq:dpsgd} in Section~\ref{subsec:cvae}), using Opacus 1.6.0~\cite{yousefpour2021}. Mini-batches are formed by Poisson sampling with rate $q_k = B_k/n_k$, where $B_k = \min(B_{\text{batch}}, n_k)$ keeps $q_k \le 1$. The local privacy loss $\varepsilon_k$ is accumulated over $R$ rounds and $E$ local epochs with the RDP accountant of the sampled Gaussian mechanism~\cite{mironov2019}.
+The deep baseline is trained with differentially private stochastic gradient descent (DP-SGD)~\cite{abadi2016dpsgd} adapted to federated learning. At each local step, each client clips the per-example gradients to norm $C$ and adds Gaussian noise to the mini-batch sum (Equation~\eqref{eq:dpsgd} in Section~\ref{subsec:cvae}), using Opacus 1.6.0~\cite{yousefpour2021}. Mini-batches are formed by Poisson sampling with rate $q_k = B_k/n_k$, where $B_k = \min(B_{\text{batch}}, n_k)$ keeps $q_k \le 1$. The local privacy loss $\varepsilon_k$ is accumulated over $R$ rounds and $E$ local epochs with the RDP accountant of the sampled Gaussian mechanism~\cite{mironov2019}.
 \begin{itemize}
     \item \textbf{Per-client calibration and amplification by subsampling:} The noise multiplier $\sigma_k$ is calibrated per client from its size $n_k$ and its number of steps. Under a skewed partition, clients with very few rows ($n_k \approx 500 \le B_{\text{batch}}$) have $q_k = 1$ and lose the amplification by subsampling, so their $\sigma_k$ must be much larger to reach the target. Because steps are discrete and the calibration grid is finite, the realised $\varepsilon_k$ differ slightly between clients. The federation is reported conservatively as the worst client~\cite{mironov2019},
     \begin{equation}
@@ -939,10 +939,10 @@ The formal DP perimeter is as follows (see also Section~\ref{subsec:threat_model
 \subsection{Federated CVAE, DP-SGD and SecAgg$^+$ (Baseline)}\label{subsec:cvae}
 
 \subsubsection*{CVAE Architecture and Loss}
-The deep baseline is a label-conditional variational autoencoder (CVAE)~\cite{sohn2015}. The encoder $q_\phi(z \mid x, y)$ maps the features $x \in \mathbb{R}^{D}$ ($D = 60$) and the one-hot label $y \in \{0, 1\}^{C}$ to latent parameters $(\mu_z, \log \sigma_z^2) \in \mathbb{R}^{2 d_z}$, and the decoder $p_\theta(x \mid z, y)$ reconstructs the input.
+The deep baseline is a label-conditional variational autoencoder (CVAE)~\cite{sohn2015cvae}. The encoder $q_\phi(z \mid x, y)$ maps the features $x \in \mathbb{R}^{D}$ ($D = 60$) and the one-hot label $y \in \{0, 1\}^{C}$ to latent parameters $(\mu_z, \log \sigma_z^2) \in \mathbb{R}^{2 d_z}$, and the decoder $p_\theta(x \mid z, y)$ reconstructs the input.
 \begin{itemize}
     \item \textbf{No batch normalisation:} The CVAE has no batch-normalisation layers. This is required for per-example gradients to be independent, so that Opacus can clip each example's gradient without coupling between examples~\cite{yousefpour2021}. The parameters form a fixed-size vector, compatible with FedAvg and SecAgg$^+$.
-    \item \textbf{Loss:} The model minimises the $\beta$-weighted conditional variational loss~\cite{sohn2015, higgins2017}:
+    \item \textbf{Loss:} The model minimises the $\beta$-weighted conditional variational loss~\cite{sohn2015cvae, higgins2017}:
     \begin{equation}
     \begin{split}
     \mathcal{L}_{\text{CVAE}}(\phi, \theta) ={}& \sum_{b \in \text{num}} \|x_b - \hat{x}_b\|_2^2 + \sum_{b \in \text{bin}} \mathrm{BCE}(x_b, \hat{x}_b) + \sum_{g \in \text{cat}} \mathrm{CE}(x_g, \hat{x}_g) \\
@@ -968,7 +968,7 @@ w^{r+1} = \sum_{k=1}^{K} \frac{n_k}{\sum_{j} n_j} w_k^{r+1}.
 \end{itemize}
 
 \subsubsection*{DP-SGD at the Clients}
-When DP is used (M1 and M3), clients run DP-SGD with Opacus 1.6.0~\cite{yousefpour2021}. At each local step, the per-example gradients are clipped to norm $C$ and Gaussian noise is added before the update~\cite{abadi2016}:
+When DP is used (M1 and M3), clients run DP-SGD with Opacus 1.6.0~\cite{yousefpour2021}. At each local step, the per-example gradients are clipped to norm $C$ and Gaussian noise is added before the update~\cite{abadi2016dpsgd}:
 \begin{equation}
 \bar{g}_i = \frac{g_i}{\max(1, \|g_i\|_2 / C)}, \qquad \tilde{g} = \frac{1}{B_k}\left(\sum_{i=1}^{B_k} \bar{g}_i + \mathcal{N}(0, \sigma_k^2 C^2 \mathbf{I})\right),
 \label{eq:dpsgd}
@@ -995,7 +995,7 @@ For M2 and M3, the updates are aggregated with Flower's \texttt{SecAggPlusWorkfl
 \end{itemize}
 
 \subsubsection*{Generation of Synthetic Samples}
-After training, the encoder $q_\phi$ is discarded. Synthetic samples are generated by drawing $z \sim \mathcal{N}(0, \mathbf{I})$ and decoding with $p_\theta(x \mid z, y = c)$~\cite{sohn2015}:
+After training, the encoder $q_\phi$ is discarded. Synthetic samples are generated by drawing $z \sim \mathcal{N}(0, \mathbf{I})$ and decoding with $p_\theta(x \mid z, y = c)$~\cite{sohn2015cvae}:
 \begin{itemize}
     \item \textbf{Sampling by block:} Bernoulli sampling for binary features, softmax sampling for categorical blocks, and inverse standardisation for numeric features.
     \item \textbf{Plain decoder:} Uses the final decoder outputs directly. It stays within the formal DP guarantee and is the format used in all DP comparisons.
@@ -1014,9 +1014,9 @@ Table~\ref{tab:generator_matrix} compares the CVAE configurations with the main 
 \textbf{Code} & \textbf{Architecture} & \textbf{Privacy guarantee} & \textbf{Transport privacy} & \textbf{Rounds} & \textbf{Payload per round} \\
 \midrule
 \textbf{B3} & CVAE & None ($\varepsilon = \infty$) & Plain FedAvg~\cite{mcmahan2017} & 30 & Dense weights $\theta$ \\
-\textbf{M1} & CVAE & DP-SGD ($\varepsilon$)~\cite{abadi2016} & Plain FedAvg~\cite{mcmahan2017} & 30 & Dense weights $\theta$ \\
+\textbf{M1} & CVAE & DP-SGD ($\varepsilon$)~\cite{abadi2016dpsgd} & Plain FedAvg~\cite{mcmahan2017} & 30 & Dense weights $\theta$ \\
 \textbf{M2} & CVAE & None ($\varepsilon = \infty$) & SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$~\cite{bell2020} & 30 & Ring tensors (uint32) \\
-\textbf{M3} & CVAE & DP-SGD ($\varepsilon$)~\cite{abadi2016} & SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$~\cite{bell2020} & 30 & Ring tensors (uint32) \\
+\textbf{M3} & CVAE & DP-SGD ($\varepsilon$)~\cite{abadi2016dpsgd} & SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$~\cite{bell2020} & 30 & Ring tensors (uint32) \\
 \textbf{MGs} & FedDP-Marginal & Distributed DP $(\varepsilon, \delta)$~\cite{agarwal2021} & SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$~\cite{bell2020} & 3 & Count vectors (uint32) \\
 \bottomrule
 \end{tabularx}
