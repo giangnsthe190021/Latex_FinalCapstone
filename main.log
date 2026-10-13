@@ -1,6 +1,7 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.13)  13 OCT 2026 17:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.30)  13 OCT 2026 17:40
 entering extended mode
  restricted \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
 **./main.tex
 (main.tex
@@ -830,94 +831,94 @@ Underfull \hbox (badness 10000) in paragraph at lines 47--47
  []
 
 [7] [8]
-Underfull \hbox (badness 2343) in paragraph at lines 295--295
+Underfull \hbox (badness 2343) in paragraph at lines 288--288
 []|\OT1/ptm/m/n/8 (+20) Chow--Liu de-pen-dency tree [10]; op-tional 2nd-order
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 295--295
+Underfull \hbox (badness 10000) in paragraph at lines 288--288
 []|\OT1/pcr/m/n/8 models/marginal.py\OT1/ptm/m/n/8 (+20) , \OT1/pcr/m/n/8 fl/mg
 _app.py\OT1/ptm/m/n/8 (+20) ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 295--295
+Underfull \hbox (badness 10000) in paragraph at lines 288--288
 []|\OT1/pcr/m/n/8 models/cvae.py\OT1/ptm/m/n/8 (+20) , \OT1/pcr/m/n/8 fl/core.p
 y\OT1/ptm/m/n/8 (+20) , \OT1/pcr/m/n/8 fl/app.py\OT1/ptm/m/n/8 (+20) ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 325--325
+Underfull \hbox (badness 10000) in paragraph at lines 318--318
 []|\OT1/ptm/b/n/8 (+20) Secure
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 325--325
+Underfull \hbox (badness 10000) in paragraph at lines 318--318
 []|\OT1/ptm/b/n/8 (+20) Differential
  []
 
 LaTeX Font Info:    Trying to load font information for OMS+pcr on input line 3
-34.
+27.
 (C:\Users\admin\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omspcr.fd
 File: omspcr.fd 
 )
 LaTeX Font Info:    Font shape `OMS/pcr/b/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 334.
+(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 327.
 
-Underfull \hbox (badness 10000) in paragraph at lines 376--376
+Underfull \hbox (badness 10000) in paragraph at lines 369--369
 []|\OT1/ptm/m/n/7 (+20) B0 with bal-anced class
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 376--376
+Underfull \hbox (badness 10000) in paragraph at lines 369--369
 \OT1/ptm/m/n/7 (+20) weights (\OT1/pcr/m/n/7 class_weight\OT1/ptm/m/n/7 (+20) =
 
  []
 
 
-Underfull \hbox (badness 4120) in paragraph at lines 376--376
+Underfull \hbox (badness 4120) in paragraph at lines 369--369
 []|\OT1/ptm/m/n/7 (+20) SecAgg$[]$ cryp-to-graphic
  []
 
 
-Underfull \hbox (badness 4634) in paragraph at lines 376--376
+Underfull \hbox (badness 4634) in paragraph at lines 369--369
 []|\OT1/ptm/m/n/7 (+20) FedDP-Marginal with Skel-lam
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 376--376
+Underfull \hbox (badness 10000) in paragraph at lines 369--369
 []|\OT1/ptm/m/n/7 (+20) Distributed DP and
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 376--376
+Underfull \hbox (badness 10000) in paragraph at lines 369--369
 []|\OT1/ptm/m/n/7 (+20) Distributed DP
  []
 
 LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 382.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 375.
 
-Underfull \hbox (badness 10000) in paragraph at lines 410--410
+Underfull \hbox (badness 10000) in paragraph at lines 403--403
 []|\OT1/ptm/m/n/8 (+20) Evaluated for
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 410--410
+Underfull \hbox (badness 10000) in paragraph at lines 403--403
 []|\OT1/ptm/m/n/8 (+20) Evaluated for
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 410--410
+Underfull \hbox (badness 10000) in paragraph at lines 403--403
 []|\OT1/ptm/m/n/8 (+20) Evaluated (2
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 410--410
+Underfull \hbox (badness 10000) in paragraph at lines 403--403
 []|\OT1/ptm/m/n/8 (+20) Evaluated for
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 410--410
+Underfull \hbox (badness 10000) in paragraph at lines 403--403
 []|\OT1/ptm/m/n/8 (+20) Unrun (needs
  []
 
@@ -962,10 +963,10 @@ L3 programming layer <2025-12-24>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 19234 strings out of 467871
- 379521 string characters out of 5418375
- 864075 words of memory out of 5000000
- 47140 multiletter control sequences out of 15000+600000
+ 19267 strings out of 467871
+ 380276 string characters out of 5418376
+ 866085 words of memory out of 5000000
+ 47173 multiletter control sequences out of 15000+600000
  709286 words of font info for 535 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,15n,94p,1964b,1421s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -999,7 +1000,7 @@ onts/type1/urw/times/utmb8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/f
 onts/type1/urw/times/utmbi8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/
 fonts/type1/urw/times/utmr8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/
 fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (15 pages, 401464 bytes).
+Output written on main.pdf (15 pages, 401535 bytes).
 PDF statistics:
  214 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

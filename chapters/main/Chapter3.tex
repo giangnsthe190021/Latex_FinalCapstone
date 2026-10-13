@@ -190,55 +190,48 @@ The visibility of client updates to the aggregation server is strictly determine
 \colorlet{violet}{purple!70!black}
 
 % --- TIER 1: Edge Gateways ---
-\node[gwbox] (g1) at (0, 2.2) {Gateway 1};
-\node[gwbox] (g2) [below=0.25cm of g1] {Gateway 2};
-\node at (0, 0.9) {\textbf{\vdots}};
-\node[gwbox] (gk) at (0, 0.2) {Gateway $K = 5$};
-\node[draw=none, text width=2.5cm, align=center, font=\tiny\itshape, text=slate] at (0, -0.6) {Raw traffic stays local on edge gateways};
-
-% Background frame for Tier 1
-\begin{scope}[on background layer]
-    \node[tier, fit=(g1) (gk), label={[font=\scriptsize\bfseries, text=slate]above:Edge Gateways (FL Clients)}] (tier1) {};
-\end{scope}
+\node[gwbox] (g1) at (0, 1.15) {Gateway 1};
+\node[gwbox] (g2) [below=0.2cm of g1] {Gateway 2};
+\node[font=\bfseries] (gdots) [below=0.02cm of g2] {$\vdots$};
+\node[gwbox] (gk) [below=0.02cm of gdots] {Gateway $K = 5$};
+\node[text width=2.5cm, align=center, font=\tiny\itshape, text=slate] (gnote) [below=0.15cm of gk] {Raw traffic stays local\\on edge gateways};
 
 % --- TIER 2: Dual Generator Routes ---
-% Route 1 (Top)
-\node[route1box] (r1_1) at (4.0, 2.5) {1. Local Count Tables\\{\tiny (1-way, pairwise, tree)}};
-\node[route1box] (r1_2) [right=0.35cm of r1_1] {2. DP Noise Share\\{\tiny (Skellam / Gaussian)}};
-\node[route1box] (r1_3) [right=0.35cm of r1_2] {3. SecAgg$^+$ uint32\\{\tiny (Modulo $2^{32}$ sum)}};
+% Route 1 (Top lane)
+\node[route1box] (r1_1) at (5.4, 1.5) {1. Local Count Tables\\{\tiny (1-way, pairwise, tree)}};
+\node[route1box] (r1_2) [right=0.45cm of r1_1] {2. DP Noise Share\\{\tiny (Skellam / Gaussian)}};
+\node[route1box] (r1_3) [right=0.45cm of r1_2] {3. SecAgg$^+$ uint32\\{\tiny (Modulo $2^{32}$ sum)}};
 
-% Route 2 (Bottom)
-\node[route2box] (r2_1) at (4.0, -0.1) {1. Local CVAE Training\\{\tiny (Encoder / Decoder)}};
-\node[route2box] (r2_2) [right=0.35cm of r2_1] {2. DP-SGD Opacus\\{\tiny (Gradient clip \& noise)}};
-\node[route2box] (r2_3) [right=0.35cm of r2_2] {3. SecAgg$^+$ Fixed-Pt\\{\tiny ($2^{22}$ levels, range 16)}};
-
-% Background frames for Tier 2
-\begin{scope}[on background layer]
-    \node[tier, fit=(r1_1) (r1_3), fill=indigo!3, draw=indigo!40, label={[font=\scriptsize\bfseries, text=indigo]above:\textbf{Route 1: FedDP-Marginal (Primary Generator)}}] (box_r1) {};
-    \node[tier, fit=(r2_1) (r2_3), fill=teal!3, draw=teal!40, label={[font=\scriptsize\bfseries, text=teal]above:\textbf{Route 2: Federated CVAE (Baseline Generator)}}] (box_r2) {};
-\end{scope}
+% Route 2 (Bottom lane)
+\node[route2box] (r2_1) at (5.4, -1.5) {1. Local CVAE Training\\{\tiny (Encoder / Decoder)}};
+\node[route2box] (r2_2) [right=0.45cm of r2_1] {2. DP-SGD Opacus\\{\tiny (Gradient clip \& noise)}};
+\node[route2box] (r2_3) [right=0.45cm of r2_2] {3. SecAgg$^+$ Fixed-Pt\\{\tiny ($2^{22}$ levels, range 16)}};
 
 % --- TIER 3: Aggregation Server ---
-\node[srvbox] (s1) at (14.2, 2.1) {1. Secure Aggregation\\{\tiny (Exact sum or FedAvg)}};
-\node[srvbox] (s2) [below=0.25cm of s1] {2. Global Model Reconstruction\\{\tiny (Chow-Liu tree + IPF / Decoder)}};
-\node[srvbox] (s3) [below=0.25cm of s2] {3. Class-Conditional Sampling\\{\tiny (\texttt{synthetic.npz})}};
-
-\begin{scope}[on background layer]
-    \node[tier, fit=(s1) (s3), fill=crimson!3, draw=crimson!40, label={[font=\scriptsize\bfseries, text=crimson]above:\textbf{Honest-but-Curious Server}}] (tier3) {};
-\end{scope}
+\node[srvbox] (s1) at (17.2, 1.5) {1. Secure Aggregation\\{\tiny (Exact sum or FedAvg)}};
+\node[srvbox] (s2) at (17.2, 0) {2. Global Model Reconstruction\\{\tiny (Chow-Liu tree + IPF / Decoder)}};
+\node[srvbox] (s3) at (17.2, -1.5) {3. Class-Conditional Sampling\\{\tiny (\texttt{synthetic.npz})}};
 
 % --- TIER 4: Downstream IDS ---
-\node[idsbox] (ids_train) at (18.6, 1.8) {Downstream Classifiers\\{\tiny Random Forest \& MLP}\\{\tiny (TSTR / TAug)}};
-\node[idsbox] (ids_eval) [below=0.4cm of ids_train] {Evaluation on Locked\\Real Test Split\\{\tiny (30,000 packets)}};
+\node[idsbox] (ids_eval) at (22.1, 0.75) {Evaluation on Locked\\Real Test Split\\{\tiny (30,000 packets)}};
+\node[idsbox] (ids_train) at (22.1, -1.5) {Downstream Classifiers\\{\tiny Random Forest \& MLP}};
 
+% --- Background frames (all tiers share the same top/bottom edges) ---
 \begin{scope}[on background layer]
-    \node[tier, fit=(ids_train) (ids_eval), fill=violet!3, draw=violet!40, label={[font=\scriptsize\bfseries, text=violet]above:\textbf{Downstream IDS}}] (tier4) {};
+    \node[tier, fit=(g1) (gnote) (g1 |- s1.north) (g1 |- s3.south), label={[font=\scriptsize\bfseries, text=slate]above:Edge Gateways (FL Clients)}] (tier1) {};
+    \node[tier, fit=(r1_1) (r1_3), fill=indigo!3, draw=indigo!40, label={[font=\scriptsize\bfseries, text=indigo]above:Route 1: FedDP-Marginal (Primary Generator)}] (box_r1) {};
+    \node[tier, fit=(r2_1) (r2_3), fill=teal!3, draw=teal!40, label={[font=\scriptsize\bfseries, text=teal]below:Route 2: Federated CVAE (Baseline Generator)}] (box_r2) {};
+    \node[tier, fit=(s1) (s3), fill=crimson!3, draw=crimson!40, label={[font=\scriptsize\bfseries, text=crimson]above:Honest-but-Curious Server}] (tier3) {};
+    \node[tier, fit=(ids_eval) (ids_train) (ids_train |- s1.north) (ids_train |- s3.south), fill=violet!3, draw=violet!40, label={[font=\scriptsize\bfseries, text=violet]above:Downstream IDS}] (tier4) {};
 \end{scope}
 
 % --- CONNECTIONS ---
-% Gateways to Routes
-\draw[arr, indigo] (tier1.north east) -- ++(0.3,0) |- node[pos=0.25, above, font=\tiny\bfseries] {3 table releases} (r1_1.west);
-\draw[arr, teal] (tier1.south east) -- ++(0.3,0) |- node[pos=0.25, below, font=\tiny\bfseries] {30 training rounds} (r2_1.west);
+% Gateways fork into the two routes
+\coordinate (fork) at ($(tier1.east)+(0.35,0)$);
+\draw[thick, draw=black!80] (tier1.east) -- (fork);
+\fill[black!80] (fork) circle (1.5pt);
+\draw[arr, indigo] (fork) |- node[pos=0.75, above, font=\tiny\bfseries, align=center] {3 table\\releases} (r1_1.west);
+\draw[arr, teal] (fork) |- node[pos=0.75, below, font=\tiny\bfseries, align=center] {30 training\\rounds} (r2_1.west);
 
 % Inside Route 1
 \draw[arr, indigo] (r1_1) -- (r1_2);
@@ -248,17 +241,17 @@ The visibility of client updates to the aggregation server is strictly determine
 \draw[arr, teal] (r2_1) -- (r2_2);
 \draw[arr, teal] (r2_2) -- (r2_3);
 
-% Routes to Server
-\draw[arr, indigo] (r1_3.east) -- ++(0.25,0) |- (s1.west);
-\draw[arr, teal] (r2_3.east) -- ++(0.25,0) |- (s1.west);
+% Routes merge into the server's aggregation stage
+\draw[arr, indigo] ([yshift=1.5mm]r1_3.east) -- ([yshift=1.5mm]s1.west);
+\draw[arr, teal] (r2_3.east) -- ($(r2_3.east)!0.5!(r2_3.east -| s1.west)$) |- ([yshift=-1.5mm]s1.west);
 
 % Inside Server
 \draw[arr, crimson] (s1) -- (s2);
 \draw[arr, crimson] (s2) -- (s3);
 
 % Server to IDS
-\draw[arr, crimson] (s3.east) -| (ids_train.west);
-\draw[arr, violet] (ids_train) -- (ids_eval);
+\draw[arr, crimson] (s3.east) -- node[above, font=\tiny\bfseries, align=center] {synthetic\\data} (ids_train.west);
+\draw[arr, violet] (ids_train) -- node[right, font=\tiny\bfseries, align=left] {TSTR /\\TAug} (ids_eval);
 
 \end{tikzpicture}%
 }
