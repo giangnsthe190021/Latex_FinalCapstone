@@ -1,12 +1,8 @@
 This is BibTeX, Version 0.99e
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
-Reallocating 'name_of_file' (item size: 1) to 24 items.
-A level-1 auxiliary file: chapters/front/head.aux
-Reallocating 'name_of_file' (item size: 1) to 26 items.
-A level-1 auxiliary file: chapters/front/thanks.aux
-Reallocating 'name_of_file' (item size: 1) to 10 items.
-The style file: IEEEtranN.bst
+Reallocating 'name_of_file' (item size: 1) to 9 items.
+The style file: IEEEtran.bst
 Reallocating 'name_of_file' (item size: 1) to 21 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
@@ -14,53 +10,49 @@ Reallocating 'singl_function' (item size: 4) to 100 items.
 Reallocating 'wiz_functions' (item size: 4) to 6000 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
 Database file #1: references/reference.bib
--- IEEEtranN.bst version 1.13 (2008/09/30) by Michael Shell.
+-- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
-** Natbib version - not for normal IEEE work.
-Reallocating 'glb_str_end' (item size: 4) to 20 items.
-Reallocating 'glb_str_ptr' (item size: 4) to 20 items.
-Reallocating 'global_strs' (item size: 1) to 4000000 items.
 
 Done.
 You've used 39 entries,
-            4783 wiz_defined-function locations,
-            1162 strings with 16951 characters,
-and the built_in function-call counts, 43591 in all, are:
-= -- 3797
-> -- 1500
-< -- 362
-+ -- 785
-- -- 374
-* -- 2484
-:= -- 6321
+            4087 wiz_defined-function locations,
+            1046 strings with 16112 characters,
+and the built_in function-call counts, 36914 in all, are:
+= -- 3012
+> -- 972
+< -- 357
++ -- 583
+- -- 211
+* -- 1851
+:= -- 5209
 add.period$ -- 86
 call.type$ -- 39
-change.case$ -- 78
-chr.to.int$ -- 882
+change.case$ -- 39
+chr.to.int$ -- 843
 cite$ -- 39
-duplicate$ -- 2770
-empty$ -- 2910
-format.name$ -- 414
-if$ -- 9814
-int.to.chr$ -- 1
-int.to.str$ -- 40
+duplicate$ -- 2536
+empty$ -- 2715
+format.name$ -- 202
+if$ -- 8620
+int.to.chr$ -- 0
+int.to.str$ -- 39
 missing$ -- 422
-newline$ -- 153
-num.names$ -- 117
-pop$ -- 1029
+newline$ -- 152
+num.names$ -- 39
+pop$ -- 951
 preamble$ -- 1
-purify$ -- 39
+purify$ -- 0
 quote$ -- 2
-skip$ -- 3163
+skip$ -- 2805
 stack$ -- 0
-substring$ -- 2265
-swap$ -- 2297
+substring$ -- 2187
+swap$ -- 2258
 text.length$ -- 76
 text.prefix$ -- 0
-top$ -- 6
-type$ -- 624
+top$ -- 5
+type$ -- 39
 warning$ -- 0
-while$ -- 192
-width$ -- 0
-write$ -- 509
+while$ -- 153
+width$ -- 41
+write$ -- 430

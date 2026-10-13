@@ -1,28 +1,29 @@
-\chapter{Introduction}
+\section{Introduction}\label{sec:intro}
 
-\section{Background}
+\subsection{Background and Motivation}
 The Internet of Things (IoT) connects physical objects, sensors, and various devices through communication networks, enabling data-driven services in domains such as healthcare, industrial automation, and smart environments. Alongside the expansion of IoT deployments, the number of connected components exposed to cybersecurity threats increases correspondingly~\cite{atzori2010}. The Message Queuing Telemetry Transport (MQTT) protocol is commonly used for lightweight publish-subscribe communication in IoT environments. However, MQTT-based systems can become targets for denial-of-service (DoS) and distributed denial-of-service (DDoS) attacks. The DoS/DDoS-MQTT-IoT dataset, collected from a physical IoT testbed, provides normal MQTT traffic alongside ten DoS attack scenarios to facilitate the study of attacks in this context~\cite{alatram2023}. Intrusion Detection Systems (IDS) monitor network activity to identify traffic or behavior exhibiting malicious signs. Machine learning and deep learning methods have been utilized and researched for this task due to their ability to learn characteristic patterns directly from network traffic. Their effectiveness depends partly on the availability and representativeness of the training data~\cite{he2009}. Federated Learning (FL) allows multiple clients to collaboratively train a shared model while keeping their data local; a central server distributes the global model and aggregates updates from clients across training rounds~\cite{mcmahan2017}. This approach is highly suitable when IoT data is distributed across multiple devices or locations, although communication and computational costs remain critical factors to consider in resource-constrained environments~\cite{shi2016, imteaj2022}. Keeping data local also does not equate to completely eliminating privacy concerns arising from the exchange of model updates~\cite{zhu2019}.
 
 Privacy-preserving synthetic data generation is a potential solution to address the shortage of training data for rare attack classes in IoT networks while still ensuring strict security guarantees. Rather than relying on deep neural networks that require substantial computational resources and face convergence difficulties on edge devices~\cite{behera2022fedsyn}, the probabilistic graphical model paradigm (Probabilistic Graphical Models) approaches the problem by decomposing tabular data into low-dimensional marginal frequency distribution slices (low-dimensional marginals)~\cite{zhang2017privbayes}. Through the Chow-Liu dependency tree structure (Chow-Liu Tree)~\cite{chow1968}, this approach effectively captures the core correlations between traffic features and attack labels without being affected by the curse of dimensionality. When combined with Differential Privacy (DP)~\cite{zhang2017privbayes} on contingency tables and consistent graphical inference mechanisms (such as Private-PGM), the system can reconstruct a valid global distribution to generate conditional traffic data, establishing a foundation to enhance the performance of downstream intrusion detection systems (IDS)~\cite{mckenna2019pgm, mckenna2024aim}.
-\section{Problem Statement}
+
+\subsection{Problem Statement}
 Building an effective IDS for IoT networks faces multiple challenges related to data privacy, the representation of attack classes, and the practical costs of the model training process. These challenges are particularly evident when training data is distributed among clients and synthetic attack samples are considered as a supplementary detection solution. The first problem relates to privacy risks during federated training. Although FL avoids the periodic transfer of raw local data, clients must still exchange model updates with the server. Previous studies have demonstrated that shared gradients can leak information about training data in certain attack scenarios~\cite{zhu2019}. Therefore, sharing model weights instead of raw data cannot be considered a comprehensive privacy protection measure. Depending on the threat model and the type of information to be protected, supplementary mechanisms may be mandatory. The second problem concerns the representation of attack classes in the training data. Class imbalance can bias the learning process towards majority classes, making it difficult to identify classes that account for a low percentage~\cite{he2009}. For the DoS/DDoS detection problem in MQTT, the impact of this issue depends on the dataset version, label mapping, preprocessing pipeline, and data partitioning strategy for clients. Therefore, the class distribution of the dataset after selection and preprocessing must be empirically verified rather than assumed by default. If some attack classes lack data, synthetic samples can supplement training examples. However, merely increasing the number of samples does not prove that the generated data is useful; their actual contribution must be evaluated through data quality metrics and the detection performance of the downstream IDS model.
 
 The third challenge pertains to the hardware constraints of edge devices, the ``curse of dimensionality,'' and the intricate trade-off among privacy protection, data quality, and operational overhead: on the one hand, deploying traditional distributed deep generative models (such as GANs or CVAEs) requires substantial computational resources (GPU/CPU) and large RAM capacity at client nodes, which is infeasible for hardware-constrained edge IoT devices~\cite{behera2022fedsyn}. On the other hand, tabular MQTT network traffic inherently possesses a high-dimensional structure with numerous interdependent attributes. Applying Differential Privacy (DP) directly to this high-dimensional attribute space readily leads to a state-space explosion---reaching up to $10^{19}$ cells~\cite{mckenna2019pgm}---causing the injected differential privacy noise to completely overwhelm the original data signal and severely degrade the fidelity of the generated distributions~\cite{zhang2017privbayes}.
 
 A direct consequence is a severe tug-of-war among three factors: the degree of privacy protection (privacy budget $\varepsilon$), synthetic data utility for downstream IDS models, and computational/operational overhead across the IoT infrastructure. Specifically, tightening privacy guarantees (reducing the budget $\varepsilon$) injects heavy DP noise that destroys the core feature correlations of rare DoS/DDoS attack classes~\cite{zhang2017privbayes, mckenna2024aim}. Conversely, increasing the privacy budget and expanding model capacity to improve the quality of generated data causes computational costs and system runtime to surge drastically~\cite{mckenna2024aim}. Consequently, finding a tabular data generation solution that simultaneously ensures rigorous privacy guarantees, remains computationally lightweight for edge devices, and preserves critical feature characteristics for rare attack classes remains a major, unresolved technical bottleneck.
-\section{Research Objectives and Research Questions}
 
-\frenchspacing
-\subsection{Objectives}
+\subsection{Research Objectives and Questions}
+
+\subsubsection{Objectives (O1--O4)}
 This study proposes PP-FedData---a privacy-preserving federated data generation framework for intrusion detection systems (IDS) in IoT-MQTT networks. The research aims to achieve four primary objectives (O1--O4):
 \begin{itemize}
     \item \textbf{Objective O1 -- Federated Architecture Construction:} Model each IoT Gateway device as a client within the Federated Learning network (FL Client). Each gateway stores raw packet traffic data locally and only transmits protected statistics to the Aggregation Server under an honest-but-curious threat model.
-    \item \textbf{\textls[-18]{Objective O2 -- Marginal-based Federated Generator Development (FedDP-Marginal):}} Extend marginal-based privacy-preserving data synthesis methods (such as MST and PrivBayes) to the federated learning environment: each gateway releases noisy per-class count tables across three communication rounds. Noise can be partitioned among gateways and accumulated via the Secure Aggregation mechanism (SecAgg$^+$) (corresponding to Distributed Differential Privacy using discrete Skellam noise), or fully added locally at each gateway (Local DP). Synthetic data records are subsequently sampled from a Chow-Liu dependency tree structure trained on the released marginal statistics tables.
+    \item \textbf{Objective O2 -- Marginal-based Federated Generator Development (FedDP-Marginal):} Extend marginal-based privacy-preserving data synthesis methods (such as MST and PrivBayes) to the federated learning environment: each gateway releases noisy per-class count tables across three communication rounds. Noise can be partitioned among gateways and accumulated via the Secure Aggregation mechanism (SecAgg$^+$) (corresponding to Distributed Differential Privacy using discrete Skellam noise), or fully added locally at each gateway (Local DP). Synthetic data records are subsequently sampled from a Chow-Liu dependency tree structure trained on the released marginal statistics tables.
     \item \textbf{Objective O3 -- Deep Generative Baseline Implementation:} Implement a federated Conditional Variational Autoencoder (CVAE) model as a deep generative baseline. The CVAE model is trained using the FedAvg algorithm and protected by DP-SGD, SecAgg$^+$, or a combination of both, under identical data partitioning and evaluation protocols to enable a head-to-head empirical comparison against the FedDP-Marginal generator.
     \item \textbf{Objective O4 -- Comprehensive Evaluation and Deployment Guidance Formulation:} Comprehensively evaluate all privacy-preserving configurations on a held-out real test set across five dimensions (utility, fidelity, privacy, overhead, and statistical rigor). From these empirical findings, establish a transparent decision rule to map practical deployment constraints (server/client trust assumptions, privacy budget $\varepsilon$, communication bandwidth, prioritized attack classes) into their corresponding optimal configurations.
 \end{itemize}
 
-\subsection{Research Questions}
+\subsubsection{Research Questions (RQ1--RQ4)}
 To fulfill the four aforementioned objectives, this research focuses on addressing four core research questions:
 \begin{itemize}
     \item \textbf{RQ1:} When raw network traffic data cannot be centralized, how much IDS utility does the synthetic data generated by the federated generator retain compared to an IDS trained on centralized real data? Does augmenting training sets with synthetic data improve detection performance when real data is already available (either centrally or at individual gateways)?
@@ -30,7 +31,8 @@ To fulfill the four aforementioned objectives, this research focuses on addressi
     \item \textbf{RQ3:} What overhead does each protection mechanism incur under DP, SecAgg$^+$, or their combination, and at what granularity does it provide privacy protection? How do the unit of privacy protection (packet, TCP stream, or capture session) and the number of honest gateways alter privacy guarantees and operational costs?
     \item \textbf{RQ4:} Which protection configuration (combining DP, SecAgg$^+$, noise distribution, and privacy protection unit) should be selected for specific real-world deployment requirements?
 \end{itemize}
-\section{Significance of the Study}
+
+\subsection{Significance and Contributions}
 This study addresses two fundamental bottlenecks in collaborative intrusion detection across IoT-MQTT networks: (1)~rare attack classes are sparsely and non-identically distributed across IoT Gateway devices (Non-IID), and (2)~gateways cannot share raw packet traffic data due to privacy concerns.
 
 The study offers three primary scientific and practical contributions:
@@ -41,14 +43,13 @@ The study offers three primary scientific and practical contributions:
 \end{itemize}
 
 \noindent\textbf{Explicitly Stated Limitations and Privacy Guarantees:}
-
 The privacy guarantees in this study are precisely and transparently defined:
 \begin{itemize}
     \item \textbf{Differential Privacy (DP)} provides mathematical upper bounds limiting the amount of information that released statistical tables or models can leak regarding a single data record (by default at the packet level, or optionally at the TCP stream or capture session level under specific assumptions). The DP mechanism does not anonymize class labels and does not enforce privacy guarantees on the hyperparameter tuning process conducted on validation data.
     \item \textbf{Secure Aggregation (SecAgg$^+$)} only guarantees the confidentiality of individual gateway updates/statistics with respect to the Aggregation Server; it does not prevent what the final model or generated synthetic data might leak about the aggregate dataset.
 \end{itemize}
 
-\section{Scope and Limitations}
+\subsection{Scope and Limitations}
 This research is scoped within the following specific experimental and technical boundaries:
 \begin{itemize}
     \item \textbf{Dataset and Data Granularity:} Utilizes the DoS/DDoS-MQTT-IoT dataset at the packet level (where each record corresponds to a single network packet and includes six traffic class labels: one Normal class and five DoS/DDoS attack families).
@@ -67,20 +68,5 @@ Despite achieving rigorous empirical findings, this study is subject to several 
     \item \textbf{Constrained Threat Model:} The study operates under an honest-but-curious threat model across all gateways. Sophisticated adversarial threat scenarios such as data/model poisoning attacks or Byzantine clients are outside the scope of this investigation.
 \end{itemize}
 
-\section{Thesis Structure}
-The remainder of this thesis is structured into six chapters as follows:
-\begin{itemize}
-    \item \textbf{Chapter 1: Introduction:} Outlines the background, problem, objectives, significance, scope, and structure of the study.
-    \item \textbf{Chapter 2: Literature Review:} Reviews relevant studies and identifies the research gap and the position of this study in the existing literature.
-    \item \textbf{Chapter 3: Methodology:} Details the research design, the dataset and its preparation, the two generators, the privacy mechanisms and accounting, and the evaluation protocol.
-    \item \textbf{Chapter 4: Experimental and Results:} Describes the experimental setup and reports synthetic-data, IDS, and system overhead results.
-    \item \textbf{Chapter 5: Discussion:} Interprets the findings, examines the observed trade-offs, and discusses the limitations and implications of the study.
-    \item \textbf{Chapter 6: Conclusion and Future Work:} Summarizes the conclusions and outlines directions for further research.
-\end{itemize}
-
-
-
-
-
-
-
+\subsection{Paper Organization}
+The remainder of this paper is structured as follows: Section~\ref{sec:related_work} reviews related work and identifies the research gaps. Section~\ref{sec:methodology} presents the system model and the proposed generative defense methodology. Section~\ref{sec:experiments} details the experimental evaluation and empirical results. Section~\ref{sec:discussion} discusses findings and trade-offs, and Section~\ref{sec:conclusion} concludes the paper with future research directions.

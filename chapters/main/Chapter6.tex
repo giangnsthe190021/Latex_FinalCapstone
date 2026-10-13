@@ -1,7 +1,7 @@
-\chapter{Conclusion and Future Work}
-The 'conclusions' are a key component of the paper. It should complement the 'abstract' and is normally used by experts to value the paper's engineering content. A conclusion is not merely a summary of the main topics covered or a re-statement of your research problem, but a synthesis of key points and, if applicable, where you recommend new areas for future research.
-\section{Conclusion}
-%Viết kết luận ở đây
-\section{Future Work}
-%Viết định hướng phát triển ở đây
+\section{Conclusion and Future Work}\label{sec:conclusion}
 
+\subsection{Conclusion}
+In this paper, we introduced PP-FedData, a privacy-preserving federated generative framework designed to mitigate severe minority attack class imbalance in distributed IoT-MQTT intrusion detection. By conducting a rigorous head-to-head empirical comparison between a marginal-based generator (FedDP-Marginal) and a deep generative model (Fed-CVAE) across calibrated Differential Privacy budgets and SecAgg$^+$ cryptographic aggregation, we illuminated key trade-offs between privacy loss, synthetic data fidelity, and edge overhead. Our results demonstrate that FedDP-Marginal significantly outperforms deep neural models in low-order discrete header anomaly detection under strict privacy guarantees ($\varepsilon \le 1.0$) while reducing communication bandwidth by over 98\%, whereas deep models excel at capturing complex continuous volumetric flow dynamics.
+
+\subsection{Future Work}
+Future research directions include: (1)~extending the federated marginal framework to cross-silo IoT environments with heterogeneous schema partitions; (2)~evaluating temporal sequential dependencies using privacy-preserving Markov or autoregressive marginal models; and (3)~deploying the PP-FedData pipeline on physical resource-constrained edge microcontrollers (e.g., ESP32 and Raspberry Pi clusters) to assess real-world energy consumption and hardware latency.

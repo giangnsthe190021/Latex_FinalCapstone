@@ -1,6 +1,23 @@
-\chapter{Methodology}
-Describes the research design, data collection methods, and analysis techniques.
-\section{Research Design}
-\section{Data Collection Methods}
-\section{Sampling Data Analysis Techniques}
-\section{Limitations of the Methodology}
+\section{System Architecture and Methodology}\label{sec:methodology}
+
+\subsection{Threat Model and Federated Network Topology}
+The proposed PP-FedData framework models an edge IoT deployment comprising $K=5$ IoT Gateway devices acting as federated learning clients, coordinated by an Aggregation Server. Each edge gateway monitors local MQTT network traffic and maintains its telemetry in private storage. We adopt an \textit{honest-but-curious} threat model: the server and participating gateways strictly adhere to defined communication protocols but may attempt to infer private training records or telemetry traces from exchanged parameters or statistical messages~\cite{zhu2019}. The security objective is to prevent both gradient inversion and membership inference attacks on client data while enabling collaborative augmentation of rare attack classes.
+
+\subsection{Dataset Formulation and Dirichlet Non-IID Partitioning}
+We evaluate the framework using the DoS/DDoS-MQTT-IoT dataset~\cite{alatram2023}, which encompasses benign MQTT communication alongside diverse DoS/DDoS attack vectors recorded from a physical IoT sensor testbed. Telemetry records are processed at the packet level, spanning six distinct classes: Normal benign traffic and five attack categories (MQTT Unauthorized Connect, Malformed Header, Publish Flood, Subscribe Flood, and Disconnect Flood).
+
+To model realistic edge non-IID conditions, training data is partitioned among the five gateways using a Dirichlet distribution $\mathrm{Dir}(\alpha)$ with $\alpha=0.5$, reflecting severe class imbalance and heterogeneous traffic volume distributions across client nodes. Features comprise structured discrete protocol attributes (e.g., packet types, QoS flags, retain flags) and discretized continuous metrics (e.g., inter-arrival times, payload sizes).
+
+\subsection{FedDP-Marginal Generator Architecture}
+The primary marginal-based synthesizer, \textit{FedDP-Marginal}, extends graphical model synthesis~\cite{zhang2017privbayes, mckenna2024aim} to federated networks without iterative backpropagation. For each target minority class, synthesis proceeds over three communication rounds:
+\begin{enumerate}
+    \item \textbf{1-Way Marginal Measurement:} Gateways compute local 1-way attribute frequencies. Under Local DP, each gateway adds Laplace or Gaussian perturbation. Under Distributed DP, gateways add discrete Skellam noise shares, which accumulate into full calibrated DP noise upon SecAgg$^+$ aggregation at the server.
+    \item \textbf{Dependency Structure Selection:} Using aggregated 1-way marginals, the server constructs a maximum spanning Chow-Liu dependency tree~\cite{chow1968} based on mutual information across attribute pairs.
+    \item \textbf{2-Way Marginal Measurement and Synthesis:} Clients measure 2-way contingency tables along tree edges under the allocated privacy budget share. The server reconstructs a globally consistent joint distribution via Private-PGM inference~\cite{mckenna2019pgm} and samples synthetic minority traffic records.
+\end{enumerate}
+
+\subsection{Federated Deep Generative Baseline (Fed-CVAE)}
+As a representative deep generative baseline, we implement a federated Conditional Variational Autoencoder (Fed-CVAE) trained via Federated Averaging (FedAvg)~\cite{mcmahan2017}. The CVAE conditions both encoder and decoder on attack class labels. To enforce formal privacy guarantees, local client updates are bounded by per-sample gradient clipping threshold $C$ and perturbed via DP-SGD Gaussian noise, or aggregated via SecAgg$^+$, benchmarked under identical privacy budgets $(\varepsilon, \delta)$.
+
+\subsection{Privacy Accounting and Statistical Rigor}
+Privacy expenditure across rounds and mechanisms is unified under R{\'e}nyi Differential Privacy (RDP) accounting, converting all guarantees into canonical $(\varepsilon, \delta)$-DP with $\delta = 10^{-5}$ for $\varepsilon \in \{1.0, 5.0, 10.0\}$. Experiments are replicated across five independent random seeds. Statistical significance between generative architectures across attack classes is validated using two-sided Wilcoxon signed-rank tests with a threshold margin $|\Delta\mathrm{F1}| \ge 2.0$ percentage points at $p < 0.05$.

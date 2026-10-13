@@ -1,100 +1,52 @@
-\documentclass[oneside]{FPTthesis}
-%=============tao bang mới================
-\usepackage{longtable} 
-\newglossarystyle{fpttable}{ 
-	\setglossarystyle{long} 
-	
-	\renewcommand*{\glossaryheader}{ 
-		\textbf{Acronym} & \textbf{Definition} \\ \hline 
-	} 
-	\renewcommand*{\glossentry}[2]{ 
-		\glossentryname{##1} & \glossentrydesc{##1} \\ \hline 
-	} 
-	
-	\renewcommand*{\glsgroupskip}{} 
-	
-	% 4. Định nghĩa môi trường bảng
-	\renewenvironment{theglossary}{
-		\begin{longtable}{|p{4cm}|p{11cm}|} \hline 
-		}{
-		\end{longtable} 
-	} 
-} 
-\setglossarystyle{fpttable}
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
 
-\renewcommand*{\glossarysection}[2][]{%
-	\chapter*{List of Abbreviations}
-	\addcontentsline{toc}{chapter}{List of Abbreviations}
+% ========== CORE IEEE PACKAGES ==========
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{microtype}
+\usepackage{url}
+\usepackage{array}
+
+% ========== TITLE & AUTHORS ==========
+\title{A Privacy-Preserving Data Generation Framework in Federated Learning for Enhanced IoT System Attack Detection}
+
+\author{
+\IEEEauthorblockN{Author One\IEEEauthorrefmark{1}, Author Two\IEEEauthorrefmark{1}, Author Three\IEEEauthorrefmark{1}, Author Four\IEEEauthorrefmark{1}, Author Five\IEEEauthorrefmark{1}}
+\IEEEauthorblockA{\IEEEauthorrefmark{1}Department of Information Technology, FPT University, Hanoi, Vietnam\\
+Email: \{student1, student2, student3, student4, student5\}@fpt.edu.vn}
+\IEEEauthorblockA{\IEEEauthorrefmark{2}Supervisor: MSc.~Trinh Tien Dat, Co-supervisor: Dr.~Nguyen Anh Nhat\\
+Department of Information Technology, FPT University, Hanoi, Vietnam\\
+Email: \{dattt, nhatna\}@fe.edu.vn}
 }
 
-%================================================
-\newenvironment{titlepage}
-{\thispagestyle{empty}}
-{}
-% ========== CONFIG CHAPTER FORMAT - CENTERED ==========
-\titleformat{\chapter}[display]
-{\normalfont\Large\bfseries\centering}  % Format: centered, bold
-{\chaptertitlename\ \thechapter}         % Label: "Chapter X"
-{20pt}                                   % Space between label and title
-{\Large\bfseries}                        % Title format
-
-\titlespacing*{\chapter}{0pt}{\chaptertopmargin}{30pt}
-\usepackage{multirow}
-\usepackage[numbers,sort&compress]{natbib}
-\usepackage{microtype}
-\DeclareMicrotypeSet{allfonts}{encoding=*}
-\UseMicrotypeSet[expansion]{allfonts}
-% ========== CHỐNG GẠCH NỐI TỰ ĐỘNG TÁCH TỪ CUỐI DÒNG ==========
-\hyphenpenalty=10000      % Tắt tự động tách từ (như pro-tected, communica-tion)
-\exhyphenpenalty=10000    % Tắt tách từ tại dấu gạch nối (không để gạch nối ở cuối dòng)
-\tolerance=1200
-\emergencystretch=1.5em
-\frenchspacing            % Đồng nhất khoảng cách sau dấu câu (dấu hai chấm, dấu chấm) giống khoảng cách giữa các từ
-% ========== BỎ HEADER TRÊN TRANG CHAPTER ==========
-\copypagestyle{chapter}{plain}
-\makeoddhead{chapter}{}{}{}
-\makeevenhead{chapter}{}{}{}
-\makeoddfoot{chapter}{}{\thepage}{}
-\makeevenfoot{chapter}{}{\thepage}{}
-
-\input{chapters/front/glossaries.tex}
-\makeglossaries
-% Bỏ trang trắng khi dùng cleardoublepage
-\let\cleardoublepage\clearpage
-
 \begin{document}
-	
-	% ========== FRONT MATTER ==========
-	\frontmatter
-	
-	% Dùng \input thay vì \include
-	\include{chapters/front/head.tex}
-	\include{chapters/front/thanks.tex}
-	\tableofcontents
-	\clearpage
-	\listoffigures
-	\clearpage
-	\listoftables
-	\clearpage
-	\input{chapters/main/Abstract.tex}
-	\printglossaries
-	% ========== MAIN MATTER ==========
-	\mainthesis
-	% Dùng \input, KHÔNG có \clearpage giữa các chapter
-	\input{chapters/main/Chapter1.tex}
-	\input{chapters/main/Chapter2.tex}
-	\input{chapters/main/Chapter3.tex}
-	\input{chapters/main/Chapter4.tex}
-	\input{chapters/main/Chapter5.tex}
-	\input{chapters/main/Chapter6.tex}
-	
-	% ========== APPENDIX ==========
-	\appendix
-	\input{chapters/back/apendixA.tex}
-	
-	% ========== REFERENCES ==========
-\bibliographystyle{IEEEtranN} % Chuẩn IEEE sắp xếp theo thứ tự xuất hiện [1], [2], ...
+
+\maketitle
+
+% ========== ABSTRACT & KEYWORDS ==========
+\input{chapters/main/Abstract.tex}
+
+% ========== SECTIONS ==========
+\input{chapters/main/Chapter1.tex}
+\input{chapters/main/Chapter2.tex}
+\input{chapters/main/Chapter3.tex}
+\input{chapters/main/Chapter4.tex}
+\input{chapters/main/Chapter5.tex}
+\input{chapters/main/Chapter6.tex}
+
+% ========== ACKNOWLEDGMENT ==========
+\input{chapters/front/thanks.tex}
+
+% ========== REFERENCES ==========
+\bibliographystyle{IEEEtran}
 \bibliography{references/reference}
 
 \end{document}
-

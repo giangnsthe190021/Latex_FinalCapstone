@@ -1,6 +1,12 @@
-\chapter{Discussion}
-The findings and their implications should be discussed in the broadest context possible and limitations of the work highlighted.
-\section{Restate the Research Problem or Objectives}
-\section{Summarize Key Findings}
+\section{Discussion and Deployment Guidelines}\label{sec:discussion}
 
+\subsection{The Privacy-Utility-Overhead Trilemma}
+The empirical results illustrate a fundamental trilemma governing federated generative defenses on edge IoT networks: balancing formal mathematical privacy bounds ($\varepsilon$), downstream minority detection sensitivity, and gateway communication bandwidth. Tightening differential privacy guarantees ($\varepsilon \le 1.0$) rapidly degrades gradient-based deep generative models due to noise compounding across backpropagation rounds. In contrast, marginal synthesizers confine perturbation to localized low-order tables, providing resilience against aggressive noise injection when modeling structured protocol fields.
 
+\subsection{Architectural Selection Framework}
+Based on these findings, we establish clear deployment decision rules for IoT network administrators:
+\begin{itemize}
+    \item \textbf{Low-Bandwidth, Header-Dominant Environments:} When edge gateways operate under strict cellular or low-power LPWAN bandwidth constraints, and priority threats consist of discrete protocol abuse (e.g., unauthorized connections, illicit flag combinations), \textit{FedDP-Marginal} is the optimal choice due to its 3-round protocol and superior accuracy at strict privacy budgets ($\varepsilon \le 1.0$).
+    \item \textbf{High-Compute, Flow-Dominant Environments:} When edge gateways possess dedicated hardware accelerators and priority threats involve complex multi-attribute volumetric floods (e.g., distributed packet bursts with subtle payload shifts), \textit{Fed-CVAE} under moderate privacy budgets ($\varepsilon \ge 5.0$) or protected by SecAgg$^+$ provides richer continuous distribution modeling.
+    \item \textbf{Zero-Perturbation Cryptographic Pipeline:} Where regulatory compliance requires exact data reconstruction without statistical perturbation error, combining marginal contingency tables with SecAgg$^+$ provides an efficient, lightweight cryptographic solution without the prohibitive latency of full deep neural weight aggregation.
+\end{itemize}
