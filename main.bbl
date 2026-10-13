@@ -260,4 +260,79 @@ S.~Duan, C.~Liu, P.~Han, X.~Jin, X.~Zhang, T.~He, H.~Pan, and X.~Xiang,
   ``{HT-Fed-GAN}: Federated generative model for decentralized tabular data
   synthesis,'' \emph{Entropy}, vol.~25, no.~1, p.~88, 2022.
 
+\bibitem{hsu2019}
+T.-M.~H. Hsu, H.~Qi, and M.~Brown, ``Measuring the effects of non-identical
+  data distribution for federated visual classification,'' \emph{arXiv preprint
+  arXiv:1909.06335}, 2019.
+
+\bibitem{breiman2001}
+L.~Breiman, ``Random forests,'' \emph{Machine Learning}, vol.~45, no.~1, pp.
+  5--32, 2001.
+
+\bibitem{sohn2015}
+K.~Sohn, H.~Lee, and X.~Yan, ``Learning structured output representation using
+  deep conditional generative models,'' in \emph{Advances in Neural Information
+  Processing Systems (NeurIPS)}, vol.~28, 2015, pp. 3483--3491.
+
+\bibitem{beutel2020}
+D.~J. Beutel, T.~Topal, A.~Mathur, X.~Qiu, J.~Fernandez-Marques, Y.~Gao,
+  L.~Sani, K.~Li, T.~Parcollet, P.~P.~B. de~Gusm{\~a}o, and N.~D. Lane,
+  ``Flower: A friendly federated learning research framework,'' \emph{arXiv
+  preprint arXiv:2007.14390}, 2020.
+
+\bibitem{abadi2016}
+M.~Abadi, A.~Chu, I.~Goodfellow, H.~B. McMahan, I.~Mironov, K.~Talwar, and
+  L.~Zheng, ``Deep learning with differential privacy,'' in \emph{Proceedings
+  of the 2016 ACM SIGSAC Conference on Computer and Communications Security
+  (CCS '16)}.\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2016, pp. 308--318.
+
+\bibitem{yousefpour2021}
+A.~Yousefpour, I.~Shilov, A.~Sablayrolles, D.~Tian, N.~Christofides, R.~Gu,
+  M.~Ling, H.~Yu, B.~Wang, Z.~Gu \emph{et~al.}, ``Opacus: User-friendly
+  differential privacy library in {PyTorch},'' \emph{arXiv preprint
+  arXiv:2109.12298}, 2021.
+
+\bibitem{goldreich2004}
+O.~Goldreich, \emph{Foundations of Cryptography: Volume 2, Basic
+  Applications}.\hskip 1em plus 0.5em minus 0.4em\relax Cambridge, U.K.:
+  Cambridge University Press, 2004.
+
+\bibitem{kasiviswanathan2011}
+S.~P. Kasiviswanathan, H.~K. Lee, K.~Nissim, S.~Raskhodnikova, and A.~Smith,
+  ``What can we learn privately?'' \emph{SIAM Journal on Computing}, vol.~40,
+  no.~3, pp. 793--826, 2011.
+
+\bibitem{dwork2006}
+C.~Dwork, F.~McSherry, K.~Nissim, and A.~Smith, ``Calibrating noise to
+  sensitivity in private data analysis,'' in \emph{Theory of Cryptography
+  Conference (TCC)}.\hskip 1em plus 0.5em minus 0.4em\relax Springer, 2006, pp.
+  265--284.
+
+\bibitem{dwork2014}
+C.~Dwork and A.~Roth, ``The algorithmic foundations of differential privacy,''
+  \emph{Foundations and Trends in Theoretical Computer Science}, vol.~9, no.
+  3--4, pp. 211--407, 2014.
+
+\bibitem{deming1940}
+W.~E. Deming and F.~F. Stephan, ``On a least squares adjustment of a sampled
+  frequency table when the expected marginal totals are known,'' \emph{The
+  Annals of Mathematical Statistics}, vol.~11, no.~4, pp. 427--444, 1940.
+
+\bibitem{bun2016}
+M.~Bun and T.~Steinke, ``Concentrated differential privacy: Simplifications,
+  extensions, and lower bounds,'' in \emph{Theory of Cryptography Conference
+  (TCC)}.\hskip 1em plus 0.5em minus 0.4em\relax Springer, 2016, pp. 635--658.
+
+\bibitem{akiba2019}
+T.~Akiba, S.~Sano, T.~Yanase, T.~Ohta, and M.~Koyama, ``Optuna: A
+  next-generation hyperparameter optimization framework,'' in \emph{Proceedings
+  of the 25th ACM SIGKDD International Conference on Knowledge Discovery \&
+  Data Mining (KDD '19)}.\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2019, pp.
+  2623--2631.
+
+\bibitem{bergstra2011}
+J.~Bergstra, R.~Bardenet, Y.~Bengio, and B.~K{\'e}gl, ``Algorithms for
+  hyper-parameter optimization,'' in \emph{Advances in Neural Information
+  Processing Systems (NeurIPS)}, vol.~24, 2011, pp. 2546--2554.
+
 \end{thebibliography}
