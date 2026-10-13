@@ -57,6 +57,15 @@
 
 % Layout A: one block per author, IEEE conference template (three blocks per row: 5 authors give rows of 3 and 2).
 % The supervisor (Dr. Nguyen Anh Nhat) and co-supervisor (MSc. Luu Minh Tri) are not authors; they are thanked in the Acknowledgment.
+% Start a new, centered row of author blocks (3 authors on the first row, 2 on the second)
+\makeatletter
+\newcommand{\linebreakand}{%
+  \end{@IEEEauthorhalign}
+  \hfill\mbox{}\par
+  \mbox{}\hfill\begin{@IEEEauthorhalign}
+}
+\makeatother
+
 \author{
 \IEEEauthorblockN{Nguyen Nam Khanh}
 \IEEEauthorblockA{\textit{Dept. of Information Assurance} \\
@@ -75,7 +84,7 @@ giangnsthe190021@gmail.com}
 \textit{FPT University}\\
 Hanoi, Vietnam \\
 dungtn002@gmail.com}
-\and
+\linebreakand
 \IEEEauthorblockN{Vu Duc Lam}
 \IEEEauthorblockA{\textit{Dept. of Information Assurance} \\
 \textit{FPT University}\\
