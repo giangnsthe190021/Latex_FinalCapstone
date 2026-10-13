@@ -362,7 +362,164 @@ Table~\ref{tab:scenarios} defines ten illustrative requirements. Only the inputs
 \end{tabularx}
 \end{table}
 
-\section{Data Collection Methods}
+\section{Data Collection Methods}\label{sec:data_collection}
+
+\subsection{Dataset}\label{subsec:dataset}
+The data source is the DoS/DDoS-MQTT-IoT dataset of Alatram et~al.~\cite{alatram2023}, obtained from the authors' official Kaggle release~\cite{alatram2023kaggle}. It contains normal IoT traffic and several denial-of-service (DoS) and distributed denial-of-service (DDoS) attacks that abuse the MQTT protocol~\cite{mqtt311}. The release is distributed in several formats; this study uses a CSV form of 59,624,826 rows (about 13\,GB).
+
+Each row is one network packet described by 33 feature columns. The Normal traffic has two additional columns, \texttt{Label} and \texttt{Capture\_ID}; \texttt{Capture\_ID} assigns the \texttt{group\_id} used for splitting, whereas attack rows take their \texttt{group\_id} from the name of the source file. An inventory step confirms that the row counts match the expected totals. Table~\ref{tab:dataset_composition} gives the composition by class.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Composition of the DoS/DDoS-MQTT-IoT dataset}
+\label{tab:dataset_composition}
+\begin{tabularx}{\textwidth}{X r r r r}
+\toprule
+\textbf{Class} & \textbf{DoS} & \textbf{DDoS} & \textbf{Total rows} & \textbf{Share} \\
+\midrule
+NORMAL & --- & --- & 45,580,102 & 76.44\% \\
+BCF (Basic Connect Flooding) & 5,825,026 & 6,455,848 & 12,280,874 & 20.60\% \\
+DELAYED (Delayed Connect Flooding) & 291,988 & 309,554 & 601,542 & 1.01\% \\
+SYN (SYN TCP Flooding) & 103,828 & 497,611 & 601,439 & 1.01\% \\
+INVALID (Invalid Subscription Flooding) & 109,150 & 181,190 & 290,340 & 0.49\% \\
+WILL (Connect Flooding with WILL payload) & 114,474 & 156,055 & 270,529 & 0.45\% \\
+\midrule
+\textbf{Total} & & & \textbf{59,624,826} & \textbf{100.00\%} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection*{Data Provenance and Verification}
+The attack traffic is used as published: the 48 attack CSV files exported by the dataset authors~\cite{alatram2023}, whose paths and sizes match the Kaggle release~\cite{alatram2023kaggle}. The release provides the Normal traffic only as 49 PCAP files, so every Normal packet was exported with TShark 4.4.7~\cite{wireshark} into the same 33 columns, using a script kept in the project repository.
+
+The export is complete (the number of rows equals the number of packets in all 49 captures, 45,580,102 rows) and reproducible (re-extracting three captures yields byte-identical files). To validate the procedure, it was applied to the attack PCAP files, for which the authors' CSV files serve as ground truth: 23 of the 25 features used by the models match the authors' values in at least 99.98\% of the rows. The two remaining differences are explained by the authors' export settings, namely a display filter that keeps only the packets sent to the broker and two-pass dissection; adding both settings reproduces the authors' rows in all 48 captures. The Normal export therefore contains every packet that the authors' settings would select from the same PCAP files, plus the packets sent by the broker; the consequences of this difference are discussed in Section~\ref{sec:methodology_limitations}. Table~\ref{tab:provenance} summarises the checks.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Data provenance verification}
+\label{tab:provenance}
+\begin{tabularx}{\textwidth}{p{3.6cm}XX}
+\toprule
+\textbf{Question} & \textbf{Method} & \textbf{Result} \\
+\midrule
+Are the files those of the release? & File paths and sizes compared with the public Kaggle manifest~\cite{alatram2023kaggle} & 411/411 files match (49 attack CSVs, 313 attack PCAPs, 49 Normal PCAPs) \\
+\midrule
+Does the Normal CSV contain all packets? & Row counts compared with the packet counts of \texttt{capinfos}~\cite{wireshark}; frame numbers checked to run $1, \dots, N$ & Complete match for 49/49 captures (45,580,102 rows) \\
+\midrule
+Is the extraction reproducible? & Three captures re-extracted and SHA-256 digests compared & Files are byte-identical \\
+\midrule
+Does the procedure give correct feature values? & Script applied to the 48 attack PCAPs; output compared row by row with the authors' CSVs & 23/25 model features match in $\ge 99.98\%$ of rows \\
+\midrule
+What explains the remaining differences? & Traced to the authors' two-pass dissection and display filter & With both settings the authors' rows are reproduced; the remaining 0.04\% stem from the Wireshark version \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Label Harmonisation and Rare Classes}\label{subsec:labels}
+The labels are harmonised into a six-class mode: NORMAL, BCF, DELAYED, SYN, INVALID, and WILL. In this mode, the DoS and DDoS variants of the same attack family are merged into one class. The merge is supported by leakage check C5 (Section~\ref{subsec:leakage_checks}), which shows that DoS and DDoS variants of the same family are practically indistinguishable at packet level. The original eleven-class mode remains available in the pipeline but is used only for the robustness branch (Table~\ref{tab:robustness_branches}).
+
+In this study, the rare classes are the attack classes whose training quota is at most 5,000 rows, namely DELAYED, SYN, INVALID, and WILL. Their rarity in training is a deliberate consequence of the quota design rather than a lack of raw data: as Table~\ref{tab:dataset_composition} shows, the raw dataset contains between 270,529 and 601,542 packets for each of them.
+
+The quotas create an imbalance of 60:1 between the majority class (NORMAL, 60,000 rows) and the smallest class (WILL, 1,000 rows), which makes the evaluation of the generators demanding~\cite{he2009}. The validation and test splits, in contrast, are class-balanced (2,000 and 5,000 rows per class respectively), so that the evaluation measures are not dominated by the majority class.
+
+\subsection{Schema Harmonisation and Feature Selection}\label{subsec:schema}
+Preprocessing starts by harmonising the schema of the raw packet exports. Column names are converted to snake case. Wireshark text labels (such as \texttt{message\_type}, \texttt{qos\_level\_*}, and \texttt{requested\_qos}) are normalised to canonical codes, and boolean indicators (True/False, Set/Not set) are mapped to 0/1. Redundant columns with the suffix \texttt{\_1} are removed. For multi-valued cells that contain several MQTT messages, only the first element is kept, in line with the Normal export, which used the TShark option \texttt{occurrence=f}; the \texttt{n\_mqtt\_msgs} column is therefore dropped. Rows are then restricted to those whose protocol is TCP or MQTT, followed by a format audit of the time-based tokens.
+
+To prevent leakage~\cite{kaufman2012, arp2022}, identifier and metadata columns are removed:
+\begin{itemize}
+    \item \texttt{no} (row sequence), \texttt{epoch\_time} (absolute timestamp), and \texttt{time\_since\_reference\_\allowbreak or\_first\_frame} (which reveals the start time of the capture);
+    \item \texttt{source}, because sender IP addresses would let a model memorise machine identities instead of learning traffic patterns;
+    \item the free-text payload in \texttt{info}, and the \texttt{label} and \texttt{capture\_id} columns, which exist only in the Normal traffic.
+\end{itemize}
+\texttt{stream\_index} is kept only as grouping metadata and is not an input feature. The raw dataset contains no MAC address or port columns. After the feature selection decisions, the final schema has $D = 60$ input columns (Table~\ref{tab:feature_schema}).
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Final feature schema ($D = 60$)}
+\label{tab:feature_schema}
+\begin{tabularx}{\textwidth}{p{2.8cm}>{\raggedright\arraybackslash}Xc}
+\toprule
+\textbf{Feature type} & \textbf{Columns} & \textbf{Dim.} \\
+\midrule
+Numeric & \texttt{time\_delta\_from\_previous\_displayed\_frame}, \texttt{frame\_length\_on\_wire\_2}, \texttt{irtt}, \texttt{time\_since\_first\_frame\_in\_this\_tcp\_stream}, \texttt{tcp\_segment\_len}, \texttt{calculated\_window\_size}, \texttt{keep\_alive}, \texttt{user\_name\_length}, \texttt{password\_length}, \texttt{will\_message\_length}, \texttt{will\_topic\_length}, \texttt{topic\_length}, \texttt{msg\_len} & 13 \\
+\midrule
+Binary & \texttt{syn}, \texttt{reset}, \texttt{acknowledgment}, \texttt{retain}, \texttt{clean\_session\_flag\_2}, \texttt{will\_retain}, \texttt{will\_flag} & 7 \\
+\midrule
+Missingness flags & 12 \texttt{\_is\_na} indicator columns & 12 \\
+\midrule
+Categorical (one-hot) & \texttt{message\_type} (12), \texttt{qos\_level\_1} (5), \texttt{qos\_level\_2} (4), \texttt{requested\_qos} (3), \texttt{protocol} (4) & 28 \\
+\midrule
+\textbf{Total} & & \textbf{60} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Group-Based Split and Quota Sampling}\label{subsec:split}
+The eleven sub-classes (NORMAL and the DoS and DDoS variants of the five attack families) are split by group: whole capture groups are assigned to the training, validation, or test split according to a fixed \texttt{split\_seed}. This keeps highly correlated packets of the same TCP stream or capture session from appearing in more than one split~\cite{arp2022}.
+
+The source data limits this approach: 8 of the 11 sub-classes come from a single capture file. For these sub-classes, the validation and test rows are taken as consecutive blocks of the same capture used for training (block split), separated by buffers of 1,000 rows to reduce adjacency leakage. TCP streams that straddle a block boundary are dropped entirely. This removes between 1.2\% and 9.9\% of the eligible rows of each affected sub-class and biases the sample slightly toward shorter connections.
+
+After the split, rows are drawn at random without replacement according to the class quotas in Table~\ref{tab:quota}. The training quotas impose a strong imbalance, whereas the validation and test quotas are balanced.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Class quotas of the training, validation, and test splits}
+\label{tab:quota}
+\begin{tabularx}{\textwidth}{X r r r}
+\toprule
+\textbf{Class} & \textbf{Train} & \textbf{Validation} & \textbf{Test} \\
+\midrule
+NORMAL & 60,000 & 2,000 & 5,000 \\
+BCF & 20,000 & 2,000 & 5,000 \\
+DELAYED & 3,000 & 2,000 & 5,000 \\
+SYN & 3,000 & 2,000 & 5,000 \\
+INVALID & 1,500 & 2,000 & 5,000 \\
+WILL & 1,000 & 2,000 & 5,000 \\
+\midrule
+\textbf{Total} & \textbf{88,500} & \textbf{12,000} & \textbf{30,000} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The 30,000-row test split is locked and used only for the final report. All hyper-parameter tuning, design choices, and threshold calibration use the validation split only.
+
+\subsection{Preprocessing and Encoding}\label{subsec:preprocessing}
+The preprocessing pipeline is fitted on the training split only; the validation and test splits are transformed with the stored parameters. Missing or non-applicable numeric values are imputed with 0, and an indicator column \texttt{\_is\_na} is added for every feature whose missing rate in the training split lies strictly between 0.005 and 0.995.
+
+Numeric features with a skewness greater than 2 are transformed with $\log(1+x)$; time-delta features are first multiplied by 1,000 (seconds to milliseconds). Numeric columns are then standardised to zero mean and unit variance and clipped at $\pm 5\sigma$ to limit the influence of extreme values. Categorical features are one-hot encoded. To bound the dimension, only the ten most frequent training tokens of each categorical column are kept; other valid values are grouped into an \texttt{OTHER} token and missing values are mapped to a \texttt{NONE} token.
+
+The normalisation statistics, category lists, and imputation parameters are fitted centrally on the pooled training split. This is a limitation of the method: it assumes a centralised view of the data before federation, and these statistics lie outside the privacy budget $\varepsilon$ (Section~\ref{subsec:threat_model}).
+
+\subsection{Leakage and Label-Reliability Checks}\label{subsec:leakage_checks}
+Before any synthetic data is generated, a set of diagnostic checks verifies that the learning task is not made artificially easy by the schema and that the attack labels are reliable. Each check uses a Random Forest~\cite{breiman2001} with 100 trees, evaluated on the validation split with seeds $\{0, 1, 2\}$.
+
+The suite consists of five checks (C1--C5). Each has a heuristic threshold that flags an anomaly for manual inspection or a change of schema (Table~\ref{tab:leakage_checks}).
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Leakage and label-reliability checks}
+\label{tab:leakage_checks}
+\begin{tabularx}{\textwidth}{lXp{4.6cm}}
+\toprule
+\textbf{Code} & \textbf{Check} & \textbf{Flag threshold} \\
+\midrule
+C1 & Presence of each column across classes, to find attributes structurally bound to particular attacks & A column is empty in one class but populated in another \\
+\midrule
+C2 & Random Forest trained only on the \texttt{\_is\_na} missingness indicators & Macro-F1 $> 0.5$ \\
+\midrule
+C3 & Class-balanced Random Forest trained on single raw columns, and ablations that omit given features & Macro-F1 or best per-class F1 $> 0.9$ on any single feature \\
+\midrule
+C4 & Gap between a random row split and the group-based stream split & Difference (random minus group) $> 0.05$ \\
+\midrule
+C5 & Binary task separating the DoS and DDoS variants of the same attack family & F1 $< 0.6$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 \section{Sampling Data Analysis Techniques}
 
@@ -414,6 +571,7 @@ The limitations below arise from the design of the study and the scope of the te
 \subsubsection*{Data and Features}
 \begin{itemize}
     \item Only one dataset is used; the study offers no evidence about other traffic or networks.
+    \item The Normal traffic was re-exported from the original PCAP files and also contains the packets sent by the broker, which the authors' export settings exclude (Section~\ref{subsec:dataset}).
     \item Records are single packets, and the generators produce packets independently. Session-level temporal structure is therefore not reproduced, and the time-based features depend on how the captures were exported.
     \item Eight of the eleven sub-classes originate from a single capture file, so their validation and test rows are consecutive blocks of the same capture and not other captures. Removing TCP streams that straddle two blocks (\texttt{drop\_cross\_block\_streams}) reduces leakage between splits but biases the sample toward short connections; the share removed per sub-class is documented in the split manifest.
     \item The pipeline keeps only rows with protocol TCP or MQTT, keeps the first element of multi-valued cells, clips the tail of the time-gap feature at $5\sigma$, and treats nearly empty columns with the statistics of the rows where they apply plus an indicator.

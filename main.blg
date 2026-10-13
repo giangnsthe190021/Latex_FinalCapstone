@@ -14,7 +14,7 @@ Reallocating 'singl_function' (item size: 4) to 100 items.
 Reallocating 'wiz_functions' (item size: 4) to 6000 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
 Database file #1: references/reference.bib
--- IEEEtranN.bst version 1.13 (2008/09/30) by Michael Shell.
+-- IEEEtranN.bst version 1.14 (2015/08/26) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
 ** Natbib version - not for normal IEEE work.
@@ -23,44 +23,44 @@ Reallocating 'glb_str_ptr' (item size: 4) to 20 items.
 Reallocating 'global_strs' (item size: 1) to 4000000 items.
 
 Done.
-You've used 53 entries,
-            4783 wiz_defined-function locations,
-            1242 strings with 19708 characters,
-and the built_in function-call counts, 57833 in all, are:
-= -- 4979
-> -- 2033
-< -- 470
-+ -- 1045
-- -- 496
-* -- 3267
-:= -- 8389
-add.period$ -- 118
-call.type$ -- 53
-change.case$ -- 105
-chr.to.int$ -- 1145
-cite$ -- 53
-duplicate$ -- 3693
-empty$ -- 3953
-format.name$ -- 568
-if$ -- 13039
-int.to.chr$ -- 1
-int.to.str$ -- 54
-missing$ -- 575
-newline$ -- 195
-num.names$ -- 159
-pop$ -- 1432
+You've used 58 entries,
+            4855 wiz_defined-function locations,
+            1278 strings with 20665 characters,
+and the built_in function-call counts, 62687 in all, are:
+= -- 5364
+> -- 2202
+< -- 497
++ -- 1126
+- -- 536
+* -- 3693
+:= -- 9080
+add.period$ -- 129
+call.type$ -- 58
+change.case$ -- 115
+chr.to.int$ -- 1212
+cite$ -- 58
+duplicate$ -- 3980
+empty$ -- 4273
+format.name$ -- 619
+if$ -- 14210
+int.to.chr$ -- 2
+int.to.str$ -- 59
+missing$ -- 628
+newline$ -- 216
+num.names$ -- 174
+pop$ -- 1591
 preamble$ -- 1
-purify$ -- 53
+purify$ -- 58
 quote$ -- 2
-skip$ -- 4198
+skip$ -- 4509
 stack$ -- 0
-substring$ -- 2886
-swap$ -- 3001
-text.length$ -- 96
+substring$ -- 3047
+swap$ -- 3216
+text.length$ -- 100
 text.prefix$ -- 0
 top$ -- 6
-type$ -- 840
+type$ -- 917
 warning$ -- 0
-while$ -- 260
+while$ -- 278
 width$ -- 0
-write$ -- 668
+write$ -- 731

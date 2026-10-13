@@ -1,0 +1,7 @@
+# LaTeX build artifacts
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.synctex(busy)
+*.out
+*.toc

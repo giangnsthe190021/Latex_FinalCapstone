@@ -8,7 +8,12 @@
 \contentsline {table}{\numberline {3.4}{\ignorespaces Experiment matrix of PP-FedData}}{28}{table.caption.13}%
 \contentsline {table}{\numberline {3.5}{\ignorespaces Robustness and sensitivity branches}}{29}{table.caption.14}%
 \contentsline {table}{\numberline {3.6}{\ignorespaces Deployment scenarios (inputs only)}}{32}{table.caption.15}%
-\contentsline {table}{\numberline {3.7}{\ignorespaces Experimental environment specification}}{33}{table.caption.16}%
+\contentsline {table}{\numberline {3.7}{\ignorespaces Composition of the DoS/DDoS-MQTT-IoT dataset}}{33}{table.caption.16}%
+\contentsline {table}{\numberline {3.8}{\ignorespaces Data provenance verification}}{34}{table.caption.17}%
+\contentsline {table}{\numberline {3.9}{\ignorespaces Final feature schema ($D = 60$)}}{36}{table.caption.18}%
+\contentsline {table}{\numberline {3.10}{\ignorespaces Class quotas of the training, validation, and test splits}}{36}{table.caption.19}%
+\contentsline {table}{\numberline {3.11}{\ignorespaces Leakage and label-reliability checks}}{38}{table.caption.20}%
+\contentsline {table}{\numberline {3.12}{\ignorespaces Experimental environment specification}}{39}{table.caption.21}%
 \addvspace {10pt}
 \addvspace {10pt}
 \addvspace {10pt}
