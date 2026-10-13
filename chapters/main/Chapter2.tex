@@ -93,5 +93,61 @@ To the best of our knowledge, the IEEE, Springer, ACM, PMLR, and arXiv searches 
 
 This study addresses these gaps by evaluating communication overhead, synthetic sample fidelity, and downstream minority-class intrusion detection for marginal and deep generative models under both DP and cryptographic secure aggregation on edge IoT networks.
 
-\section{Summary of the Literature Review}
+\section{Summary of the Literature Review}\label{sec:lit_summary}
+The reviewed literature establishes federated learning as a promising approach to IoT intrusion detection while identifying persistent limitations in data representation, privacy protection, and empirical evaluation. As summarised in Table~\ref{tab:lit_review_comparison}, several studies address non-IID data distributions or incorporate data augmentation, but these features alone do not demonstrate effective detection of under-represented attack classes. Class imbalance and inter-client heterogeneity therefore remain central concerns. Two generator families address them under privacy constraints, deep generative models trained with DP-SGD and marginal-based synthesis, but they have been evaluated separately and rarely on IoT traffic; whether either adds detection value must be verified through controlled experiments.
+
+\begin{table}[htbp]
+\centering
+\caption{Unified comparison of the reviewed studies}
+\label{tab:lit_review_comparison}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccccccccc}
+\toprule
+\textbf{Reference} & \textbf{Ref.} & \textbf{FL} & \textbf{IoT Dataset} & \textbf{Non-IID} & \textbf{Data Synthesis} & \textbf{DP} & \textbf{SMPC} & \makecell{\textbf{DP vs. SecAgg}\\\textbf{Trade-off}} & \makecell{\textbf{Marginal-based}\\\textbf{DP synthesis}} & \makecell{\textbf{Distributed}\\\textbf{DP}} \\
+\midrule
+Vyas et al. & \cite{vyas2024} & \checkmark &  &  &  & \checkmark &  &  &  &  \\
+Manzano et al. & \cite{manzano2025} & \checkmark & \checkmark & \checkmark & \checkmark &  &  &  &  &  \\
+Nakayiza et al. & \cite{nakayiza2026} & \checkmark & \checkmark &  &  &  &  &  &  &  \\
+Ruzafa-Alc{\'a}zar et al. & \cite{ruzafa2022} & \checkmark & \checkmark & \checkmark &  & \checkmark &  &  &  &  \\
+Bessaa et al. & \cite{bessaa2026} & \checkmark & \checkmark & \checkmark &  &  & \checkmark &  &  &  \\
+Bonawitz et al. & \cite{bonawitz2017} & \checkmark &  &  &  &  & \checkmark &  &  &  \\
+Bell et al. & \cite{bell2020} & \checkmark &  &  &  &  & \checkmark &  &  &  \\
+Gutti et al. & \cite{gutti2024} & \checkmark & \checkmark & \checkmark &  & \checkmark & \checkmark &  &  &  \\
+Kairouz et al. & \cite{kairouz2021} & \checkmark &  & \checkmark &  & \checkmark & \checkmark &  &  & \checkmark \\
+Agarwal et al. & \cite{agarwal2021} & \checkmark &  & \checkmark &  & \checkmark & \checkmark &  &  & \checkmark \\
+Deng et al. & \cite{deng2025} &  &  &  &  &  &  &  &  &  \\
+Chawla et al. & \cite{chawla2002} &  &  &  & \checkmark &  &  &  &  &  \\
+Yang et al. & \cite{yang2025} &  & \checkmark &  & \checkmark &  &  &  &  &  \\
+Jacob \& Sultana & \cite{jacob2026} & \checkmark & \checkmark & \checkmark & \checkmark &  &  &  &  &  \\
+Anandhi \& Srikanth & \cite{anandhi2026} & \checkmark & \checkmark & \checkmark & \checkmark &  & \checkmark &  &  &  \\
+Durga et al. & \cite{durga2026} & \checkmark & \checkmark & \checkmark & \checkmark &  &  &  &  &  \\
+Cunha Neto et al. & \cite{cunhaneto2023} & \checkmark &  &  &  &  &  &  &  &  \\
+Yao et al. & \cite{yao2024} & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark &  &  &  \\
+He et al. & \cite{he2023} & \checkmark &  &  & \checkmark & \checkmark &  &  &  &  \\
+Salim et al. & \cite{salim2025} & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark &  &  &  &  \\
+Jiao et al. & \cite{jiao2025} & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark &  &  &  &  \\
+Shettar et al. & \cite{shettar2026} & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark &  &  &  &  \\
+Hamouda et al. & \cite{hamouda2024} & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark &  &  &  &  \\
+Maddock et al. & \cite{maddock2024} & \checkmark &  & \checkmark & \checkmark & \checkmark & \checkmark &  & \checkmark &  \\
+Pentyala et al. & \cite{pentyala2024} &  &  &  & \checkmark & \checkmark & \checkmark &  & \checkmark &  \\
+Li et al. & \cite{li2026} & \checkmark &  & \checkmark & \checkmark & \checkmark &  &  & \checkmark &  \\
+Duan et al. & \cite{duan2022} & \checkmark &  & \checkmark & \checkmark & \checkmark &  &  &  &  \\
+\midrule
+\rowcolor{gray!15}
+\textbf{Ours (PP-FedData)} & -- & \textbf{\checkmark} & \textbf{\checkmark} & \textbf{\checkmark} & \textbf{\checkmark} & \textbf{\checkmark} & \textbf{\checkmark} & \textbf{\checkmark} & \textbf{\checkmark} & \textbf{\checkmark} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+The comparative synthesis in Table~\ref{tab:lit_review_comparison} shows that privacy preservation and synthetic data generation have increasingly converged across distributed and federated environments. On the one hand, several intrusion detection frameworks employ deep generative models, such as generative adversarial networks and variational autoencoders, to address severe class imbalance and zero-day threat variants in IoT, UAV, and satellite networks (e.g.,~\cite{hamouda2024, yao2024, he2023, salim2025, jiao2025, shettar2026}). On the other hand, recent advances in tabular data synthesis, including FLAIM~\cite{maddock2024}, CaPS~\cite{pentyala2024}, and HeteroFedSyn~\cite{li2026}, have extended marginal-based synthesis to distributed or federated settings using differential privacy (DP) and secure multi-party computation (SMPC). However, these marginal-based synthesisers have been validated almost exclusively on general-purpose tabular benchmarks (such as Adult, Census, and Credit Card Fraud) rather than on streaming network telemetry, leaving their efficacy in packet-level IoT intrusion detection unexamined.
+
+More critically, an inspection of Table~\ref{tab:lit_review_comparison} highlights two persistent research gaps in the literature:
+\begin{itemize}
+    \item \textbf{Absence of a controlled DP versus SecAgg trade-off analysis:} Cryptographic protection (SMPC and SecAgg/SecAgg$^+$) preserves exact parameter sums without statistical noise but incurs communication and round complexity. Conversely, perturbation-based protection (DP) offers formal mathematical bounds against inference attacks at the expense of utility degradation. While several hybrid systems incorporate aspects of both paradigms (e.g.,~\cite{gutti2024, yao2024, maddock2024}), none provides an explicit, head-to-head empirical trade-off analysis comparing a purely cryptographic pipeline against a perturbation-based pipeline under identical IoT network conditions, non-IID partitions, and threat models.
+    \item \textbf{Untapped distributed DP for federated marginal synthesis in IoT:} Although discrete distributed DP mechanisms, such as discrete Gaussian~\cite{kairouz2021} and Skellam~\cite{agarwal2021} noise, permit noise shares to be split across clients and reconstructed exactly over modular secure aggregation, existing federated intrusion detection architectures continue to rely on centralised DP noise injection or local DP-SGD. Furthermore, deep generative approaches and marginal-based mechanisms have developed in isolation, without a unified benchmark to determine whether lightweight count-table synthesis retains sufficient utility compared with complex deep generative baselines.
+\end{itemize}
+
+To the best of our knowledge, based on a non-systematic search of the literature, no prior study has jointly addressed these limitations within a unified federated framework. This observation motivates PP-FedData, which addresses the gap by implementing: (i) a federated marginal-based generator (FedDP-Marginal) tailored to IoT-MQTT network traffic; (ii) an end-to-end distributed differential privacy mechanism using integer Skellam noise aggregated through Flower's SecAgg$^+$ protocol, alongside a federated CVAE deep generative baseline; and (iii) a controlled evaluation across five dimensions: downstream IDS utility, synthetic-data fidelity, formal privacy accounting, operational overhead, and statistical rigour.
+
 \section{Contribution of Research}
