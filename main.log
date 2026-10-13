@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.5)  13 OCT 2026 21:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.5)  13 OCT 2026 23:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -200,27 +200,14 @@ Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-))
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/algorithms\algorithmic.
-sty
-Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
- (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
-Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
-)
+)) (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.st
+y
+Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
+
 (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks23
 )
-\c@ALC@unique=\count302
-\c@ALC@line=\count303
-\c@ALC@rem=\count304
-\c@ALC@depth=\count305
-\ALC@tlm=\skip55
-\algorithmicindent=\skip56
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
-Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
-
 (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
 Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
 
@@ -270,29 +257,29 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \cmidrulesep=\dimen190
 \cmidrulekern=\dimen191
 \defaultaddspace=\dimen192
-\@cmidla=\count306
-\@cmidlb=\count307
+\@cmidla=\count302
+\@cmidlb=\count303
 \@aboverulesep=\dimen193
 \@belowrulesep=\dimen194
-\@thisruleclass=\count308
-\@lastruleclass=\count309
+\@thisruleclass=\count304
+\@lastruleclass=\count305
 \@thisrulewidth=\dimen195
 ) (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
 Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
-\multirow@colwidth=\skip57
-\multirow@cntb=\count310
-\multirow@dima=\skip58
+\multirow@colwidth=\skip55
+\multirow@cntb=\count306
+\multirow@dima=\skip56
 \bigstrutjot=\dimen196
 )
 (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype.sty
 Package: microtype 2026/03/01 v3.2d Micro-typographical refinements (RS)
 (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
 Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count311
+\etb@tempcnta=\count307
 )
 \MT@toks=\toks24
 \MT@tempbox=\box57
-\MT@count=\count312
+\MT@count=\count308
 LaTeX Info: Redefining \noprotrusionifhmode on input line 1084.
 LaTeX Info: Redefining \leftprotrusion on input line 1085.
 \MT@prot@toks=\toks25
@@ -301,7 +288,7 @@ LaTeX Info: Redefining \textls on input line 1449.
 \MT@outer@kern=\dimen197
 LaTeX Info: Redefining \microtypecontext on input line 2053.
 LaTeX Info: Redefining \textmicrotypecontext on input line 2070.
-\MT@listname@count=\count313
+\MT@listname@count=\count309
 
 (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype-pdf
 tex.def
@@ -309,7 +296,7 @@ File: microtype-pdftex.def 2026/03/01 v3.2d Definitions specific to pdftex (RS)
 
 LaTeX Info: Redefining \lsstyle on input line 944.
 LaTeX Info: Redefining \lslig on input line 944.
-\MT@outer@space=\skip59
+\MT@outer@space=\skip57
 )
 Package microtype Info: Loading configuration file microtype.cfg.
 
@@ -327,8 +314,8 @@ Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
 \ar@mcellbox=\box58
 \extrarowheight=\dimen199
 \NC@list=\toks26
-\extratabsurround=\skip60
-\backup@length=\skip61
+\extratabsurround=\skip58
+\backup@length=\skip59
 \ar@cellbox=\box59
 )
 (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty
@@ -338,359 +325,8 @@ Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
 \TX@old@col=\dimen258
 \TX@target=\dimen259
 \TX@delta=\dimen260
-\TX@cols=\count314
+\TX@cols=\count310
 \TX@ftn=\toks27
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/pgf/frontendlayer\tikz.
-sty
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgf.sty
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfrcs.st
-y
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil
--common.tex
-\pgfutil@everybye=\toks28
-\pgfutil@tempdima=\dimen261
-\pgfutil@tempdimb=\dimen262
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil
--latex.def
-\pgfutil@abb=\box60
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfrcs.
-code.tex
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf\pgf.revision.tex)
-Package: pgfrcs 2025-08-29 v3.1.11a (3.1.11a)
-))
-Package: pgf 2025-08-29 v3.1.11a (3.1.11a)
-
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgfcore.
-sty
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/pgf/systemlayer\pgfsys.
-sty
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsy
-s.code.tex
-Package: pgfsys 2025-08-29 v3.1.11a (3.1.11a)
-
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys
-.code.tex
-\pgfkeys@pathtoks=\toks29
-\pgfkeys@temptoks=\toks30
-
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys
-libraryfiltered.code.tex
-\pgfkeys@tmptoks=\toks31
-))
-\pgf@x=\dimen263
-\pgf@y=\dimen264
-\pgf@xa=\dimen265
-\pgf@ya=\dimen266
-\pgf@xb=\dimen267
-\pgf@yb=\dimen268
-\pgf@xc=\dimen269
-\pgf@yc=\dimen270
-\pgf@xd=\dimen271
-\pgf@yd=\dimen272
-\w@pgf@writea=\write3
-\r@pgf@reada=\read2
-\c@pgf@counta=\count315
-\c@pgf@countb=\count316
-\c@pgf@countc=\count317
-\c@pgf@countd=\count318
-\t@pgf@toka=\toks32
-\t@pgf@tokb=\toks33
-\t@pgf@tokc=\toks34
-\pgf@sys@id@count=\count319
-
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgf.c
-fg
-File: pgf.cfg 2025-08-29 v3.1.11a (3.1.11a)
-)
-Driver file for pgf: pgfsys-pdftex.def
-
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsy
-s-pdftex.def
-File: pgfsys-pdftex.def 2025-08-29 v3.1.11a (3.1.11a)
-
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsy
-s-common-pdf.def
-File: pgfsys-common-pdf.def 2025-08-29 v3.1.11a (3.1.11a)
-)))
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsy
-ssoftpath.code.tex
-File: pgfsyssoftpath.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfsyssoftpath@smallbuffer@items=\count320
-\pgfsyssoftpath@bigbuffer@items=\count321
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsy
-sprotocol.code.tex
-File: pgfsysprotocol.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-))
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
-e.code.tex
-Package: pgfcore 2025-08-29 v3.1.11a (3.1.11a)
-
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code
-.tex
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathutil.
-code.tex)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathparse
-r.code.tex
-\pgfmath@dimen=\dimen273
-\pgfmath@count=\count322
-\pgfmath@box=\box61
-\pgfmath@toks=\toks35
-\pgfmath@stack@operand=\toks36
-\pgfmath@stack@operation=\toks37
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
-ions.code.tex)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
-ions.basic.code.tex)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
-ions.trigonometric.code.tex)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
-ions.random.code.tex)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
-ions.comparison.code.tex)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
-ions.base.code.tex)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
-ions.round.code.tex)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
-ions.misc.code.tex)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
-ions.integerarithmetics.code.tex)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathcalc.
-code.tex)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfloat
-.code.tex
-\c@pgfmathroundto@lastzeros=\count323
-))
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfint.code.
-tex)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
-epoints.code.tex
-File: pgfcorepoints.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@picminx=\dimen274
-\pgf@picmaxx=\dimen275
-\pgf@picminy=\dimen276
-\pgf@picmaxy=\dimen277
-\pgf@pathminx=\dimen278
-\pgf@pathmaxx=\dimen279
-\pgf@pathminy=\dimen280
-\pgf@pathmaxy=\dimen281
-\pgf@xx=\dimen282
-\pgf@xy=\dimen283
-\pgf@yx=\dimen284
-\pgf@yy=\dimen285
-\pgf@zx=\dimen286
-\pgf@zy=\dimen287
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
-epathconstruct.code.tex
-File: pgfcorepathconstruct.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@path@lastx=\dimen288
-\pgf@path@lasty=\dimen289
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
-epathusage.code.tex
-File: pgfcorepathusage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@shorten@end@additional=\dimen290
-\pgf@shorten@start@additional=\dimen291
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
-escopes.code.tex
-File: pgfcorescopes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfpic=\box62
-\pgf@hbox=\box63
-\pgf@layerbox@main=\box64
-\pgf@picture@serial@count=\count324
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
-egraphicstate.code.tex
-File: pgfcoregraphicstate.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgflinewidth=\dimen292
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
-etransformations.code.tex
-File: pgfcoretransformations.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@pt@x=\dimen293
-\pgf@pt@y=\dimen294
-\pgf@pt@temp=\dimen295
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
-equick.code.tex
-File: pgfcorequick.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
-eobjects.code.tex
-File: pgfcoreobjects.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
-epathprocessing.code.tex
-File: pgfcorepathprocessing.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
-earrows.code.tex
-File: pgfcorearrows.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfarrowsep=\dimen296
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
-eshade.code.tex
-File: pgfcoreshade.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@max=\dimen297
-\pgf@sys@shading@range@num=\count325
-\pgf@shadingcount=\count326
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
-eimage.code.tex
-File: pgfcoreimage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
-eexternal.code.tex
-File: pgfcoreexternal.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfexternal@startupbox=\box65
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
-elayers.code.tex
-File: pgfcorelayers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
-etransparency.code.tex
-File: pgfcoretransparency.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
-epatterns.code.tex
-File: pgfcorepatterns.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
-erdf.code.tex
-File: pgfcorerdf.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-)))
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodule
-shapes.code.tex
-File: pgfmoduleshapes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfnodeparttextbox=\box66
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodule
-plot.code.tex
-File: pgfmoduleplot.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfco
-mp-version-0-65.sty
-Package: pgfcomp-version-0-65 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@nodesepstart=\dimen298
-\pgf@nodesepend=\dimen299
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfco
-mp-version-1-18.sty
-Package: pgfcomp-version-1-18 2025-08-29 v3.1.11a (3.1.11a)
-))
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgffor.st
-y
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfkeys.s
-ty
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys
-.code.tex))
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/pgf/math\pgfmath.sty
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code
-.tex))
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgffor.
-code.tex
-Package: pgffor 2025-08-29 v3.1.11a (3.1.11a)
-\pgffor@iter=\dimen300
-\pgffor@skip=\dimen301
-\pgffor@stack=\toks38
-\pgffor@toks=\toks39
-))
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tik
-z\tikz.code.tex
-Package: tikz 2025-08-29 v3.1.11a (3.1.11a)
-
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibr
-aryplothandlers.code.tex
-File: pgflibraryplothandlers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@plot@mark@count=\count327
-\pgfplotmarksize=\dimen302
-)
-\tikz@lastx=\dimen303
-\tikz@lasty=\dimen304
-\tikz@lastxsaved=\dimen305
-\tikz@lastysaved=\dimen306
-\tikz@lastmovetox=\dimen307
-\tikz@lastmovetoy=\dimen308
-\tikzleveldistance=\dimen309
-\tikzsiblingdistance=\dimen310
-\tikz@figbox=\box67
-\tikz@figbox@bg=\box68
-\tikz@tempbox=\box69
-\tikz@tempbox@bg=\box70
-\tikztreelevel=\count328
-\tikznumberofchildren=\count329
-\tikznumberofcurrentchild=\count330
-\tikz@fig@count=\count331
-
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodule
-matrix.code.tex
-File: pgfmodulematrix.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfmatrixcurrentrow=\count332
-\pgfmatrixcurrentcolumn=\count333
-\pgf@matrix@numberofcolumns=\count334
-)
-\tikz@expandcount=\count335
-
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tik
-z/libraries\tikzlibrarytopaths.code.tex
-File: tikzlibrarytopaths.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-)))
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tik
-z/libraries\tikzlibraryshapes.geometric.code.tex
-File: tikzlibraryshapes.geometric.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/shapes\
-pgflibraryshapes.geometric.code.tex
-File: pgflibraryshapes.geometric.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-))
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibr
-aryarrows.meta.code.tex
-File: pgflibraryarrows.meta.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfarrowinset=\dimen311
-\pgfarrowlength=\dimen312
-\pgfarrowwidth=\dimen313
-\pgfarrowlinewidth=\dimen314
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tik
-z/libraries\tikzlibrarypositioning.code.tex
-File: tikzlibrarypositioning.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tik
-z/libraries\tikzlibrarycalc.code.tex
-File: tikzlibrarycalc.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tik
-z/libraries\tikzlibraryfit.code.tex
-File: tikzlibraryfit.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tik
-z/libraries\tikzlibrarybackgrounds.code.tex
-File: tikzlibrarybackgrounds.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@layerbox@background=\box71
-\pgf@layerboxsaved@background=\box72
-)
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tik
-z/libraries\tikzlibraryshadows.code.tex
-File: tikzlibraryshadows.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tik
-z/libraries\tikzlibraryfadings.code.tex
-File: tikzlibraryfadings.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibr
-aryfadings.code.tex
-File: pgflibraryfadings.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-)))
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/placeins\placeins.sty
-Package: placeins 2005/04/18  v 2.2
 )
 (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\pifont.sty
 Package: pifont 2020/03/25 PSNFSS-v9.3 Pi font support (SPQR) 
@@ -708,54 +344,54 @@ File: upsy.fd 2001/06/04 font definitions for U/psy.
 ))
 (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/makecell\makecell.sty
 Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
-\rotheadsize=\dimen315
-\c@nlinenum=\count336
-\TeXr@lab=\toks40
+\rotheadsize=\dimen261
+\c@nlinenum=\count311
+\TeXr@lab=\toks28
 )
 (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/colortbl\colortbl.sty
 Package: colortbl 2026/05/01 v1.0l Color table columns (DPC)
-\everycr=\toks41
-\minrowclearance=\skip62
-\rownum=\count337
+\everycr=\toks29
+\minrowclearance=\skip60
+\rownum=\count312
 )
 (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
 tex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count338
+\l__color_backend_stack_int=\count313
 ) (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 92.
-LaTeX Font Info:    ... okay on input line 92.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 92.
-LaTeX Font Info:    ... okay on input line 92.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 92.
-LaTeX Font Info:    ... okay on input line 92.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 92.
-LaTeX Font Info:    ... okay on input line 92.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 92.
-LaTeX Font Info:    ... okay on input line 92.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 92.
-LaTeX Font Info:    ... okay on input line 92.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 92.
-LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
 
 -- Lines per column: 56 (exact).
 
 (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count339
-\scratchdimen=\dimen316
-\scratchbox=\box73
-\nofMPsegments=\count340
-\nofMParguments=\count341
-\everyMPshowfont=\toks42
-\MPscratchCnt=\count342
-\MPscratchDim=\dimen317
-\MPnumerator=\count343
-\makeMPintoPDFobject=\count344
-\everyMPtoPDFconversion=\toks43
+\scratchcounter=\count314
+\scratchdimen=\dimen262
+\scratchbox=\box60
+\nofMPsegments=\count315
+\nofMParguments=\count316
+\everyMPshowfont=\toks30
+\MPscratchCnt=\count317
+\MPscratchDim=\dimen263
+\MPnumerator=\count318
+\makeMPintoPDFobject=\count319
+\everyMPtoPDFconversion=\toks31
 )
 (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
 ase.sty
@@ -767,13 +403,13 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-LaTeX Info: Redefining \microtypecontext on input line 92.
-Package microtype Info: Applying patch `item' on input line 92.
-Package microtype Info: Applying patch `toc' on input line 92.
-Package microtype Info: Applying patch `eqnum' on input line 92.
-Package microtype Info: Applying patch `footnote' on input line 92.
-Package microtype Info: Applying patch `verbatim' on input line 92.
-LaTeX Info: Redefining \microtypesetup on input line 92.
+LaTeX Info: Redefining \microtypecontext on input line 105.
+Package microtype Info: Applying patch `item' on input line 105.
+Package microtype Info: Applying patch `toc' on input line 105.
+Package microtype Info: Applying patch `eqnum' on input line 105.
+Package microtype Info: Applying patch `footnote' on input line 105.
+Package microtype Info: Applying patch `verbatim' on input line 105.
+LaTeX Info: Redefining \microtypesetup on input line 105.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -793,7 +429,7 @@ File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 3.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 5.
 
 (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -801,7 +437,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 5.
 
 (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -814,226 +450,23 @@ ftex/pdftex.map}{C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/b
 ase/8r.enc}
 
 
-] [2]
-Underfull \hbox (badness 6016) in paragraph at lines 41--42
-[]\OT1/ptm/b/n/10 (+20) Marginal-Based Dis-tributed Gen-er-a-tor (FedDP-
- []
+]) (chapters/main/Chapter2.tex [2]) (chapters/main/Chapter3.tex
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 2
+1.
 
-[3]) (chapters/main/Chapter2.tex [4]
-Underfull \hbox (badness 10000) in paragraph at lines 56--57
-[]\OT1/ptm/b/n/10 (+20) Centralized Cloud VAE-GAN: \OT1/ptm/m/n/10 (+20) Anandh
-i and
- []
-
-
-Underfull \hbox (badness 1454) in paragraph at lines 56--57
-\OT1/ptm/m/n/10 (+20) Srikanth [27] syn-the-sized 51,200 Low-Rate Stealth
- []
-
-[5] [6]
-Underfull \hbox (badness 1394) in paragraph at lines 148--149
-\OT1/ptm/b/n/10 (+20) off anal-y-sis: \OT1/ptm/m/n/10 (+20) Cryp-to-graphic pro
--tec-tion (SMPC and
- []
-
-[7]) (chapters/main/Chapter3.tex [8]
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1pcr.fd)
-Underfull \hbox (badness 7944) in paragraph at lines 48--48
-[]|\OT1/ptm/m/n/8 (+20) TRTR, TSTR, TAug,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 48--48
-[]|\OT1/ptm/m/n/8 (+20) TSTR, pri-vacy au-dit,
- []
-
-
-Underfull \hbox (badness 2343) in paragraph at lines 156--156
-[]|\OT1/ptm/m/n/8 (+20) Chow--Liu de-pen-dency tree [10]; op-tional 2nd-order
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 156--156
-[]|\OT1/pcr/m/n/8 models/marginal.py\OT1/ptm/m/n/8 (+20) , \OT1/pcr/m/n/8 fl/mg
-_app.py\OT1/ptm/m/n/8 (+20) ,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 156--156
-[]|\OT1/pcr/m/n/8 models/cvae.py\OT1/ptm/m/n/8 (+20) , \OT1/pcr/m/n/8 fl/core.p
-y\OT1/ptm/m/n/8 (+20) , \OT1/pcr/m/n/8 fl/app.py\OT1/ptm/m/n/8 (+20) ,
- []
-
-[9] [10]
-Underfull \hbox (badness 10000) in paragraph at lines 311--311
-[]|\OT1/ptm/b/n/8 (+20) Secure
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 311--311
-[]|\OT1/ptm/b/n/8 (+20) Differential
- []
-
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omsptm.fd)
-Underfull \hbox (badness 10000) in paragraph at lines 340--340
-[]|\OT1/ptm/m/n/7 (+20) B0 with bal-anced class
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 340--340
-\OT1/ptm/m/n/7 (+20) weights (\OT1/pcr/m/n/7 class_weight\OT1/ptm/m/n/7 (+20) =
-
- []
-
-
-Underfull \hbox (badness 4120) in paragraph at lines 340--340
-[]|\OT1/ptm/m/n/7 (+20) SecAgg$[]$ cryp-to-graphic
- []
-
-
-Underfull \hbox (badness 4634) in paragraph at lines 340--340
-[]|\OT1/ptm/m/n/7 (+20) FedDP-Marginal with Skel-lam
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 340--340
-[]|\OT1/ptm/m/n/7 (+20) Distributed DP and
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 340--340
-[]|\OT1/ptm/m/n/7 (+20) Distributed DP
- []
-
-LaTeX Font Info:    Trying to load font information for OMS+pcr on input line 3
-63.
-(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omspcr.fd
-File: omspcr.fd 
+(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-LaTeX Font Info:    Font shape `OMS/pcr/b/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 363.
-
-[11]
-Underfull \hbox (badness 10000) in paragraph at lines 395--395
-[]|\OT1/ptm/m/n/8 (+20) Evaluated for
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 395--395
-[]|\OT1/ptm/m/n/8 (+20) Evaluated for
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 395--395
-[]|\OT1/ptm/m/n/8 (+20) Evaluated (2
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 395--395
-[]|\OT1/ptm/m/n/8 (+20) Evaluated for
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 395--395
-[]|\OT1/ptm/m/n/8 (+20) Unrun (needs
- []
-
-LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 428.
-[12] [13]
-Underfull \vbox (badness 2735) has occurred while \output is active []
-
-
-Underfull \hbox (badness 3895) in paragraph at lines 560--561
-\OT1/ptm/m/n/10 (+20) (ab-so-lute times-tamp), and \OT1/pcr/m/n/10 time_since_r
-eference_
- []
-
-
-Underfull \vbox (badness 2735) has occurred while \output is active []
-
- [14]
-Underfull \hbox (badness 1824) in paragraph at lines 627--628
- \OT1/ptm/m/it/10 (+20) 1) Dirich-let Label-Skew Par-ti-tion-ing: [][] \OT1/ptm
-/m/n/10 (+20) To model non-
- []
-
-[15]
-Underfull \hbox (badness 10000) in paragraph at lines 647--648
-[]\OT1/ptm/b/n/10 (+20) Pre-Partition Split Iso-la-tion: \OT1/ptm/m/n/10 (+20) 
-The global
- []
-
-
-Underfull \hbox (badness 2828) in paragraph at lines 747--748
-\OT1/ptm/m/n/10 (+20) flags (\OT1/pcr/m/n/10 syn\OT1/ptm/m/n/10 (+20) , \OT1/pc
-r/m/n/10 reset\OT1/ptm/m/n/10 (+20) , \OT1/pcr/m/n/10 acknowledgment\OT1/ptm/m/
-n/10 (+20) , \OT1/pcr/m/n/10 retain\OT1/ptm/m/n/10 (+20) ,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 747--748
-\OT1/pcr/m/n/10 clean_session_flag_2\OT1/ptm/m/n/10 (+20) , \OT1/pcr/m/n/10 wil
-l_retain\OT1/ptm/m/n/10 (+20) ,
- []
-
-
-Underfull \hbox (badness 3690) in paragraph at lines 747--748
-\OT1/pcr/m/n/10 will_flag\OT1/ptm/m/n/10 (+20) ) and 12 \OT1/pcr/m/n/10 _is_na 
-\OT1/ptm/m/n/10 (+20) in-di-ca-tors; and 5
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 747--748
-\OT1/pcr/m/n/10 qos_level_2\OT1/ptm/m/n/10 (+20) , \OT1/pcr/m/n/10 requested_qo
-s\OT1/ptm/m/n/10 (+20) , \OT1/pcr/m/n/10 protocol\OT1/ptm/m/n/10 (+20) )
- []
-
-[16] [17] [18] [19]
-Underfull \hbox (badness 5431) in paragraph at lines 936--938
- \OT1/ptm/m/it/10 (+20) 4) SecAgg$[]$ Con-fig-u-ra-tion and Over-flow Bounds: [
-][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 938--939
-[]\OT1/ptm/b/n/10 (+20) Topology: \OT1/pcr/m/n/10 num_shares $\OT1/cmr/m/n/10 =
- 5$ \OT1/ptm/m/n/10 (+20) and
- []
-
-
-Underfull \hbox (badness 6893) in paragraph at lines 938--939
-\OT1/pcr/m/n/10 reconstruction_threshold $\OT1/cmr/m/n/10 = 3$\OT1/ptm/m/n/10 (
-+20) , tol-er-at-ing
- []
-
-[20]
-Underfull \hbox (badness 1533) in paragraph at lines 1010--1011
-[]\OT1/ptm/b/n/10 (+20) Space (a), cen-tral-ized non-DP CVAE: \OT1/ptm/m/n/10 (
-+20) 30 TPE
- []
-
-[21]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [22]
-[23]) (chapters/main/Chapter4.tex) (chapters/main/Chapter5.tex
-Underfull \hbox (badness 1917) in paragraph at lines 10--11
-[]\OT1/ptm/b/n/10 (+20) Low-Bandwidth, Header-Dominant En-vi-ron-ments:
- []
-
-[24]) (chapters/main/Chapter6.tex
-Underfull \hbox (badness 1496) in paragraph at lines 5--6
-[]\OT1/ptm/m/n/10 (+20) In this pa-per, we in-tro-duced PP-FedData, a privacy-
- []
-
-) (chapters/front/thanks.tex) (main.bbl [25]
-Overfull \hbox (0.92387pt too wide) in paragraph at lines 306--310
+[3] [4]) (chapters/main/Chapter4.tex
+(C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omsptm.fd)
+[5]) (chapters/main/Chapter5.tex [6] [7]) (chapters/main/Chapter6.tex)
+(chapters/front/thanks.tex) (main.bbl [8]
+Overfull \hbox (0.92387pt too wide) in paragraph at lines 173--177
 \OT1/ptm/m/n/8 (-20) ``Flower: A friendly federated learning research framework
 ,'' \OT1/ptm/m/it/8 (-20) arXiv preprint
  []
 
-[26])
+)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -1045,63 +478,55 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[27
-
-] (main.aux)
+[9] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 19796 strings out of 467871
- 387884 string characters out of 5418376
- 868060 words of memory out of 5000000
- 47585 multiletter control sequences out of 15000+600000
- 712519 words of font info for 589 fonts, out of 8000000 for 9000
+ 7738 strings out of 467871
+ 123018 string characters out of 5418376
+ 590293 words of memory out of 5000000
+ 36062 multiletter control sequences out of 15000+600000
+ 693718 words of font info for 400 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,20n,94p,1964b,1421s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 57i,15n,65p,1931b,385s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
-cmbsy10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
-sfonts/cmextra/cmbsy7.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/t
-ype1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTe
-X/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/Admin/AppData/Local/Progra
-ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Admin/AppData/Loc
-al/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><C:/Users/Admi
-n/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><
-C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmm
-i10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
-ts/cm/cmmi5.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/publi
-c/amsfonts/cm/cmmi6.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/typ
-e1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/f
-onts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Admin/AppData/Local/Programs/
-MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/Admin/AppData/Local/P
-rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Admin/AppData
-/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/Admin/
-AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users
-/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C
-:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8
-.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
-cm/cmr9.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
-sfonts/cm/cmsy10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/
-public/amsfonts/cm/cmsy5.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/font
-s/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/Admin/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Admin/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/Admin/AppData/Lo
-cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/Admin/Ap
-pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/
-Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/m
-sbm7.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/
-ucrb8a.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courie
-r/ucrr8a.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/time
-s/utmb8a.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/time
-s/utmbi8a.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/tim
-es/utmr8a.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/tim
-es/utmri8a.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/za
-pfding/uzdr.pfb>
-Output written on main.pdf (27 pages, 583960 bytes).
+cmbx10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmbx5.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/pu
+blic/amsfonts/cm/cmex10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Admin/AppData/Local/Programs/MiK
+TeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/Admin/AppData/Local/Prog
+rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/Admin/AppData/Lo
+cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Admin/Ap
+pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/
+Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C
+:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi
+b10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
+ts/cmextra/cmmib5.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1
+/public/amsfonts/cmextra/cmmib7.pfb><C:/Users/Admin/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Admin/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/Admin/AppData/Loca
+l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/Admin/AppDa
+ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Admi
+n/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Use
+rs/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb>
+<C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
+sy10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
+nts/cm/cmsy6.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/publ
+ic/amsfonts/cm/cmsy7.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/ty
+pe1/public/amsfonts/cm/cmsy8.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/
+fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/Admin/AppData/Local/Pr
+ograms/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/Admin/AppData/Local/
+Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/Admin/AppData/Local/
+Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/Admin/AppData/Local
+/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/Admin/AppData/Local
+/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb><C:/Users/Admin/AppData/Loca
+l/Programs/MiKTeX/fonts/type1/urw/zapfding/uzdr.pfb>
+Output written on main.pdf (9 pages, 380814 bytes).
 PDF statistics:
- 287 PDF objects out of 1000 (max. 8388607)
+ 178 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 82029 words of extra memory for PDF output out of 89155 (max. 10000000)
+ 64513 words of extra memory for PDF output out of 74296 (max. 10000000)
 

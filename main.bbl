@@ -21,20 +21,11 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
-\bibitem{atzori2010}
-L.~Atzori, A.~Iera, and G.~Morabito, ``The {Internet of Things}: A survey,''
-  \emph{Computer Networks}, vol.~54, no.~15, pp. 2787--2805, 2010.
-
 \bibitem{alatram2023}
 A.~Alatram, L.~F. Sikos, M.~Johnstone, P.~Szewczyk, and J.~J. Kang,
   ``{DoS/DDoS-MQTT-IoT}: A dataset for evaluating intrusions in {IoT} networks
   using the {MQTT} protocol,'' \emph{Computer Networks}, vol. 231, p. 109809,
   2023.
-
-\bibitem{he2009}
-H.~He and E.~A. Garcia, ``Learning from imbalanced data,'' \emph{IEEE
-  Transactions on Knowledge and Data Engineering}, vol.~21, no.~9, pp.
-  1263--1284, 2009.
 
 \bibitem{mcmahan2017}
 B.~McMahan, E.~Moore, D.~Ramage, S.~Hampson, and B.~A. y~Arcas,
@@ -42,19 +33,6 @@ B.~McMahan, E.~Moore, D.~Ramage, S.~Hampson, and B.~A. y~Arcas,
   data,'' in \emph{Proceedings of the 20th International Conference on
   Artificial Intelligence and Statistics (AISTATS)}.\hskip 1em plus 0.5em minus
   0.4em\relax PMLR, 2017, pp. 1273--1282.
-
-\bibitem{shi2016}
-W.~Shi, J.~Cao, Q.~Zhang, Y.~Li, and L.~Xu, ``Edge computing: Vision and
-  challenges,'' \emph{IEEE Internet of Things Journal}, vol.~3, no.~5, pp.
-  637--646, 2016.
-
-\bibitem{imteaj2022}
-\BIBentryALTinterwordspacing
-A.~Imteaj, U.~Thakker, S.~Wang, J.~Li, and M.~H. Amini, ``Federated learning
-  for resource-constrained {IoT} devices: Panoramas and state-of-the-art,''
-  \emph{Machine Learning and Knowledge Extraction}, 2022. [Online]. Available:
-  \url{https://arxiv.org/abs/2002.10610}
-\BIBentrySTDinterwordspacing
 
 \bibitem{zhu2019}
 \BIBentryALTinterwordspacing
@@ -64,74 +42,10 @@ L.~Zhu, Z.~Liu, and S.~Han, ``Deep leakage from gradients,'' in \emph{Advances
   \url{https://proceedings.neurips.cc/paper_files/paper/2019/file/60a6c4002cc7b29142def8871531281a-Paper.pdf}
 \BIBentrySTDinterwordspacing
 
-\bibitem{behera2022fedsyn}
-\BIBentryALTinterwordspacing
-M.~R. Behera, S.~Upadhyay, S.~Shetty, S.~Priyadarshini, P.~Patel, and K.~F.
-  Lee, ``{FedSyn}: Synthetic data generation using federated learning,''
-  \emph{arXiv preprint arXiv:2203.05931}, 2022. [Online]. Available:
-  \url{https://arxiv.org/abs/2203.05931}
-\BIBentrySTDinterwordspacing
-
-\bibitem{zhang2017privbayes}
-J.~Zhang, G.~Cormode, C.~M. Procopiuc, D.~Srivastava, and X.~Xiao,
-  ``{PrivBayes}: Private data release via {Bayesian} networks,'' \emph{ACM
-  Transactions on Database Systems}, vol.~42, no.~4, pp. 25:1--25:41, 2017.
-
-\bibitem{chow1968}
-C.~K. Chow and C.~N. Liu, ``Approximating discrete probability distributions
-  with dependence trees,'' \emph{IEEE Transactions on Information Theory},
-  vol.~14, no.~3, pp. 462--467, 1968.
-
-\bibitem{mckenna2019pgm}
-\BIBentryALTinterwordspacing
-R.~McKenna, D.~Sheldon, and G.~Miklau, ``Graphical-model based estimation and
-  inference for differential privacy,'' in \emph{Proceedings of the 36th
-  International Conference on Machine Learning (ICML)}, ser. Proceedings of
-  Machine Learning Research, vol.~97.\hskip 1em plus 0.5em minus 0.4em\relax
-  PMLR, 2019, pp. 4435--4444. [Online]. Available:
-  \url{https://arxiv.org/abs/1901.09136}
-\BIBentrySTDinterwordspacing
-
-\bibitem{mckenna2024aim}
-R.~McKenna, B.~Mullins, D.~Sheldon, and G.~Miklau, ``{AIM}: An adaptive and
-  iterative mechanism for differentially private synthetic data,''
-  \emph{Proceedings of the VLDB Endowment}, vol.~15, no.~11, pp. 2599--2612,
-  2022.
-
 \bibitem{vyas2024}
-A.~Vyas, S.~Balamurugan, P.~Kumar, and K.~Kotecha, ``Privacy-preserving
+A.~Vyas, P.-C. Lin, R.-H. Hwang, and M.~Tripathi, ``Privacy-preserving
   federated learning for intrusion detection in {IoT} environments: A survey,''
-  \emph{IEEE Access}, vol.~12, pp. 130\,452--130\,478, 2024.
-
-\bibitem{manzano2025}
-R.~Manzano, M.~Zaman, D.~Upadhyay, N.~Goel, and S.~Sampalli, ``Federated
-  learning framework based on distributed storage and diffusion model for
-  intrusion detection on {IoT} networks,'' \emph{IEEE Access}, vol.~13, pp.
-  79\,571--79\,595, 2025.
-
-\bibitem{nakayiza2026}
-J.~Nakayiza and J.~H. Park, ``{PureFL}: Trust-weighted federated learning with
-  noise-resilient homomorphic encryption for blockchain-based {IoV} networks,''
-  \emph{IEEE Internet of Things Journal}, 2026.
-
-\bibitem{ruzafa2022}
-P.~Ruzafa-Alc{\'a}zar, P.~Fern{\'a}ndez-Maim{\'o}, F.~G{\'o}mez~M{\'a}rmol, and
-  G.~Mart{\'i}nez~P{\'e}rez, ``Intrusion detection based on privacy-preserving
-  federated learning for the industrial {IoT},'' \emph{IEEE Transactions on
-  Industrial Informatics}, vol.~19, no.~2, pp. 1145--1154, 2023.
-
-\bibitem{bessaa2026}
-C.~Bessaa, M.~R. Senouci, and S.~Bouzefrane, ``{FL-SQMPC}: Secure quantized
-  aggregation for mitigating gradient inversion attacks in federated {IoT}
-  intrusion detection,'' \emph{IEEE Journal on Selected Areas in Sensors},
-  2026.
-
-\bibitem{bell2020}
-J.~H. Bell, K.~A. Bonawitz, A.~Gasc{\'o}n, T.~Lepoint, and M.~Raykova, ``Secure
-  single-server aggregation with (poly)logarithmic overhead,'' in
-  \emph{Proceedings of the 2020 ACM SIGSAC Conference on Computer and
-  Communications Security (CCS '20)}.\hskip 1em plus 0.5em minus 0.4em\relax
-  ACM, 2020, pp. 1253--1269.
+  \emph{IEEE Access}, vol.~12, pp. 127\,018--127\,050, 2024.
 
 \bibitem{bonawitz2017}
 K.~Bonawitz, V.~Ivanov, B.~Kreuter, A.~Marcedone, H.~B. McMahan, S.~Patel,
@@ -140,10 +54,63 @@ K.~Bonawitz, V.~Ivanov, B.~Kreuter, A.~Marcedone, H.~B. McMahan, S.~Patel,
   SIGSAC Conference on Computer and Communications Security (CCS '17)}.\hskip
   1em plus 0.5em minus 0.4em\relax ACM, 2017, pp. 1175--1191.
 
-\bibitem{gutti2024}
-C.~Gutti, R.~Kumar, and S.~Sharma, ``Federated learning for distributed {IoT}
-  security: A privacy-preserving approach to intrusion detection,'' \emph{IEEE
-  Access}, vol.~13, pp. 25\,410--25\,425, 2025.
+\bibitem{bell2020}
+J.~H. Bell, K.~A. Bonawitz, A.~Gasc{\'o}n, T.~Lepoint, and M.~Raykova, ``Secure
+  single-server aggregation with (poly)logarithmic overhead,'' in
+  \emph{Proceedings of the 2020 ACM SIGSAC Conference on Computer and
+  Communications Security (CCS '20)}.\hskip 1em plus 0.5em minus 0.4em\relax
+  ACM, 2020, pp. 1253--1269.
+
+\bibitem{dwork2014}
+C.~Dwork and A.~Roth, ``The algorithmic foundations of differential privacy,''
+  \emph{Foundations and Trends in Theoretical Computer Science}, vol.~9, no.
+  3--4, pp. 211--407, 2014.
+
+\bibitem{deng2025}
+Z.~Deng, A.~Torim, S.~Ben~Yahia, and H.~Bahsi, ``Generative {AI} in intrusion
+  detection systems for internet of things: A systematic literature review,''
+  \emph{IEEE Open Journal of the Communications Society}, vol.~6, pp.
+  4689--4717, 2025.
+
+\bibitem{hamouda2024}
+D.~Hamouda, M.~A. Ferrag, N.~Benhamida, H.~Seridi, and M.~C. Ghanem,
+  ``Revolutionizing intrusion detection in industrial {IoT} with distributed
+  learning and deep generative techniques,'' \emph{Internet of Things},
+  vol.~26, p. 101149, 2024.
+
+\bibitem{yao2024}
+W.~Yao, H.~Zhao, and H.~Shi, ``Privacy-preserving collaborative intrusion
+  detection in edge of {Internet of Things}: A robust and efficient deep
+  generative learning approach,'' \emph{IEEE Internet of Things Journal},
+  vol.~11, no.~9, pp. 15\,704--15\,722, 2024.
+
+\bibitem{shettar2026}
+R.~Shettar, R.~Coelho, and S.~S. Veerasagar, ``{SYNAPSE}: Synthetic
+  network-traffic agent pipeline for federated edge security,'' \emph{IEEE
+  Access}, vol.~14, pp. 117\,847--117\,860, 2026.
+
+\bibitem{abadi2016dpsgd}
+M.~Abadi, A.~Chu, I.~Goodfellow, H.~B. McMahan, I.~Mironov, K.~Talwar, and
+  L.~Zhang, ``Deep learning with differential privacy,'' in \emph{Proceedings
+  of the 2016 ACM SIGSAC Conference on Computer and Communications Security
+  (CCS '16)}.\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2016, pp. 308--318.
+
+\bibitem{zhang2017privbayes}
+J.~Zhang, G.~Cormode, C.~M. Procopiuc, D.~Srivastava, and X.~Xiao,
+  ``{PrivBayes}: Private data release via {Bayesian} networks,'' \emph{ACM
+  Transactions on Database Systems}, vol.~42, no.~4, pp. 25:1--25:41, 2017.
+
+\bibitem{mckenna2021mst}
+R.~McKenna, G.~Miklau, and D.~Sheldon, ``Winning the {NIST} contest: A scalable
+  and general approach to differentially private synthetic data,''
+  \emph{Journal of Privacy and Confidentiality}, vol.~11, no.~3, pp. 1--35,
+  2021.
+
+\bibitem{mckenna2024aim}
+R.~McKenna, B.~Mullins, D.~Sheldon, and G.~Miklau, ``{AIM}: An adaptive and
+  iterative mechanism for differentially private synthetic data,''
+  \emph{Proceedings of the VLDB Endowment}, vol.~15, no.~11, pp. 2599--2612,
+  2022.
 
 \bibitem{kairouz2021}
 \BIBentryALTinterwordspacing
@@ -163,80 +130,6 @@ N.~Agarwal, P.~Kairouz, and Z.~Liu, ``The {Skellam} mechanism for
   \url{https://arxiv.org/abs/2110.04995}
 \BIBentrySTDinterwordspacing
 
-\bibitem{deng2025}
-Z.~Deng, A.~Torim, S.~Ben~Yahia, and H.~Bahsi, ``Generative {AI} in intrusion
-  detection systems for internet of things: A systematic literature review,''
-  \emph{IEEE Open Journal of the Communications Society}, vol.~6, pp.
-  4689--4717, 2025.
-
-\bibitem{chawla2002}
-N.~V. Chawla, K.~W. Bowyer, L.~O. Hall, and W.~P. Kegelmeyer, ``{SMOTE}:
-  Synthetic minority over-sampling technique,'' \emph{Journal of Artificial
-  Intelligence Research}, vol.~16, pp. 321--357, 2002.
-
-\bibitem{yang2025}
-J.~Yang, V.~Govindarajan, L.~Y. Por, Z.~A. Shaikh, Q.~Xin, P.~Bhattacharya,
-  A.~A. Khan, and Y.~Wang, ``{DDoS} attack detection in consumer {IoT}-based
-  healthcare systems using improved off-policy proximal policy optimization and
-  generative adversarial network,'' \emph{IEEE Transactions on Consumer
-  Electronics}, vol.~71, no.~4, pp. 11\,662--11\,675, Nov. 2025.
-
-\bibitem{jacob2026}
-S.~L. Jacob and H.~P. Sultana, ``{GBOA\_SR-ShuffleNet}: An explainable
-  federated learning framework for privacy-preserving intrusion detection in
-  {IoT},'' \emph{Scientific Reports}, vol.~16, p. 5621, 2026.
-
-\bibitem{anandhi2026}
-R.~Anandhi and G.~U. Srikanth, ``Federated sparse-learning framework for
-  detecting low-rate stealth attacks in resource-constrained {IoT} devices,''
-  \emph{Scientific Reports}, vol.~16, p. 21298, 2026.
-
-\bibitem{durga2026}
-S.~Durga, M.~G. Shankar, E.~Daniel, and B.~G. Varghese~R., ``Enhancing security
-  in {IoMT} using federated {TinyGAN} for lightweight and accurate malware
-  detection,'' \emph{Scientific Reports}, vol.~16, p. 7116, 2026.
-
-\bibitem{cunhaneto2023}
-H.~N. Cunha~Neto, J.~Hribar, I.~Dusparic, D.~M.~F. Mattos, and N.~C. Fernandes,
-  ``A survey on securing federated learning: Analysis of applications, attacks,
-  challenges, and trends,'' \emph{IEEE Access}, vol.~11, pp. 41\,928--41\,953,
-  2023.
-
-\bibitem{yao2024}
-W.~Yao, H.~Zhao, and H.~Shi, ``Privacy-preserving collaborative intrusion
-  detection in edge of {Internet of Things}: A robust and efficient deep
-  generative learning approach,'' \emph{IEEE Internet of Things Journal},
-  vol.~11, no.~9, pp. 15\,704--15\,722, 2024.
-
-\bibitem{he2023}
-X.~He, Q.~Chen, L.~Tang, W.~Wang, and T.~Liu, ``{CGAN}-based collaborative
-  intrusion detection for {UAV} networks: A blockchain-empowered distributed
-  federated learning approach,'' \emph{IEEE Internet of Things Journal},
-  vol.~10, no.~1, pp. 120--132, 2023.
-
-\bibitem{salim2025}
-S.~Salim, N.~Moustafa, and A.~Almorjan, ``Responsible
-  deep-federated-learning-based threat detection for satellite
-  communications,'' \emph{IEEE Internet of Things Journal}, vol.~12, no.~5, pp.
-  4807--4819, 2025.
-
-\bibitem{jiao2025}
-S.~Jiao, J.~Wang, Z.~Tong, Z.~Wang, L.~Tan, and X.~Zhang,
-  ``Foundation-model-based federated learning for intrusion detection in
-  drone-aided industrial {IoT},'' \emph{IEEE Internet of Things Journal},
-  vol.~12, no.~22, pp. 46\,889--46\,901, 2025.
-
-\bibitem{shettar2026}
-R.~Shettar, R.~Coelho, and S.~S. Veerasagar, ``{SYNAPSE}: Synthetic
-  network-traffic agent pipeline for federated edge security,'' \emph{IEEE
-  Access}, vol.~14, pp. 116\,318--116\,335, 2026.
-
-\bibitem{hamouda2024}
-D.~Hamouda, M.~A. Ferrag, N.~Benhamida, H.~Seridi, and M.~C. Ghanem,
-  ``Revolutionizing intrusion detection in industrial {IoT} with distributed
-  learning and deep generative techniques,'' \emph{Internet of Things},
-  vol.~26, p. 101149, 2024.
-
 \bibitem{maddock2024}
 S.~Maddock, G.~Cormode, and C.~Maple, ``{FLAIM}: {AIM}-based synthetic data
   generation in the federated setting,'' in \emph{Proceedings of the 30th ACM
@@ -247,24 +140,40 @@ S.~Maddock, G.~Cormode, and C.~Maple, ``{FLAIM}: {AIM}-based synthetic data
 S.~Pentyala, M.~Pereira, and M.~De~Cock, ``{CaPS}: Collaborative and private
   synthetic data generation from distributed sources,'' in \emph{Proceedings of
   the 41st International Conference on Machine Learning (ICML '24)}, ser.
-  Proceedings of Machine Learning Research, vol. 279.\hskip 1em plus 0.5em
-  minus 0.4em\relax PMLR, 2024, pp. 173--198.
+  Proceedings of Machine Learning Research, vol. 235.\hskip 1em plus 0.5em
+  minus 0.4em\relax PMLR, 2024, pp. 40\,397--40\,413.
 
-\bibitem{li2026}
-X.~Li, F.~Gao, X.~Wei, T.~Wang, C.~Shen, and J.~Yang, ``{HeteroFedSyn}:
-  Differentially private tabular data synthesis for heterogeneous federated
-  settings,'' \emph{arXiv preprint arXiv:2603.08832}, 2026.
+\bibitem{chow1968}
+C.~K. Chow and C.~N. Liu, ``Approximating discrete probability distributions
+  with dependence trees,'' \emph{IEEE Transactions on Information Theory},
+  vol.~14, no.~3, pp. 462--467, 1968.
 
-\bibitem{duan2023}
-S.~Duan, C.~Liu, P.~Han, X.~Jin, X.~Zhang, T.~He, H.~Pan, and X.~Xiang,
-  ``{HT-Fed-GAN}: Federated generative model for decentralized tabular data
-  synthesis,'' \emph{Entropy}, vol.~25, no.~1, p.~88, 2023.
+\bibitem{mironov2017rdp}
+I.~Mironov, ``R{\'e}nyi differential privacy,'' in \emph{2017 IEEE 30th
+  Computer Security Foundations Symposium (CSF)}.\hskip 1em plus 0.5em minus
+  0.4em\relax IEEE, 2017, pp. 263--275.
 
-\bibitem{mckenna2021mst}
-R.~McKenna, G.~Miklau, and D.~Sheldon, ``Winning the {NIST} contest: A scalable
-  and general approach to differentially private synthetic data,''
-  \emph{Journal of Privacy and Confidentiality}, vol.~11, no.~3, pp. 1--35,
-  2021.
+\bibitem{chawla2002}
+N.~V. Chawla, K.~W. Bowyer, L.~O. Hall, and W.~P. Kegelmeyer, ``{SMOTE}:
+  Synthetic minority over-sampling technique,'' \emph{Journal of Artificial
+  Intelligence Research}, vol.~16, pp. 321--357, 2002.
+
+\bibitem{hsu2019}
+T.-M.~H. Hsu, H.~Qi, and M.~Brown, ``Measuring the effects of non-identical
+  data distribution for federated visual classification,'' \emph{arXiv preprint
+  arXiv:1909.06335}, 2019.
+
+\bibitem{yousefpour2021}
+A.~Yousefpour, I.~Shilov, A.~Sablayrolles, D.~Testuggine, K.~Prasad, M.~Malek,
+  J.~Nguyen, S.~Ghosh, A.~Bharadwaj, J.~Zhao, G.~Cormode, and I.~Mironov,
+  ``Opacus: User-friendly differential privacy library in {PyTorch},''
+  \emph{arXiv preprint arXiv:2109.12298}, 2021.
+
+\bibitem{beutel2020}
+D.~J. Beutel, T.~Topal, A.~Mathur, X.~Qiu, J.~Fernandez-Marques, Y.~Gao,
+  L.~Sani, K.~Li, T.~Parcollet, P.~P.~B. de~Gusm{\~a}o, and N.~D. Lane,
+  ``Flower: A friendly federated learning research framework,'' \emph{arXiv
+  preprint arXiv:2007.14390}, 2020.
 
 \bibitem{sohn2015cvae}
 \BIBentryALTinterwordspacing
@@ -276,107 +185,6 @@ K.~Sohn, H.~Lee, and X.~Yan, ``Learning structured output representation using
   \url{https://proceedings.neurips.cc/paper/2015/hash/8d55a249e6baa5c0677fbc52b95b178b-Abstract.html}
 \BIBentrySTDinterwordspacing
 
-\bibitem{mironov2017rdp}
-I.~Mironov, ``R{\'e}nyi differential privacy,'' in \emph{2017 IEEE 30th
-  Computer Security Foundations Symposium (CSF)}.\hskip 1em plus 0.5em minus
-  0.4em\relax IEEE, 2017, pp. 263--275.
-
-\bibitem{abadi2016dpsgd}
-M.~Abadi, A.~Chu, I.~Goodfellow, H.~B. McMahan, I.~Mironov, K.~Talwar, and
-  L.~Zhang, ``Deep learning with differential privacy,'' in \emph{Proceedings
-  of the 2016 ACM SIGSAC Conference on Computer and Communications Security
-  (CCS '16)}.\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2016, pp. 308--318.
-
-\bibitem{hsu2019}
-T.-M.~H. Hsu, H.~Qi, and M.~Brown, ``Measuring the effects of non-identical
-  data distribution for federated visual classification,'' \emph{arXiv preprint
-  arXiv:1909.06335}, 2019.
-
-\bibitem{breiman2001}
-L.~Breiman, ``Random forests,'' \emph{Machine Learning}, vol.~45, no.~1, pp.
-  5--32, 2001.
-
-\bibitem{yousefpour2021}
-A.~Yousefpour, I.~Shilov, A.~Sablayrolles, D.~Tian, N.~Christofides, R.~Gu,
-  M.~Ling, H.~Yu, B.~Wang, Z.~Gu \emph{et~al.}, ``Opacus: User-friendly
-  differential privacy library in {PyTorch},'' \emph{arXiv preprint
-  arXiv:2109.12298}, 2021.
-
-\bibitem{beutel2020}
-D.~J. Beutel, T.~Topal, A.~Mathur, X.~Qiu, J.~Fernandez-Marques, Y.~Gao,
-  L.~Sani, K.~Li, T.~Parcollet, P.~P.~B. de~Gusm{\~a}o, and N.~D. Lane,
-  ``Flower: A friendly federated learning research framework,'' \emph{arXiv
-  preprint arXiv:2007.14390}, 2020.
-
-\bibitem{dwork2006}
-C.~Dwork, F.~McSherry, K.~Nissim, and A.~Smith, ``Calibrating noise to
-  sensitivity in private data analysis,'' in \emph{Theory of Cryptography
-  Conference (TCC)}.\hskip 1em plus 0.5em minus 0.4em\relax Springer, 2006, pp.
-  265--284.
-
-\bibitem{deming1940}
-W.~E. Deming and F.~F. Stephan, ``On a least squares adjustment of a sampled
-  frequency table when the expected marginal totals are known,'' \emph{The
-  Annals of Mathematical Statistics}, vol.~11, no.~4, pp. 427--444, 1940.
-
-\bibitem{bun2016}
-M.~Bun and T.~Steinke, ``Concentrated differential privacy: Simplifications,
-  extensions, and lower bounds,'' in \emph{Theory of Cryptography Conference
-  (TCC)}.\hskip 1em plus 0.5em minus 0.4em\relax Springer, 2016, pp. 635--658.
-
-\bibitem{kasiviswanathan2011}
-S.~P. Kasiviswanathan, H.~K. Lee, K.~Nissim, S.~Raskhodnikova, and A.~Smith,
-  ``What can we learn privately?'' \emph{SIAM Journal on Computing}, vol.~40,
-  no.~3, pp. 793--826, 2011.
-
-\bibitem{goldreich2004}
-O.~Goldreich, \emph{Foundations of Cryptography: Volume 2, Basic
-  Applications}.\hskip 1em plus 0.5em minus 0.4em\relax Cambridge, U.K.:
-  Cambridge University Press, 2004.
-
-\bibitem{dwork2014}
-C.~Dwork and A.~Roth, ``The algorithmic foundations of differential privacy,''
-  \emph{Foundations and Trends in Theoretical Computer Science}, vol.~9, no.
-  3--4, pp. 211--407, 2014.
-
-\bibitem{akiba2019}
-T.~Akiba, S.~Sano, T.~Yanase, T.~Ohta, and M.~Koyama, ``Optuna: A
-  next-generation hyperparameter optimization framework,'' in \emph{Proceedings
-  of the 25th ACM SIGKDD International Conference on Knowledge Discovery \&
-  Data Mining (KDD '19)}.\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2019, pp.
-  2623--2631.
-
-\bibitem{bergstra2011}
-J.~Bergstra, R.~Bardenet, Y.~Bengio, and B.~K{\'e}gl, ``Algorithms for
-  hyper-parameter optimization,'' in \emph{Advances in Neural Information
-  Processing Systems (NeurIPS)}, vol.~24, 2011, pp. 2546--2554.
-
-\bibitem{alatram2023kaggle}
-\BIBentryALTinterwordspacing
-A.~Alatram, L.~F. Sikos, M.~Johnstone, P.~Szewczyk, and J.~J. Kang,
-  ``{DoS/DDoS-MQTT-IoT} dataset,'' Kaggle, 2023. [Online]. Available:
-  \url{https://www.kaggle.com/datasets/alaaalatram/dosddos-mqtt-iot}
-\BIBentrySTDinterwordspacing
-
-\bibitem{wireshark}
-\BIBentryALTinterwordspacing
-{Wireshark Foundation}, ``Wireshark: Network protocol analyzer ({TShark} and
-  capinfos),'' Version 4.4.7, 2025. [Online]. Available:
-  \url{https://www.wireshark.org}
-\BIBentrySTDinterwordspacing
-
-\bibitem{mqtt311}
-\BIBentryALTinterwordspacing
-A.~Banks and R.~Gupta, ``{MQTT} version 3.1.1,'' OASIS Standard, Oct. 2014.
-  [Online]. Available:
-  \url{http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html}
-\BIBentrySTDinterwordspacing
-
-\bibitem{kaufman2012}
-S.~Kaufman, S.~Rosset, C.~Perlich, and O.~Stitelman, ``Leakage in data mining:
-  Formulation, detection, and avoidance,'' \emph{ACM Transactions on Knowledge
-  Discovery from Data}, vol.~6, no.~4, pp. 15:1--15:21, 2012.
-
 \bibitem{arp2022}
 D.~Arp, E.~Quiring, F.~Pendlebury, A.~Warnecke, F.~Pierazzi, C.~Wressnegger,
   L.~Cavallaro, and K.~Rieck, ``Dos and don'ts of machine learning in computer
@@ -384,123 +192,20 @@ D.~Arp, E.~Quiring, F.~Pendlebury, A.~Warnecke, F.~Pierazzi, C.~Wressnegger,
   Symposium}.\hskip 1em plus 0.5em minus 0.4em\relax USENIX Association, 2022,
   pp. 3971--3988.
 
-\bibitem{kruskal1956}
-J.~B. Kruskal, ``On the shortest spanning subtree of a graph and the traveling
-  salesman problem,'' \emph{Proceedings of the American Mathematical Society},
-  vol.~7, no.~1, pp. 48--50, 1956.
-
-\bibitem{miller1955}
-G.~A. Miller, ``Note on the bias of information estimates,'' in
-  \emph{Information Theory in Psychology: Problems and Methods}, H.~Quastler,
-  Ed.\hskip 1em plus 0.5em minus 0.4em\relax Glencoe, IL, USA: Free Press,
-  1955, pp. 95--100.
-
-\bibitem{csiszar1975}
-I.~Csisz{\'a}r, ``I-divergence geometry of probability distributions and
-  minimization problems,'' \emph{The Annals of Probability}, vol.~3, no.~1, pp.
-  146--158, 1975.
-
-\bibitem{balle2020}
-B.~Balle, G.~Barthe, M.~Gaboardi, and J.~Geumlek, ``Hypothesis testing
-  interpretations and {R{\'e}nyi} differential privacy,'' in \emph{Proceedings
-  of the 23rd International Conference on Artificial Intelligence and
-  Statistics (AISTATS)}, ser. Proceedings of Machine Learning Research, vol.
-  108.\hskip 1em plus 0.5em minus 0.4em\relax PMLR, 2020, pp. 2496--2506.
-
-\bibitem{skellam1946}
-J.~G. Skellam, ``The frequency distribution of the difference between two
-  {Poisson} variates belonging to different populations,'' \emph{Journal of the
-  Royal Statistical Society: Series A (General)}, vol. 109, no.~3, p. 296,
-  1946.
-
-\bibitem{mironov2019}
-I.~Mironov, K.~Talwar, and L.~Zhang, ``{R{\'e}nyi} differential privacy of the
-  sampled {Gaussian} mechanism,'' \emph{arXiv preprint arXiv:1908.10530}, 2019.
-
-\bibitem{higgins2017}
-I.~Higgins, L.~Matthey, A.~Pal, C.~Burgess, X.~Glorot, M.~Botvinick,
-  S.~Mohamed, and A.~Lerchner, ``beta-{VAE}: Learning basic visual concepts
-  with a constrained variational framework,'' in \emph{Proceedings of the 5th
-  International Conference on Learning Representations (ICLR)}, 2017.
-
-\bibitem{jaccard1912}
-P.~Jaccard, ``The distribution of the flora in the alpine zone,'' \emph{New
-  Phytologist}, vol.~11, no.~2, pp. 37--50, 1912.
-
-\bibitem{mcsherry2007}
-F.~McSherry and K.~Talwar, ``Mechanism design via differential privacy,'' in
-  \emph{Proceedings of the 48th Annual IEEE Symposium on Foundations of
-  Computer Science (FOCS)}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2007,
-  pp. 94--103.
-
-\bibitem{liu2019}
-J.~Liu and K.~Talwar, ``Private selection from private candidates,'' in
-  \emph{Proceedings of the 51st Annual ACM SIGACT Symposium on Theory of
-  Computing (STOC)}.\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2019, pp.
-  298--309.
-
-\bibitem{papernot2022}
-N.~Papernot and T.~Steinke, ``Hyperparameter tuning with {R{\'e}nyi}
-  differential privacy,'' in \emph{Proceedings of the 10th International
-  Conference on Learning Representations (ICLR)}, 2022.
-
-\bibitem{hastie2009}
-T.~Hastie, R.~Tibshirani, and J.~Friedman, \emph{The Elements of Statistical
-  Learning: Data Mining, Inference, and Prediction}, 2nd~ed.\hskip 1em plus
-  0.5em minus 0.4em\relax New York, NY, USA: Springer, 2009.
-
-\bibitem{efron1993}
-B.~Efron and R.~J. Tibshirani, \emph{An Introduction to the Bootstrap}.\hskip
-  1em plus 0.5em minus 0.4em\relax New York, NY, USA: Chapman \& Hall/CRC,
-  1993.
-
-\bibitem{brodersen2010}
-K.~H. Brodersen, C.~S. Ong, K.~E. Stephan, and J.~M. Buhmann, ``The balanced
-  accuracy and its posterior distribution,'' in \emph{Proceedings of the 20th
-  International Conference on Pattern Recognition (ICPR)}.\hskip 1em plus 0.5em
-  minus 0.4em\relax IEEE, 2010, pp. 3121--3124.
-
-\bibitem{saito2015}
-T.~Saito and M.~Rehmsmeier, ``The precision-recall plot is more informative
-  than the {ROC} plot when evaluating binary classifiers on imbalanced
-  datasets,'' \emph{PLoS ONE}, vol.~10, no.~3, p. e0118432, 2015.
-
-\bibitem{lin1991}
-J.~Lin, ``Divergence measures based on the {Shannon} entropy,'' \emph{IEEE
-  Transactions on Information Theory}, vol.~37, no.~1, pp. 145--151, 1991.
+\bibitem{esteban2017}
+C.~Esteban, S.~L. Hyland, and G.~R{\"a}tsch, ``Real-valued (medical) time
+  series generation with recurrent conditional {GANs},'' \emph{arXiv preprint
+  arXiv:1706.02633}, 2017.
 
 \bibitem{lopezpaz2017}
 D.~Lopez-Paz and M.~Oquab, ``Revisiting classifier two-sample tests,'' in
   \emph{Proceedings of the 5th International Conference on Learning
   Representations (ICLR)}, 2017.
 
-\bibitem{park2018}
-N.~Park, M.~Mohammadi, K.~Gorde, S.~Jajodia, H.~Park, and Y.~Kim, ``Data
-  synthesis based on generative adversarial networks,'' \emph{Proceedings of
-  the VLDB Endowment}, vol.~11, no.~10, pp. 1071--1083, 2018.
-
-\bibitem{shokri2017}
-R.~Shokri, M.~Stronati, C.~Song, and V.~Shmatikov, ``Membership inference
-  attacks against machine learning models,'' in \emph{Proceedings of the 2017
-  IEEE Symposium on Security and Privacy (SP)}.\hskip 1em plus 0.5em minus
-  0.4em\relax IEEE, 2017, pp. 3--18.
-
 \bibitem{carlini2022}
 N.~Carlini, S.~Chien, M.~Nasr, S.~Song, A.~Terzis, and F.~Tram{\`e}r,
   ``Membership inference attacks from first principles,'' in \emph{Proceedings
   of the 2022 IEEE Symposium on Security and Privacy (SP)}.\hskip 1em plus
   0.5em minus 0.4em\relax IEEE, 2022, pp. 1897--1914.
-
-\bibitem{esteban2017}
-C.~Esteban, S.~L. Hyland, and G.~R{\"a}tsch, ``Real-valued (medical) time
-  series generation with recurrent conditional {GANs},'' \emph{arXiv preprint
-  arXiv:1706.02633}, 2017.
-
-\bibitem{pedregosa2011}
-F.~Pedregosa, G.~Varoquaux, A.~Gramfort, V.~Michel, B.~Thirion, O.~Grisel,
-  M.~Blondel, P.~Prettenhofer, R.~Weiss, V.~Dubourg, J.~Vanderplas, A.~Passos,
-  D.~Cournapeau, M.~Brucher, M.~Perrot, and {\'E}.~Duchesnay, ``Scikit-learn:
-  Machine learning in {Python},'' \emph{Journal of Machine Learning Research},
-  vol.~12, pp. 2825--2830, 2011.
 
 \end{thebibliography}
