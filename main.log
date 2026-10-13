@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.13)  13 OCT 2026 15:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.13)  13 OCT 2026 17:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2081,7 +2081,7 @@ Package microtype Warning: I cannot find a protrusion list for font
 \openout2 = `chapters/front/head.aux'.
 
 (chapters/front/head.tex
-<graphics/Image/logo.jpg, id=170, 515.9275pt x 172.645pt>
+<graphics/Image/logo.jpg, id=194, 515.9275pt x 172.645pt>
 File: graphics/Image/logo.jpg Graphic file (type jpg)
 <use graphics/Image/logo.jpg>
 Package pdftex.def Info: graphics/Image/logo.jpg  used on input line 11.
@@ -2273,23 +2273,451 @@ ols bound gra-di-ent in-ver-sion and
 
 [14] [15] [16] [17]) (chapters/main/Chapter3.tex [18]
 Chapter 3.
-) (chapters/main/Chapter4.tex [19
+[19
 
 ]
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/m/n/11.86258'. Switching off
+(microtype)                protrusion for this font on input line 30.
+
+(C:\Users\admin\AppData\Local\Programs\MiKTeX\tex/latex/vntex\t5cmtt.fd)
+Underfull \hbox (badness 10000) in paragraph at lines 45--45
+[]|\T5/ptm/b/n/11.86258 (+20) Question (short
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--45
+[]|\T5/ptm/b/n/11.86258 (+20) Compared
+ []
+
+
+Underfull \hbox (badness 7081) in paragraph at lines 45--45
+\T5/ptm/m/n/11.86258 (+20) im-prove an IDS
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--45
+[]|\T5/ptm/m/n/11.86258 (+20) B0, B1a, B1b
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--45
+\T5/ptm/m/n/11.86258 (+20) (pooled real
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--45
+[]|\T5/ptm/m/n/11.86258 (+20) TRTR,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--45
+\T5/ptm/m/n/11.86258 (+20) TSTR, TAug,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--45
+\T5/ptm/m/n/11.86258 (+20) TAugR, lo-cal
+ []
+
+
+Underfull \hbox (badness 2158) in paragraph at lines 45--45
+[]|\T5/ptm/m/n/11.86258 (+20) Macro-F1 over six classes;
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--45
+[]|\T5/ptm/m/n/11.86258 (+20) How do the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--45
+\T5/ptm/m/n/11.86258 (+20) marginal-based
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--45
+\T5/ptm/m/n/11.86258 (+20) routes com-pare
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--45
+[]|\T5/ptm/m/n/11.86258 (+20) M1, M1o, M3,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--45
+\T5/ptm/m/n/11.86258 (+20) M3o (fed-er-ated
+ []
+
+
+Underfull \hbox (badness 4479) in paragraph at lines 45--45
+\T5/ptm/m/n/11.86258 (+20) CVAE with DP)
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--45
+\T5/ptm/m/n/11.86258 (+20) against MG, at
+ []
+
+
+Underfull \hbox (badness 1968) in paragraph at lines 45--45
+[]|\T5/ptm/m/n/11.86258 (+20) Macro-F1; rare-class re-call;
+ []
+
+
+Underfull \hbox (badness 1931) in paragraph at lines 45--45
+\T5/ptm/m/n/11.86258 (+20) MB per round; num-ber of
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--45
+[]|\T5/ptm/m/n/11.86258 (+20) B3 against M1
+ []
+
+
+Underfull \hbox (badness 1062) in paragraph at lines 45--45
+\T5/ptm/m/n/11.86258 (+20) (cost of DP); B3
+ []
+
+
+Underfull \hbox (badness 3000) in paragraph at lines 45--45
+\T5/ptm/m/n/11.86258 (+20) against M2 (cost
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--45
+\T5/ptm/m/n/11.86258 (+20) against MGl;
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--45
+\T5/ptm/m/n/11.86258 (+20) suf-fixes \T5/cmtt/m/n/11.86258 (+20) -strm\T5/ptm/m
+/n/11.86258 (+20) ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--45
+\T5/ptm/m/n/11.86258 (+20) mea-sure-ments;
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--45
+\OML/ztmcm/m/it/11.86258 h$\T5/ptm/m/n/11.86258 (+20) ; membership-inference
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--45
+[]|\T5/ptm/m/n/11.86258 (+20) Which
+ []
+
+
+Overfull \hbox (19.04799pt too wide) in paragraph at lines 45--45
+[]|\T5/ptm/m/n/11.86258 (-20) Requirement-driven
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--45
+\T5/ptm/m/n/11.86258 (+20) rule
+ []
+
+[20]
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/cmtt/m/n/13'. Switching off
+(microtype)                protrusion for this font on input line 76.
+
+[21] [22]
+Underfull \hbox (badness 1796) in paragraph at lines 124--124
+\T5/ptm/m/n/11.86258 (+20) 1-way marginals, pair-wise ta-bles,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 124--124
+\T5/ptm/m/n/11.86258 (+20) with 2 lo-cal epochs (de-fault
+ []
+
+
+Underfull \hbox (badness 2846) in paragraph at lines 124--124
+[]|\T5/ptm/m/n/11.86258 (+20) Chow--Liu de-pen-dency tree [[]];
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 124--124
+\T5/ptm/m/n/11.86258 (+20) op-tional second-order Bayesian
+ []
+
+
+Underfull \hbox (badness 7631) in paragraph at lines 124--124
+[]|\T5/ptm/m/n/11.86258 (+20) Conditional VAE [[]] with an
+ []
+
+
+Underfull \hbox (badness 1067) in paragraph at lines 124--124
+[]|\T5/ptm/m/n/11.86258 (+20) On each client's ta-bles, once per
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 124--124
+[]|\T5/ptm/m/n/11.86258 (+20) On each client's per-example
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 124--124
+\T5/ptm/m/n/11.86258 (+20) gra-di-ents at ev-ery lo-cal step
+ []
+
+
+Underfull \hbox (badness 7030) in paragraph at lines 124--124
+[]|\T5/ptm/m/n/11.86258 (+20) Flower SecAgg$[]$ on fixed-point
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 124--124
+[]|\T5/cmtt/m/n/11.86258 (+20) models/marginal.py\T5/ptm/m/n/11.86258 (+20) ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 124--124
+[]|\T5/cmtt/m/n/11.86258 (+20) models/cvae.py\T5/ptm/m/n/11.86258 (+20) , \T5/c
+mtt/m/n/11.86258 (+20) fl/core.py\T5/ptm/m/n/11.86258 (+20) ,
+ []
+
+[23]
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/m/n/10.83347'. Switching off
+(microtype)                protrusion for this font on input line 139.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/b/n/10.83347'. Switching off
+(microtype)                protrusion for this font on input line 139.
+
+LaTeX Font Info:    Calculating math sizes for size <10.83347> on input line 13
+9.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.83347> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 139.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.01682> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 139.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6.50014> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 139.
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/cmtt/m/n/10.83347'. Switching off
+(microtype)                protrusion for this font on input line 152.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/m/n/8.66673'. Switching off
+(microtype)                protrusion for this font on input line 158.
+
+[24]
+Underfull \hbox (badness 10000) in paragraph at lines 204--204
+[]|\T5/ptm/m/n/11.86258 (+20) Server in-spect-ing an in-di-vid-ual
+ []
+
+
+Underfull \hbox (badness 5548) in paragraph at lines 204--204
+\T5/ptm/m/n/11.86258 (+20) it-self re-veals, so it re-ceives no
+ []
+
+[25] [26]
+Underfull \hbox (badness 6396) in paragraph at lines 264--264
+[]|\T5/ptm/m/n/8.66673 (+20) B0 with bal-anced class
+ []
+
+
+Underfull \hbox (badness 2359) in paragraph at lines 264--264
+\T5/ptm/m/n/8.66673 (+20) weights (\T5/cmtt/m/n/8.66673 (+20) class_weight\T5/p
+tm/m/n/8.66673 (+20) =
+ []
+
+
+Underfull \hbox (badness 8075) in paragraph at lines 264--264
+[]|\T5/ptm/m/n/8.66673 (+20) Reference for class
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
+[]|\T5/ptm/m/n/8.66673 (+20) B0 with SMOTE [[]]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
+[]|\T5/ptm/m/n/8.66673 (+20) Upper gen-er-a-tion
+ []
+
+
+Underfull \hbox (badness 1112) in paragraph at lines 264--264
+\T5/ptm/m/n/8.66673 (+20) ref-er-ence (pools real
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
+[]|\T5/ptm/m/n/8.66673 (+20) CVAE with Fe-dAvg, 5
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
+[]|\T5/ptm/m/n/8.66673 (+20) Federated base-line
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
+[]|\T5/ptm/m/n/8.66673 (+20) DP-SGD and SecAgg$[]$
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
+[]|\T5/ptm/m/n/8.66673 (+20) FedDP-Marginal with
+ []
+
+
+Underfull \hbox (badness 1087) in paragraph at lines 264--264
+[]|\T5/ptm/m/n/8.66673 (+20) Distributed DP and
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
+[]|\T5/ptm/m/n/8.66673 (+20) MGs with server
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
+\T5/ptm/m/n/8.66673 (+20) post-processing (fu-sion,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
+[]|\T5/ptm/m/n/8.66673 (+20) Post-processing
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
+[]|\T5/ptm/m/n/8.66673 (+20) Distributed DP
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
+[]|\T5/ptm/m/n/8.66673 (+20) No trust in other
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
+[]|\T5/ptm/m/n/8.66673 (+20) FedDP-Marginal with
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
+\T5/ptm/m/n/8.66673 (+20) 2nd-order Bayesian net
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
+[]|\T5/ptm/m/n/8.66673 (+20) Distributed DP
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
+[]|\T5/ptm/m/n/8.66673 (+20) MLP clas-si-fier trained
+ []
+
+
+Underfull \hbox (badness 1406) in paragraph at lines 264--264
+\T5/ptm/m/n/8.66673 (+20) di-rectly with Fe-dAvg, no
+ []
+
+[27] [28]
+Underfull \hbox (badness 1019) in paragraph at lines 299--299
+[]|\T5/ptm/m/n/11.86258 (+20) 11-class mode sep-a-rat-ing DoS and
+ []
+
+[29]
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/m/n/9.62007'. Switching off
+(microtype)                protrusion for this font on input line 314.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/m/n/7.80008'. Switching off
+(microtype)                protrusion for this font on input line 314.
+
+[30]
+Underfull \hbox (badness 1259) in paragraph at lines 362--362
+[]|\T5/ptm/m/n/11.86258 (+20) Server and clients trusted; no DP re-quired;
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 362--362
+[]|\T5/ptm/m/n/11.86258 (+20) Gateways of one
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 362--362
+\T5/ptm/m/n/11.86258 (+20) com-pany, 3rd-party
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 362--362
+[]|\T5/ptm/m/n/11.86258 (+20) Brokers of dif-fer-ent
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 362--362
+[]|\T5/ptm/m/n/11.86258 (+20) Sensitive de-ploy-ments
+ []
+
+
+Underfull \hbox (badness 1389) in paragraph at lines 362--362
+[]|$\OML/ztmcm/m/it/11.86258 "$ \T5/ptm/m/n/11.86258 (+20) must cover a whole
+ []
+
+
+Underfull \hbox (badness 1389) in paragraph at lines 362--362
+[]|$\OML/ztmcm/m/it/11.86258 "$ \T5/ptm/m/n/11.86258 (+20) must cover a whole
+ []
+
+[31] [32]
+Underfull \hbox (badness 6110) in paragraph at lines 393--393
+[]|\T5/ptm/m/n/11.86258 (+20) Machine learn-ing and
+ []
+
+
+Underfull \hbox (badness 1264) in paragraph at lines 401--402
+\T5/ptm/m/n/13 (+20) record of the ref-er-ence run shows com-mit \T5/cmtt/m/n/1
+3 (+20) 9ee2a85e \T5/ptm/m/n/13 (+20) and con-fig-u-ra-tion hash
+ []
+
+[33]
+Underfull \hbox (badness 10000) in paragraph at lines 404--405
+[]\T5/ptm/b/n/13 (+20) Reproducibility bun-dle: \T5/cmtt/m/n/13 (+20) results/r
+epro/ \T5/ptm/m/n/13 (+20) holds the ex-act pack-age list
+ []
+
+
+Underfull \hbox (badness 6526) in paragraph at lines 406--407
+[]\T5/ptm/b/n/13 (+20) Clean-copy re-execution: \T5/ptm/m/n/13 (+20) Phases 1--
+5 (in-ven-tory, har-mon-i-sa-tion, sam-pling,
+ []
+
+[34] [35] [36]) (chapters/main/Chapter4.tex [37]
 Chapter 4.
-) (chapters/main/Chapter5.tex [20
+) (chapters/main/Chapter5.tex [38
 
 ]
 Chapter 5.
-) (chapters/main/Chapter6.tex [21
+) (chapters/main/Chapter6.tex [39
 
 ]
 Chapter 6.
-) (chapters/back/apendixA.tex [22
+) (chapters/back/apendixA.tex [40
 
 ]
 Appendix A.
-) (main.bbl [23
+) (main.bbl [41
 
 ]
 
@@ -2309,7 +2737,7 @@ Underfull \hbox (badness 5077) in paragraph at lines 43--48
 A. y Ar-cas,
  []
 
-[24
+[42
 
 ]
 Underfull \hbox (badness 1810) in paragraph at lines 120--123
@@ -2317,13 +2745,13 @@ Underfull \hbox (badness 1810) in paragraph at lines 120--123
 d-er-ated learn-ing with
  []
 
-[25] [26]
+[43] [44]
 Underfull \hbox (badness 1953) in paragraph at lines 249--253
 []\T5/ptm/m/n/13 (+20) D. Hamouda, M. A. Fer-rag, N. Ben-hamida, H. Seridi, and
  M. C. Ghanem,
  []
 
-[27]) [28
+[45] [46]) [47
 runsystem(makeindex -s "kpsewhich:majorissue:Sofar,youhavenotcheckedforMiKTeXup
 dates."\main.ist -t "kpsewhich:majorissue:Sofar,youhavenotcheckedforMiKTeXupdat
 es."\main.glg -o "kpsewhich:majorissue:Sofar,youhavenotcheckedforMiKTeXupdates.
@@ -2352,30 +2780,34 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2020/03/25>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 37CCB9E5635ADE8AEE82C4167983B917;6686.
+(rerunfilecheck)             Checksum: F22815E0B28A797E63F5289B7891D7F1;8320.
  ) 
 Here is how much of TeX's memory you used:
- 43881 strings out of 467871
- 832163 string characters out of 5418375
- 1445705 words of memory out of 5000000
- 71722 multiletter control sequences out of 15000+600000
- 697367 words of font info for 206 fonts, out of 8000000 for 9000
+ 44596 strings out of 467871
+ 844187 string characters out of 5418375
+ 1460528 words of memory out of 5000000
+ 72212 multiletter control sequences out of 15000+600000
+ 772372 words of font info for 392 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 123i,12n,121p,2538b,740s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 123i,12n,121p,2538b,883s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
 cmmi10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmr10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/pu
 blic/amsfonts/cm/cmsy10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts
-/type1/urw/symbol/usyr.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/
-type1/urw/symbol/usyr.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/t
-ype1/vntex/urwvn/utmb8v.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts
-/type1/urw/times/utmr8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts
-/type1/vntex/urwvn/utmr8v.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fon
-ts/type1/urw/times/utmri8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fo
-nts/type1/vntex/urwvn/utmri8v.pfb>
-Output written on main.pdf (35 pages, 276446 bytes).
+/type1/public/rsfs/rsfs10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fon
+ts/type1/urw/symbol/usyr.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/font
+s/type1/urw/symbol/usyr.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts
+/type1/vntex/urwvn/utmb8v.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fon
+ts/type1/urw/times/utmr8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fon
+ts/type1/vntex/urwvn/utmr8v.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/f
+onts/type1/urw/times/utmri8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/
+fonts/type1/vntex/urwvn/utmri8v.pfb><C:/Users/admin/AppData/Local/Programs/MiKT
+eX/fonts/type1/vntex/vnr/vntt10.pfb><C:/Users/admin/AppData/Local/Programs/MiKT
+eX/fonts/type1/vntex/vnr/vntt12.pfb><C:/Users/admin/AppData/Local/Programs/MiKT
+eX/fonts/type1/vntex/vnr/vntt9.pfb>
+Output written on main.pdf (54 pages, 397608 bytes).
 PDF statistics:
- 585 PDF objects out of 1000 (max. 8388607)
- 119 named destinations out of 1000 (max. 500000)
- 35162 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 857 PDF objects out of 1000 (max. 8388607)
+ 175 named destinations out of 1000 (max. 500000)
+ 73610 words of extra memory for PDF output out of 74296 (max. 10000000)
 

@@ -1,6 +1,459 @@
 \chapter{Methodology}
 Describes the research design, data collection methods, and analysis techniques.
+
 \section{Research Design}
+
+\subsection{Research Type and Design Overview}
+This study is a quantitative, controlled experimental study carried out on one published network-traffic dataset, DoS/DDoS-MQTT-IoT~\cite{alatram2023}. In the terminology of the FPT thesis guide, it combines Experiments with Archival Research: the independent variables (generator, privacy mechanism, privacy budget) are manipulated by the researchers, while the traffic itself is existing recorded data rather than data collected specifically for this study.
+
+\subsubsection*{Research Object}
+The object of study is a framework, PP-FedData, that lets several IoT/MQTT gateways jointly produce synthetic network-traffic records without any gateway releasing its raw packets, so that an intrusion detection system (IDS) can be trained on data that no single party could pool. The framework is evaluated along four dimensions: the utility of the synthetic data for the IDS, the privacy guarantee attached to the released artefacts, the communication and computation overhead, and the fit of each configuration to a stated deployment requirement.
+
+\subsubsection*{Experimental Control}
+Internal validity rests on holding everything except the studied factors fixed. Every configuration in the experiment matrix (Section~\ref{subsec:exp_configs}) is run with:
+\begin{itemize}
+    \item the same train/validation/test split, formed by capture group, with a real test split that is locked and never used for tuning (train 88,500, validation 12,000, test 30,000 rows; class quotas fixed in the configuration);
+    \item the same non-IID partition of the training rows over $K = 5$ clients, drawn from a Dirichlet distribution with concentration $\alpha = 0.5$~\cite{hsu2019} and fixed by the seed;
+    \item the same preprocessing ($\log(1+x)$ transformation of skewed columns, standardisation, clipping at $\pm 5\sigma$, one-hot encoding of categorical columns), which turns the harmonised packet attributes into 60 model input columns;
+    \item the same downstream classifiers: a Random Forest~\cite{breiman2001} with 200 trees and a multilayer perceptron with hidden layers $[128, 64]$;
+    \item the same three random seeds $\{0, 1, 2\}$;
+    \item the same real test split for every reported score.
+\end{itemize}
+
+Under this design, differences between configurations are attributable to the generator and to the protection mechanism, subject to the limits listed in Section~\ref{sec:methodology_limitations}. The design does not claim that extraneous influences are eliminated: hyper-parameter selection, the choice of capture groups, and the number of seeds all remain sources of variation, and Section~\ref{sec:methodology_limitations} states how far each is covered.
+
+\subsubsection*{Research Questions and Design Mapping}
+Table~\ref{tab:rq_design} maps each research question to the comparison, the evaluation protocol, and the measures used to answer it. The protocols are defined in Section~3.3.6. Training-and-testing notation follows common usage: TRTR trains and tests on real data; TSTR trains on synthetic data and tests on real data; TAug trains on real plus synthetic data; TAugR adds synthetic rows only for the rare classes; local augmentation supplements each client's own classifier with synthetic rows for classes it lacks.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Research questions and their experimental design}
+\label{tab:rq_design}
+\begin{tabularx}{\textwidth}{lp{3.2cm}p{3.2cm}p{2.6cm}X}
+\toprule
+\textbf{RQ} & \textbf{Question (short form)} & \textbf{Compared configurations} & \textbf{Protocols} & \textbf{Primary measures} \\
+\midrule
+\textbf{RQ1} & Does synthetic data improve an IDS relative to limited real data? & B0, B1a, B1b (pooled real references) against B3, M2 and MG (synthetic) & TRTR, TSTR, TAug, TAugR, local augmentation & Macro-F1 over six classes; mean recall of the rare classes \\
+\midrule
+\textbf{RQ2} & How do the marginal-based and deep generator routes compare under the same DP budget? & M1, M1o, M3, M3o (federated CVAE with DP) against MG, at $\varepsilon \in \{1, 5, 10\}$ & TSTR & Macro-F1; rare-class recall; MB per round; number of rounds \\
+\midrule
+\textbf{RQ3} & What does privacy cost in utility and in resources? & B3 against M1 (cost of DP); B3 against M2 (cost of SecAgg); MGs against MGl; suffixes \texttt{-strm}, \texttt{-cap}, \texttt{-t} & TSTR; privacy measurements; cost monitoring & $\varepsilon$ as a function of honest clients $h$; membership-inference AUC; bytes; time \\
+\midrule
+\textbf{RQ4} & Which configuration suits which deployment requirement? & All valid rows of the scorecard & Requirement-driven rule (Section~\ref{subsec:req_rule}) & Satisfaction of the requirement vector \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The rare classes are DELAYED, SYN, INVALID, and WILL, the four attack families whose training quota is at most 3,000 rows. The macro-F1 is the unweighted mean of the per-class F1 over the six classes; binary F1 separates NORMAL from the merged attack classes.
+
+\subsubsection*{Overall Workflow}
+The research proceeds in five stages (Figure~\ref{fig:overall_workflow}): data preparation with leakage checks; partitioning over clients; training of the generator routes; multi-protocol evaluation; and aggregation into a scorecard from which recommendations are drawn.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    node distance=1.3cm,
+    block/.style={rectangle, draw=blue!70, fill=blue!5, rounded corners=3pt, thick, text width=0.88\textwidth, align=center, inner sep=6pt, font=\small},
+    arrow/.style={thick, ->, >=stealth, draw=blue!80}
+]
+\node (A) [block] {\textbf{1. Data preparation}\\Harmonise, split by capture group, sample by quota, preprocess (60 columns), leakage checks C1--C5};
+\node (B) [block, below of=A] {\textbf{2. Federated partition}\\Dirichlet $\alpha = 0.5$, $K = 5$ clients, per seed};
+\node (C) [block, below of=B] {\textbf{3. Generator routes}\\FedDP-Marginal (main) and federated CVAE (baseline)};
+\node (D) [block, below of=C] {\textbf{4. Evaluation}\\IDS (RF, MLP); TRTR / TSTR / TAug / TAugR / local augmentation; utility, fidelity, privacy, overhead};
+\node (E) [block, below of=D] {\textbf{5. Aggregation}\\Run ledger, scorecard, Pareto front, requirement-driven recommendation};
+
+\draw [arrow] (A) -- (B);
+\draw [arrow] (B) -- (C);
+\draw [arrow] (C) -- (D);
+\draw [arrow] (D) -- (E);
+\end{tikzpicture}
+\caption{Overall research workflow of PP-FedData.}
+\label{fig:overall_workflow}
+\end{figure}
+
+\subsubsection*{Evolution of the Design}
+The study was originally designed around a federated conditional variational autoencoder (CVAE)~\cite{sohn2015}, which is the premise of the project. After a first evaluation round, the framework adopted a marginal-based generator, FedDP-Marginal, as its primary generator and retained the CVAE as a baseline. The decision is recorded with its date and rationale in the project's deviation log (\texttt{docs/SPEC\_DEVIATIONS.md}, entries O1.9 and O2.3); Chapter~4 presents the evidence and Chapter~5 discusses it. The CVAE configurations remain in the matrix so that the comparison in RQ2 is made under identical federation, privacy, and secure-aggregation conditions.
+
+\subsection{System Architecture and the Two Generator Routes}
+
+\subsubsection*{Roles}
+The system involves three primary roles (Figure~\ref{fig:system_arch}):
+\begin{itemize}
+    \item \textbf{Gateways (federated learning clients):} The main study uses $K = 5$ gateways. Each gateway holds the traffic it observed and is trusted with its own data. Because the partition is non-IID, some gateways have few or no examples of some attack classes.
+    \item \textbf{Aggregation server:} The server coordinates the rounds, combines client contributions and, after training or table release, produces the synthetic data. It is modelled as honest-but-curious (Section~\ref{subsec:threat_model}).
+    \item \textbf{Downstream IDS:} A Random Forest and a multilayer perceptron are trained on synthetic data (TSTR) or on real plus synthetic data (TAug, TAugR, local augmentation) and are evaluated on the real test split.
+\end{itemize}
+
+\subsubsection*{Where Synthetic Data is Generated}
+Synthetic records are generated at the server, from the global model (CVAE decoder) or from the released global tables (marginal counts and dependency tree), by sampling conditionally on the class label. They are not generated at the gateways. The sampling functions are implemented in \texttt{models/generate.py} (CVAE) and \texttt{models/marginal.py} (FedDP-Marginal).
+
+\subsubsection*{What the Server Sees}
+The visibility of client contributions depends on the configuration and must not be stated in general terms:
+\begin{itemize}
+    \item M2, M3, MGs, and MGr use Flower's SecAgg$^+$ protocol~\cite{bell2020, beutel2020}: the server receives masked vectors and can recover only their sum.
+    \item B3 and M1 use plain FedAvg~\cite{mcmahan2017}: the server sees each client's model update; in M1 the update already carries noise added by DP-SGD.
+    \item MGl (local DP): each client adds the full noise to its own tables and sends them without secure aggregation, so the server sees each client's noisy tables.
+    \item MGd and MGb simulate the distributed sum inside one process; they do not pass through the SecAgg$^+$ protocol.
+\end{itemize}
+
+\subsubsection*{The Two Generator Routes}
+Table~\ref{tab:two_routes} contrasts the two routes. FedDP-Marginal exchanges counts of discrete attribute combinations in three releases; the CVAE exchanges continuous model weights over many FedAvg rounds. The difference matters for privacy accounting. Each marginal release is a single additive aggregate with bounded sensitivity, so the calibrated noise can be divided among the clients and the sum computed through secure aggregation. DP-SGD~\cite{abadi2016}, by contrast, performs many local non-linear steps per round, and noise added by one client passes through the other clients' training before aggregation; the project therefore does not claim distributed DP for the CVAE route (\texttt{SPEC\_DEVIATIONS.md}, O2.1).
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Comparison of the two generator routes}
+\label{tab:two_routes}
+\begin{tabularx}{\textwidth}{p{3.4cm}XX}
+\toprule
+\textbf{Property} & \textbf{FedDP-Marginal (main generator)} & \textbf{Federated CVAE (baseline)} \\
+\midrule
+\textbf{Quantity shared} & Count tables (summed over clients) in three releases: class-conditional 1-way marginals, pairwise tables, tables for dependency tree edges & Model weights, 30 FedAvg rounds with 2 local epochs (default configuration) \\
+\midrule
+\textbf{Model structure} & Chow--Liu dependency tree~\cite{chow1968}; optional second-order Bayesian network (PrivBayes-style~\cite{zhang2017privbayes}, MGb) & Conditional VAE~\cite{sohn2015} with an encoder and a block-wise decoder \\
+\midrule
+\textbf{Where DP noise is added} & On each client's tables, once per release (Skellam~\cite{agarwal2021} or Gaussian share) & On each client's per-example gradients at every local step (DP-SGD via Opacus~\cite{yousefpour2021}) \\
+\midrule
+\textbf{Secure aggregation} & Flower SecAgg$^+$ on exact integers (uint32, arithmetic modulo $2^{32}$) & Flower SecAgg$^+$ on fixed-point quantised weights ($2^{22}$ quantisation levels, clipping range 16) \\
+\midrule
+\textbf{Distributed DP} & Valid: each release is one additive aggregate & Not claimed: multiple non-linear local steps \\
+\midrule
+\textbf{Main code} & \texttt{models/marginal.py}, \texttt{fl/mg\_app.py}, \texttt{group\_dp.py} & \texttt{models/cvae.py}, \texttt{fl/core.py}, \texttt{fl/app.py}, \texttt{fl/dp\_utils.py} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+For the FedDP-Marginal route, the sum is carried by a patched client path: stock Flower SecAgg$^+$ sends masked vectors as 64-bit integers, so the project casts the masked vector to uint32 after the final modular reduction and lets the server's unsigned addition wrap, which equals addition modulo $2^{32}$ (\texttt{SPEC\_DEVIATIONS.md}, O2.2). The installed Flower package is not modified; the patch lives in the project process.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    box/.style={rectangle, draw=black!70, fill=gray!5, rounded corners=2pt, align=center, font=\footnotesize, inner sep=4pt},
+    mgbox/.style={rectangle, draw=blue!70, fill=blue!5, rounded corners=2pt, align=center, font=\footnotesize, inner sep=4pt},
+    cvbox/.style={rectangle, draw=teal!70, fill=teal!5, rounded corners=2pt, align=center, font=\footnotesize, inner sep=4pt},
+    svbox/.style={rectangle, draw=purple!70, fill=purple!5, rounded corners=2pt, align=center, font=\footnotesize, inner sep=4pt},
+    arrow/.style={thick, ->, >=stealth}
+]
+% Gateways
+\node[box, text width=5cm] (gw) at (0, 4.5) {\textbf{$K = 5$ Gateways (FL Clients)}\\Raw traffic stays local};
+
+% Route 1: FedDP-Marginal
+\node[mgbox, text width=4.5cm] (m1) at (-3.6, 3.1) {\textbf{Route 1: FedDP-Marginal}\\Local count tables per class\\(1-way, pairwise, tree edges)};
+\node[mgbox, text width=4.5cm] (m2) at (-3.6, 1.8) {Add DP noise share\\(Skellam, or full noise for MGl)};
+\node[mgbox, text width=4.5cm] (m3) at (-3.6, 0.6) {SecAgg$^+$ uint32\\(not used by MGl)};
+
+% Route 2: CVAE
+\node[cvbox, text width=4.5cm] (c1) at (3.6, 3.1) {\textbf{Route 2: Federated CVAE}\\Local CVAE training};
+\node[cvbox, text width=4.5cm] (c2) at (3.6, 1.8) {DP-SGD (Opacus)\\(M1, M3)};
+\node[cvbox, text width=4.5cm] (c3) at (3.6, 0.6) {SecAgg$^+$ fixed-point\\(M2, M3)};
+
+% Aggregation Server
+\node[svbox, text width=9cm] (s1) at (0, -0.9) {\textbf{Honest-but-Curious Aggregation Server}\\Aggregate (sum or FedAvg) $\longrightarrow$ Rebuild global model (tree + IPF post-processing, or global decoder) $\longrightarrow$ Class-conditional sampling (\texttt{synthetic.npz})};
+
+% Downstream IDS
+\node[box, text width=9cm] (ids) at (0, -2.2) {\textbf{Downstream IDS (Random Forest / MLP)}\\Evaluation on locked real test split};
+
+% Connections
+\draw[arrow] (gw) -| node[above, font=\scriptsize] {3 table releases} (m1);
+\draw[arrow] (gw) -| node[above, font=\scriptsize] {30 training rounds} (c1);
+\draw[arrow] (m1) -- (m2);
+\draw[arrow] (m2) -- (m3);
+\draw[arrow] (c1) -- (c2);
+\draw[arrow] (c2) -- (c3);
+\draw[arrow] (m3) |- (s1);
+\draw[arrow] (c3) |- (s1);
+\draw[arrow] (s1) -- (ids);
+\end{tikzpicture}
+\caption{System architecture with both generator routes.}
+\label{fig:system_arch}
+\end{figure}
+
+\subsection{Threat Model, Trust Assumptions and Privacy Units}\label{subsec:threat_model}
+
+\subsubsection*{Adversary and Trust Assumptions}
+The aggregation server is assumed to be honest-but-curious, also called semi-honest~\cite{goldreich2004}: it follows the protocol but may analyse every message it receives. Gateways hold their own traffic and are trusted with it. The study considers four trust settings, which differ in how much the privacy guarantee depends on other gateways:
+\begin{itemize}
+    \item \textbf{Base setting:} All $K$ gateways follow the protocol and each adds its designated share of the noise ($1/K$ of the variance in the distributed variants).
+    \item \textbf{$h$ honest gateways:} The guarantee is also reported when only $h \in \{1, \dots, K\}$ gateways add their share; the remaining gateways may collude with the server or drop out. The reported $\varepsilon$ then grows as $h$ decreases. For the distributed FedDP-Marginal variant, the project reports $\varepsilon$ for every $h$; Chapter~4 gives the values.
+    \item \textbf{Threshold $t$:} The per-client noise is calibrated so that the target $(\varepsilon, \delta)$ holds whenever at least $t$ gateways contribute their share. Each client then adds $1/t$ of the calibrated variance. The default is $t = K$.
+    \item \textbf{Local DP (MGl):} Each gateway adds the full noise itself, so no other gateway needs to be trusted~\cite{kasiviswanathan2011}; the total noise variance in the aggregate grows with the number of clients.
+\end{itemize}
+
+\subsubsection*{Out of Scope}
+Active attacks by malicious gateways, namely data poisoning, model poisoning, and Byzantine behaviour, are outside the threat model. Statements in this thesis about privacy do not extend to them.
+
+\subsubsection*{Roles of Secure Aggregation and Differential Privacy}
+The two mechanisms address different threats and are not interchangeable (Table~\ref{tab:protection_mechanisms}).
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Comparison of protection mechanisms}
+\label{tab:protection_mechanisms}
+\begin{tabularx}{\textwidth}{p{3.2cm}XX}
+\toprule
+\textbf{Aspect} & \textbf{Secure Aggregation (SecAgg$^+$)} & \textbf{Differential Privacy (DP)} \\
+\midrule
+\textbf{Threat addressed} & Server inspecting an individual client's update or table & Inference about one data unit from what is released (aggregate, model or synthetic data) \\
+\midrule
+\textbf{Guarantee} & The server recovers only the sum of masked contributions~\cite{bonawitz2017, bell2020} & $(\varepsilon, \delta)$-DP~\cite{dwork2006} with $\delta = 10^{-5}$: the release distribution changes by at most a factor $e^\varepsilon$, up to $\delta$, when one unit is added or removed \\
+\midrule
+\textbf{What it does not do} & It does not limit what the aggregate itself reveals, so it receives no differential-privacy credit & It does not hide the individual update from the server unless combined with secure aggregation or applied locally \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection*{Privacy Unit}
+The default unit is the record, that is, one network packet. An $\varepsilon$ at record level protects the presence of one packet. For FedDP-Marginal, two larger units are available: the TCP stream (suffix \texttt{-strm\{m\}}) and the capture (suffix \texttt{-cap\{m\}}). Their guarantee holds only under two conditions:
+\begin{enumerate}
+    \item each unit is held entirely by one client (the partition is made by unit, not by row);
+    \item each client uses at most $m$ rows of each unit.
+\end{enumerate}
+When both hold, a release of $T$ tables has sensitivities $\Delta_1 = m \cdot T$ in $\ell_1$ and $\Delta_2 = m \sqrt{T}$ in $\ell_2$ (\texttt{group\_dp.py}), and the noise is calibrated to these values. The CVAE routes keep record-level $\varepsilon$.
+
+\subsubsection*{Why the Unit Must Be Stated}
+Packets of one stream, and packets of one capture, are correlated. Under record-level $\varepsilon$, a set of $k$ correlated records from the same source is protected only through group privacy, which weakens the guarantee to roughly $k\varepsilon$ with a correspondingly larger $\delta$~\cite{dwork2014}. A statement of $\varepsilon$ without its unit therefore says little about whether an attack session as a whole is concealed. The unit statistics of the data are: the training split contains 76,463 TCP streams and 147 capture groups, and a capture contains between 62 and 1,277 rows.
+
+\subsubsection*{Public Side Information (Not Covered by $\varepsilon$)}
+The following are treated as known to every party and are outside the accounting:
+\begin{itemize}
+    \item the class labels and the number of examples per class;
+    \item client sizes $n_i$, where they are transmitted in clear (Flower's \texttt{num\_examples} in the CVAE routes);
+    \item the normalisation statistics, the $\log(1+x)$ choices, the category lists, and the mask of unused categories, computed centrally on the pooled training split before partitioning;
+    \item the hyper-parameter selection, performed on the real validation split.
+\end{itemize}
+In the FedDP-Marginal route the client reports \texttt{num\_examples} as a fixed public constant, so client sizes do not travel through that field (\texttt{SPEC\_DEVIATIONS.md}, O2.3).
+
+\subsubsection*{Standard Formulation for the Thesis}
+We assume an honest-but-curious aggregation server that follows the protocol but may analyse every message it receives. Gateways hold their own traffic and are trusted with it. In the base setting every gateway follows the protocol and adds its share of the noise; we also report the guarantee when only $h$ of the $K$ gateways do so, and an optional threshold $t$ calibrates the noise so that the target $\varepsilon$ holds whenever at least $t$ gateways add their share (the others may collude with the server or drop out). In the local-DP variant each gateway adds the full noise, so no other gateway needs to be trusted. Malicious (poisoning or Byzantine) gateways are out of scope.
+
+Secure aggregation hides each gateway's contribution from the server, which learns only the sum; it does not limit what the aggregate reveals and receives no privacy credit. Differential privacy bounds what the released tables, model, or synthetic data reveal about one record (one packet) with $\delta = 10^{-5}$. Class labels, class counts, and client sizes are treated as public side information and are not protected.
+
+\subsection{Experimental Configurations}\label{subsec:exp_configs}
+
+\subsubsection*{Experiment Matrix}
+Table~\ref{tab:exp_matrix} lists the configurations. Every configuration is run with seeds $\{0, 1, 2\}$. The code of each configuration in the ledger carries the suffixes defined at the end of the table.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\renewcommand{\arraystretch}{0.92}
+\caption{Experiment matrix of PP-FedData}
+\label{tab:exp_matrix}
+\begin{tabularx}{\textwidth}{lp{3.4cm}p{3.2cm}p{2.6cm}X}
+\toprule
+\textbf{Code} & \textbf{Description} & \textbf{Shared / Released} & \textbf{Protection} & \textbf{Role} \\
+\midrule
+\textbf{B0} & IDS trained on pooled real data (TRTR) & None & None & Reference \\
+\textbf{B1a} & B0 with balanced class weights (\texttt{class\_weight}=\allowbreak\texttt{"balanced"}, RF only) & None & None & Reference for class imbalance \\
+\textbf{B1b} & B0 with SMOTE~\cite{chawla2002} oversampling to class quota & None & None & Reference for classical interpolation \\
+\textbf{B2} & CVAE trained centrally on pooled data & Pooled data & None & Upper generation reference (pools real data) \\
+\textbf{B3} & CVAE with FedAvg, 5 non-IID clients, 30 rounds $\times$ 2 epochs & Model weights & None & Federated baseline ($\varepsilon = \infty$) \\
+\textbf{M1-eps\{1,5,10\}} & B3 with DP-SGD at each client & Noisy weights & DP (local noise) & DP cost of CVAE route \\
+\textbf{M2} & B3 with Flower SecAgg$^+$ & Masked weights & SecAgg$^+$ & SecAgg cost of CVAE route \\
+\textbf{M3-eps5} & DP-SGD and SecAgg$^+$ together & Noisy, masked weights & DP and SecAgg$^+$ & Combined protection \\
+\textbf{M1o / M3o-eps\{1,5,10\}} & M1 and M3 tuned per $\varepsilon$ at full federated scale & As M1, M3 & As M1, M3 & Optimisation round O1 \\
+\textbf{MGs-eps\{1,5,10\}} & FedDP-Marginal with Skellam noise, summed via SecAgg$^+$ & 3 releases of integer count tables & Distributed DP and SecAgg$^+$ & Main generator \\
+\textbf{MGr-eps\{1,5,10\}} & MGs with server post-processing (fusion, IPF~\cite{deming1940}, smoothing) & As MGs & As MGs & Post-processing (spends no extra $\varepsilon$) \\
+\textbf{MGd-eps\{1,5,10\}} & Gaussian noise, simulated inside one process & Noisy count tables & Distributed DP (zCDP~\cite{bun2016}) & Accounting variant \\
+\textbf{MGl-eps\{1,5,10\}} & Each client adds full noise; no secure aggregation & Noisy count tables & Local DP~\cite{kasiviswanathan2011} & No trust in other clients \\
+\textbf{MGb-eps10} & FedDP-Marginal with 2nd-order Bayesian net (PrivBayes-style~\cite{zhang2017privbayes}) & Pairwise count tables & Distributed DP (simulated) & Dependency extension \\
+\textbf{FedMLP / FedMLPcw} & MLP classifier trained directly with FedAvg, no generator & Classifier weights & None, DP or SecAgg & Reference (releases no data) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent\textbf{Suffixes:} \texttt{-strm\{m\}} protects a whole TCP stream with at most $m$ rows per stream; \texttt{-cap\{m\}} protects a whole capture with at most $m$ rows per capture; \texttt{-t\{t\}} calibrates the noise for $t$ honest clients (default $t = K = 5$; $t \in \{2, 3\}$ are additional settings).
+
+\subsubsection*{Main Configurations of the Framework}
+Three configurations are designated the framework's main configurations, one per privacy budget: MG-eps1 = MGr-eps1, MG-eps5 = MGs-eps5, MG-eps10 = MGs-eps10, all with $\delta = 10^{-5}$.
+
+\subsubsection*{Hyper-parameter Selection}
+Hyper-parameters are tuned on the real validation split with Optuna~\cite{akiba2019} using the Tree-structured Parzen Estimator (TPE)~\cite{bergstra2011}. The search spaces differ by route (CVAE without DP, CVAE with DP at proxy scale, CVAE with DP at full scale, FedDP-Marginal, IDS side) and are defined in Section~3.3.5.
+
+\subsubsection*{Robustness and Sensitivity Branches}
+To assess how far the design conclusions depend on settings fixed in the main study, the matrix includes the branches in Table~\ref{tab:robustness_branches}. The run status is stated explicitly; branches without a runner are not part of the study.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Robustness and sensitivity branches}
+\label{tab:robustness_branches}
+\begin{tabularx}{\textwidth}{lXX}
+\toprule
+\textbf{Branch} & \textbf{Change relative to main study} & \textbf{Status} \\
+\midrule
+\textbf{Heterogeneity} & Dirichlet $\alpha \in \{0.1, 10.0\}$ (main $\alpha = 0.5$) & Run for MGs (one seed per setting) \\
+\midrule
+\textbf{Federation size} & $K \in \{10, 20\}$ (main $K = 5$) & Run for MGs (one seed) and for MGl (three seeds) \\
+\midrule
+\textbf{Label resolution} & 11-class mode separating DoS and DDoS & Run through robustness module for reference and FedDP-Marginal \\
+\midrule
+\textbf{A4} & \texttt{split\_seed} changed so other capture groups form validation/test & Run with two alternative choices \\
+\midrule
+\textbf{A5} & At most 20 packets per TCP stream in training pool (\texttt{max\_rows\_per\_stream} = 20) & Run \\
+\midrule
+\textbf{A2, A3} & Class-imbalance ratios of training pool; 11-class matrix & Declared as \texttt{needs\_data} without a runner; not run \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection*{Configurations Written but Not Run}
+Two components exist as code and tests but were not executed after the change of primary generator (Section~3.1.1): M3f, a distributed DP-FedSGD variant of the CVAE, and a sweep of the SecAgg$^+$ quantisation width for the CVAE weights. Both are listed again among the limitations (Section~\ref{sec:methodology_limitations}).
+
+\subsection{Requirement-Driven Recommendation Rule}\label{subsec:req_rule}
+
+\subsubsection*{Motivation and Relation to Rule R6}
+The original specification fixed a single rule, R6: among the configurations whose membership-inference AUC is at most 0.55, whose $\varepsilon$ (maximum over clients and worst seed) is at most 5 when DP is used, and whose time per round is at most three times that of B3, choose the one with the highest TAug macro-F1 of the Random Forest. Ties within the seed noise are broken by the strength of the formal protection. The thresholds are heuristics fixed by the research team (Section~\ref{sec:methodology_limitations}). R6 is retained as a reference rule. A single fixed criterion cannot express deployments that differ in trust, bandwidth, and privacy unit, so the framework adds a requirement-driven rule, implemented as \texttt{ppfeddata recommend} (\texttt{recommend.py}), which takes a deployment requirement as input.
+
+\subsubsection*{Requirement Formulation}
+A requirement is the tuple:
+\begin{equation}
+\begin{aligned}
+\mathcal{R} = \langle & \text{Trust}_{\text{server}}, \text{Trust}_{\text{clients}}, \varepsilon_{\max}, \text{BW}_{\text{round}}, \text{BW}_{\text{total}}, \\
+& \text{Rounds}_{\max}, \text{Unit}, \text{Priority}, \text{Recall}_{\text{rare},\min}, \text{MIA}_{\max}, h \rangle
+\end{aligned}
+\end{equation}
+where $\text{Trust}_{\text{server}}$ and $\text{Trust}_{\text{clients}}$ state whether the server and the other clients are trusted; $\varepsilon_{\max}$ is the record-level (or unit-level) budget, or none if no DP is required; $\text{BW}_{\text{round}}$, $\text{BW}_{\text{total}}$, and $\text{Rounds}_{\max}$ bound the gateway bandwidth per round, over the whole run, and in rounds; $\text{Unit} \in \{\text{packet}, \text{stream}, \text{capture}\}$ is the unit $\varepsilon$ must cover; $\text{Priority} \in \{\text{macro}, \text{binary}, \text{rare}\}$ selects TSTR macro-F1, binary F1, or mean rare-class recall; $\text{Recall}_{\text{rare},\min}$ is a floor on the rare-class recall; $\text{MIA}_{\max}$ is the maximum acceptable membership-inference AUC; and $h$ is the number of clients assumed to add their noise share.
+
+\subsubsection*{Procedure}
+Inputs are the rows of the scorecard, which are produced from the run ledger; no figure is typed by hand. The rule applies five steps:
+\begin{enumerate}
+    \item \textbf{Validity filter:} A row is considered only if its reported quantities correspond to what its name claims. For example, a DP configuration with a component computed from data outside the $\varepsilon$ accounting (residual noise computed from real training data) is not valid; a directly federated classifier is a reference and is excluded from the generator front.
+    \item \textbf{Trust filter:} If the server is not trusted, only rows with secure aggregation or local DP remain. If clients may collude, the $\varepsilon$ used for a distributed-DP row is the one that holds with the assumed number of honest clients (one honest client by default, or $h$ when it is specified); local-DP rows keep their $\varepsilon$ because each client adds the full noise.
+    \item \textbf{Constraint filter:} Rows that exceed the $\varepsilon$ budget (with a 2\% tolerance), the per-round or total bandwidth, the number of rounds, or the MIA bound, that do not protect the requested unit (a row protecting a packet does not satisfy a stream or capture requirement), or whose rare-class recall is below the floor, are removed. Missing cost figures do not exclude a row; they are reported as not available.
+    \item \textbf{Pareto front:} Among the remaining rows, configuration A dominates B if A is at least as good on every axis and better on at least one. The axes are the three utility measures (TSTR macro-F1, binary F1, rare-class recall), $\varepsilon$ under the assumed trust, the presence of secure aggregation, MB per round, and total MB. A utility difference counts only if it exceeds the seed standard deviation of both configurations; $\varepsilon$ values within 2\% and cost values within 5\% are treated as equal; a configuration with secure aggregation is preferred to one without when the other axes are equal.
+    \item \textbf{Selection and ties:} The configuration with the best value on the requested priority is selected, and every configuration within the seed standard deviation of it is listed as tied.
+\end{enumerate}
+
+\subsubsection*{Deployment Scenarios}
+Table~\ref{tab:scenarios} defines ten illustrative requirements. Only the inputs are specified here; the configuration chosen for each is a result and is reported in Chapter~4.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Deployment scenarios (inputs only)}
+\label{tab:scenarios}
+\begin{tabularx}{\textwidth}{l p{4.2cm} X}
+\toprule
+\textbf{Scenario} & \textbf{Setting} & \textbf{Requirement} \\
+\midrule
+\texttt{lab} & One operator owns server and all gateways & Server and clients trusted; no DP required; priority macro \\
+\midrule
+\texttt{cloud-aggregator} & Gateways of one company, 3rd-party cloud & Server not trusted; clients trusted; $\varepsilon \le 5$; priority macro \\
+\midrule
+\texttt{consortium} & Brokers of different companies may collude & Server not trusted; clients may collude; $\varepsilon \le 10$; priority macro \\
+\midrule
+\texttt{strict-privacy} & Sensitive deployments (e.g., healthcare IoT) & Server not trusted; clients trusted; $\varepsilon \le 1$; priority macro \\
+\midrule
+\texttt{low-bandwidth} & NB-IoT, LoRa or metered cellular & Server not trusted; $\varepsilon \le 10$; $\le 2$\,MB/round; $\le 100$\,MB total; priority macro \\
+\midrule
+\texttt{rare-attacks} & Rare attacks (DELAYED, SYN, INVALID, WILL) & Server not trusted; clients trusted; $\varepsilon \le 5$; priority rare \\
+\midrule
+\texttt{honest-majority} & Five operators, at most 2 may collude & Server not trusted; $\ge 3$ honest clients; $\varepsilon \le 10$; MIA AUC $< 0.55$; priority macro \\
+\midrule
+\texttt{gateway-dropout} & Up to 2 of 5 gateways drop out / leak noise & Server not trusted; $\ge 3$ honest clients; $\varepsilon \le 5$; priority macro \\
+\midrule
+\texttt{session-privacy} & $\varepsilon$ must cover a whole TCP session & Server not trusted; $\varepsilon \le 5$; unit = stream; priority macro \\
+\midrule
+\texttt{capture-privacy} & $\varepsilon$ must cover a whole capture & Server not trusted; $\varepsilon \le 10$; unit = capture; priority macro \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
 \section{Data Collection Methods}
+
 \section{Sampling Data Analysis Techniques}
-\section{Limitations of the Methodology}
+
+\subsection{Experimental Environment and Reproducibility}
+
+\subsubsection*{Environment}
+All experiments ran on one Windows 11 machine (build 10.0.26200) with an Intel x86-64 CPU and 16.9\,GB of RAM, using the CPU only. Federated learning is simulated with Flower and Ray; each client is a Ray actor sharing the machine's CPU, so no network latency is measured (see Section~\ref{sec:methodology_limitations}). The values come from the environment record \texttt{results/repro/environment.json} and the project's deviation log (Table~\ref{tab:env_spec}).
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Experimental environment specification}
+\label{tab:env_spec}
+\begin{tabularx}{\textwidth}{p{4.2cm}X}
+\toprule
+\textbf{Component} & \textbf{Value} \\
+\midrule
+Operating system & Windows 11, build 10.0.26200 (AMD64) \\
+Processor & Intel64 Family 6 Model 186 Stepping 2 (GenuineIntel); CPU only, 10 threads in benchmark \\
+Memory & 16.9\,GB \\
+Language & Python 3.13.5 \\
+Federated simulation & Flower 1.39.0~\cite{beutel2020}; Ray 2.59.0 \\
+Deep learning and DP & PyTorch 2.14.1; Opacus 1.6.0~\cite{yousefpour2021} \\
+Machine learning and data & scikit-learn 1.9.1; imbalanced-learn 0.14.2; NumPy 2.3.2; pandas 2.3.1; SciPy 1.18.1; PyArrow 25.0.1 \\
+Hyper-parameter search & Optuna 5.0.0~\cite{akiba2019} (TPE sampler~\cite{bergstra2011}) \\
+Other & Joblib 1.6.0; Matplotlib 3.10.5; PyYAML 6.0.3; Streamlit 1.65.0; psutil 7.2.2 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection*{Random Seeds}
+Every experiment is run with seeds $\{0, 1, 2\}$. The seed controls weight initialisation, the client partition, and the sampling of synthetic data. \texttt{utils.set\_seed} seeds Python's \texttt{random}, NumPy, and PyTorch; the federated and DP code additionally derives per-client and per-round generators from the seed.
+
+\subsubsection*{Measures Supporting Reliability and Reproducibility}
+\begin{itemize}
+    \item \textbf{Central run ledger:} Each run appends one row to \texttt{results/runs.csv} with a configuration hash and the Git commit of the code that produced it. The environment record of the reference run shows commit \texttt{9ee2a85e} and configuration hash \texttt{8c86c0b143d4}.
+    \item \textbf{Checkpoint and resume:} Long training jobs save state; re-running a command compares against the ledger and skips completed configurations.
+    \item \textbf{Automated reporting:} The tables, intervals, and figures of the final report are generated by code (\texttt{ppfeddata aggregate}, \texttt{ppfeddata interpret}); no result is typed by hand. A check recomputes macro-F1 from the saved prediction files and compares it with the ledger.
+    \item \textbf{Reproducibility bundle:} \texttt{results/repro/} holds the exact package list (\texttt{pip\_freeze.txt}, identical to \texttt{requirements-lock.txt}), the configuration files, the environment record, and a manifest with SHA-256 digests of the ledger, the split and schema manifests, and the report.
+    \item \textbf{Acceptance command:} \texttt{python -m ppfeddata.cli accept} checks the repository against the Definition of Done and writes a checklist of twelve items (D1--D10, with D6 split into three). This command does not run the test suite; the suite is run separately.
+    \item \textbf{Clean-copy re-execution:} Phases 1--5 (inventory, harmonisation, sampling, preprocessing, leakage check) were re-run from the raw data in a clean copy of the repository with a fresh virtual environment, and the processed train, validation, and test arrays were compared with those of the main checkout. Phases 6--14 were not re-run in the clean copy.
+    \item \textbf{Controlled trial:} A trial run of all ten configurations of the base matrix with seed 0 was compared row by row with the ledger of the main checkout (\texttt{SPEC\_DEVIATIONS.md}, 11.6).
+    \item \textbf{Leakage checks:} The data pipeline is guarded by five checks (C1--C5, Section~3.2.6), and the real test split is verified against a stored hash.
+\end{itemize}
+
+\section{Limitations of the Methodology}\label{sec:methodology_limitations}
+The limitations below arise from the design of the study and the scope of the techniques. The full list is maintained in \texttt{limitations.py}, which feeds the final report and the README; this section groups them. None of the statements below reports a result.
+
+\subsubsection*{Data and Features}
+\begin{itemize}
+    \item Only one dataset is used; the study offers no evidence about other traffic or networks.
+    \item Records are single packets, and the generators produce packets independently. Session-level temporal structure is therefore not reproduced, and the time-based features depend on how the captures were exported.
+    \item Eight of the eleven sub-classes originate from a single capture file, so their validation and test rows are consecutive blocks of the same capture and not other captures. Removing TCP streams that straddle two blocks (\texttt{drop\_cross\_block\_streams}) reduces leakage between splits but biases the sample toward short connections; the share removed per sub-class is documented in the split manifest.
+    \item The pipeline keeps only rows with protocol TCP or MQTT, keeps the first element of multi-valued cells, clips the tail of the time-gap feature at $5\sigma$, and treats nearly empty columns with the statistics of the rows where they apply plus an indicator.
+    \item DoS and DDoS are merged in the six-class mode used for the experiment matrix.
+    \item The validation and test splits are class-balanced (5,000 test rows per class) and do not follow the class proportions of real traffic.
+\end{itemize}
+
+\subsubsection*{Privacy Scope}
+\begin{itemize}
+    \item $\varepsilon$ is stated at record level (one packet) by default. Stream- and capture-level protection is optional for FedDP-Marginal and requires each unit to be held by one client and capped at $m$ rows. Under record-level $\varepsilon$, an attack session or capture is protected only through the weaker group bound~\cite{dwork2014}.
+    \item Class labels, class counts, and client sizes are not protected (Section~\ref{subsec:threat_model}).
+    \item Normalisation statistics are computed centrally on the pooled training split, as if each client had shared its data once. A real federation would have to compute them securely or fix them beforehand.
+    \item Hyper-parameter selection on the real validation split is not private and lies outside $\varepsilon$.
+    \item Distributed DP assumes that enough clients add their noise share; the guarantee degrades as the number of honest clients falls, which is why $\varepsilon$ is reported as a function of $h$.
+    \item Accounting differs between variants: the Skellam variant uses the RDP bound of Agarwal et~al.~\cite{agarwal2021} and the RDP-to-$(\varepsilon, \delta)$ conversion of Opacus~\cite{yousefpour2021}, while the Gaussian variant uses zCDP~\cite{bun2016} with a looser conversion, so part of the difference between the two at the same $\varepsilon$ comes from the conversion and not from the mechanism.
+    \item Malicious gateways (poisoning, Byzantine behaviour) are outside the threat model.
+\end{itemize}
+
+\subsubsection*{Generators}
+\begin{itemize}
+    \item FedDP-Marginal represents dependencies with a Chow--Liu tree~\cite{chow1968}, so each attribute depends on one parent; a second-order structure (MGb)~\cite{zhang2017privbayes} is only an option.
+    \item Only one CVAE architecture is studied, and its hyper-parameter search used one seed per trial.
+\end{itemize}
+
+\subsubsection*{Evaluation and Statistics}
+\begin{itemize}
+    \item Three seeds are used for every configuration. Federated training can be sensitive to very small numerical perturbations, so a standard deviation over three seeds is a rough estimate.
+    \item The bootstrap intervals and decision rules reflect the sampling of test rows (or whole streams) and of training seeds; they do not cover the choice of capture groups, the hyper-parameters, or the data sampling. Sensitivity A4 explores only two alternative choices of validation and test groups.
+    \item The decision thresholds (for example the membership-inference AUC bound of 0.55, the $\varepsilon$ bound of 5, and the overhead ratio of 3) are heuristics fixed by the research team and not derived from data.
+    \item Each membership-inference family tests one attack at record level and does not test group-level inference; each attack must pass a positive control to be informative.
+    \item The decision rule does not use $p$-values or a multiple-comparison correction.
+\end{itemize}
+
+\subsubsection*{Execution Platform}
+\begin{itemize}
+    \item Federated learning is simulated on one CPU machine with Ray actors; no network latency, packet loss, or constrained-device behaviour is measured, and the reported times per round are compute times on this machine.
+\end{itemize}
+
+\subsubsection*{Baselines Not Compared and Parts Not Run}
+\begin{itemize}
+    \item \textbf{Not compared:} FLAIM and AIM (the Private-PGM dependency was not installed), DP-CTGAN or other deep generators in the federation, federated SMOTE, and a directly trained federated classifier with distributed DP.
+    \item \textbf{Written but not run after the change of primary generator:} M3f (distributed DP-FedSGD for the CVAE) and the SecAgg$^+$ quantisation-width sweep for the CVAE. Robustness branches A2 and A3 have configuration files but no runner.
+\end{itemize}
