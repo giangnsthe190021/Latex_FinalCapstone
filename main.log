@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.30)  13 OCT 2026 19:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.30)  13 OCT 2026 19:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1510,6 +1510,20 @@ File: tikzlibrarycalc.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 Package hyperref Info: Option `colorlinks' set `true' on input line 85.
 \chaptertopmargin=\skip288
 Package hyperref Info: Option `colorlinks' set `true' on input line 196.
+) (C:\Users\admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibraryarrows.meta.code.tex
+File: pgflibraryarrows.meta.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfarrowinset=\dimen397
+\pgfarrowlength=\dimen398
+\pgfarrowwidth=\dimen399
+\pgfarrowlinewidth=\dimen400
+) (C:\Users\admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarypositioning.code.tex
+File: tikzlibrarypositioning.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (C:\Users\admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibraryfit.code.tex
+File: tikzlibraryfit.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (C:\Users\admin\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarybackgrounds.code.tex
+File: tikzlibrarybackgrounds.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@layerbox@background=\box86
+\pgf@layerboxsaved@background=\box87
 ) (C:\Users\admin\AppData\Local\Programs\MiKTeX\tex/latex/natbib\natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip289
@@ -1519,14 +1533,14 @@ LaTeX Info: Redefining \cite on input line 694.
 ) (C:\Users\admin\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype.sty
 Package: microtype 2026/03/01 v3.2d Micro-typographical refinements (RS)
 \MT@toks=\toks62
-\MT@tempbox=\box86
+\MT@tempbox=\box88
 \MT@count=\count473
 LaTeX Info: Redefining \noprotrusionifhmode on input line 1084.
 LaTeX Info: Redefining \leftprotrusion on input line 1085.
 \MT@prot@toks=\toks63
 LaTeX Info: Redefining \rightprotrusion on input line 1104.
 LaTeX Info: Redefining \textls on input line 1449.
-\MT@outer@kern=\dimen397
+\MT@outer@kern=\dimen401
 LaTeX Info: Redefining \microtypecontext on input line 2053.
 LaTeX Info: Redefining \textmicrotypecontext on input line 2070.
 \MT@listname@count=\count474
@@ -1546,44 +1560,44 @@ LaTeX Info: Redefining \microtypesetup on input line 3065.
 \glo@main@file=\write6
 \openout6 = `main.glo'.
 
-Package glossaries Info: Writing glossary file main.glo on input line 61.
+Package glossaries Info: Writing glossary file main.glo on input line 62.
 \glo@acronym@file=\write7
 \openout7 = `main.acn'.
 
-Package glossaries Info: Writing glossary file main.acn on input line 61.
+Package glossaries Info: Writing glossary file main.acn on input line 62.
  (main.aux (chapters/front/head.aux) (chapters/front/thanks.aux))
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 65.
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 65.
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 65.
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 65.
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 65.
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 65.
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 65.
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for T5/cmr/m/n on input line 65.
-LaTeX Font Info:    Trying to load font information for T5+cmr on input line 65.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for T5/cmr/m/n on input line 66.
+LaTeX Font Info:    Trying to load font information for T5+cmr on input line 66.
  (C:\Users\admin\AppData\Local\Programs\MiKTeX\tex/latex/vntex\t5cmr.fd
 File: t5cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 65.
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 65.
-LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
 
 
 Class memoir Warning: \addtodef is marked deprecated and will be
 (memoir)              removed in 2026, use instead \patchcmd,
 (memoir)              \pretocmd or \apptocmd from the etoolbox package
-(memoir)              (which is autoloaded by the class) on input line 65.
+(memoir)              (which is autoloaded by the class) on input line 66.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1622,13 +1636,13 @@ Class memoir Warning: \addtodef is marked deprecated and will be
 (C:\Users\admin\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count475
-\scratchdimen=\dimen398
-\scratchbox=\box87
+\scratchdimen=\dimen402
+\scratchbox=\box89
 \nofMPsegments=\count476
 \nofMParguments=\count477
 \everyMPshowfont=\toks64
 \MPscratchCnt=\count478
-\MPscratchDim=\dimen399
+\MPscratchDim=\dimen403
 \MPnumerator=\count479
 \makeMPintoPDFobject=\count480
 \everyMPtoPDFconversion=\toks65
@@ -1653,29 +1667,29 @@ Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
 )
 Package caption Info: rotating package is loaded.
 Package caption Info: scrextend package is loaded.
-\caption@addmargin@hsize=\dimen400
-\caption@addmargin@linewidth=\dimen401
+\caption@addmargin@hsize=\dimen404
+\caption@addmargin@linewidth=\dimen405
 Package caption Info: supertabular package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring ON on input line 65.
+Package hyperref Info: Link coloring ON on input line 66.
  (main.out) (main.out)
 \@outlinefile=\write8
 \openout8 = `main.out'.
 
 \c@lstlisting=\count481
 Package microtype Info: Patching varwidth to enable character protrusion.
-\MT@vwid@leftmargin=\dimen402
-\MT@vwid@rightmargin=\dimen403
-LaTeX Info: Redefining \microtypecontext on input line 65.
-Package microtype Info: Applying patch `item' on input line 65.
-Package microtype Info: Applying patch `toc' on input line 65.
-Package microtype Info: Applying patch `eqnum' on input line 65.
+\MT@vwid@leftmargin=\dimen406
+\MT@vwid@rightmargin=\dimen407
+LaTeX Info: Redefining \microtypecontext on input line 66.
+Package microtype Info: Applying patch `item' on input line 66.
+Package microtype Info: Applying patch `toc' on input line 66.
+Package microtype Info: Applying patch `eqnum' on input line 66.
 
 
-Package microtype Warning: Unable to apply patch `footnote' on input line 65.
+Package microtype Warning: Unable to apply patch `footnote' on input line 66.
 
-Package microtype Info: Applying patch `verbatim' on input line 65.
-LaTeX Info: Redefining \microtypesetup on input line 65.
+Package microtype Info: Applying patch `verbatim' on input line 66.
+LaTeX Info: Redefining \microtypesetup on input line 66.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -1692,7 +1706,7 @@ File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/m/n/13'. Switching off
-(microtype)                protrusion for this font on input line 65.
+(microtype)                protrusion for this font on input line 66.
 
 \openout2 = `chapters/front/head.aux'.
 
@@ -1801,12 +1815,12 @@ File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/m/n/32.34409'. Switching off
-(microtype)                protrusion for this font on input line 74.
+(microtype)                protrusion for this font on input line 75.
 
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/b/n/32.34409'. Switching off
-(microtype)                protrusion for this font on input line 74.
+(microtype)                protrusion for this font on input line 75.
 
 (main.toc [3
 
@@ -2022,209 +2036,221 @@ Underfull \hbox (badness 10000) in paragraph at lines 45--45
 [20]
 
 Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/m/n/7'. Switching off
+(microtype)                protrusion for this font on input line 124.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/b/n/7'. Switching off
+(microtype)                protrusion for this font on input line 124.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 124.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 124.
+
+Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/cmtt/m/n/13'. Switching off
-(microtype)                protrusion for this font on input line 76.
+(microtype)                protrusion for this font on input line 130.
 
 [21] [22]
-Underfull \hbox (badness 1796) in paragraph at lines 124--124
+Underfull \hbox (badness 1796) in paragraph at lines 178--178
 \T5/ptm/m/n/11.86258 (+20) 1-way marginals, pair-wise ta-bles,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 124--124
+Underfull \hbox (badness 10000) in paragraph at lines 178--178
 \T5/ptm/m/n/11.86258 (+20) with 2 lo-cal epochs (de-fault
  []
 
 
-Underfull \hbox (badness 2846) in paragraph at lines 124--124
+Underfull \hbox (badness 2846) in paragraph at lines 178--178
 []|\T5/ptm/m/n/11.86258 (+20) Chow--Liu de-pen-dency tree [[]];
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 124--124
+Underfull \hbox (badness 10000) in paragraph at lines 178--178
 \T5/ptm/m/n/11.86258 (+20) op-tional second-order Bayesian
  []
 
 
-Underfull \hbox (badness 7631) in paragraph at lines 124--124
+Underfull \hbox (badness 7631) in paragraph at lines 178--178
 []|\T5/ptm/m/n/11.86258 (+20) Conditional VAE [[]] with an
  []
 
 
-Underfull \hbox (badness 1067) in paragraph at lines 124--124
+Underfull \hbox (badness 1067) in paragraph at lines 178--178
 []|\T5/ptm/m/n/11.86258 (+20) On each client's ta-bles, once per
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 124--124
+Underfull \hbox (badness 10000) in paragraph at lines 178--178
 []|\T5/ptm/m/n/11.86258 (+20) On each client's per-example
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 124--124
+Underfull \hbox (badness 10000) in paragraph at lines 178--178
 \T5/ptm/m/n/11.86258 (+20) gra-di-ents at ev-ery lo-cal step
  []
 
 
-Underfull \hbox (badness 7030) in paragraph at lines 124--124
+Underfull \hbox (badness 7030) in paragraph at lines 178--178
 []|\T5/ptm/m/n/11.86258 (+20) Flower SecAgg$[]$ on fixed-point
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 124--124
+Underfull \hbox (badness 10000) in paragraph at lines 178--178
 []|\T5/cmtt/m/n/11.86258 (+20) models/marginal.py\T5/ptm/m/n/11.86258 (+20) ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 124--124
+Underfull \hbox (badness 10000) in paragraph at lines 178--178
 []|\T5/cmtt/m/n/11.86258 (+20) models/cvae.py\T5/ptm/m/n/11.86258 (+20) , \T5/cmtt/m/n/11.86258 (+20) fl/core.py\T5/ptm/m/n/11.86258 (+20) ,
  []
 
-[23]
 
 Package microtype Warning: I cannot find a protrusion list for font
-(microtype)                `T5/ptm/m/n/10.83347'. Switching off
-(microtype)                protrusion for this font on input line 139.
-
-
-Package microtype Warning: I cannot find a protrusion list for font
-(microtype)                `T5/ptm/b/n/10.83347'. Switching off
-(microtype)                protrusion for this font on input line 139.
-
-LaTeX Font Info:    Calculating math sizes for size <10.83347> on input line 139.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.83347> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 139.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.01682> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 139.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6.50014> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 139.
-
-Package microtype Warning: I cannot find a protrusion list for font
-(microtype)                `T5/cmtt/m/n/10.83347'. Switching off
-(microtype)                protrusion for this font on input line 152.
+(microtype)                `T5/ptm/m/n/5'. Switching off
+(microtype)                protrusion for this font on input line 290.
 
 
 Package microtype Warning: I cannot find a protrusion list for font
-(microtype)                `T5/ptm/m/n/8.66673'. Switching off
-(microtype)                protrusion for this font on input line 158.
+(microtype)                `T5/ptm/m/it/5'. Switching off
+(microtype)                protrusion for this font on input line 290.
 
-[24]
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/cmtt/m/n/5'. Switching off
+(microtype)                protrusion for this font on input line 290.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/b/n/5'. Switching off
+(microtype)                protrusion for this font on input line 290.
+
+[23] [24]
+Underfull \hbox (badness 10000) in paragraph at lines 327--327
 []|\T5/ptm/m/n/11.86258 (+20) Server in-spect-ing an in-di-vid-ual
  []
 
 
-Underfull \hbox (badness 5548) in paragraph at lines 204--204
+Underfull \hbox (badness 5548) in paragraph at lines 327--327
 \T5/ptm/m/n/11.86258 (+20) it-self re-veals, so it re-ceives no
  []
 
 [25] [26]
-Underfull \hbox (badness 6396) in paragraph at lines 264--264
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ptm/m/n/8.66673'. Switching off
+(microtype)                protrusion for this font on input line 363.
+
+
+Underfull \hbox (badness 6396) in paragraph at lines 387--387
 []|\T5/ptm/m/n/8.66673 (+20) B0 with bal-anced class
  []
 
 
-Underfull \hbox (badness 2359) in paragraph at lines 264--264
+Underfull \hbox (badness 2359) in paragraph at lines 387--387
 \T5/ptm/m/n/8.66673 (+20) weights (\T5/cmtt/m/n/8.66673 (+20) class_weight\T5/ptm/m/n/8.66673 (+20) =
  []
 
 
-Underfull \hbox (badness 8075) in paragraph at lines 264--264
+Underfull \hbox (badness 8075) in paragraph at lines 387--387
 []|\T5/ptm/m/n/8.66673 (+20) Reference for class
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--264
+Underfull \hbox (badness 10000) in paragraph at lines 387--387
 []|\T5/ptm/m/n/8.66673 (+20) B0 with SMOTE [[]]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--264
+Underfull \hbox (badness 10000) in paragraph at lines 387--387
 []|\T5/ptm/m/n/8.66673 (+20) Upper gen-er-a-tion
  []
 
 
-Underfull \hbox (badness 1112) in paragraph at lines 264--264
+Underfull \hbox (badness 1112) in paragraph at lines 387--387
 \T5/ptm/m/n/8.66673 (+20) ref-er-ence (pools real
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--264
+Underfull \hbox (badness 10000) in paragraph at lines 387--387
 []|\T5/ptm/m/n/8.66673 (+20) CVAE with Fe-dAvg, 5
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--264
+Underfull \hbox (badness 10000) in paragraph at lines 387--387
 []|\T5/ptm/m/n/8.66673 (+20) Federated base-line
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--264
+Underfull \hbox (badness 10000) in paragraph at lines 387--387
 []|\T5/ptm/m/n/8.66673 (+20) DP-SGD and SecAgg$[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--264
+Underfull \hbox (badness 10000) in paragraph at lines 387--387
 []|\T5/ptm/m/n/8.66673 (+20) FedDP-Marginal with
  []
 
 
-Underfull \hbox (badness 1087) in paragraph at lines 264--264
+Underfull \hbox (badness 1087) in paragraph at lines 387--387
 []|\T5/ptm/m/n/8.66673 (+20) Distributed DP and
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--264
+Underfull \hbox (badness 10000) in paragraph at lines 387--387
 []|\T5/ptm/m/n/8.66673 (+20) MGs with server
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--264
+Underfull \hbox (badness 10000) in paragraph at lines 387--387
 \T5/ptm/m/n/8.66673 (+20) post-processing (fu-sion,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--264
+Underfull \hbox (badness 10000) in paragraph at lines 387--387
 []|\T5/ptm/m/n/8.66673 (+20) Post-processing
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--264
+Underfull \hbox (badness 10000) in paragraph at lines 387--387
 []|\T5/ptm/m/n/8.66673 (+20) Distributed DP
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--264
+Underfull \hbox (badness 10000) in paragraph at lines 387--387
 []|\T5/ptm/m/n/8.66673 (+20) No trust in other
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--264
+Underfull \hbox (badness 10000) in paragraph at lines 387--387
 []|\T5/ptm/m/n/8.66673 (+20) FedDP-Marginal with
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--264
+Underfull \hbox (badness 10000) in paragraph at lines 387--387
 \T5/ptm/m/n/8.66673 (+20) 2nd-order Bayesian net
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--264
+Underfull \hbox (badness 10000) in paragraph at lines 387--387
 []|\T5/ptm/m/n/8.66673 (+20) Distributed DP
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 264--264
+Underfull \hbox (badness 10000) in paragraph at lines 387--387
 []|\T5/ptm/m/n/8.66673 (+20) MLP clas-si-fier trained
  []
 
 
-Underfull \hbox (badness 1406) in paragraph at lines 264--264
+Underfull \hbox (badness 1406) in paragraph at lines 387--387
 \T5/ptm/m/n/8.66673 (+20) di-rectly with Fe-dAvg, no
  []
 
 [27] [28]
-Underfull \hbox (badness 1019) in paragraph at lines 299--299
+Underfull \hbox (badness 1019) in paragraph at lines 422--422
 []|\T5/ptm/m/n/11.86258 (+20) 11-class mode sep-a-rat-ing DoS and
  []
 
@@ -2232,330 +2258,330 @@ Underfull \hbox (badness 1019) in paragraph at lines 299--299
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/m/n/9.62007'. Switching off
-(microtype)                protrusion for this font on input line 314.
+(microtype)                protrusion for this font on input line 437.
 
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/m/n/7.80008'. Switching off
-(microtype)                protrusion for this font on input line 314.
+(microtype)                protrusion for this font on input line 437.
 
 [30]
-Underfull \hbox (badness 1259) in paragraph at lines 362--362
+Underfull \hbox (badness 1259) in paragraph at lines 485--485
 []|\T5/ptm/m/n/11.86258 (+20) Server and clients trusted; no DP re-quired;
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 362--362
+Underfull \hbox (badness 10000) in paragraph at lines 485--485
 []|\T5/ptm/m/n/11.86258 (+20) Gateways of one
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 362--362
+Underfull \hbox (badness 10000) in paragraph at lines 485--485
 \T5/ptm/m/n/11.86258 (+20) com-pany, 3rd-party
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 362--362
+Underfull \hbox (badness 10000) in paragraph at lines 485--485
 []|\T5/ptm/m/n/11.86258 (+20) Brokers of dif-fer-ent
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 362--362
+Underfull \hbox (badness 10000) in paragraph at lines 485--485
 []|\T5/ptm/m/n/11.86258 (+20) Sensitive de-ploy-ments
  []
 
 
-Underfull \hbox (badness 1389) in paragraph at lines 362--362
+Underfull \hbox (badness 1389) in paragraph at lines 485--485
 []|$\OML/ztmcm/m/it/11.86258 "$ \T5/ptm/m/n/11.86258 (+20) must cover a whole
  []
 
 
-Underfull \hbox (badness 1389) in paragraph at lines 362--362
+Underfull \hbox (badness 1389) in paragraph at lines 485--485
 []|$\OML/ztmcm/m/it/11.86258 "$ \T5/ptm/m/n/11.86258 (+20) must cover a whole
  []
 
 [31] [32]
-Underfull \hbox (badness 4805) in paragraph at lines 417--417
+Underfull \hbox (badness 4805) in paragraph at lines 540--540
 []|\T5/ptm/m/n/11.86258 (+20) 411/411 files match (49 at-tack
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 417--417
+Underfull \hbox (badness 10000) in paragraph at lines 540--540
 []|\T5/ptm/m/n/11.86258 (+20) Does the Nor-mal
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 417--417
+Underfull \hbox (badness 10000) in paragraph at lines 540--540
 \T5/ptm/m/n/11.86258 (+20) CSV con-tain all
  []
 
 
-Underfull \hbox (badness 3439) in paragraph at lines 417--417
+Underfull \hbox (badness 3439) in paragraph at lines 540--540
 []|\T5/ptm/m/n/11.86258 (+20) Row counts com-pared with the
  []
 
 
-Underfull \hbox (badness 4927) in paragraph at lines 417--417
+Underfull \hbox (badness 4927) in paragraph at lines 540--540
 \T5/ptm/m/n/11.86258 (+20) frame num-bers checked to run
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 417--417
+Underfull \hbox (badness 10000) in paragraph at lines 540--540
 []|\T5/ptm/m/n/11.86258 (+20) Is the ex-trac-tion
  []
 
 
-Underfull \hbox (badness 5548) in paragraph at lines 417--417
+Underfull \hbox (badness 5548) in paragraph at lines 540--540
 []|\T5/ptm/m/n/11.86258 (+20) Three cap-tures re-extracted and
  []
 
 
-Underfull \hbox (badness 1348) in paragraph at lines 417--417
+Underfull \hbox (badness 1348) in paragraph at lines 540--540
 []|\T5/ptm/m/n/11.86258 (+20) Does the pro-ce-dure
  []
 
 
-Underfull \hbox (badness 1616) in paragraph at lines 417--417
+Underfull \hbox (badness 1616) in paragraph at lines 540--540
 \T5/ptm/m/n/11.86258 (+20) give cor-rect fea-ture
  []
 
 
-Underfull \hbox (badness 3138) in paragraph at lines 417--417
+Underfull \hbox (badness 3138) in paragraph at lines 540--540
 []|\T5/ptm/m/n/11.86258 (+20) Script ap-plied to the 48 at-tack
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 417--417
+Underfull \hbox (badness 10000) in paragraph at lines 540--540
 []|\T5/ptm/m/n/11.86258 (+20) What ex-plains
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 417--417
+Underfull \hbox (badness 10000) in paragraph at lines 540--540
 \T5/ptm/m/n/11.86258 (+20) the re-main-ing
  []
 
 
-Underfull \hbox (badness 2856) in paragraph at lines 417--417
+Underfull \hbox (badness 2856) in paragraph at lines 540--540
 []|\T5/ptm/m/n/11.86258 (+20) Traced to the au-thors' two-pass
  []
 
 [33] [34]
-Underfull \hbox (badness 10000) in paragraph at lines 457--457
+Underfull \hbox (badness 10000) in paragraph at lines 580--580
 []|\T5/ptm/m/n/11.86258 (+20) Missingness
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 457--457
+Underfull \hbox (badness 10000) in paragraph at lines 580--580
 []|\T5/ptm/m/n/11.86258 (+20) Categorical
  []
 
 [35] [36]
-Underfull \hbox (badness 5008) in paragraph at lines 521--521
+Underfull \hbox (badness 5008) in paragraph at lines 644--644
 []|\T5/ptm/m/n/11.86258 (+20) A col-umn is empty in
  []
 
 
-Underfull \hbox (badness 1769) in paragraph at lines 521--521
+Underfull \hbox (badness 1769) in paragraph at lines 644--644
 \T5/ptm/m/n/11.86258 (+20) F1 $\OML/ztmcm/m/it/11.86258 > \OT1/ztmcm/m/n/11.86258 0\OML/ztmcm/m/it/11.86258 :\OT1/ztmcm/m/n/11.86258 9$ \T5/ptm/m/n/11.86258 (+20) on any sin-gle
  []
 
 [37] [38]
-Underfull \hbox (badness 10000) in paragraph at lines 576--576
+Underfull \hbox (badness 10000) in paragraph at lines 699--699
 []|\T5/ptm/m/n/11.86258 (+20) Per-class Dirich-let
  []
 
 
-Underfull \hbox (badness 5147) in paragraph at lines 576--576
+Underfull \hbox (badness 5147) in paragraph at lines 699--699
 []|\T5/ptm/m/n/11.86258 (+20) NORMAL 60,000; BCF
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 576--576
+Underfull \hbox (badness 10000) in paragraph at lines 699--699
 \T5/ptm/m/n/11.86258 (+20) SYN 3,000; IN-VALID
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 576--576
+Underfull \hbox (badness 10000) in paragraph at lines 699--699
 []|\T5/ptm/m/n/11.86258 (+20) Class dis-tri-bu-tion par-ti-tioned over the
  []
 
 [39] [40] [41]
-Underfull \hbox (badness 6995) in paragraph at lines 635--636
+Underfull \hbox (badness 6995) in paragraph at lines 758--759
 []\T5/ptm/m/n/13 (+20) 5 cat-e-gor-i-cal at-tributes (\T5/cmtt/m/n/13 (+20) message_type\T5/ptm/m/n/13 (+20) , \T5/cmtt/m/n/13 (+20) qos_level_1\T5/ptm/m/n/13 (+20) , \T5/cmtt/m/n/13 (+20) qos_level_2\T5/ptm/m/n/13 (+20) ,
  []
 
 [42]
-Underfull \hbox (badness 1776) in paragraph at lines 661--662
+Underfull \hbox (badness 1776) in paragraph at lines 784--785
 []\T5/ptm/b/n/13 (+20) Trade-off of pool-ing. \T5/ptm/m/n/13 (+20) The class-conditional MI $[]\OT1/ztmcm/m/n/13 (\OML/ztmcm/m/it/13 X[]\OT1/ztmcm/m/n/13 ; \OML/ztmcm/m/it/13 X[] \OMS/ztmcm/m/n/13 j \OML/ztmcm/m/it/13 Y \OT1/ztmcm/m/n/13 = \OML/ztmcm/m/it/13 c\OT1/ztmcm/m/n/13 )$ \T5/ptm/m/n/13 (+20) would match
  []
 
 [43] [44] [45]
-Underfull \hbox (badness 10000) in paragraph at lines 736--736
+Underfull \hbox (badness 10000) in paragraph at lines 859--859
 []|\T5/ptm/b/n/11.86258 (+20) Privacy
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 736--736
+Underfull \hbox (badness 10000) in paragraph at lines 859--859
 []|\T5/ptm/b/n/11.86258 (+20) Aggregation
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 736--736
+Underfull \hbox (badness 10000) in paragraph at lines 859--859
 []|\T5/ptm/m/n/11.86258 (+20) Distributed
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 736--736
+Underfull \hbox (badness 10000) in paragraph at lines 859--859
 []|\T5/ptm/m/n/11.86258 (+20) SecAgg$[]$ over
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 736--736
+Underfull \hbox (badness 10000) in paragraph at lines 859--859
 []|\T5/ptm/m/n/11.86258 (+20) Distributed
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 736--736
+Underfull \hbox (badness 10000) in paragraph at lines 859--859
 []|\T5/ptm/m/n/11.86258 (+20) SecAgg$[]$ over
  []
 
 
-Underfull \hbox (badness 1635) in paragraph at lines 736--736
+Underfull \hbox (badness 1635) in paragraph at lines 859--859
 []|\T5/ptm/m/n/11.86258 (+20) MGs with merg-ing and IPF
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 736--736
+Underfull \hbox (badness 10000) in paragraph at lines 859--859
 []|\T5/ptm/m/n/11.86258 (+20) Distributed
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 736--736
+Underfull \hbox (badness 10000) in paragraph at lines 859--859
 []|\T5/ptm/m/n/11.86258 (+20) Continuous Gaus-sian
  []
 
 
-Underfull \hbox (badness 6808) in paragraph at lines 736--736
+Underfull \hbox (badness 6808) in paragraph at lines 859--859
 []|\T5/ptm/m/n/11.86258 (+20) Skellam or
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 736--736
+Underfull \hbox (badness 10000) in paragraph at lines 859--859
 []|\T5/ptm/m/n/11.86258 (+20) Local DP
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 736--736
+Underfull \hbox (badness 10000) in paragraph at lines 859--859
 []|\T5/ptm/m/n/11.86258 (+20) Direct sum, no
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 736--736
+Underfull \hbox (badness 10000) in paragraph at lines 859--859
 []|\T5/ptm/m/n/11.86258 (+20) Distributed
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 736--736
+Underfull \hbox (badness 10000) in paragraph at lines 859--859
 []|\T5/ptm/m/n/11.86258 (+20) SecAgg$[]$ over
  []
 
 
-Underfull \hbox (badness 3158) in paragraph at lines 736--736
+Underfull \hbox (badness 3158) in paragraph at lines 859--859
 []|\T5/ptm/m/n/11.86258 (+20) None ($\OML/ztmcm/m/it/11.86258 " \OT1/ztmcm/m/n/11.86258 =
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 736--736
+Underfull \hbox (badness 10000) in paragraph at lines 859--859
 []|\T5/ptm/m/n/11.86258 (+20) SecAgg$[]$ over
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 736--736
+Underfull \hbox (badness 10000) in paragraph at lines 859--859
 []|\T5/ptm/m/n/11.86258 (+20) Non-private ref-er-ence with
  []
 
 
-Underfull \hbox (badness 3158) in paragraph at lines 736--736
+Underfull \hbox (badness 3158) in paragraph at lines 859--859
 []|\T5/ptm/m/n/11.86258 (+20) None ($\OML/ztmcm/m/it/11.86258 " \OT1/ztmcm/m/n/11.86258 =
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 736--736
+Underfull \hbox (badness 10000) in paragraph at lines 859--859
 []|\T5/ptm/m/n/11.86258 (+20) Plain Flower
  []
 
 [46] [47] [48] [49]
-Underfull \hbox (badness 1168) in paragraph at lines 796--798
+Underfull \hbox (badness 1168) in paragraph at lines 919--921
 \T5/ptm/m/n/13 (+20) (DP-SGD) [[]] adapted to fed-er-ated learn-ing. At each lo-cal step, each client clips
  []
 
 [50]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 816.
+(hyperref)                removing `math shift' on input line 939.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 816.
+(hyperref)                removing `superscript' on input line 939.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 816.
+(hyperref)                removing `math shift' on input line 939.
 
 [51] [52] [53]
-Underfull \hbox (badness 10000) in paragraph at lines 899--899
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1022
 []|\T5/ptm/b/n/11.86258 (+20) Privacy
  []
 
 
-Underfull \hbox (badness 6445) in paragraph at lines 899--899
+Underfull \hbox (badness 6445) in paragraph at lines 1022--1022
 []|\T5/ptm/b/n/11.86258 (+20) Payload per
  []
 
 
-Underfull \hbox (badness 7504) in paragraph at lines 899--899
+Underfull \hbox (badness 7504) in paragraph at lines 1022--1022
 []|\T5/ptm/m/n/11.86258 (+20) Ring ten-sors
  []
 
 
-Underfull \hbox (badness 7504) in paragraph at lines 899--899
+Underfull \hbox (badness 7504) in paragraph at lines 1022--1022
 []|\T5/ptm/m/n/11.86258 (+20) Ring ten-sors
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 899--899
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1022
 []|\T5/ptm/m/n/11.86258 (+20) Distributed DP
  []
 
 [54]
-Underfull \hbox (badness 2343) in paragraph at lines 912--913
+Underfull \hbox (badness 2343) in paragraph at lines 1035--1036
 \OML/ztmcm/m/it/13 ^^L \OMS/ztmcm/m/n/13 2 \OT1/ztmcm/m/n/13 [0\OML/ztmcm/m/it/13 :\OT1/ztmcm/m/n/13 1\OML/ztmcm/m/it/13 ; \OT1/ztmcm/m/n/13 2\OML/ztmcm/m/it/13 :\OT1/ztmcm/m/n/13 0]$ \T5/ptm/m/n/13 (+20) (log-uniform), and $\OML/ztmcm/m/it/13 ^^Q \OMS/ztmcm/m/n/13 2 \OT1/ztmcm/m/n/13 [10[]\OML/ztmcm/m/it/13 ; \OT1/ztmcm/m/n/13 3 \OMS/ztmcm/m/n/13 ^^B \OT1/ztmcm/m/n/13 10[]]$ \T5/ptm/m/n/13 (+20) (log-uniform). Out-put:
  []
 
 LaTeX Font Info:    Font shape `T5/cmtt/bx/n' in size <13> not available
-(Font)              Font shape `T5/cmtt/m/n' tried instead on input line 913.
+(Font)              Font shape `T5/cmtt/m/n' tried instead on input line 1036.
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/cmtt/m/n/13'. Switching off
-(microtype)                protrusion for this font on input line 913.
+(microtype)                protrusion for this font on input line 1036.
 
 [55] [56] [57]
-Underfull \hbox (badness 6110) in paragraph at lines 984--984
+Underfull \hbox (badness 6110) in paragraph at lines 1107--1107
 []|\T5/ptm/m/n/11.86258 (+20) Machine learn-ing and
  []
 
 
-Underfull \hbox (badness 1264) in paragraph at lines 992--993
+Underfull \hbox (badness 1264) in paragraph at lines 1115--1116
 \T5/ptm/m/n/13 (+20) record of the ref-er-ence run shows com-mit \T5/cmtt/m/n/13 (+20) 9ee2a85e \T5/ptm/m/n/13 (+20) and con-fig-u-ra-tion hash
  []
 
 [58]
-Underfull \hbox (badness 10000) in paragraph at lines 995--996
+Underfull \hbox (badness 10000) in paragraph at lines 1118--1119
 []\T5/ptm/b/n/13 (+20) Reproducibility bun-dle: \T5/cmtt/m/n/13 (+20) results/repro/ \T5/ptm/m/n/13 (+20) holds the ex-act pack-age list
  []
 
 
-Underfull \hbox (badness 6526) in paragraph at lines 997--998
+Underfull \hbox (badness 6526) in paragraph at lines 1120--1121
 []\T5/ptm/b/n/13 (+20) Clean-copy re-execution: \T5/ptm/m/n/13 (+20) Phases 1--5 (in-ven-tory, har-mon-i-sa-tion, sam-pling,
  []
 
@@ -2627,17 +2653,17 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: B73DB5220BD103A45454BFD86D300929;10717.
  ) 
 Here is how much of TeX's memory you used:
- 44961 strings out of 467871
- 849449 string characters out of 5418376
- 1463686 words of memory out of 5000000
- 72374 multiletter control sequences out of 15000+600000
- 794785 words of font info for 458 fonts, out of 8000000 for 9000
+ 45562 strings out of 467871
+ 864654 string characters out of 5418376
+ 1481416 words of memory out of 5000000
+ 72952 multiletter control sequences out of 15000+600000
+ 799206 words of font info for 458 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 123i,19n,121p,2576b,900s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/rsfs/rsfs10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/symbol/usyr.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/symbol/usyr.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/urwvn/utmb8v.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/urwvn/utmr8v.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/urwvn/utmri8v.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vntt10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vntt12.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vntt9.pfb>
-Output written on main.pdf (82 pages, 584373 bytes).
+ 123i,19n,121p,2576b,1487s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/rsfs/rsfs10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/symbol/usyr.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/symbol/usyr.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/urwvn/utmb8v.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/urwvn/utmr8v.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/urwvn/utmri8v.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vntt12.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vntt8.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vntt9.pfb>
+Output written on main.pdf (82 pages, 586917 bytes).
 PDF statistics:
  1285 PDF objects out of 1440 (max. 8388607)
  278 named destinations out of 1000 (max. 500000)
- 79842 words of extra memory for PDF output out of 89155 (max. 10000000)
+ 84450 words of extra memory for PDF output out of 89155 (max. 10000000)
 

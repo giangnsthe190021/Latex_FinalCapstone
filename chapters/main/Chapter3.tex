@@ -52,22 +52,76 @@ The research proceeds in five stages (Figure~\ref{fig:overall_workflow}): data p
 
 \begin{figure}[htbp]
 \centering
+% Use the font sizes of the IEEE version (10pt class) inside this figure
+\renewcommand{\scriptsize}{\fontsize{7}{8}\selectfont}%
+\resizebox{\textwidth}{!}{%
 \begin{tikzpicture}[
-    node distance=1.3cm,
-    block/.style={rectangle, draw=blue!70, fill=blue!5, rounded corners=3pt, thick, text width=0.88\textwidth, align=center, inner sep=6pt, font=\small},
-    arrow/.style={thick, ->, >=stealth, draw=blue!80}
+    node distance=0.45cm and 0.35cm,
+    stagebox/.style={
+        rectangle, draw=blue!80!black, fill=blue!3, rounded corners=4pt, thick,
+        text width=3.15cm, minimum height=2.6cm, align=left, inner sep=5pt, font=\scriptsize
+    },
+    header/.style={
+        fill=blue!15, text=blue!90!black, font=\scriptsize\bfseries, align=center,
+        rounded corners=2pt, minimum width=3.0cm, minimum height=0.45cm
+    },
+    arr/.style={-{Stealth[length=2.5mm, width=1.8mm]}, thick, draw=blue!80!black}
 ]
-\node (A) [block] {\textbf{1. Data preparation}\\Harmonise, split by capture group, sample by quota, preprocess (60 columns), leakage checks C1--C5};
-\node (B) [block, below of=A] {\textbf{2. Federated partition}\\Dirichlet $\alpha = 0.5$, $K = 5$ clients, per seed};
-\node (C) [block, below of=B] {\textbf{3. Generator routes}\\FedDP-Marginal (main) and federated CVAE (baseline)};
-\node (D) [block, below of=C] {\textbf{4. Evaluation}\\IDS (RF, MLP); TRTR / TSTR / TAug / TAugR / local augmentation; utility, fidelity, privacy, overhead};
-\node (E) [block, below of=D] {\textbf{5. Aggregation}\\Run ledger, scorecard, Pareto front, requirement-driven recommendation};
+% Stages
+\node (s1) [stagebox] {
+    \begin{center}\tikz\node[header]{Stage 1: Preparation};\end{center}\vspace{-2pt}
+    $\bullet$ Harmonise packet features\\
+    $\bullet$ Split by capture group\\
+    $\bullet$ Class quota enforcement\\
+    $\bullet$ Standardize 60 columns\\
+    $\bullet$ Leakage checks C1--C5
+};
 
-\draw [arrow] (A) -- (B);
-\draw [arrow] (B) -- (C);
-\draw [arrow] (C) -- (D);
-\draw [arrow] (D) -- (E);
-\end{tikzpicture}
+\node (s2) [stagebox, right=of s1] {
+    \begin{center}\tikz\node[header]{Stage 2: Partitioning};\end{center}\vspace{-2pt}
+    $\bullet$ $K = 5$ edge clients\\
+    $\bullet$ Non-IID Dirichlet $\alpha = 0.5$\\
+    $\bullet$ Class skew per seed\\
+    $\bullet$ Local telemetry isolation\\
+    $\bullet$ Zero cross-client pooling
+};
+
+\node (s3) [stagebox, right=of s2] {
+    \begin{center}\tikz\node[header]{Stage 3: Generators};\end{center}\vspace{-2pt}
+    $\bullet$ \textbf{FedDP-Marginal (Main):}\\
+    \hspace{6pt}3 count table releases\\
+    $\bullet$ \textbf{Federated CVAE (Base):}\\
+    \hspace{6pt}30 rounds $\times$ 2 epochs\\
+    $\bullet$ DP-SGD / Skellam DP\\
+    $\bullet$ SecAgg$^+$ masking
+};
+
+\node (s4) [stagebox, right=of s3] {
+    \begin{center}\tikz\node[header]{Stage 4: Evaluation};\end{center}\vspace{-2pt}
+    $\bullet$ Downstream RF \& MLP\\
+    $\bullet$ TRTR, TSTR, TAug, TAugR\\
+    $\bullet$ Local augmentation\\
+    $\bullet$ Utility \& rare-class recall\\
+    $\bullet$ Privacy audit (MIA AUC)\\
+    $\bullet$ Byte / time profiling
+};
+
+\node (s5) [stagebox, right=of s4] {
+    \begin{center}\tikz\node[header]{Stage 5: Decision};\end{center}\vspace{-2pt}
+    $\bullet$ Immutable run ledger\\
+    $\bullet$ Automated scorecard\\
+    $\bullet$ Pareto front extraction\\
+    $\bullet$ Multi-objective rule\\
+    $\bullet$ Deployment recommendation
+};
+
+% Connecting Arrows
+\draw [arr] (s1) -- (s2);
+\draw [arr] (s2) -- (s3);
+\draw [arr] (s3) -- (s4);
+\draw [arr] (s4) -- (s5);
+\end{tikzpicture}%
+}
 \caption{Overall research workflow of PP-FedData.}
 \label{fig:overall_workflow}
 \end{figure}
@@ -128,43 +182,112 @@ For the FedDP-Marginal route, the sum is carried by a patched client path: stock
 
 \begin{figure}[htbp]
 \centering
+% Use the font sizes of the IEEE version (10pt class) inside this figure
+\renewcommand{\scriptsize}{\fontsize{7}{8}\selectfont}%
+\renewcommand{\tiny}{\fontsize{5}{6}\selectfont}%
+\resizebox{\textwidth}{!}{%
 \begin{tikzpicture}[
-    box/.style={rectangle, draw=black!70, fill=gray!5, rounded corners=2pt, align=center, font=\footnotesize, inner sep=4pt},
-    mgbox/.style={rectangle, draw=blue!70, fill=blue!5, rounded corners=2pt, align=center, font=\footnotesize, inner sep=4pt},
-    cvbox/.style={rectangle, draw=teal!70, fill=teal!5, rounded corners=2pt, align=center, font=\footnotesize, inner sep=4pt},
-    svbox/.style={rectangle, draw=purple!70, fill=purple!5, rounded corners=2pt, align=center, font=\footnotesize, inner sep=4pt},
-    arrow/.style={thick, ->, >=stealth}
+    >=Stealth,
+    node distance=0.6cm,
+    font=\scriptsize,
+    tier/.style={
+        rectangle, draw=gray!40, fill=gray!3, rounded corners=6pt, inner sep=8pt
+    },
+    gwbox/.style={
+        rectangle, draw=slate!80!black, fill=slate!10, rounded corners=3pt, thick,
+        text width=2.4cm, minimum height=0.65cm, align=center, font=\scriptsize\bfseries
+    },
+    route1box/.style={
+        rectangle, draw=indigo!80!black, fill=indigo!8, rounded corners=3pt, thick,
+        text width=2.8cm, minimum height=0.75cm, align=center
+    },
+    route2box/.style={
+        rectangle, draw=teal!80!black, fill=teal!8, rounded corners=3pt, thick,
+        text width=2.8cm, minimum height=0.75cm, align=center
+    },
+    srvbox/.style={
+        rectangle, draw=crimson!80!black, fill=crimson!8, rounded corners=3pt, thick,
+        text width=3.3cm, minimum height=0.75cm, align=center
+    },
+    idsbox/.style={
+        rectangle, draw=violet!80!black, fill=violet!8, rounded corners=3pt, thick,
+        text width=2.7cm, minimum height=0.85cm, align=center
+    },
+    arr/.style={->, thick, draw=black!80}
 ]
-% Gateways
-\node[box, text width=5cm] (gw) at (0, 4.5) {\textbf{$K = 5$ Gateways (FL Clients)}\\Raw traffic stays local};
 
-% Route 1: FedDP-Marginal
-\node[mgbox, text width=4.5cm] (m1) at (-3.6, 3.1) {\textbf{Route 1: FedDP-Marginal}\\Local count tables per class\\(1-way, pairwise, tree edges)};
-\node[mgbox, text width=4.5cm] (m2) at (-3.6, 1.8) {Add DP noise share\\(Skellam, or full noise for MGl)};
-\node[mgbox, text width=4.5cm] (m3) at (-3.6, 0.6) {SecAgg$^+$ uint32\\(not used by MGl)};
+% Define color aliases
+\colorlet{slate}{blue!40!gray}
+\colorlet{indigo}{blue!70!black}
+\colorlet{crimson}{red!60!black}
+\colorlet{violet}{purple!70!black}
 
-% Route 2: CVAE
-\node[cvbox, text width=4.5cm] (c1) at (3.6, 3.1) {\textbf{Route 2: Federated CVAE}\\Local CVAE training};
-\node[cvbox, text width=4.5cm] (c2) at (3.6, 1.8) {DP-SGD (Opacus)\\(M1, M3)};
-\node[cvbox, text width=4.5cm] (c3) at (3.6, 0.6) {SecAgg$^+$ fixed-point\\(M2, M3)};
+% --- TIER 1: Edge Gateways ---
+\node[gwbox] (g1) at (0, 1.15) {Gateway 1};
+\node[gwbox] (g2) [below=0.2cm of g1] {Gateway 2};
+\node[font=\bfseries] (gdots) [below=0.02cm of g2] {$\vdots$};
+\node[gwbox] (gk) [below=0.02cm of gdots] {Gateway $K = 5$};
+\node[text width=2.5cm, align=center, font=\tiny\itshape, text=slate] (gnote) [below=0.15cm of gk] {Raw traffic stays local\\on edge gateways};
 
-% Aggregation Server
-\node[svbox, text width=9cm] (s1) at (0, -0.9) {\textbf{Honest-but-Curious Aggregation Server}\\Aggregate (sum or FedAvg) $\longrightarrow$ Rebuild global model (tree + IPF post-processing, or global decoder) $\longrightarrow$ Class-conditional sampling (\texttt{synthetic.npz})};
+% --- TIER 2: Dual Generator Routes ---
+% Route 1 (Top lane)
+\node[route1box] (r1_1) at (5.4, 1.5) {1. Local Count Tables\\{\tiny (1-way, pairwise, tree)}};
+\node[route1box] (r1_2) [right=0.45cm of r1_1] {2. DP Noise Share\\{\tiny (Skellam / Gaussian)}};
+\node[route1box] (r1_3) [right=0.45cm of r1_2] {3. SecAgg$^+$ uint32\\{\tiny (Modulo $2^{32}$ sum)}};
 
-% Downstream IDS
-\node[box, text width=9cm] (ids) at (0, -2.2) {\textbf{Downstream IDS (Random Forest / MLP)}\\Evaluation on locked real test split};
+% Route 2 (Bottom lane)
+\node[route2box] (r2_1) at (5.4, -1.5) {1. Local CVAE Training\\{\tiny (Encoder / Decoder)}};
+\node[route2box] (r2_2) [right=0.45cm of r2_1] {2. DP-SGD Opacus\\{\tiny (Gradient clip \& noise)}};
+\node[route2box] (r2_3) [right=0.45cm of r2_2] {3. SecAgg$^+$ Fixed-Pt\\{\tiny ($2^{22}$ levels, range 16)}};
 
-% Connections
-\draw[arrow] (gw) -| node[above, font=\scriptsize] {3 table releases} (m1);
-\draw[arrow] (gw) -| node[above, font=\scriptsize] {30 training rounds} (c1);
-\draw[arrow] (m1) -- (m2);
-\draw[arrow] (m2) -- (m3);
-\draw[arrow] (c1) -- (c2);
-\draw[arrow] (c2) -- (c3);
-\draw[arrow] (m3) |- (s1);
-\draw[arrow] (c3) |- (s1);
-\draw[arrow] (s1) -- (ids);
-\end{tikzpicture}
+% --- TIER 3: Aggregation Server ---
+\node[srvbox] (s1) at (17.2, 1.5) {1. Secure Aggregation\\{\tiny (Exact sum or FedAvg)}};
+\node[srvbox] (s2) at (17.2, 0) {2. Global Model Reconstruction\\{\tiny (Chow-Liu tree + IPF / Decoder)}};
+\node[srvbox] (s3) at (17.2, -1.5) {3. Class-Conditional Sampling\\{\tiny (\texttt{synthetic.npz})}};
+
+% --- TIER 4: Downstream IDS ---
+\node[idsbox] (ids_eval) at (22.1, 0.75) {Evaluation on Locked\\Real Test Split\\{\tiny (30,000 packets)}};
+\node[idsbox] (ids_train) at (22.1, -1.5) {Downstream Classifiers\\{\tiny Random Forest \& MLP}};
+
+% --- Background frames (all tiers share the same top/bottom edges) ---
+\begin{scope}[on background layer]
+    \node[tier, fit=(g1) (gnote) (g1 |- s1.north) (g1 |- s3.south), label={[font=\scriptsize\bfseries, text=slate]above:Edge Gateways (FL Clients)}] (tier1) {};
+    \node[tier, fit=(r1_1) (r1_3), fill=indigo!3, draw=indigo!40, label={[font=\scriptsize\bfseries, text=indigo]above:Route 1: FedDP-Marginal (Primary Generator)}] (box_r1) {};
+    \node[tier, fit=(r2_1) (r2_3), fill=teal!3, draw=teal!40, label={[font=\scriptsize\bfseries, text=teal]below:Route 2: Federated CVAE (Baseline Generator)}] (box_r2) {};
+    \node[tier, fit=(s1) (s3), fill=crimson!3, draw=crimson!40, label={[font=\scriptsize\bfseries, text=crimson]above:Honest-but-Curious Server}] (tier3) {};
+    \node[tier, fit=(ids_eval) (ids_train) (ids_train |- s1.north) (ids_train |- s3.south), fill=violet!3, draw=violet!40, label={[font=\scriptsize\bfseries, text=violet]above:Downstream IDS}] (tier4) {};
+\end{scope}
+
+% --- CONNECTIONS ---
+% Gateways fork into the two routes
+\coordinate (fork) at ($(tier1.east)+(0.35,0)$);
+\draw[thick, draw=black!80] (tier1.east) -- (fork);
+\fill[black!80] (fork) circle (1.5pt);
+\draw[arr, indigo] (fork) |- node[pos=0.75, above, font=\tiny\bfseries, align=center] {3 table\\releases} (r1_1.west);
+\draw[arr, teal] (fork) |- node[pos=0.75, below, font=\tiny\bfseries, align=center] {30 training\\rounds} (r2_1.west);
+
+% Inside Route 1
+\draw[arr, indigo] (r1_1) -- (r1_2);
+\draw[arr, indigo] (r1_2) -- (r1_3);
+
+% Inside Route 2
+\draw[arr, teal] (r2_1) -- (r2_2);
+\draw[arr, teal] (r2_2) -- (r2_3);
+
+% Routes merge into the server's aggregation stage
+\draw[arr, indigo] ([yshift=1.5mm]r1_3.east) -- ([yshift=1.5mm]s1.west);
+\draw[arr, teal] (r2_3.east) -- ($(r2_3.east)!0.5!(r2_3.east -| s1.west)$) |- ([yshift=-1.5mm]s1.west);
+
+% Inside Server
+\draw[arr, crimson] (s1) -- (s2);
+\draw[arr, crimson] (s2) -- (s3);
+
+% Server to IDS
+\draw[arr, crimson] (s3.east) -- node[above, font=\tiny\bfseries, align=center] {synthetic\\data} (ids_train.west);
+\draw[arr, violet] (ids_train) -- node[right, font=\tiny\bfseries, align=left] {TSTR /\\TAug} (ids_eval);
+
+\end{tikzpicture}%
+}
 \caption{System architecture with both generator routes.}
 \label{fig:system_arch}
 \end{figure}
