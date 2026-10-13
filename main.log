@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.30)  13 OCT 2026 19:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.30)  13 OCT 2026 19:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -729,7 +729,57 @@ Underfull \vbox (badness 2735) has occurred while \output is active []
 
 Underfull \vbox (badness 3199) has occurred while \output is active []
 
- [13] [14]) (chapters/main/Chapter4.tex [15]) (chapters/main/Chapter5.tex
+ [13]
+Underfull \hbox (badness 1824) in paragraph at lines 604--605
+ \OT1/ptm/m/it/10 (+20) 1) Dirich-let Label-Skew Par-ti-tion-ing: [][] \OT1/ptm/m/n/10 (+20) To model non-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 624--625
+[]\OT1/ptm/b/n/10 (+20) Pre-Partition Split Iso-la-tion: \OT1/ptm/m/n/10 (+20) The global
+ []
+
+[14]
+Underfull \hbox (badness 2828) in paragraph at lines 702--703
+\OT1/ptm/m/n/10 (+20) flags (\OT1/pcr/m/n/10 syn\OT1/ptm/m/n/10 (+20) , \OT1/pcr/m/n/10 reset\OT1/ptm/m/n/10 (+20) , \OT1/pcr/m/n/10 acknowledgment\OT1/ptm/m/n/10 (+20) , \OT1/pcr/m/n/10 retain\OT1/ptm/m/n/10 (+20) ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 702--703
+\OT1/pcr/m/n/10 clean_session_flag_2\OT1/ptm/m/n/10 (+20) , \OT1/pcr/m/n/10 will_retain\OT1/ptm/m/n/10 (+20) ,
+ []
+
+
+Underfull \hbox (badness 3690) in paragraph at lines 702--703
+\OT1/pcr/m/n/10 will_flag\OT1/ptm/m/n/10 (+20) ) and 12 \OT1/pcr/m/n/10 _is_na \OT1/ptm/m/n/10 (+20) in-di-ca-tors; and 5
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 702--703
+\OT1/pcr/m/n/10 qos_level_2\OT1/ptm/m/n/10 (+20) , \OT1/pcr/m/n/10 requested_qos\OT1/ptm/m/n/10 (+20) , \OT1/pcr/m/n/10 protocol\OT1/ptm/m/n/10 (+20) )
+ []
+
+[15] [16] [17] [18]
+Underfull \hbox (badness 5431) in paragraph at lines 908--910
+ \OT1/ptm/m/it/10 (+20) 4) SecAgg$[]$ Con-fig-u-ra-tion and Over-flow Bounds: [][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 910--911
+[]\OT1/ptm/b/n/10 (+20) Topology: \OT1/pcr/m/n/10 num_shares $\OT1/cmr/m/n/10 = 5$ \OT1/ptm/m/n/10 (+20) and
+ []
+
+
+Underfull \hbox (badness 6893) in paragraph at lines 910--911
+\OT1/pcr/m/n/10 reconstruction_threshold $\OT1/cmr/m/n/10 = 3$\OT1/ptm/m/n/10 (+20) , tol-er-at-ing
+ []
+
+[19]
+Underfull \hbox (badness 1533) in paragraph at lines 958--959
+[]\OT1/ptm/b/n/10 (+20) Space (a), cen-tral-ized non-DP CVAE: \OT1/ptm/m/n/10 (+20) 30 TPE
+ []
+
+[20] [21]) (chapters/main/Chapter4.tex [22]) (chapters/main/Chapter5.tex
 Underfull \hbox (badness 1917) in paragraph at lines 9--10
 []\OT1/ptm/b/n/10 (+20) Low-Bandwidth, Header-Dominant En-vi-ron-ments:
  []
@@ -739,12 +789,15 @@ Underfull \hbox (badness 1496) in paragraph at lines 4--5
 []\OT1/ptm/m/n/10 (+20) In this pa-per, we in-tro-duced PP-FedData, a privacy-
  []
 
-[16]) (chapters/front/thanks.tex) (main.bbl [17]
+) (chapters/front/thanks.tex) (main.bbl [23]
+Underfull \vbox (badness 1270) has occurred while \output is active []
+
+
 Overfull \hbox (0.92387pt too wide) in paragraph at lines 278--282
 \OT1/ptm/m/n/8 (-20) ``Flower: A friendly federated learning research framework,'' \OT1/ptm/m/it/8 (-20) arXiv preprint
  []
 
-)
+[24])
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -756,24 +809,24 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[18] (main.aux)
+[25] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 19335 strings out of 467871
- 381151 string characters out of 5418376
- 864498 words of memory out of 5000000
- 47203 multiletter control sequences out of 15000+600000
- 711370 words of font info for 559 fonts, out of 8000000 for 9000
+ 19483 strings out of 467871
+ 383131 string characters out of 5418376
+ 865518 words of memory out of 5000000
+ 47303 multiletter control sequences out of 15000+600000
+ 713997 words of font info for 591 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,15n,94p,2002b,1421s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbsy10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmbsy7.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrb8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (18 pages, 441875 bytes).
+ 84i,20n,94p,2002b,1421s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbsy10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmbsy7.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm7.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrb8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (25 pages, 572441 bytes).
 PDF statistics:
- 228 PDF objects out of 1000 (max. 8388607)
+ 276 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  84589 words of extra memory for PDF output out of 89155 (max. 10000000)
 
