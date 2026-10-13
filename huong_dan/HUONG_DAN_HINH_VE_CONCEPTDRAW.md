@@ -6,14 +6,68 @@ Bài báo có 4 hình, **cả 4 đều vẽ bằng ConceptDraw**:
 
 Khi chưa có file, LaTeX hiện một khung giữ chỗ **đúng kích thước cuối cùng**, nên số trang khi build vẫn chính xác. Lệnh `\cdfigure` trong `main.tex` tự lấy file `.pdf` hoặc `.png` ngay khi file được đặt vào thư mục.
 
-| Hình | File cần xuất | Kích thước khi in | Vị trí trong bài |
-|---|---|---|---|
-| Fig. 1 | `graphics/paper/fig1_architecture.pdf` | rộng **88 mm** (1 cột) × cao **60 mm** | `Chapter3.tex`, mục III-A |
-| Fig. 2 | `graphics/paper/fig2_three_releases.pdf` | rộng **88 mm** × cao **47 mm** | `Chapter3.tex`, mục III-B |
-| Fig. 3 | `graphics/paper/fig3_tstr_vs_eps.pdf` | rộng **88 mm** × cao **60 mm** | `Chapter5.tex`, mục V-B |
-| Fig. 4 | `graphics/paper/fig4_utility_vs_traffic.pdf` | rộng **88 mm** × cao **70 mm** | `Chapter5.tex`, mục V-D |
+Tên file và kích thước dưới đây khớp với các file `.tex` hiện tại (từ commit `73eee4c`):
+
+| Hình | File | Kích thước khi in | Môi trường trong LaTeX | Vị trí |
+|---|---|---|---|---|
+| Fig. 1 | `graphics/paper/fig1_architecture.pdf` | **182 × 60 mm** (rộng cả trang) | `figure*`, `\textwidth` | `Chapter3.tex`, III-A |
+| Fig. 2 | `graphics/paper/Fig2.pdf` | **182 × 60 mm** (rộng cả trang); nên thu về **88 × 47 mm**, xem mục kiểm tra | `figure*`, `\textwidth` | `Chapter3.tex`, III-B |
+| Fig. 3 | `graphics/paper/Fig3.pdf` | **88 × 60 mm** (1 cột) | `figure`, `\columnwidth` | `Chapter5.tex`, V-B |
+| Fig. 4 | `graphics/paper/Fig4.pdf` | **88 × 70 mm** (1 cột) | `figure`, `\columnwidth` | `Chapter5.tex`, V-D |
 
 Nếu bản vẽ cao hơn chiều cao ghi ở bảng, hãy sửa tham số thứ ba của `\cdfigure` cho khớp, rồi build lại để kiểm tra giới hạn 10 trang.
+
+## Kết quả kiểm tra ngày 14/10/2026 (commit `73eee4c`): việc cần sửa
+
+Phương pháp kiểm tra: xem từng file PDF, rồi đọc toạ độ vector và cỡ chữ ngay trong file. Bản build lúc đó (`main.log`) dài **đúng 10 trang**, tức đang chạm giới hạn.
+
+### Fig. 3: **bắt buộc vẽ lại** (sai số liệu)
+
+Hình được vẽ bằng mắt, không theo bảng toạ độ. Quy đổi vị trí marker về giá trị theo chính trục y của hình:
+
+| Điểm | Giá trị thật | Giá trị trên hình |
+|---|---|---|
+| FedDP-Marginal, ε = ∞ (MGs-nodp) | 0.444 | **0.466** |
+| Đường B0 | 0.447 | **0.469** |
+| Federated CVAE, ε = ∞ (B3) | 0.420 | **0.436** |
+| MG local DP, ε = 1 | 0.253 | **0.267** |
+
+- Các vạch trục y cách nhau không đều: từ 0.4 xuống 0.2 dài 18.1 mm, nhưng từ 0.2 xuống 0.1 chỉ 7.9 mm.
+- Chỉ **6/11 điểm có marker**: thiếu ở ε = 5 (cả 3 chuỗi) và ở ε = 10 (MG distributed và CVAE).
+- **Không có thanh sai số**, trong khi caption ghi "bars: one seed standard deviation".
+- Chú giải và nhãn hai đường tham chiếu chỉ **6 pt**, cần 8 pt.
+- **Cách sửa:** vẽ lại theo quy trình *vẽ đè* ở mục Fig. 3 và Fig. 4 bên dưới. Đặt `tham_chieu/fig3_tstr_vs_eps_reference.png` làm nền, kích thước đúng 88 × 60 mm, góc ở (0, 0). Lấy khung đồ thị, vạch chia, điểm và thanh sai số theo `SO_LIEU_HINH_3_4.md`. Xuất ra `graphics/paper/Fig3.pdf`.
+
+### Fig. 4: **bắt buộc vẽ lại** (sai số liệu, trục log méo)
+
+- Hai điểm MG no DP nằm ở khoảng **0.466**, giá trị thật **0.444**.
+- Ba điểm MG local DP thấp hơn thật **0.011–0.025**: MGl-eps10 0.413, MGl-eps5 0.374, MGl-eps1 0.253.
+- Trục x logarit không đều: đoạn 10⁰–10¹ dài **19.6 mm**, đoạn 10¹–10² dài **24.3 mm**, lẽ ra phải bằng nhau (22.5 mm theo bảng toạ độ).
+- Các vạch trục y cũng cách nhau không đều (8.9 / 8.5 / 8.4 / 9.8 mm).
+- **Cách sửa:** giống Fig. 3, với nền `tham_chieu/fig4_utility_vs_traffic_reference.png` (88 × 70 mm). Xuất ra `graphics/paper/Fig4.pdf`.
+
+> Nếu không tiện vẽ lại, có thể hỏi giảng viên cho phép dùng biểu đồ do Python vẽ từ `results/`. Hai file PDF đó đúng tới từng số (`tham_chieu/*_reference.pdf`), vì hình số liệu vẽ tay rất dễ lệch như trên.
+
+### Fig. 1: sửa trình bày (kích thước và vị trí đã ổn)
+
+| Chữ | Hiện tại | Sửa thành |
+|---|---|---|
+| Chữ trong các ô (Gateway 1, 1. Local Count Tables, …) | **Tahoma** 8 pt | Times New Roman 8 pt |
+| "Raw traffic stays local on edge gateways" | Tahoma **6 pt** | Times New Roman **8 pt**, nghiêng |
+| "3 table releases", "30 training rounds" | Times **7 pt** | **8 pt** |
+| "synthetic data", "TSTR / TAug" | Times **6 pt** | **8 pt** |
+
+- Thêm **mũi tên nét đứt** từ khối server quay về khối gateway, chạy dọc mép dưới, kèm nhãn 8 pt "cut points, T* (route 1) / global weights (route 2)".
+- Ô "2. DP Noise Share": ghi thêm "(Skellam)".
+- Giữa Gateway 2 và Gateway K = 5: thay dấu "|" bằng "⋮".
+- Giữ khổ trang 182 × 60 mm, rồi xuất lại đè lên `graphics/paper/fig1_architecture.pdf`.
+
+### Fig. 2: sửa trình bày
+
+- Tăng các nhãn **7 pt** lên **8 pt**: "uint32" (×3), "lift" (×3), "coarse cutpoints", "tree T".
+- Đổi "tree T" và "Chow–Liu tree T" thành **T\*** (T mũ ⋆) cho khớp với bài.
+- Caption có nói "count tables plus Skellam noise shares", nhưng trên hình không thấy nhiễu. Thêm dòng "+ Skellam share ξₖ" vào ba ô Release.
+- **Nên làm:** phần vẽ chỉ rộng khoảng **105 mm** mà đang chiếm cả khổ 182 mm, hai bên để trắng. Nếu vẽ lại gọn **88 × 47 mm** theo mẫu ở mục Fig. 2 bên dưới, hình nằm vừa một cột và bài ngắn đi khoảng 0.2 trang (đang đúng 10 trang). Khi đó, trong `Chapter3.tex` đổi `figure*` thành `figure` và `\textwidth` thành `\columnwidth`, với chiều cao `1.85in`.
 
 ## Quy ước chung (cả 4 hình)
 
@@ -36,7 +90,9 @@ Nếu bản vẽ cao hơn chiều cao ghi ở bảng, hãy sửa tham số thứ
 - **Không** ghi số hình hay tiêu đề "Fig. 1" lên hình, vì LaTeX tự thêm caption.
 - Bản TikZ cũ của hai sơ đồ này vẫn còn trong git (commit `0628d91`, file `chapters/main/Chapter3.tex`, khoảng dòng 179–286 và 714–742) và có thể dùng làm hình tham khảo.
 
-## Fig. 1: Kiến trúc PP-FedData (`fig1_architecture`, 88 × 60 mm)
+## Fig. 1: mẫu bố cục một cột ban đầu (chỉ để tham khảo)
+
+> Bản nhóm đã vẽ dùng **bố cục ngang 182 × 60 mm** (`figure*`), và bố cục này được giữ nguyên. Các điểm cần sửa nằm ở mục *Kết quả kiểm tra* phía trên. Mẫu 88 × 60 mm dưới đây chỉ dùng nếu sau này cần thu Fig. 1 về một cột.
 
 Bố cục gồm 4 dải dọc, đi từ trái sang phải. Toạ độ tính theo mm từ góc trên bên trái và chỉ là gợi ý.
 
@@ -90,7 +146,9 @@ Chi tiết từng khối:
    - cạnh server, biểu tượng con mắt: "curious server";
    - cạnh hộp ②, biểu tượng khiên: "DP: ε bounds what the release reveals about one packet".
 
-## Fig. 2: Giao thức ba lượt công bố (`fig2_three_releases`, 88 × 47 mm)
+## Fig. 2: mẫu bố cục một cột 88 × 47 mm (khuyến nghị khi vẽ lại `Fig2`)
+
+> Bản hiện tại rộng 182 mm (`figure*`). Nếu vẽ lại theo mẫu dưới đây, xuất đè lên `graphics/paper/Fig2.pdf`. Sau đó, trong `Chapter3.tex` đổi `figure*` thành `figure` và `\textwidth` thành `\columnwidth`, với chiều cao `1.85in`.
 
 Lưới 3 hàng (Release 1, 2, 3) × 3 cột (Gateways → SecAgg+ → Server).
 
@@ -171,7 +229,8 @@ python scripts/make_paper_figures.py --results ../results
 
 ## Kiểm tra trước khi nộp
 
-- [ ] Đủ 4 file trong `graphics/paper/`: `fig1_architecture`, `fig2_three_releases`, `fig3_tstr_vs_eps`, `fig4_utility_vs_traffic` (`.pdf` hoặc `.png`).
+- [ ] Đủ 4 file trong `graphics/paper/`, đúng tên mà `.tex` đang dùng: `fig1_architecture`, `Fig2`, `Fig3`, `Fig4` (`.pdf` hoặc `.png`).
+- [ ] Đã xử lý hết các mục trong *Kết quả kiểm tra ngày 14/10/2026*.
 - [ ] Build trên Overleaf: không còn khung giữ chỗ nào, tổng số trang vẫn ≤ 10.
 - [ ] Chữ trong hình **≥ 8 pt** khi in, thuật ngữ khớp với bài: FedDP-Marginal, SecAgg+, Skellam, Chow–Liu, TSTR, TAug.
 - [ ] Hình 1–2 không chứa số liệu kết quả. Hình 3–4 có số liệu và vị trí khớp với `SO_LIEU_HINH_3_4.md`.
