@@ -5,3 +5,6 @@
 *.synctex(busy)
 *.out
 *.toc
+
+# Upload package for Overleaf (rebuilt from the sources)
+overleaf_upload.zip

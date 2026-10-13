@@ -1,0 +1,66 @@
+% ======================================================================================================
+% DÁN MÃ LATEX DO MATHTYPE COPY RA VÀO ĐÂY
+% Gõ công thức trong MathType -> Ctrl+A -> Ctrl+C -> dán vào giữa hai dòng BAT DAU / KET THUC của đúng số.
+% Không cần xoá \[ \] hay các dòng %MathType: script tự xử lý. Có thể làm từng công thức một.
+% Sau đó chạy (trong thư mục Latex_FinalCapstone):
+%     python scripts/insert_mathtype.py --dry-run
+%     python scripts/insert_mathtype.py
+% hoặc nhắn Claude để đưa vào giúp. Dòng '% Mẫu' chỉ để đối chiếu, không sửa.
+% ======================================================================================================
+
+% (1) Chia dữ liệu non-IID theo Dirichlet
+% Mẫu: \mathbf{p}_c = (p_{c,1}, \dots, p_{c,K}) \sim \mathrm{Dir}(\alpha_{\mathrm{dir}} \mathbf{1}_K),
+%%% (1) eq:dirichlet BAT DAU
+
+%%% (1) eq:dirichlet KET THUC
+
+% (2) Cây Chow-Liu
+% Mẫu: T^\star = \arg\max_{T} \sum_{(i,j) \in T} \hat{I}(X_i; X_j),
+%%% (2) eq:chow_liu BAT DAU
+
+%%% (2) eq:chow_liu KET THUC
+
+% (3) Phân rã xác suất theo cây
+% Mẫu: \hat{P}(\mathbf{x} \mid y = c) = \hat{P}(x_r \mid y = c) \prod_{(u,v) \in T^\star} \hat{P}(x_v \mid x_u, y = c),
+%%% (3) eq:tree_factorization BAT DAU
+
+%%% (3) eq:tree_factorization KET THUC
+
+% (4) Độ nhạy theo đơn vị bảo vệ
+% Mẫu: \Delta_{1,r} = m\,T_r, \qquad \Delta_{2,r} = m\sqrt{T_r}.
+%%% (4) eq:sensitivity BAT DAU
+
+%%% (4) eq:sensitivity KET THUC
+
+% (5) Cận RDP của Skellam (HAI DÒNG)
+% Mẫu: \begin{aligned}
+% Mẫu: \varepsilon_r(\lambda) \le{}& \frac{\lambda \Delta_{2,r}^2}{2\mu_r} \\
+% Mẫu: &+ \min\!\left( \frac{(2\lambda - 1)\Delta_{2,r}^2 + 6\Delta_{1,r}}{4\mu_r^2}, \frac{3\Delta_{1,r}}{2\mu_r} \right).
+% Mẫu: \end{aligned}
+%%% (5) eq:skellam_rdp BAT DAU
+
+%%% (5) eq:skellam_rdp KET THUC
+
+% (6) Đổi RDP sang (epsilon, delta)
+% Mẫu: \varepsilon = \min_{\lambda} \Big[ \sum_{r=1}^{3} \varepsilon_r(\lambda) - \frac{\ln \delta + \ln \lambda}{\lambda - 1} + \ln \frac{\lambda - 1}{\lambda} \Big],
+%%% (6) eq:rdp_conversion BAT DAU
+
+%%% (6) eq:rdp_conversion KET THUC
+
+% (7) Tổng SecAgg+ modulo 2^32
+% Mẫu: S = \sum_{k \in \mathcal{K}} (\mathbf{x}_k + \boldsymbol{\xi}_k) \bmod 2^{32},
+%%% (7) eq:secagg BAT DAU
+
+%%% (7) eq:secagg KET THUC
+
+% (8) DP-SGD
+% Mẫu: \tilde{g} = \frac{1}{B} \Big( \sum_{i=1}^{B} \frac{g_i}{\max(1, \|g_i\|_2 / C)} + \mathcal{N}(0, \sigma_k^2 C^2 \mathbf{I}) \Big),
+%%% (8) eq:dpsgd BAT DAU
+
+%%% (8) eq:dpsgd KET THUC
+
+% (9) Luật quyết định
+% Mẫu: 0 \notin \mathrm{CI}_{95\%}(\bar{\Delta}) \quad \text{and} \quad |\bar{\Delta}| > \max(\mathrm{sd}_A, \mathrm{sd}_B),
+%%% (9) eq:decision_rule BAT DAU
+
+%%% (9) eq:decision_rule KET THUC

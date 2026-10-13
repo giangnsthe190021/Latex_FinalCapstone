@@ -1,44 +1,78 @@
 % !TeX root = ../../main.tex
-\section{Experimental Evaluation and Results}\label{sec:experiments}
+% Sources: results/reports/final_report.md (sections 1, 10), results/reports/leakage_report.md, results/reports/data_provenance.md,
+% results/manifests/split_manifest_6class.json, results/repro/environment.json.
+\section{Experimental Setup}\label{sec:setup}
 
-\subsection{Experimental Setup and Evaluation Metrics}
-Simulations are executed using the Flower federated learning framework across five client nodes under Dirichlet non-IID partitioning ($\alpha=0.5$). Downstream intrusion detection performance is evaluated using both a Multi-Layer Perceptron (MLP) and Random Forest classifiers trained on balanced datasets augmented with generated traffic samples. We evaluate five performance dimensions:
-\begin{itemize}
-    \item \textbf{Downstream Classification Utility:} Macro F1-score, Precision, and Recall on rare minority attack classes evaluated on an unperturbed, held-out real test set.
-    \item \textbf{Sample Fidelity:} Total Variation Distance (TVD) and pairwise correlation difference between genuine and synthetic distributions.
-    \item \textbf{Communication Overhead:} Total uplink and downlink bytes transmitted per gateway across complete generative training workflows.
-    \item \textbf{Computational Latency:} Client-side execution time required for contingency measurement versus local neural epoch backpropagation.
-\end{itemize}
+\subsection{Dataset and Preprocessing}\label{subsec:dataset}
+We use the DoS/DDoS-MQTT-IoT dataset~\cite{alatram2023}: 59,624,826 packets, each described by 33 columns, with normal traffic and the DoS and DDoS variants of five MQTT attack families. The attack rows are the authors' CSV exports. The release provides normal traffic only as PCAP files, so we exported every normal packet with TShark into the same columns; applying the same export to the attack captures reproduces the authors' rows once their display filter and two-pass dissection are enabled. The DoS and DDoS variants of each family are merged into one class, so that the IDS detects the attack family. Separating the variants is hard at the packet level: a random forest on real data reaches a macro-F1 of only 0.326 on the eleven sub-classes, and the two variants of basic connect flooding are close to chance. Merging gives six classes (Table~\ref{tab:data}).
 
-\subsection{Downstream Minority-Class Detection Performance}
-Table~\ref{tab:results_summary} presents downstream intrusion detection macro F1-scores across privacy budgets $\varepsilon \in \{1.0, 5.0, 10.0\}$ and augmentation strategies.
-Under an unaugmented federated baseline, the extreme scarcity of minority attack records causes severe classification degradation, yielding an average minority F1-score of only 38.4\% due to high false negative rates.
+Identifiers and capture metadata (frame number, absolute and relative timestamps, source address, free-text information) are removed to avoid leakage~\cite{arp2022}. Numeric features with skewness above 2 are log-transformed, all numeric features are standardized and clipped at $\pm 5\sigma$, and categorical fields are one-hot encoded, giving $D = 60$ features. The preprocessing statistics are fitted on the pooled training split, which is a centralized step outside $\varepsilon$. Diagnostic checks with a random forest on the validation split found no shortcut feature: no single column reaches a macro-F1 above 0.9, the missingness indicators alone reach 0.10 (chance 0.17), and a random row split scores only 0.0075 above a split by capture group.
 
-Augmenting client datasets with synthesized minority samples consistently restores detection sensitivity. Under relaxed privacy budgets ($\varepsilon = 10.0$), both FedDP-Marginal and Fed-CVAE achieve competitive detection utility, reaching 94.6\% and 93.8\% macro F1-scores, respectively. However, under strict privacy guarantees ($\varepsilon = 1.0$), stark architectural divergence emerges:
-\begin{itemize}
-    \item \textbf{Discrete Header Attacks:} For attacks governed by low-order discrete header dependencies (e.g., Unauthorized Connect and Malformed Header), FedDP-Marginal outperforms Fed-CVAE by a statistically significant margin ($+12.4\%$ F1, $p < 0.01$). This validates our hypothesis that low-order marginal tables retain high signal-to-noise ratios even under strict DP perturbation.
-    \item \textbf{Volumetric Flow Attacks:} Conversely, for high-rate continuous volumetric attacks (e.g., Publish Floods), Fed-CVAE achieves superior feature alignment ($+4.8\%$ F1 over FedDP-Marginal), demonstrating that deep latent spaces capture multi-attribute continuous flow dynamics more effectively than discretized marginal bins.
-\end{itemize}
+Whole capture groups are assigned to the training, validation or test split. Eight of the eleven DoS/DDoS sub-classes come from a single capture file, so their validation and test rows are contiguous blocks of that capture, separated by 1,000-row buffers; TCP streams crossing a block boundary are dropped. Rows are then sampled to fixed quotas (Table~\ref{tab:data}). The training quotas impose a 60:1 imbalance between \texttt{NORMAL} and \texttt{WILL}. The validation and test sets are class-balanced, so that the metrics are not dominated by the majority class. The test set (11 capture groups, 20,343 TCP streams) is used only once for the final evaluation. We call \texttt{DELAYED}, \texttt{SYN}, \texttt{INVALID} and \texttt{WILL} the rare classes.
 
-\begin{table}[t]
+\begin{table}[!t]
 \centering
-\caption{Downstream Minority Attack Detection F1-Score (\%) Under Varying Privacy Budgets ($\delta = 10^{-5}$)}
-\label{tab:results_summary}
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{lcccc}
+\caption{Classes, Raw Packet Counts and Split Quotas}
+\label{tab:data}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{l r r r r r}
 \toprule
-\textbf{Configuration} & $\varepsilon = 1.0$ & $\varepsilon = 5.0$ & $\varepsilon = 10.0$ & \textbf{Non-Private} \\
+\textbf{Class} & \textbf{Raw packets} & \textbf{Share} & \textbf{Train} & \textbf{Val.} & \textbf{Test} \\
 \midrule
-No Augmentation (Baseline) & 38.4 & 38.4 & 38.4 & 38.4 \\
-Fed-CVAE (DP-SGD)          & 71.2 & 86.5 & 93.8 & 96.2 \\
-Fed-CVAE (SecAgg$^+$)      & 96.1 & 96.1 & 96.1 & 96.1 \\
-FedDP-Marginal (Local DP)  & 79.8 & 89.2 & 94.6 & 96.8 \\
-\textbf{FedDP-Marginal (SecAgg$^+$)} & \textbf{87.4} & \textbf{94.1} & \textbf{96.4} & \textbf{96.8} \\
-Centralized Real Data      & ---  & ---  & ---  & 97.4 \\
+\texttt{NORMAL}  & 45,580,102 & 76.44\% & 60,000 & 2,000 & 5,000 \\
+\texttt{BCF}     & 12,280,874 & 20.60\% & 20,000 & 2,000 & 5,000 \\
+\texttt{DELAYED} &    601,542 &  1.01\% &  3,000 & 2,000 & 5,000 \\
+\texttt{SYN}     &    601,439 &  1.01\% &  3,000 & 2,000 & 5,000 \\
+\texttt{INVALID} &    290,340 &  0.49\% &  1,500 & 2,000 & 5,000 \\
+\texttt{WILL}    &    270,529 &  0.45\% &  1,000 & 2,000 & 5,000 \\
+\midrule
+\textbf{Total}   & 59,624,826 & 100\%   & 88,500 & 12,000 & 30,000 \\
 \bottomrule
-\end{tabular}%
-}
+\end{tabular}
+
+\vspace{2pt}
+\parbox{\columnwidth}{\scriptsize BCF: basic connect flooding; DELAYED: delayed connect flooding; SYN: SYN TCP flooding; INVALID: invalid subscription flooding; WILL: connect flooding with WILL payload.}
 \end{table}
 
-\subsection{Communication and Computational Overhead}
-Communication profiling reveals that FedDP-Marginal requires only three deterministic communication rounds to exchange low-dimensional contingency statistics, consuming less than $1.2$\,MB of total uplink bandwidth per gateway. In contrast, Fed-CVAE necessitates iterative weight exchanges over 50 federated rounds, transmitting over $84.6$\,MB per client. Furthermore, when integrating cryptographic SecAgg$^+$, the lightweight dimension of marginal tables avoids the combinatorial secret-sharing overhead observed when aggregating full neural network parameter tensors.
+\subsection{Configurations}
+Table~\ref{tab:configs} lists the configurations. The real-data references B0, B1a and B1b pool the raw training data and are therefore not available in a federation. All federated configurations use $K = 5$ gateways and the partition of \eqref{eq:dirichlet} with $\alpha_{\mathrm{dir}} = 0.5$, drawn once per seed and shared by every configuration. Privacy budgets are $\varepsilon \in \{1, 5, 10\}$ with $\delta = 10^{-5}$ at the packet level. The headline FedDP-Marginal configurations are MG-eps1 = MGr-eps1, MG-eps5 = MGs-eps5 and MG-eps10 = MGs-eps10, the variants selected on validation data. Hyperparameters were tuned on the validation split only (tree-structured Parzen search for the CVAE, a grid for FedDP-Marginal); this selection is not covered by $\varepsilon$.
+
+\begin{table}[!t]
+\centering
+\caption{Evaluated Configurations}
+\label{tab:configs}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\columnwidth}{l l >{\raggedright\arraybackslash}X c}
+\toprule
+\textbf{ID} & \textbf{Generator} & \textbf{Protection} & \textbf{Rounds} \\
+\midrule
+B0, B1a, B1b & none & pooled real data; B1a class weights, B1b SMOTE~\cite{chawla2002} & -- \\
+B3           & CVAE & none (FedAvg) & 30 \\
+M1-eps\{1,5,10\} & CVAE & DP-SGD at each gateway (local DP) & 30 \\
+M2           & CVAE & SecAgg$^+$ & 30 \\
+M3-eps5      & CVAE & DP-SGD and SecAgg$^+$ & 30 \\
+M1o, M3o     & CVAE & as M1, M3, re-tuned per $\varepsilon$ at full scale & 30--50 \\
+MGp-, MGs-nodp & Marginal & none; SecAgg$^+$ without noise & 3 \\
+MGs-eps\{1,5,10\} & Marginal & distributed Skellam DP and SecAgg$^+$ & 3 \\
+MGr-eps\{1,5,10\} & Marginal & MGs with post-processing (no extra $\varepsilon$) & 3 \\
+MGl-eps\{1,5,10\} & Marginal & local DP, plain sum & 3 \\
+\midrule
+\multicolumn{4}{p{\dimexpr\columnwidth-2\tabcolsep\relax}}{Suffixes: \texttt{-t}$t$ noise share $1/t$ (holds with $t$ honest gateways); \texttt{-strm}$m$ and \texttt{-cap}$m$ protect a TCP stream or a capture with at most $m$ packets each.} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Evaluation Protocols and Metrics}
+All protocols are scored on the same real test set. \textit{TRTR} trains the IDS on the pooled real training data (B0, B1a, B1b). \textit{TSTR}~\cite{esteban2017} trains it on 5,000 synthetic rows per class only, which measures what a federation obtains when raw data cannot be pooled. \textit{TAug} adds synthetic rows to the pooled real data until each class has at least 20,000 rows. \textit{Local augmentation} lets each gateway train its own IDS on its local rows, topped up with synthetic rows for every class of which it holds fewer than 5,000 rows (5 gateways $\times$ 3 seeds $= 15$ models). The IDS is a random forest with 200 trees or a multilayer perceptron with hidden layers (128, 64); for each protocol the classifier with the higher validation macro-F1 is reported.
+
+Utility is measured by macro-F1 over the six classes (primary metric), binary F1 (normal versus attack) and rare-class recall (mean recall of the four rare classes). Fidelity is measured by the Wasserstein-1 distance, the Jensen--Shannon divergence, a correlation distance, and a classifier two-sample test (C2ST) whose AUC is 0.5 when synthetic and real rows are indistinguishable~\cite{lopezpaz2017}. Privacy is assessed with the formal $\varepsilon$, recomputed independently, and with three membership inference attacks (MIAs): one on the synthetic data, one with access to the released model and calibrated with a reference model~\cite{carlini2022}, and one on the released tables of FedDP-Marginal. Each attack is checked against a positive control on which it must succeed. Communication is the payload measured on the Flower message grid, reported per round and per run.
+
+\subsection{Decision Rule and Environment}
+Every configuration is run with seeds $\{0, 1, 2\}$, which govern the partition, initialization and sampling. A configuration $A$ is declared better or worse than $B$ only if
+\begin{equation}
+0 \notin \mathrm{CI}_{95\%}(\bar{\Delta}) \quad \text{and} \quad |\bar{\Delta}| > \max(\mathrm{sd}_A, \mathrm{sd}_B),
+\label{eq:decision_rule}
+\end{equation}
+where $\bar{\Delta}$ is the mean difference in macro-F1 over seeds, the interval comes from a paired bootstrap of the test rows (1,000 class-stratified resamples, identical for all runs), and $\mathrm{sd}$ is the seed standard deviation. Otherwise the difference is reported as no effect. Because packets of a TCP stream are correlated, every verdict is repeated with a bootstrap over whole streams. We report no $p$-values. The federation is simulated with Flower~1.39~\cite{beutel2020} and Ray actors on a single Windows~11 machine (CPU only, 16.9\,GB RAM), with PyTorch~2.14, Opacus~1.6 and scikit-learn~1.9. Times therefore reflect computation, not network latency. Every run is recorded in a ledger with its configuration hash and code version, and a from-scratch re-run of the seed-0 matrix reproduced all 53 ledger rows exactly.

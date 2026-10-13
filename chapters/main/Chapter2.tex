@@ -1,172 +1,49 @@
 % !TeX root = ../../main.tex
-\section{Related Work and Research Gaps}\label{sec:related_work}
+\section{Related Work}\label{sec:related_work}
 
-\subsection{Privacy-Preserving Mechanisms in Federated Learning}
+\subsection{Privacy Protection in Federated Learning}
+Surveys of privacy-preserving FL for IoT intrusion detection group the techniques into differential privacy, homomorphic encryption, secure multi-party computation, trusted execution environments and blockchain~\cite{vyas2024}. The last three require heavy computation, special hardware or consensus overhead on constrained gateways, so this work uses DP and secure aggregation.
 
-\subsubsection{Landscape and Scope of Research}
-The integration of Federated Learning (FL) into Intrusion Detection Systems (IDS) for IoT environments has resolved raw data centralization, yet the model weight sharing process itself still harbors data leakage risks~\cite{vyas2024}. Current studies classify Privacy-Preserving Federated Learning (PPFL) techniques into five main categories: Differential Privacy (DP), Homomorphic Encryption (HE), Secure Multi-Party Computation (SMPC), Trusted Execution Environments (TEE), and Blockchain~\cite{vyas2024}. Although TEEs provide a secure execution environment and Blockchain ensures transparency, they require specialized hardware or complex consensus mechanisms unsuitable for the constrained resources of edge IoT devices~\cite{manzano2025}. Therefore, this study implements DP and SMPC-based secure aggregation (SecAgg$^+$); HE is reviewed as an alternative but not implemented due to its prohibitive computational cost on constrained devices~\cite{nakayiza2026}.
+\textit{Differential privacy} limits how much a released output can change when one record is added or removed~\cite{dwork2014}. In the central model a trusted curator adds the noise; in the local model each client perturbs its own contribution and trusts nobody, at a much higher noise level. DP-SGD clips per-example gradients and adds Gaussian noise at every step~\cite{abadi2016dpsgd}; its cumulative loss is tracked with R\'enyi DP (RDP)~\cite{mironov2017rdp}.
 
-\subsubsection{Trusted Execution Environments (TEE)}
-The Trusted Execution Environment (TEE) provides an isolated and secure hardware computing enclave for processing sensitive telemetry, effectively preserving confidentiality. However, this technology depends heavily on specialized hardware security modules. This strict hardware requirement makes TEE cumbersome and unsuitable for ubiquitous deployment across heterogeneous IoT networks comprising massively resource-constrained devices~\cite{vyas2024}.
+\textit{Secure aggregation} lets the server learn only the sum of client vectors. The protocol of Bonawitz et~al.\ uses pairwise masks and secret sharing to tolerate dropouts~\cite{bonawitz2017}; SecAgg$^+$ replaces the complete communication graph with a sparse random graph and reaches polylogarithmic overhead~\cite{bell2020}. Secure aggregation adds no statistical noise, but it protects only the individual updates, not the aggregate.
 
-\subsubsection{Blockchain-Based Mechanisms}
-Blockchain preserves data privacy through decentralized ledgers and cryptographic consensus that ensure tamper-resistance and eliminate intermediaries. However, these architectures suffer from fatal performance weaknesses due to low throughput, high latency, and expensive verification costs stemming from continuously growing immutable storage. These latency and storage overheads make blockchain impractical for lightweight, multi-device IoT environments that demand rapid detection response times~\cite{vyas2024}.
+\textit{Distributed DP} combines both: each client adds a share of the noise and secure aggregation reveals only the sum, which then carries the full calibrated noise. Because secure aggregation works on integers modulo $2^b$, discrete mechanisms are needed. Kairouz et~al.\ proposed the distributed discrete Gaussian~\cite{kairouz2021}. Agarwal et~al.\ showed that the Skellam distribution is closed under summation and gave a tight RDP bound for it~\cite{agarwal2021}. Both works train models with many rounds; a release made of a few sums, such as count tables, is a simpler fit.
 
-\subsubsection{Homomorphic Encryption (HE)}
-HE enables arithmetic operations directly on encrypted ciphertexts, ensuring model updates from clients remain confidential prior to server aggregation without decryption~\cite{nakayiza2026}. However, the computational complexity and communication bandwidth expansion of HE algorithms are exceptionally heavy, drastically increasing system latency~\cite{nakayiza2026}. This renders HE unfeasible for edge IDS requiring real-time response under tight resource constraints~\cite{nakayiza2026}.
+\subsection{Synthetic Data for Intrusion Detection}
+Oversampling such as SMOTE interpolates between minority neighbors~\cite{chawla2002}, which requires the minority records to be pooled and is therefore unavailable when a gateway holds few or no attack records. A systematic review of generative AI for IoT intrusion detection found that most studies use generative adversarial networks (GANs) or variational autoencoders for data augmentation and class rebalancing, and noted mode collapse and training instability as recurring problems~\cite{deng2025}.
 
-\subsubsection{Differential Privacy (DP)}
-Unlike the heavy overhead of HE, Differential Privacy (DP) offers high scalability. The core principle of DP is to mask the contribution of any individual record by injecting calibrated random perturbation into local updates before transmission~\cite{ruzafa2022}. DP is exceptionally lightweight, incurs negligible transmission overhead, and scales easily to large client cohorts~\cite{ruzafa2022}. The trade-off is that noise injection degrades model parameter precision, necessitating careful calibration of the privacy budget $\varepsilon$~\cite{ruzafa2022}.
+Federated generative IDSs follow this line. Hamouda et~al.\ trained a federated conditional GAN on Edge-IIoTset and applied DP-SGD to the downstream classifier rather than to the generator; they identified cryptographic protection of the models as an open challenge~\cite{hamouda2024}. Yao et~al.\ protected the downlink broadcast of synthetic samples with dynamic $(t, n)$-threshold secret sharing, while the uplink gradients relied on Gaussian DP~\cite{yao2024}. Shettar et~al.\ reported a detection F1-score of 96.8\% with a central aggregator under DP at $\varepsilon = 4.8$~\cite{shettar2026}. None of these works applies secure aggregation to the generator updates or measures how DP and secure aggregation each affect rare-class detection.
 
-\subsubsection{Secure Multi-Party Computation (SMPC/SecAgg)}
-Conversely, Secure Aggregation (SecAgg) protocols based on SMPC resolve the accuracy degradation of DP. SMPC prevents the server from inspecting individual client updates by ensuring that only the aggregated sum is revealed~\cite{bessaa2026}. SecAgg introduces zero statistical perturbation; under the fixed-point quantization utilized in SecAgg$^+$, the aggregate differs from the plain sum only by bounded quantization error~\cite{bell2020}. Although the original SecAgg protocol suffered from multi-round interaction bottlenecks scaling quadratically with client counts~\cite{bonawitz2017}, the SecAgg$^+$ protocol resolves these issues by replacing complete communication graphs with $k$-regular graphs, achieving polylogarithmic communication and computational complexity~\cite{bell2020}.
+\subsection{Marginal-Based Private Synthesis}
+Marginal-based synthesizers avoid backpropagation altogether. PrivBayes fits a Bayesian network to noisy low-order marginals~\cite{zhang2017privbayes}; MST measures noisy two-way marginals along a maximum spanning tree and post-processes them with a graphical model~\cite{mckenna2021mst}; AIM selects marginals adaptively and iteratively~\cite{mckenna2024aim}. Two works move this family to distributed data. FLAIM adapts AIM to federated clients under zero-concentrated DP and compares it with a secure multi-party variant~\cite{maddock2024}. CaPS performs marginal selection and measurement inside secure multi-party computation (``DP-in-MPC'')~\cite{pentyala2024}. Both were evaluated mainly on general-purpose tabular benchmarks from demographic, financial and biomedical domains; FLAIM also used the legacy DARPA intrusion detection data, but measured workload error and negative log-likelihood rather than downstream rare-class detection. The family has known limits: only low-order dependencies are modeled, continuous attributes must be discretized, and sparse cells have a low signal-to-noise ratio under DP.
 
-\subsubsection{Hybrid Privacy-Preserving Systems}
-Gutti et~al.~\cite{gutti2024} (combining DP and SecAgg via the HADA algorithm) demonstrated that pairing DP (to prevent post-aggregation inference) with SecAgg (to secure transmission channels) is a promising paradigm. However, stacking these security layers introduces substantial hyperparameter tuning and coordination complexity~\cite{gutti2024}. Evaluating independent and joint performance trade-offs under realistic edge conditions is therefore essential before deploying hybrid pipelines.
+\subsection{Research Gap}
+Table~\ref{tab:lit_review} summarizes the closest works. Based on a non-systematic search of the literature, and to the best of our knowledge, no prior study (i) evaluates a federated marginal generator on IoT-MQTT traffic for downstream rare-class detection, (ii) compares it with a federated deep generator under identical partitions, budgets and secure aggregation, or (iii) combines distributed discrete DP with a real secure aggregation implementation and reports the guarantee as a function of the number of honest clients.
 
-\subsubsection{Distributed Differential Privacy}
-Distributed DP combines the strengths of both paradigms: each client adds only a fraction of the required noise, and secure aggregation reveals only the collective sum containing the full calibrated perturbation~\cite{kairouz2021, agarwal2021}. Because secure aggregation operates over modular integer lattices, discrete noise distributions are preferred; the sum of independent Skellam variables remains Skellam, permitting exact privacy accounting after modular aggregation~\cite{agarwal2021}. Distributed DP is particularly well-suited for single-sum releases such as contingency count tables.
-
-\subsection{Generative Data Augmentation for Intrusion Detection}
-
-\subsubsection{Taxonomy and Core Concepts}
-Generative AI paradigms in IoT-IDS learn the underlying multivariate probability distributions of network telemetry to automatically synthesize realistic traffic samples whose structural and statistical attributes align with genuine traffic~\cite{deng2025}.
-
-\noindent\textbf{Core problems addressed by generative augmentation:}
-\begin{itemize}
-    \item \textbf{Mitigating Extreme Class Imbalance:} Real-world IoT traffic exhibits severe class skewness, where over 90--99\% of traffic comprises benign activities, while rare DoS/DDoS attacks constitute negligible fractions. This deficit biases downstream classifiers toward majority classes, generating unacceptable false negatives on stealthy threats~\cite{deng2025}.
-    \item \textbf{Surpassing Interpolation-Based Oversampling:} Traditional oversampling algorithms such as SMOTE~\cite{chawla2002} perform linear interpolation within localized convex hulls. Deep generative models capture global distributions and explore under-represented regions of feature space to synthesize zero-day attack variants. Furthermore, SMOTE requires centralized access to neighboring minority instances, making it inapplicable to federated environments where individual edge gateways possess few or no attack records~\cite{chawla2002}.
-    \item \textbf{Data Augmentation and Restructuring:} Systematic surveys show that up to 89\% of studies leverage generative models for data augmentation and class rebalancing, improving classification generalization without centralizing raw traffic~\cite{deng2025}.
-\end{itemize}
-
-\noindent\textbf{Primary taxonomies of generative architectures in IDS:}
-\begin{itemize}
-    \item \textbf{Generative Adversarial Networks (GANs):} Structured around an adversarial minimax game between a Generator and a Discriminator. Modeling sharp distributions makes GANs the predominant architecture (58\%) in generative IoT-IDS~\cite{deng2025}.
-    \item \textbf{Variational Autoencoders (VAEs):} Encoders map high-dimensional traffic into continuous latent manifolds, while Decoders reconstruct inputs. VAEs enforce structured prior distributions, permitting stable sampling without minimax instabilities~\cite{deng2025}.
-    \item \textbf{Transformer-Based Models:} Multi-head self-attention mechanisms model complex sequential dependencies across packet streams~\cite{deng2025}.
-\end{itemize}
-
-\subsubsection{Critical Analysis of Generative Approaches}
-Existing literature reveals noticeable bottlenecks when deploying generative models in decentralized edge settings~\cite{deng2025}:
-\begin{itemize}
-    \item \textbf{Tabular Diffusion (Tab-DDPM):} Manzano et~al.~\cite{manzano2025} integrated tabular diffusion on the BoT-IoT benchmark. While Tab-DDPM achieves high fidelity, iterative denoising over hundreds of reverse steps incurs ~32 seconds per sample on edge nodes (1 CPU core, 2\,GB RAM), which is infeasible for line-rate inspection.
-    \item \textbf{Policy-Guided GANs:} Yang et~al.~\cite{yang2025} employed RL-guided GANs for DDoS augmentation. However, the multi-component architecture requires 2.726 seconds per batch and 19.6\,GB of GPU memory on KDDcup99, without isolating standalone edge inference latency.
-    \item \textbf{Adversarial Instability:} Deng et~al.~\cite{deng2025} observed that GAN training is prone to mode collapse, wasting node resources by repeatedly generating duplicate records.
-    \item \textbf{Resampling Baselines (Bootstrapping):} Jacob and Sultana~\cite{jacob2026} used bootstrapping to balance BoT-IoT and CSE-CIC-IDS2018 datasets. While lightweight, duplication does not expand feature diversity, increasing overfitting risks.
-    \item \textbf{Centralized Cloud VAE-GAN:} Anandhi and Srikanth~\cite{anandhi2026} synthesized 51,200 Low-Rate Stealth Attack samples in the cloud, raising recall from 62\% to 98\%. However, cloud synthesis violates federated privacy principles, and compressing models below 6 bits degraded detection sensitivity.
-    \item \textbf{Lightweight Edge GANs (TinyGAN):} Durga et~al.~\cite{durga2026} deployed TinyGAN for IoMT malware detection. However, all classes below 0.5\% prevalence were discarded, avoiding the fundamental minority imbalance challenge.
-\end{itemize}
-
-\subsection{Privacy-Preserving Generative Defenses and Identified Research Gaps}
-
-\subsubsection{Privacy-Utility Dilemma in Edge Generative IDS}
-Federated IDS on edge networks must protect client telemetry while coping with severe minority-class imbalance and non-IID traffic distributions. Differential privacy and cryptographic protocols bound gradient inversion and membership inference risks~\cite{cunhaneto2023} but do not correct class skew. Augmenting under-represented attack classes with federated generative models mitigates this imbalance, yet generative architectures may memorize training records and expose sensitive network traces through parameter exchanges or synthesized flows~\cite{cunhaneto2023}. Edge defenses must therefore limit the utility loss of synthetic data while providing formal client-side privacy guarantees.
-
-Cryptographic mechanisms, such as secure multi-party computation (MPC) and threshold secret sharing, preserve numerical precision without perturbation error~\cite{cunhaneto2023}. However, secure aggregation of high-dimensional neural parameters requires iterative multi-round communication, which burdens resource-constrained IoT edge devices~\cite{cunhaneto2023}.
-
-\subsubsection{State-of-the-Art in Generative PPFL-IDS}
-A literature search of IEEE Xplore and SpringerLink (2022--2026) for studies combining federated learning, intrusion detection, and generative models (GAN or VAE) identified five empirical implementations, all from IEEE~\cite{yao2024, he2023, salim2025, jiao2025, shettar2026}. None applies cryptographic secure aggregation to uplink generator updates. Salim et~al.~\cite{salim2025} (global VAE aggregation), Jiao et~al.~\cite{jiao2025} (local CGAN gradients), and Shettar et~al.~\cite{shettar2026} (central aggregator with moments-accountant clipping at $\varepsilon = 4.8$ and $\delta = 10^{-5}$) rely on DP alone. He et~al.~\cite{he2023} combine local gradient noise with blockchain Proof-of-Authority consensus across edge servers, which ensures aggregation integrity and auditability rather than parameter confidentiality.
-
-Yao et~al.~\cite{yao2024} use a hybrid design: proactive dynamic $(t, n)$-threshold secret sharing with $t=4$ and $n=5$ protects only downlink synthetic broadcasts, whereas uplink client gradients rely on Gaussian DP. They report execution measurements for key distribution and sample reconstruction (Table~VI), but secret sharing covers downlink tabular samples, not full model-parameter aggregation. Outside the primary search, Hamouda et~al.~\cite{hamouda2024} likewise omit secure aggregation and identify cryptographic model protection as an open challenge. Because none of these works benchmarks cryptographic aggregation against DP on model weights, their use of DP reflects a design choice rather than a measured trade-off.
-
-The effect of DP perturbation on downstream detection depends on the privacy budget $\varepsilon$, gradient clipping threshold $C$, and minority-class sample density, yet existing studies do not isolate these factors. Utility can remain high at a moderate budget or with large synthetic volumes: Shettar et~al.~\cite{shettar2026} report a 96.8\% detection F1-score under central DP ($\varepsilon = 4.8$), and Hamouda et~al.~\cite{hamouda2024} observe a 0.25-percentage-point accuracy reduction at $\varepsilon = 1.0$ when applying DP-SGD to the downstream global classifier with 50,000 synthetic samples per class. Generative augmentation can also raise rare-class detection from sparse baselines: He et~al.~\cite{he2023} report that CGAN augmentation improved Infiltration F1-score from 33.33\% to as high as 98.01\%, starting from 29 baseline training samples. However, Hamouda et~al.~\cite{hamouda2024} applied DP to the classifier rather than the generator, and neither He et~al.~\cite{he2023} nor Jiao et~al.~\cite{jiao2025} report formal numerical $(\varepsilon, \delta)$ budgets. Because generator-side DP must spread privacy noise across iterative training steps, how strict bounds ($\varepsilon \le 1.0$) interact with extreme class scarcity in federated generative architectures remains an open empirical question.
-
-\subsubsection{Marginal-Based Tabular Synthesis vs. Deep Models}
-Marginal-based tabular synthesis offers an alternative to deep generative models. Instead of optimizing non-convex neural network weights by backpropagation, marginal synthesizers select and measure low-order contingency tables and reconstruct the data distribution with probabilistic graphical models. Beyond network IDS research, a cross-domain search of the ACM Digital Library, PMLR, and arXiv identified distributed extensions: Maddock et~al.~\cite{maddock2024} introduce FLAIM, which adapts the Adaptive and Iterative Mechanism (AIM) to distributed clients under zero-concentrated differential privacy ($\rho$-zCDP) and compares DP with secure multi-party computation (DistAIM); Pentyala et~al.~\cite{pentyala2024} present CaPS, a ``DP-in-MPC'' framework in which secret sharing protects marginal selection and measurement; and Li et~al.~\cite{li2026} propose HeteroFedSyn, which compresses two-way marginal dependencies by random projection under distributed perturbation.
-
-Marginal synthesizers avoid the adversarial minimax training instability of GANs but carry their own privacy-utility trade-offs. Iterative selection-and-measurement algorithms (e.g., AIM and Private-PGM) divide the total privacy budget $\varepsilon$ across rounds, and distributing measurements across federated clients compounds perturbation noise~\cite{maddock2024, pentyala2024}. In sparse discrete categories with small contingency cell counts, additive Laplace or Gaussian noise yields a low signal-to-noise ratio. Restricting measurements to low-order marginals (typically two-way dependencies~\cite{li2026}) truncates higher-order multivariate correlations, and continuous flow variables require discretization, which introduces binning artifacts.
-
-Federated marginal generators have so far been evaluated mainly on general-purpose tabular benchmarks from demographic, financial, and biomedical domains (e.g., Adult, Census, Credit Card Fraud, COMPAS, Diabetes)~\cite{maddock2024, pentyala2024, li2026}. FLAIM~\cite{maddock2024} also used the legacy DARPA Intrusion Detection benchmark but evaluated only workload error and negative log-likelihood, not downstream minority-class intrusion classification. Decentralized tabular GANs with cryptographic primitives also exist: Duan et~al.~\cite{duan2023} combine Paillier additively homomorphic encryption for global multimodal distribution encoding with DP during GAN training, but evaluate statistical utility and membership inference resistance on legacy tabular data (KDD Cup 99), not modern protocol telemetry.
-
-\begin{table*}[!t]
+\begin{table}[!t]
 \centering
-\caption{Unified Comparison of the Reviewed Studies (\ding{51}: Addressed; \ding{53}: Not Addressed)}
-\label{tab:lit_review_comparison}
-\footnotesize
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{lcccccccccc}
+\caption{Comparison With the Closest Related Work}
+\label{tab:lit_review}
+\scriptsize
+\setlength{\tabcolsep}{3.2pt}
+\begin{tabular}{l c c c c c c c c}
 \toprule
-\textbf{Study} & \textbf{Ref.} & \textbf{FL} & \textbf{IoT Dataset} & \textbf{Non-IID} & \textbf{Data Synthesis} & \textbf{DP} & \textbf{SMPC} & \makecell{\textbf{DP vs.\ SecAgg}\\\textbf{Trade-off}} & \makecell{\textbf{Marginal-Based}\\\textbf{DP Synthesis}} & \makecell{\textbf{Distributed}\\\textbf{DP}} \\
+\textbf{Work} & \textbf{FL} & \textbf{IoT} & \textbf{Syn.} & \textbf{DP} & \textbf{SA} & \textbf{Marg.} & \textbf{D-DP} & \textbf{IDS} \\
 \midrule
-Vyas et al. & \cite{vyas2024} & \ding{51} & \ding{53} & \ding{53} & \ding{53} & \ding{51} & \ding{53} & \ding{53} & \ding{53} & \ding{53} \\
-Manzano et al. & \cite{manzano2025} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{53} & \ding{53} & \ding{53} & \ding{53} & \ding{53} \\
-Nakayiza et al. & \cite{nakayiza2026} & \ding{51} & \ding{51} & \ding{53} & \ding{53} & \ding{53} & \ding{53} & \ding{53} & \ding{53} & \ding{53} \\
-Ruzafa-Alc{\'a}zar et al. & \cite{ruzafa2022} & \ding{51} & \ding{51} & \ding{51} & \ding{53} & \ding{51} & \ding{53} & \ding{53} & \ding{53} & \ding{53} \\
-Bessaa et al. & \cite{bessaa2026} & \ding{51} & \ding{51} & \ding{51} & \ding{53} & \ding{53} & \ding{51} & \ding{53} & \ding{53} & \ding{53} \\
-Bonawitz et al. & \cite{bonawitz2017} & \ding{51} & \ding{53} & \ding{53} & \ding{53} & \ding{53} & \ding{51} & \ding{53} & \ding{53} & \ding{53} \\
-Bell et al. & \cite{bell2020} & \ding{51} & \ding{53} & \ding{53} & \ding{53} & \ding{53} & \ding{51} & \ding{53} & \ding{53} & \ding{53} \\
-Gutti et al. & \cite{gutti2024} & \ding{51} & \ding{51} & \ding{51} & \ding{53} & \ding{51} & \ding{51} & \ding{53} & \ding{53} & \ding{53} \\
-Kairouz et al. & \cite{kairouz2021} & \ding{51} & \ding{53} & \ding{51} & \ding{53} & \ding{51} & \ding{51} & \ding{53} & \ding{53} & \ding{51} \\
-Agarwal et al. & \cite{agarwal2021} & \ding{51} & \ding{53} & \ding{51} & \ding{53} & \ding{51} & \ding{51} & \ding{53} & \ding{53} & \ding{51} \\
-Deng et al. & \cite{deng2025} & \ding{53} & \ding{53} & \ding{53} & \ding{53} & \ding{53} & \ding{53} & \ding{53} & \ding{53} & \ding{53} \\
-Chawla et al. & \cite{chawla2002} & \ding{53} & \ding{53} & \ding{53} & \ding{51} & \ding{53} & \ding{53} & \ding{53} & \ding{53} & \ding{53} \\
-Yang et al. & \cite{yang2025} & \ding{53} & \ding{51} & \ding{53} & \ding{51} & \ding{53} & \ding{53} & \ding{53} & \ding{53} & \ding{53} \\
-Jacob \& Sultana & \cite{jacob2026} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{53} & \ding{53} & \ding{53} & \ding{53} & \ding{53} \\
-Anandhi \& Srikanth & \cite{anandhi2026} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{53} & \ding{51} & \ding{53} & \ding{53} & \ding{53} \\
-Durga et al. & \cite{durga2026} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{53} & \ding{53} & \ding{53} & \ding{53} & \ding{53} \\
-Cunha Neto et al. & \cite{cunhaneto2023} & \ding{51} & \ding{53} & \ding{53} & \ding{53} & \ding{53} & \ding{53} & \ding{53} & \ding{53} & \ding{53} \\
-Yao et al. & \cite{yao2024} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{53} & \ding{53} & \ding{53} \\
-He et al. & \cite{he2023} & \ding{51} & \ding{53} & \ding{53} & \ding{51} & \ding{51} & \ding{53} & \ding{53} & \ding{53} & \ding{53} \\
-Salim et al. & \cite{salim2025} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{53} & \ding{53} & \ding{53} & \ding{53} \\
-Jiao et al. & \cite{jiao2025} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{53} & \ding{53} & \ding{53} & \ding{53} \\
-Shettar et al. & \cite{shettar2026} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{53} & \ding{53} & \ding{53} & \ding{53} \\
-Hamouda et al. & \cite{hamouda2024} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{53} & \ding{53} & \ding{53} & \ding{53} \\
-Maddock et al. & \cite{maddock2024} & \ding{51} & \ding{53} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{53} & \ding{51} & \ding{53} \\
-Pentyala et al. & \cite{pentyala2024} & \ding{53} & \ding{53} & \ding{53} & \ding{51} & \ding{51} & \ding{51} & \ding{53} & \ding{51} & \ding{53} \\
-Li et al. & \cite{li2026} & \ding{51} & \ding{53} & \ding{51} & \ding{51} & \ding{51} & \ding{53} & \ding{53} & \ding{51} & \ding{53} \\
-Duan et al. & \cite{duan2023} & \ding{51} & \ding{53} & \ding{51} & \ding{51} & \ding{51} & \ding{53} & \ding{53} & \ding{53} & \ding{53} \\
-\midrule
+Hamouda et al.~\cite{hamouda2024}  & \yes & \yes & \yes & \yes & \no  & \no  & \no  & \yes \\
+Yao et al.~\cite{yao2024}          & \yes & \yes & \yes & \yes & \yes & \no  & \no  & \yes \\
+Shettar et al.~\cite{shettar2026}  & \yes & \yes & \yes & \yes & \no  & \no  & \no  & \yes \\
+Kairouz et al.~\cite{kairouz2021}  & \yes & \no  & \no  & \yes & \yes & \no  & \yes & \no  \\
+Agarwal et al.~\cite{agarwal2021}  & \yes & \no  & \no  & \yes & \yes & \no  & \yes & \no  \\
+MST~\cite{mckenna2021mst}          & \no  & \no  & \yes & \yes & \no  & \yes & \no  & \no  \\
+FLAIM~\cite{maddock2024}           & \yes & \no  & \yes & \yes & \yes & \yes & \no  & \no  \\
+CaPS~\cite{pentyala2024}           & \no  & \no  & \yes & \yes & \yes & \yes & \no  & \no  \\
 \rowcolor{gray!15}
-\textbf{This work (PP-FedData)} & -- & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{51} \\
+\textbf{PP-FedData}                & \yes & \yes & \yes & \yes & \yes & \yes & \yes & \yes \\
 \bottomrule
-\end{tabular}%
-}
-\end{table*}
+\end{tabular}
 
-\subsubsection{IoT-MQTT Protocol Telemetry and Hypotheses}
-IoT-MQTT telemetry combines structured, low-cardinality discrete protocol fields (e.g., message types, QoS levels, retain flags) with continuous flow metrics (e.g., payload lengths, burst durations). Sparse discrete feature combinations form low-count contingency cells, where both generative families risk degradation under DP noise, making this a suitable setting for examining these trade-offs. We hypothesize that, under generator-side DP at strict budgets ($\varepsilon \le 1.0$), a federated marginal synthesizer achieves higher minority-class detection F1-score than a federated deep generative model for attack classes defined by low-order (two-way) discrete header correlations (e.g., MQTT Unauthorized Connect, Malformed Header). We expect the reverse for volumetric or timing-based attacks (e.g., MQTT Publish Floods) governed by multi-attribute continuous flow dynamics. We test this across five random seeds, equalizing privacy budgets by converting all mechanisms to $(\varepsilon, \delta)$-DP under R{\'e}nyi differential privacy accounting, and compare class-specific F1-scores with a Wilcoxon signed-rank test (treating a margin $|\Delta\mathrm{F1}| \ge 2.0$ percentage points at $p < 0.05$ as statistically significant).
-
-\subsubsection{Identified Research Gaps}
-To the best of our knowledge, the systematic survey indicates three distinct research gaps:
-\begin{itemize}
-    \item \textbf{Gap 1 -- Marginal Synthesis for Protocol Telemetry:} Deep generative models have been evaluated on MQTT-bearing datasets (e.g., Hamouda et~al.~\cite{hamouda2024}, federated conditional GAN on Edge-IIoTset), but no prior study evaluates a federated marginal-based generator on modern IoT-MQTT telemetry or examines how mixed discrete-continuous features affect marginal synthesis relative to deep models.
-    \item \textbf{Gap 2 -- Controlled Architectural Comparison:} No empirical study compares a federated marginal-based synthesizer with a federated deep generative model (e.g., CGAN, VAE) under identical non-IID client partitions, minority-attack imbalance ratios, and calibrated generator-side privacy budgets $(\varepsilon, \delta)$.
-    \item \textbf{Gap 3 -- Downstream Detection Trade-offs:} Prior marginal studies compared DP with cryptographic aggregation on workload error, negative log-likelihood, runtime, and communication bandwidth~\cite{maddock2024, pentyala2024}, and decentralized GANs were evaluated for statistical utility and membership inference resistance~\cite{duan2023}. No study quantifies how choosing between DP and cryptographic secure aggregation affects downstream minority-class intrusion detection under matched federated edge conditions.
-\end{itemize}
-
-
-
-\subsection{Summary of the Literature Review}\label{subsec:lit_summary}
-
-
-The reviewed literature establishes federated learning (FL) as a promising approach to IoT intrusion detection, while revealing persistent limitations in data representation, privacy protection, and empirical evaluation. As summarized in Table~\ref{tab:lit_review_comparison}, several studies address non-IID data distributions or incorporate data augmentation, but these features alone do not demonstrate effective detection of underrepresented attack classes. Class imbalance and inter-client heterogeneity therefore remain central concerns. Two generator families address them under privacy constraints, namely deep generative models trained with DP-SGD and marginal-based synthesis; however, they have been evaluated separately and rarely on IoT traffic, so whether either adds detection value must be verified through controlled experiments.
-
-Table~\ref{tab:lit_review_comparison} further shows that privacy preservation and synthetic data generation have increasingly converged in distributed and federated environments. On the one hand, several intrusion detection frameworks employ deep generative models, such as generative adversarial networks (GANs) and variational autoencoders (VAEs), to mitigate severe class imbalance and zero-day threat variants in IoT, UAV, and satellite networks~\cite{hamouda2024, yao2024, he2023, salim2025, jiao2025, shettar2026}. On the other hand, recent advances in tabular data synthesis, including FLAIM~\cite{maddock2024}, CaPS~\cite{pentyala2024}, and HeteroFedSyn~\cite{li2026}, have extended marginal-based synthesis to distributed or federated settings using differential privacy (DP) and secure multi-party computation (SMPC). However, these marginal-based synthesizers have been validated almost exclusively on general-purpose tabular benchmarks (e.g., Adult, Census, and Credit Card Fraud) rather than on network telemetry, which leaves their efficacy for packet-level IoT intrusion detection unexamined.
-
-More critically, Table~\ref{tab:lit_review_comparison} highlights two persistent research gaps:
-\begin{itemize}
-    \item \textbf{Absence of a controlled DP versus SecAgg trade-off analysis:} Cryptographic protection (SMPC and SecAgg/SecAgg$^+$) preserves exact parameter sums without statistical noise but incurs communication and round complexity. Conversely, perturbation-based protection (DP) offers formal guarantees against inference attacks at the expense of utility. Although several hybrid systems combine aspects of both paradigms~\cite{gutti2024, yao2024, maddock2024}, none provides an explicit head-to-head empirical comparison of a purely cryptographic pipeline and a perturbation-based pipeline under identical IoT network conditions, non-IID partitions, and threat models.
-    \item \textbf{Untapped distributed DP for federated marginal synthesis in IoT:} Discrete distributed DP mechanisms, such as the distributed discrete Gaussian~\cite{kairouz2021} and Skellam~\cite{agarwal2021} mechanisms, allow noise shares to be split across clients and reconstructed exactly through modular secure aggregation. Nevertheless, existing federated intrusion detection architectures continue to rely on centralized noise injection or local DP-SGD. Furthermore, deep generative approaches and marginal-based mechanisms have developed in isolation, without a unified benchmark that determines whether lightweight count-table synthesis retains sufficient utility relative to complex deep generative baselines.
-\end{itemize}
-
-To the best of our knowledge, based on a non-systematic search of the literature, no prior study has jointly addressed these limitations within a unified federated framework. This observation motivates PP-FedData, which implements: (i)~a federated marginal-based generator (FedDP-Marginal) tailored to IoT-MQTT network traffic; (ii)~an end-to-end distributed DP mechanism that aggregates integer Skellam noise through Flower's SecAgg$^+$ protocol, alongside a federated conditional variational autoencoder (CVAE) baseline; and (iii)~a controlled evaluation along five dimensions, namely downstream intrusion detection utility, synthetic data fidelity, formal privacy accounting, operational overhead, and statistical rigor.
-
-\subsection{Contributions of This Reasearch}\label{subsec:contributions}
-To address the gaps identified in Section~\ref{subsec:lit_summary} and Table~\ref{tab:lit_review_comparison}, namely the lack of marginal-based private synthesis for IoT telemetry, the absence of distributed DP for tabular count data, and the lack of an explicit empirical DP-versus-SecAgg trade-off benchmark, this work proposes PP-FedData and makes three main contributions.
-
-\subsubsection{A Federated Marginal-Based Generator for Non-IID IoT-MQTT Traffic, With a Deep Generative Baseline}
-Existing marginal-based synthesizers (e.g., FLAIM~\cite{maddock2024}, CaPS~\cite{pentyala2024}, and HeteroFedSyn~\cite{li2026}) have only been evaluated on generic tabular datasets. We develop FedDP-Marginal for packet-level IoT-MQTT traffic. Over three communication rounds, the framework releases noisy per-class one-way marginal tables, global two-way tables from which a single Chow--Liu dependency tree is learned~\cite{chow1968}, and class-conditional tables along that tree; synthetic packets are then sampled class by class. The design adapts central DP synthesis mechanisms (MST~\cite{mckenna2021mst} and PrivBayes~\cite{zhang2017privbayes}) to a federation of distributed gateways and adds post-processing steps (fusion of independent marginal estimates and iterative proportional fitting) that consume no additional privacy budget. A federated CVAE~\cite{sohn2015cvae} trained with FedAvg~\cite{mcmahan2017} serves as the deep generative baseline under identical data partitions, downstream classifiers, and evaluation criteria, which determines whether structural marginal modeling offers operational advantages over deep generative alternatives.
-
-\subsubsection{Distributed Differential Privacy Through a Real Secure Aggregation Implementation, With Explicit Trust Assumptions}
-Unlike the federated intrusion detection architectures in Table~\ref{tab:lit_review_comparison}, which apply heuristic local perturbation without cryptographic aggregation or rely solely on centralized server-side noise, PP-FedData integrates formal distributed DP with a real cryptographic protocol. In FedDP-Marginal, integer Skellam noise~\cite{agarwal2021} is split across the edge gateways, and the noisy tables are summed with Flower's SecAgg$^+$ protocol~\cite{bell2020}, so that the honest-but-curious aggregator observes only the noisy sum. The cumulative privacy budget $\varepsilon$ is accounted for with the R\'enyi differential privacy (RDP)~\cite{mironov2017rdp} bound of Agarwal \textit{et al.}~\cite{agarwal2021} and is reported explicitly as a function of the number of honest gateways. The framework is configurable in (i)~the threshold $t$ of required honest gateways and (ii)~the protection unit, which is record-level (one packet) by default and optionally stream-level or capture-level when each unit is held by a single gateway and capped at $m$ rows. A local DP variant is provided for clients that trust no other party. For the CVAE baseline, DP stochastic gradient descent (DP-SGD)~\cite{abadi2016dpsgd} with per-example gradient clipping and R\'enyi accounting is combined with fixed-point quantized SecAgg$^+$.
-
-\subsubsection{A Controlled Five-Dimensional Empirical Evaluation and a Requirement-Driven Configuration Guide}
-To overcome the fragmentation of prior evaluations, all configurations (FedDP-Marginal, the CVAE baseline, and their non-private variants) are evaluated on the same held-out test split of real IoT-MQTT traffic along five dimensions:
-\begin{itemize}
-    \item \textbf{Downstream IDS utility:} Macro-F1, binary F1, per-class precision and recall, and minority-attack recall for intrusion detection systems (IDSs) trained on synthetic data only (TSTR), on real data augmented with synthetic data (TAug), and with per-gateway local augmentation;
-    \item \textbf{Fidelity:} Wasserstein distance, Jensen--Shannon divergence, correlation distance, and classifier two-sample tests (C2ST), which assess the preservation of multi-attribute dependencies;
-    \item \textbf{Privacy:} Formal $(\varepsilon, \delta)$ budgets recomputed independently with the privacy accountants, together with empirical membership inference attacks (MIAs) validated by positive controls;
-    \item \textbf{Operational overhead:} Upstream and downstream communication volume (bytes per round), number of rounds, end-to-end training and sampling time, and peak memory usage;
-    \item \textbf{Statistical rigor:} Three random seeds, paired bootstrap confidence intervals, a fixed decision rule, and stream-level bootstrap sensitivity checks.
-\end{itemize}
-Building on these findings, we derive a transparent decision rule that filters valid configurations by operational requirements (server trust, gateway collusion risk, bandwidth limits, and target attack priority) and selects the most suitable operating point from their empirical Pareto front.
+\vspace{2pt}
+\parbox{\columnwidth}{\scriptsize Syn.: synthetic data generation; SA: secure aggregation or MPC; Marg.: marginal-based DP synthesis; D-DP: distributed DP; IDS: downstream intrusion detection evaluated.}
+\end{table}

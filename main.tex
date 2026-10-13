@@ -1,11 +1,9 @@
 \documentclass[conference]{IEEEtran}
 \IEEEoverridecommandlockouts
-% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
 
 % ========== CORE IEEE PACKAGES ==========
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
-\usepackage{algorithmic}
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
@@ -15,12 +13,23 @@
 \usepackage{url}
 \usepackage{array}
 \usepackage{tabularx}
-\usepackage{tikz}
-\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc, fit, backgrounds, shadows}
-\usepackage[section]{placeins} % floats never cross a \section; \FloatBarrier for subsections
-\usepackage{pifont}   % \ding{51} / \ding{53} marks in the literature comparison table
+\usepackage{pifont}   % \ding{51} / \ding{55} marks in the literature comparison table
 \usepackage{makecell} % multi-line column headers
 \usepackage{colortbl} % \rowcolor
+
+\newcommand{\yes}{\ding{51}}
+\newcommand{\no}{\ding{55}}
+
+% ========== FIGURES DRAWN IN CONCEPTDRAW ==========
+% \cdfigure{graphics/paper/<name>}{<width>}{<placeholder height>}
+% Includes <name>.pdf or <name>.png when the exported file exists; otherwise it draws a
+% framed box of the final size, so the page count stays right while the figure is drawn.
+% Drawing instructions: huong_dan/HUONG_DAN_HINH_VE_CONCEPTDRAW.md
+\newcommand{\cdfigure}[3]{%
+  \IfFileExists{#1.pdf}{\includegraphics[width=#2]{#1.pdf}}{%
+  \IfFileExists{#1.png}{\includegraphics[width=#2]{#1.png}}{%
+  \fbox{\parbox[c][#3][c]{\dimexpr#2-2\fboxsep-2\fboxrule\relax}{\centering\footnotesize
+  Figure to be drawn in ConceptDraw:\\\texttt{\detokenize{#1}}.pdf}}}}}
 
 % ========== FLOAT PLACEMENT ==========
 % Let more and larger floats share a page so tables stay close to their text
@@ -39,7 +48,11 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
 % ========== TITLE & AUTHORS ==========
-\title{A Privacy-Preserving Data Generation Framework in Federated Learning for Enhanced IoT System Attack Detection\thanks{Identify applicable funding agency here. If none, delete this.}}
+\title{A Privacy-Preserving Data Generation Framework in Federated Learning for Enhanced IoT System Attack Detection}
+% Alternative title to discuss with the supervisor (closer to the results: synthetic data do not
+% improve the IDS when real data can be pooled; their value is where raw traffic must stay local):
+% \title{PP-FedData: Federated Differentially Private Marginal Synthesis with Secure Aggregation
+%        for IoT-MQTT Intrusion Detection}
 
 % Layout A: 6 tác giả xếp theo cột chuẩn IEEE Conference (Khớp với mẫu template)
 \author{
