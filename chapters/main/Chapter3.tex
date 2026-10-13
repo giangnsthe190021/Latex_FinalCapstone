@@ -16,12 +16,12 @@ and each record of class $c$ goes to gateway $k$ with probability $p_{c,k}$. Wit
 
 \textit{Threat model.} The server is honest-but-curious: it follows the protocol but inspects everything it receives. Gateways follow the protocol; poisoning and Byzantine behavior are out of scope. The two protections answer different threats. SecAgg$^+$~\cite{bell2020} hides each gateway's contribution from the server, which learns only the sum. DP bounds what the released sum, and every model or synthetic record derived from it, reveals about one record~\cite{dwork2014}. By default the protected record is one packet; Section~\ref{subsec:accounting} extends the unit to a TCP stream or a capture. Class labels, class quotas, the gateways' sample counts and the preprocessing statistics are treated as public side information outside $\varepsilon$.
 
-\begin{figure}[!t]
+\begin{figure*}[!t]
 \centering
-\cdfigure{graphics/paper/fig1_architecture}{\columnwidth}{2.35in}
+\cdfigure{graphics/paper/fig1_architecture}{\textwidth}{2.36in}
 \caption{PP-FedData architecture. Gateways keep raw traffic; FedDP-Marginal sends three releases of noisy count tables and the federated CVAE sends model updates, both through SecAgg$^+$ to an honest-but-curious server, which samples synthetic packets for the downstream IDS.}
 \label{fig:architecture}
-\end{figure}
+\end{figure*}
 
 \subsection{FedDP-Marginal}\label{subsec:feddp_marginal}
 FedDP-Marginal adapts tree-structured marginal synthesis~\cite{chow1968, mckenna2021mst} to a federation. It models $d = 37$ attributes: 13 numeric attributes, discretized into $B_{\mathrm{fine}} = 64$ equal bins on the standardized range $[-5, 5]$; 19 binary attributes (7 protocol flags and 12 missingness indicators); and 5 categorical attributes (message type, two QoS fields, requested QoS and protocol). Every table is a sum over records, so each release is a single additive query. The protocol has three releases (Fig.~\ref{fig:three_release}):
@@ -46,12 +46,12 @@ where $r$ is a fixed root attribute. A sampled coarse value of a numeric attribu
 
 \textit{Post-processing (MGr).} The refined variant combines every independent noisy estimate of an attribute's class-conditional marginal (from Release~1 and from the incident tree tables) by inverse-variance weighting, clips negative counts, and adjusts each edge table to the fused marginals with iterative proportional fitting. Because it only transforms released values, it costs no privacy budget~\cite{dwork2014}.
 
-\begin{figure}[!t]
+\begin{figure*}[!t]
 \centering
-\cdfigure{graphics/paper/fig2_three_releases}{\columnwidth}{1.85in}
+\cdfigure{graphics/paper/Fig2}{\textwidth}{2.36in}
 \caption{Three-release protocol of FedDP-Marginal. Each release is a sum of count tables plus Skellam noise shares, computed with SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$. The coarse cut points (after Release~1) and the tree $T^\star$ (after Release~2) are broadcast back before the next release.}
 \label{fig:three_release}
-\end{figure}
+\end{figure*}
 
 \subsection{Privacy Accounting}\label{subsec:accounting}
 \textit{Sensitivity.} Two datasets are neighbors if they differ by one packet. A packet adds one count to one cell of every table it touches, so a release of $T_r$ tables (37, 666 and 37 for the three releases) has $\ell_1$ and $\ell_2$ sensitivities $\Delta_{1,r} = T_r$ and $\Delta_{2,r} = \sqrt{T_r}$. To protect a unit of several packets (a TCP stream or a capture), each unit is assigned to a single gateway, which uses at most $m$ of its packets. The sensitivities then become

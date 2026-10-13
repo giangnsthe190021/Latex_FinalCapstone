@@ -50,6 +50,7 @@
 \citation{dwork2014}
 \citation{chow1968,mckenna2021mst}
 \citation{chow1968}
+\citation{dwork2014}
 \@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Comparison With the Closest Related Work}}{3}{}\protected@file@percent }
 \newlabel{tab:lit_review}{{I}{3}{}{table.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-D}}Research Gap}{3}{}\protected@file@percent }
@@ -58,12 +59,10 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}Architecture and Threat Model}{3}{}\protected@file@percent }
 \newlabel{subsec:system}{{\mbox  {III-A}}{3}{}{subsection.3.1}{}}
 \newlabel{eq:dirichlet}{{1}{3}{}{equation.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces PP-FedData architecture. Gateways keep raw traffic; FedDP-Marginal sends three releases of noisy count tables and the federated CVAE sends model updates, both through SecAgg$^+$ to an honest-but-curious server, which samples synthetic packets for the downstream IDS.}}{3}{}\protected@file@percent }
-\newlabel{fig:architecture}{{1}{3}{}{figure.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}FedDP-Marginal}{3}{}\protected@file@percent }
 \newlabel{subsec:feddp_marginal}{{\mbox  {III-B}}{3}{}{subsection.3.2}{}}
 \newlabel{eq:chow_liu}{{2}{3}{}{equation.2}{}}
-\citation{dwork2014}
+\newlabel{eq:tree_factorization}{{3}{3}{}{equation.3}{}}
 \citation{agarwal2021}
 \citation{agarwal2021}
 \citation{mironov2017rdp}
@@ -72,9 +71,8 @@
 \citation{sohn2015cvae}
 \citation{mcmahan2017}
 \citation{abadi2016dpsgd,yousefpour2021}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Three-release protocol of FedDP-Marginal. Each release is a sum of count tables plus Skellam noise shares, computed with SecAgg$^+$ over $\mathbb  {Z}_{2^{32}}$. The coarse cut points (after Release~1) and the tree $T^\star $ (after Release~2) are broadcast back before the next release.}}{4}{}\protected@file@percent }
-\newlabel{fig:three_release}{{2}{4}{}{figure.2}{}}
-\newlabel{eq:tree_factorization}{{3}{4}{}{equation.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces PP-FedData architecture. Gateways keep raw traffic; FedDP-Marginal sends three releases of noisy count tables and the federated CVAE sends model updates, both through SecAgg$^+$ to an honest-but-curious server, which samples synthetic packets for the downstream IDS.}}{4}{}\protected@file@percent }
+\newlabel{fig:architecture}{{1}{4}{}{figure.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}Privacy Accounting}{4}{}\protected@file@percent }
 \newlabel{subsec:accounting}{{\mbox  {III-C}}{4}{}{subsection.3.3}{}}
 \newlabel{eq:sensitivity}{{4}{4}{}{equation.4}{}}
@@ -85,8 +83,8 @@
 \newlabel{subsec:cvae}{{\mbox  {III-D}}{4}{}{subsection.3.4}{}}
 \citation{alatram2023}
 \citation{arp2022}
-\citation{chawla2002}
-\citation{esteban2017}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Three-release protocol of FedDP-Marginal. Each release is a sum of count tables plus Skellam noise shares, computed with SecAgg$^+$ over $\mathbb  {Z}_{2^{32}}$. The coarse cut points (after Release~1) and the tree $T^\star $ (after Release~2) are broadcast back before the next release.}}{5}{}\protected@file@percent }
+\newlabel{fig:three_release}{{2}{5}{}{figure.2}{}}
 \newlabel{eq:dpsgd}{{8}{5}{}{equation.8}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {IV}Experimental Setup}{5}{}\protected@file@percent }
 \newlabel{sec:setup}{{IV}{5}{}{section.4}{}}
@@ -94,45 +92,46 @@
 \newlabel{subsec:dataset}{{\mbox  {IV-A}}{5}{}{subsection.4.1}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Classes, Raw Packet Counts and Split Quotas}}{5}{}\protected@file@percent }
 \newlabel{tab:data}{{II}{5}{}{table.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Evaluated Configurations}}{5}{}\protected@file@percent }
-\newlabel{tab:configs}{{III}{5}{}{table.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Configurations}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}Evaluation Protocols and Metrics}{5}{}\protected@file@percent }
+\citation{chawla2002}
+\citation{esteban2017}
 \citation{lopezpaz2017}
 \citation{carlini2022}
 \citation{beutel2020}
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Evaluated Configurations}}{6}{}\protected@file@percent }
+\newlabel{tab:configs}{{III}{6}{}{table.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Configurations}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}Evaluation Protocols and Metrics}{6}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-D}}Decision Rule and Environment}{6}{}\protected@file@percent }
 \newlabel{eq:decision_rule}{{9}{6}{}{equation.9}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {V}Results and Discussion}{6}{}\protected@file@percent }
 \newlabel{sec:results}{{V}{6}{}{section.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}RQ1: Utility of Federated Synthetic Data}{6}{}\protected@file@percent }
 \newlabel{subsec:rq1}{{\mbox  {V-A}}{6}{}{subsection.5.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces TSTR Utility and Communication at Equal Privacy Budgets}}{6}{}\protected@file@percent }
-\newlabel{tab:main}{{IV}{6}{}{table.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}RQ2: FedDP-Marginal Versus the Federated CVAE Under DP}{6}{}\protected@file@percent }
-\newlabel{subsec:rq2}{{\mbox  {V-B}}{6}{}{subsection.5.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces TSTR Utility and Communication at Equal Privacy Budgets}}{7}{}\protected@file@percent }
+\newlabel{tab:main}{{IV}{7}{}{table.4}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces TSTR macro-F1 (bars: one seed standard deviation) against the privacy budget for FedDP-Marginal with distributed noise (MG) and local noise (MGl), and for the best CVAE configuration. Dashed lines: random forests trained on pooled real data.}}{7}{}\protected@file@percent }
 \newlabel{fig:tstr_eps}{{3}{7}{}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}RQ2: FedDP-Marginal Versus the Federated CVAE Under DP}{7}{}\protected@file@percent }
+\newlabel{subsec:rq2}{{\mbox  {V-B}}{7}{}{subsection.5.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-C}}RQ3: What Each Protection Costs and Protects}{7}{}\protected@file@percent }
 \newlabel{subsec:rq3}{{\mbox  {V-C}}{7}{}{subsection.5.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces Protection Options of FedDP-Marginal ($\varepsilon \le 5$)}}{7}{}\protected@file@percent }
-\newlabel{tab:protection}{{V}{7}{}{table.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-D}}RQ4: Requirement-Driven Configuration}{7}{}\protected@file@percent }
 \newlabel{subsec:rq4}{{\mbox  {V-D}}{7}{}{subsection.5.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-E}}Discussion and Limitations}{7}{}\protected@file@percent }
-\newlabel{subsec:limitations}{{\mbox  {V-E}}{7}{}{subsection.5.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces Protection Options of FedDP-Marginal ($\varepsilon \le 5$)}}{8}{}\protected@file@percent }
+\newlabel{tab:protection}{{V}{8}{}{table.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {VI}{\ignorespaces Recommended Configuration per Deployment Requirement}}{8}{}\protected@file@percent }
+\newlabel{tab:recommend}{{VI}{8}{}{table.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-E}}Discussion and Limitations}{8}{}\protected@file@percent }
+\newlabel{subsec:limitations}{{\mbox  {V-E}}{8}{}{subsection.5.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces TSTR macro-F1 against total traffic per run (log scale) for all valid configurations. MG: FedDP-Marginal, including its Gaussian (MGd) and second-order (MGb) ablations. Filled markers: Pareto front over utility, $\varepsilon $ and cost.}}{8}{}\protected@file@percent }
+\newlabel{fig:pareto}{{4}{8}{}{figure.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{8}{}\protected@file@percent }
+\newlabel{sec:conclusion}{{VI}{8}{}{section.6}{}}
 \bibstyle{IEEEtran}
 \bibdata{references/reference}
 \bibcite{alatram2023}{1}
 \bibcite{mcmahan2017}{2}
 \bibcite{zhu2019}{3}
-\@writefile{lot}{\contentsline {table}{\numberline {VI}{\ignorespaces Recommended Configuration per Deployment Requirement}}{8}{}\protected@file@percent }
-\newlabel{tab:recommend}{{VI}{8}{}{table.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces TSTR macro-F1 against total traffic per run (log scale) for all valid configurations. MG: FedDP-Marginal, including its Gaussian (MGd) and second-order (MGb) ablations. Filled markers: Pareto front over utility, $\varepsilon $ and cost.}}{8}{}\protected@file@percent }
-\newlabel{fig:pareto}{{4}{8}{}{figure.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{8}{}\protected@file@percent }
-\newlabel{sec:conclusion}{{VI}{8}{}{section.6}{}}
-\@writefile{toc}{\contentsline {section}{References}{8}{}\protected@file@percent }
 \bibcite{vyas2024}{4}
 \bibcite{bonawitz2017}{5}
 \bibcite{bell2020}{6}
@@ -159,5 +158,6 @@
 \bibcite{arp2022}{27}
 \bibcite{esteban2017}{28}
 \bibcite{lopezpaz2017}{29}
+\@writefile{toc}{\contentsline {section}{References}{9}{}\protected@file@percent }
 \bibcite{carlini2022}{30}
-\gdef \@abspage@last{9}
+\gdef \@abspage@last{10}
