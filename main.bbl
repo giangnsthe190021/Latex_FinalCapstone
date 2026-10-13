@@ -335,4 +335,91 @@ J.~Bergstra, R.~Bardenet, Y.~Bengio, and B.~K{\'e}gl, ``Algorithms for
   hyper-parameter optimization,'' in \emph{Advances in Neural Information
   Processing Systems (NeurIPS)}, vol.~24, 2011, pp. 2546--2554.
 
+\bibitem{alatram2023kaggle}
+\BIBentryALTinterwordspacing
+A.~Alatram, L.~F. Sikos, M.~Johnstone, P.~Szewczyk, and J.~J. Kang,
+  ``{DoS/DDoS-MQTT-IoT} dataset,'' Kaggle, 2023. [Online]. Available:
+  \url{https://www.kaggle.com/datasets/alaaalatram/dosddos-mqtt-iot}
+\BIBentrySTDinterwordspacing
+
+\bibitem{mqtt311}
+\BIBentryALTinterwordspacing
+A.~Banks and R.~Gupta, ``{MQTT} version 3.1.1,'' OASIS Standard, Oct. 2014.
+  [Online]. Available:
+  \url{http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html}
+\BIBentrySTDinterwordspacing
+
+\bibitem{wireshark}
+\BIBentryALTinterwordspacing
+{Wireshark Foundation}, ``Wireshark: Network protocol analyzer ({TShark} and
+  capinfos),'' Version 4.4.7, 2025. [Online]. Available:
+  \url{https://www.wireshark.org}
+\BIBentrySTDinterwordspacing
+
+\bibitem{kaufman2012}
+S.~Kaufman, S.~Rosset, C.~Perlich, and O.~Stitelman, ``Leakage in data mining:
+  Formulation, detection, and avoidance,'' \emph{ACM Transactions on Knowledge
+  Discovery from Data}, vol.~6, no.~4, pp. 15:1--15:21, 2012.
+
+\bibitem{arp2022}
+D.~Arp, E.~Quiring, F.~Pendlebury, A.~Warnecke, F.~Pierazzi, C.~Wressnegger,
+  L.~Cavallaro, and K.~Rieck, ``Dos and don'ts of machine learning in computer
+  security,'' in \emph{Proceedings of the 31st USENIX Security
+  Symposium}.\hskip 1em plus 0.5em minus 0.4em\relax USENIX Association, 2022,
+  pp. 3971--3988.
+
+\bibitem{esteban2017}
+C.~Esteban, S.~L. Hyland, and G.~R{\"a}tsch, ``Real-valued (medical) time
+  series generation with recurrent conditional {GANs},'' \emph{arXiv preprint
+  arXiv:1706.02633}, 2017.
+
+\bibitem{pedregosa2011}
+F.~Pedregosa, G.~Varoquaux, A.~Gramfort, V.~Michel, B.~Thirion, O.~Grisel,
+  M.~Blondel, P.~Prettenhofer, R.~Weiss, V.~Dubourg, J.~Vanderplas, A.~Passos,
+  D.~Cournapeau, M.~Brucher, M.~Perrot, and {\'E}.~Duchesnay, ``Scikit-learn:
+  Machine learning in {Python},'' \emph{Journal of Machine Learning Research},
+  vol.~12, pp. 2825--2830, 2011.
+
+\bibitem{carlini2022}
+N.~Carlini, S.~Chien, M.~Nasr, S.~Song, A.~Terzis, and F.~Tram{\`e}r,
+  ``Membership inference attacks from first principles,'' in \emph{Proceedings
+  of the 2022 IEEE Symposium on Security and Privacy (SP)}.\hskip 1em plus
+  0.5em minus 0.4em\relax IEEE, 2022, pp. 1897--1914.
+
+\bibitem{brodersen2010}
+K.~H. Brodersen, C.~S. Ong, K.~E. Stephan, and J.~M. Buhmann, ``The balanced
+  accuracy and its posterior distribution,'' in \emph{Proceedings of the 20th
+  International Conference on Pattern Recognition (ICPR)}.\hskip 1em plus 0.5em
+  minus 0.4em\relax IEEE, 2010, pp. 3121--3124.
+
+\bibitem{saito2015}
+T.~Saito and M.~Rehmsmeier, ``The precision-recall plot is more informative
+  than the {ROC} plot when evaluating binary classifiers on imbalanced
+  datasets,'' \emph{PLoS ONE}, vol.~10, no.~3, p. e0118432, 2015.
+
+\bibitem{lin1991}
+J.~Lin, ``Divergence measures based on the {Shannon} entropy,'' \emph{IEEE
+  Transactions on Information Theory}, vol.~37, no.~1, pp. 145--151, 1991.
+
+\bibitem{lopezpaz2017}
+D.~Lopez-Paz and M.~Oquab, ``Revisiting classifier two-sample tests,'' in
+  \emph{Proceedings of the 5th International Conference on Learning
+  Representations (ICLR)}, 2017.
+
+\bibitem{park2018}
+N.~Park, M.~Mohammadi, K.~Gorde, S.~Jajodia, H.~Park, and Y.~Kim, ``Data
+  synthesis based on generative adversarial networks,'' \emph{Proceedings of
+  the VLDB Endowment}, vol.~11, no.~10, pp. 1071--1083, 2018.
+
+\bibitem{shokri2017}
+R.~Shokri, M.~Stronati, C.~Song, and V.~Shmatikov, ``Membership inference
+  attacks against machine learning models,'' in \emph{Proceedings of the 2017
+  IEEE Symposium on Security and Privacy (SP)}.\hskip 1em plus 0.5em minus
+  0.4em\relax IEEE, 2017, pp. 3--18.
+
+\bibitem{efron1993}
+B.~Efron and R.~J. Tibshirani, \emph{An Introduction to the Bootstrap}.\hskip
+  1em plus 0.5em minus 0.4em\relax New York, NY, USA: Chapman \& Hall/CRC,
+  1993.
+
 \end{thebibliography}

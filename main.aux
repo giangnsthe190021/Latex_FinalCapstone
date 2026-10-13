@@ -178,10 +178,9 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-E}}Requirement-Driven Recommendation Framework}{9}{}\protected@file@percent }
 \newlabel{subsec:req_rule}{{\mbox  {III-E}}{9}{}{subsection.3.5}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-E}1}Motivation and Relation to Heuristic R6}{9}{}\protected@file@percent }
-\citation{beutel2020}
-\citation{yousefpour2021}
-\citation{akiba2019}
-\citation{bergstra2011}
+\citation{alatram2023}
+\citation{alatram2023kaggle}
+\citation{mqtt311}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces System architecture of the PP-FedData framework, depicting data flows across edge gateways, dual generator routes, the aggregation server, and downstream evaluation.}}{10}{}\protected@file@percent }
 \newlabel{fig:system_arch}{{2}{10}{}{figure.2}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Systematic Comparison of the Two Generative Routes}}{10}{}\protected@file@percent }
@@ -190,42 +189,97 @@
 \newlabel{tab:protection_mechanisms}{{IV}{10}{}{table.4}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-E}2}Five-Stage Recommendation Procedure}{10}{}\protected@file@percent }
 \citation{alatram2023}
+\citation{alatram2023kaggle}
+\citation{wireshark}
+\citation{alatram2023kaggle}
+\citation{wireshark}
 \@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces Complete Experiment Matrix of the PP-FedData Framework}}{11}{}\protected@file@percent }
 \newlabel{tab:exp_matrix}{{V}{11}{}{table.5}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {VI}{\ignorespaces Robustness and Sensitivity Excursions}}{11}{}\protected@file@percent }
 \newlabel{tab:robustness_branches}{{VI}{11}{}{table.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-F}}Experimental Environment and Reproducibility}{11}{}\protected@file@percent }
-\newlabel{subsec:reproducibility}{{\mbox  {III-F}}{11}{}{subsection.3.6}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-F}1}Environment Specifications}{11}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-F}2}Reproducibility Protocol}{11}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-G}}Methodological Limitations}{11}{}\protected@file@percent }
-\newlabel{subsec:limitations}{{\mbox  {III-G}}{11}{}{subsection.3.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-F}}Dataset and Data Collection}{11}{}\protected@file@percent }
+\newlabel{subsec:dataset}{{\mbox  {III-F}}{11}{}{subsection.3.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-F}1}Dataset Description}{11}{}\protected@file@percent }
+\newlabel{subsubsec:provenance}{{\mbox  {III-F}2}{11}{}{subsubsection.3.6.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-F}2}Data Provenance and Verification}{11}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-F}3}Label Harmonization and Rare Classes}{11}{}\protected@file@percent }
+\citation{he2009}
+\citation{kaufman2012,arp2022}
+\citation{arp2022}
 \@writefile{lot}{\contentsline {table}{\numberline {VII}{\ignorespaces Illustrative Edge Deployment Scenarios and Requirement Formulations}}{12}{}\protected@file@percent }
 \newlabel{tab:scenarios}{{VII}{12}{}{table.7}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {VIII}{\ignorespaces Experimental Hardware and Software Environment}}{12}{}\protected@file@percent }
-\newlabel{tab:env_spec}{{VIII}{12}{}{table.8}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {IV}Experimental Evaluation and Results}{12}{}\protected@file@percent }
-\newlabel{sec:experiments}{{IV}{12}{}{section.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}Experimental Setup and Evaluation Metrics}{12}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Downstream Minority-Class Detection Performance}{12}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {VIII}{\ignorespaces Composition of the DoS/DDoS-MQTT-IoT Dataset}}{12}{}\protected@file@percent }
+\newlabel{tab:dataset_composition}{{VIII}{12}{}{table.8}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-F}4}Schema Harmonization and Feature Selection}{12}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-F}5}Group-Based Splitting and Quota Sampling}{12}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {IX}{\ignorespaces Data Provenance Verification}}{13}{}\protected@file@percent }
+\newlabel{tab:provenance}{{IX}{13}{}{table.9}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {X}{\ignorespaces Final Feature Schema ($D = 60$)}}{13}{}\protected@file@percent }
+\newlabel{tab:feature_schema}{{X}{13}{}{table.10}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-F}6}Preprocessing and Encoding}{13}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {XI}{\ignorespaces Class Quotas for the Training, Validation, and Test Splits}}{13}{}\protected@file@percent }
+\newlabel{tab:quota}{{XI}{13}{}{table.11}{}}
+\citation{breiman2001}
+\citation{esteban2017}
+\citation{chawla2002}
+\citation{mcmahan2017}
+\citation{pedregosa2011}
+\citation{breiman2001}
+\citation{carlini2022}
+\citation{brodersen2010}
+\citation{saito2015}
+\citation{lin1991}
+\citation{lopezpaz2017}
+\citation{park2018}
+\citation{shokri2017,carlini2022}
+\citation{efron1993}
+\citation{beutel2020}
+\citation{yousefpour2021}
+\citation{akiba2019}
+\citation{bergstra2011}
+\@writefile{lot}{\contentsline {table}{\numberline {XII}{\ignorespaces Leakage and Label-Reliability Checks}}{14}{}\protected@file@percent }
+\newlabel{tab:leakage_checks}{{XII}{14}{}{table.12}{}}
+\newlabel{subsubsec:leakage_checks}{{\mbox  {III-F}7}{14}{}{subsubsection.3.6.7}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-F}7}Leakage and Label-Reliability Checks}{14}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-G}}Evaluation Protocols and Statistical Decision Rules}{14}{}\protected@file@percent }
+\newlabel{subsec:evaluation}{{\mbox  {III-G}}{14}{}{subsection.3.7}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-G}1}Evaluation Protocols}{14}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-G}2}Evaluation Metrics}{14}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-G}3}Statistical Decision Rule}{14}{}\protected@file@percent }
+\newlabel{eq:mean_diff}{{2}{14}{}{equation.2}{}}
+\newlabel{eq:decision_rule}{{3}{14}{}{equation.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-G}4}Stream-Level Sensitivity Check}{14}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-H}}Experimental Environment and Reproducibility}{14}{}\protected@file@percent }
+\newlabel{subsec:reproducibility}{{\mbox  {III-H}}{14}{}{subsection.3.8}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-H}1}Environment Specifications}{14}{}\protected@file@percent }
+\citation{alatram2023}
+\@writefile{lot}{\contentsline {table}{\numberline {XIII}{\ignorespaces Evaluation Metrics Across Five Dimensions}}{15}{}\protected@file@percent }
+\newlabel{tab:metrics}{{XIII}{15}{}{table.13}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {XIV}{\ignorespaces Experimental Hardware and Software Environment}}{15}{}\protected@file@percent }
+\newlabel{tab:env_spec}{{XIV}{15}{}{table.14}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-H}2}Reproducibility Protocol}{15}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-I}}Methodological Limitations}{15}{}\protected@file@percent }
+\newlabel{subsec:limitations}{{\mbox  {III-I}}{15}{}{subsection.3.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Experimental Evaluation and Results}{15}{}\protected@file@percent }
+\newlabel{sec:experiments}{{IV}{15}{}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}Experimental Setup and Evaluation Metrics}{15}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {XV}{\ignorespaces Downstream Minority Attack Detection F1-Score (\%) Under Varying Privacy Budgets ($\delta = 10^{-5}$)}}{16}{}\protected@file@percent }
+\newlabel{tab:results_summary}{{XV}{16}{}{table.15}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Downstream Minority-Class Detection Performance}{16}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}Communication and Computational Overhead}{16}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {V}Discussion and Deployment Guidelines}{16}{}\protected@file@percent }
+\newlabel{sec:discussion}{{V}{16}{}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}The Privacy-Utility-Overhead Trilemma}{16}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}Architectural Selection Framework}{16}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion and Future Work}{16}{}\protected@file@percent }
+\newlabel{sec:conclusion}{{VI}{16}{}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-A}}Conclusion}{16}{}\protected@file@percent }
 \bibstyle{IEEEtran}
 \bibdata{references/reference}
 \bibcite{atzori2010}{1}
 \bibcite{alatram2023}{2}
 \bibcite{he2009}{3}
 \bibcite{mcmahan2017}{4}
-\@writefile{lot}{\contentsline {table}{\numberline {IX}{\ignorespaces Downstream Minority Attack Detection F1-Score (\%) Under Varying Privacy Budgets ($\delta = 10^{-5}$)}}{13}{}\protected@file@percent }
-\newlabel{tab:results_summary}{{IX}{13}{}{table.9}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}Communication and Computational Overhead}{13}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {V}Discussion and Deployment Guidelines}{13}{}\protected@file@percent }
-\newlabel{sec:discussion}{{V}{13}{}{section.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}The Privacy-Utility-Overhead Trilemma}{13}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}Architectural Selection Framework}{13}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion and Future Work}{13}{}\protected@file@percent }
-\newlabel{sec:conclusion}{{VI}{13}{}{section.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-A}}Conclusion}{13}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-B}}Future Work}{13}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{References}{13}{}\protected@file@percent }
 \bibcite{shi2016}{5}
 \bibcite{imteaj2022}{6}
 \bibcite{zhu2019}{7}
@@ -255,6 +309,8 @@
 \bibcite{he2023}{31}
 \bibcite{salim2025}{32}
 \bibcite{jiao2025}{33}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-B}}Future Work}{17}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{References}{17}{}\protected@file@percent }
 \bibcite{shettar2026}{34}
 \bibcite{hamouda2024}{35}
 \bibcite{maddock2024}{36}
@@ -275,4 +331,19 @@
 \bibcite{bun2016}{51}
 \bibcite{akiba2019}{52}
 \bibcite{bergstra2011}{53}
-\gdef \@abspage@last{15}
+\bibcite{alatram2023kaggle}{54}
+\bibcite{mqtt311}{55}
+\bibcite{wireshark}{56}
+\bibcite{kaufman2012}{57}
+\bibcite{arp2022}{58}
+\bibcite{esteban2017}{59}
+\bibcite{pedregosa2011}{60}
+\bibcite{carlini2022}{61}
+\bibcite{brodersen2010}{62}
+\bibcite{saito2015}{63}
+\bibcite{lin1991}{64}
+\bibcite{lopezpaz2017}{65}
+\bibcite{park2018}{66}
+\bibcite{shokri2017}{67}
+\bibcite{efron1993}{68}
+\gdef \@abspage@last{18}
