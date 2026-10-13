@@ -17,6 +17,19 @@
 \usepackage{tabularx}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc, fit, backgrounds, shadows}
+\usepackage[section]{placeins} % floats never cross a \section; \FloatBarrier for subsections
+
+% ========== FLOAT PLACEMENT ==========
+% Let more and larger floats share a page so tables stay close to their text
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\dbltopfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.8}
+\renewcommand{\dblfloatpagefraction}{0.8}
+\setcounter{topnumber}{3}
+\setcounter{dbltopnumber}{3}
+\setcounter{totalnumber}{4}
 
 % ========== TITLE & AUTHORS ==========
 \title{A Privacy-Preserving Data Generation Framework in Federated Learning for Enhanced IoT System Attack Detection}

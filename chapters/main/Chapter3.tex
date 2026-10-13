@@ -131,6 +131,31 @@ The study was originally conceptualized around a federated conditional variation
 
 \subsection{System Architecture and Generator Routes}\label{subsec:system_arch}
 
+\begin{table*}[!t]
+\centering
+\caption{Systematic Comparison of the Two Generative Routes}
+\label{tab:two_routes}
+\footnotesize
+\begin{tabularx}{\textwidth}{p{3.4cm}XX}
+\toprule
+\textbf{Architectural Property} & \textbf{FedDP-Marginal (Primary Generator)} & \textbf{Federated CVAE (Baseline Generator)} \\
+\midrule
+\textbf{Shared Artefacts} & Contingency count tables summed across clients in 3 releases (1-way marginals, pairwise tables, tree edges). & Model parameter weights exchanged across 30 FedAvg rounds with 2 local epochs per round. \\
+\midrule
+\textbf{Probabilistic Structure} & Chow--Liu dependency tree~\cite{chow1968}; optional 2nd-order PrivBayes Bayesian network~\cite{zhang2017privbayes} (MGb). & Deep conditional autoencoder~\cite{sohn2015} with fully-connected encoder and block-wise decoder. \\
+\midrule
+\textbf{DP Perturbation Point} & Added directly to client tables once per release (discrete Skellam~\cite{agarwal2021} or Gaussian share). & Injected into per-sample clipped gradients at every local step via Opacus~\cite{yousefpour2021} (DP-SGD). \\
+\midrule
+\textbf{Secure Aggregation} & Flower SecAgg$^+$ over exact integers (uint32, modular arithmetic $\mathbb{Z}_{2^{32}}$). & Flower SecAgg$^+$ over fixed-point quantised weights ($2^{22}$ levels, dynamic range $[-16, 16]$). \\
+\midrule
+\textbf{Distributed DP Validity} & Formally proven: Each release is a single additive sum of bounded sensitivity. & Not claimed: Multi-epoch non-linear optimization violates linear noise superposition. \\
+\midrule
+\textbf{Core Implementation} & \texttt{models/marginal.py}, \texttt{fl/mg\_app.py}, \texttt{group\_dp.py} & \texttt{models/cvae.py}, \texttt{fl/core.py}, \texttt{fl/app.py}, \texttt{fl/dp\_utils.py} \\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+
 \subsubsection{System Roles}
 As illustrated in Fig.~\ref{fig:system_arch}, the PP-FedData architecture comprises three primary entities:
 \begin{enumerate}
@@ -264,43 +289,10 @@ Table~\ref{tab:two_routes} contrasts the fundamental architectural mechanisms of
 
 This operational divergence is decisive for differential privacy accounting. In FedDP-Marginal, each release represents a linear additive summation with bounded global sensitivity; calibrated noise can therefore be divided among clients and reconstituted exactly via secure aggregation. In contrast, DP-SGD~\cite{abadi2016} introduces non-linear gradient transformations across successive local optimization epochs, where noise added by one client interacts non-linearly with others; distributed DP is consequently mathematically invalid for the CVAE route (\texttt{SPEC\_DEVIATIONS.md}, entry O2.1).
 
-\begin{table*}[!t]
-\centering
-\caption{Systematic Comparison of the Two Generative Routes}
-\label{tab:two_routes}
-\footnotesize
-\begin{tabularx}{\textwidth}{p{3.4cm}XX}
-\toprule
-\textbf{Architectural Property} & \textbf{FedDP-Marginal (Primary Generator)} & \textbf{Federated CVAE (Baseline Generator)} \\
-\midrule
-\textbf{Shared Artefacts} & Contingency count tables summed across clients in 3 releases (1-way marginals, pairwise tables, tree edges). & Model parameter weights exchanged across 30 FedAvg rounds with 2 local epochs per round. \\
-\midrule
-\textbf{Probabilistic Structure} & Chow--Liu dependency tree~\cite{chow1968}; optional 2nd-order PrivBayes Bayesian network~\cite{zhang2017privbayes} (MGb). & Deep conditional autoencoder~\cite{sohn2015} with fully-connected encoder and block-wise decoder. \\
-\midrule
-\textbf{DP Perturbation Point} & Added directly to client tables once per release (discrete Skellam~\cite{agarwal2021} or Gaussian share). & Injected into per-sample clipped gradients at every local step via Opacus~\cite{yousefpour2021} (DP-SGD). \\
-\midrule
-\textbf{Secure Aggregation} & Flower SecAgg$^+$ over exact integers (uint32, modular arithmetic $\mathbb{Z}_{2^{32}}$). & Flower SecAgg$^+$ over fixed-point quantised weights ($2^{22}$ levels, dynamic range $[-16, 16]$). \\
-\midrule
-\textbf{Distributed DP Validity} & Formally proven: Each release is a single additive sum of bounded sensitivity. & Not claimed: Multi-epoch non-linear optimization violates linear noise superposition. \\
-\midrule
-\textbf{Core Implementation} & \texttt{models/marginal.py}, \texttt{fl/mg\_app.py}, \texttt{group\_dp.py} & \texttt{models/cvae.py}, \texttt{fl/core.py}, \texttt{fl/app.py}, \texttt{fl/dp\_utils.py} \\
-\bottomrule
-\end{tabularx}
-\end{table*}
 
 For FedDP-Marginal, secure summation is implemented via a lightweight client-side patch: stock Flower SecAgg$^+$ transmits masked vectors as 64-bit integers. PP-FedData casts masked vectors to unsigned 32-bit integers (\texttt{uint32}) following modular reduction, leveraging CPU register wrap-around to execute exact modulo $2^{32}$ addition without altering installed external packages (\texttt{SPEC\_DEVIATIONS.md}, entry O2.2).
 
 \subsection{Threat Model, Trust Assumptions, and Privacy Units}\label{subsec:threat_model}
-
-\subsubsection{Adversary and Trust Assumptions}
-The aggregation server is modeled as \textit{honest-but-curious} (semi-honest)~\cite{goldreich2004}: it faithfully executes protocol steps but inspects all incoming payloads to infer private telemetry. Gateways maintain physical control of their own data. We analyze four trust settings:
-\begin{enumerate}
-    \item \textbf{Base Setting:} All $K$ gateways adhere to protocol and inject their assigned noise share ($1/K$ of the total required variance in distributed variants);
-    \item \textbf{$h$ Honest Gateways:} The privacy guarantee is audited under scenarios where only $h \in \{1, \dots, K\}$ clients inject noise, while the remaining $K-h$ clients collude with the server or drop out. Effective $\varepsilon$ increases monotonically as $h$ decreases;
-    \item \textbf{Threshold $t$:} Noise is calibrated such that target $(\varepsilon, \delta)$ holds whenever at least $t$ gateways contribute, with each client injecting $1/t$ of total variance (default $t = K$);
-    \item \textbf{Local DP (MGl):} Each client adds the full required noise independently~\cite{kasiviswanathan2011}, achieving protection without trusting peer gateways.
-\end{enumerate}
-Malicious attacks, including data poisoning, model poisoning, and Byzantine corruption, are considered out of scope.
 
 \begin{table}[!t]
 \centering
@@ -317,28 +309,6 @@ Malicious attacks, including data poisoning, model poisoning, and Byzantine corr
 \bottomrule
 \end{tabularx}
 \end{table}
-
-\subsubsection{Roles of SecAgg$^+$ and Differential Privacy}
-Table~\ref{tab:protection_mechanisms} emphasizes that Secure Aggregation and Differential Privacy address orthogonal vulnerabilities and cannot be substituted for one another.
-
-\subsubsection{Privacy Unit Granularity}
-By default, $\varepsilon$ protects a single network packet record. For FedDP-Marginal, two higher-order privacy units are formalized:
-\begin{enumerate}
-    \item \textbf{TCP Stream (\texttt{-strm\{m\}}):} Protects entire bidirectional TCP sessions;
-    \item \textbf{Capture Group (\texttt{-cap\{m\}}):} Protects complete contiguous traffic captures.
-\end{enumerate}
-These guarantees hold strictly under two operational constraints: each unit is hosted entirely on a single client node, and each client clamps contributions to at most $m$ packets per unit. Under these conditions, releasing $T$ contingency tables incurs global sensitivities $\Delta_1 = m \cdot T$ in $\ell_1$ and $\Delta_2 = m\sqrt{T}$ in $\ell_2$ (\texttt{group\_dp.py}). In contrast, under packet-level DP, an attack session spanning $k$ packets is protected only via group privacy bounds, which scale weakly to approximately $k\varepsilon$~\cite{dwork2014}. The training dataset encompasses 76,463 TCP streams and 147 capture groups (ranging between 62 and 1,277 packets per capture).
-
-\subsubsection{Public Side Information}
-The following metadata is considered public and excluded from privacy budget accounting:
-\begin{itemize}
-    \item Attack class label names and global sample quotas;
-    \item Client sample counts $n_i$ when transmitted in cleartext (e.g., Flower's \texttt{num\_examples} in CVAE routes; held static in FedDP-Marginal);
-    \item Preprocessing normalization parameters, logarithmic transformation choices, and categorical encodings computed centrally on pooled data prior to partitioning;
-    \item Hyperparameter selections obtained from the validation split.
-\end{itemize}
-
-\subsection{Experimental Configurations and Robustness Matrix}\label{subsec:exp_configs}
 
 \begin{table*}[!t]
 \centering
@@ -369,20 +339,41 @@ The following metadata is considered public and excluded from privacy budget acc
 \end{tabularx}
 \end{table*}
 
-\subsubsection{Experiment Matrix}
-Table~\ref{tab:exp_matrix} outlines all evaluated configurations across three random seeds $\{0, 1, 2\}$. Configuration naming conventions adopt explicit suffixes:
+
+
+
+\subsubsection{Adversary and Trust Assumptions}
+The aggregation server is modeled as \textit{honest-but-curious} (semi-honest)~\cite{goldreich2004}: it faithfully executes protocol steps but inspects all incoming payloads to infer private telemetry. Gateways maintain physical control of their own data. We analyze four trust settings:
+\begin{enumerate}
+    \item \textbf{Base Setting:} All $K$ gateways adhere to protocol and inject their assigned noise share ($1/K$ of the total required variance in distributed variants);
+    \item \textbf{$h$ Honest Gateways:} The privacy guarantee is audited under scenarios where only $h \in \{1, \dots, K\}$ clients inject noise, while the remaining $K-h$ clients collude with the server or drop out. Effective $\varepsilon$ increases monotonically as $h$ decreases;
+    \item \textbf{Threshold $t$:} Noise is calibrated such that target $(\varepsilon, \delta)$ holds whenever at least $t$ gateways contribute, with each client injecting $1/t$ of total variance (default $t = K$);
+    \item \textbf{Local DP (MGl):} Each client adds the full required noise independently~\cite{kasiviswanathan2011}, achieving protection without trusting peer gateways.
+\end{enumerate}
+Malicious attacks, including data poisoning, model poisoning, and Byzantine corruption, are considered out of scope.
+
+
+\subsubsection{Roles of SecAgg$^+$ and Differential Privacy}
+Table~\ref{tab:protection_mechanisms} emphasizes that Secure Aggregation and Differential Privacy address orthogonal vulnerabilities and cannot be substituted for one another.
+
+\subsubsection{Privacy Unit Granularity}
+By default, $\varepsilon$ protects a single network packet record. For FedDP-Marginal, two higher-order privacy units are formalized:
+\begin{enumerate}
+    \item \textbf{TCP Stream (\texttt{-strm\{m\}}):} Protects entire bidirectional TCP sessions;
+    \item \textbf{Capture Group (\texttt{-cap\{m\}}):} Protects complete contiguous traffic captures.
+\end{enumerate}
+These guarantees hold strictly under two operational constraints: each unit is hosted entirely on a single client node, and each client clamps contributions to at most $m$ packets per unit. Under these conditions, releasing $T$ contingency tables incurs global sensitivities $\Delta_1 = m \cdot T$ in $\ell_1$ and $\Delta_2 = m\sqrt{T}$ in $\ell_2$ (\texttt{group\_dp.py}). In contrast, under packet-level DP, an attack session spanning $k$ packets is protected only via group privacy bounds, which scale weakly to approximately $k\varepsilon$~\cite{dwork2014}. The training dataset encompasses 76,463 TCP streams and 147 capture groups (ranging between 62 and 1,277 packets per capture).
+
+\subsubsection{Public Side Information}
+The following metadata is considered public and excluded from privacy budget accounting:
 \begin{itemize}
-    \item \texttt{-strm\{m\}}: Enforces stream-level DP clamping to $m$ packets;
-    \item \texttt{-cap\{m\}}: Enforces capture-level DP clamping to $m$ packets;
-    \item \texttt{-t\{t\}}: Calibrates noise assuming at least $t$ honest clients contribute (default $t = K = 5$; variants evaluate $t \in \{2, 3\}$).
+    \item Attack class label names and global sample quotas;
+    \item Client sample counts $n_i$ when transmitted in cleartext (e.g., Flower's \texttt{num\_examples} in CVAE routes; held static in FedDP-Marginal);
+    \item Preprocessing normalization parameters, logarithmic transformation choices, and categorical encodings computed centrally on pooled data prior to partitioning;
+    \item Hyperparameter selections obtained from the validation split.
 \end{itemize}
-The primary configurations representing PP-FedData across privacy regimes are designated as: \texttt{MG-eps1} = \texttt{MGr-eps1}, \texttt{MG-eps5} = \texttt{MGs-eps5}, and \texttt{MG-eps10} = \texttt{MGs-eps10}, all configured at $\delta = 10^{-5}$.
 
-\subsubsection{Hyperparameter Optimization}
-Hyperparameters are tuned exclusively on the held-out validation split using Optuna~\cite{akiba2019} with the Tree-structured Parzen Estimator (TPE)~\cite{bergstra2011}. Search spaces are segmented by model route (unperturbed CVAE, proxy-scale DP CVAE, full-scale DP CVAE, FedDP-Marginal, and downstream classifiers), as detailed in Section~\ref{subsec:hpo}.
-
-\subsubsection{Robustness and Sensitivity Branches}
-Table~\ref{tab:robustness_branches} details sensitivity excursions designed to test framework stability under non-standard distributions.
+\subsection{Experimental Configurations and Robustness Matrix}\label{subsec:exp_configs}
 
 \begin{table}[!t]
 \centering
@@ -402,27 +393,6 @@ Table~\ref{tab:robustness_branches} details sensitivity excursions designed to t
 \bottomrule
 \end{tabularx}
 \end{table}
-
-\subsection{Requirement-Driven Recommendation Framework}\label{subsec:req_rule}
-
-\subsubsection{Motivation and Relation to Heuristic R6}
-Standard benchmark studies typically rely on single static selection heuristics. For instance, heuristic rule R6 selects the configuration maximizing Random Forest TAug Macro-F1 subject to membership inference AUC $\le 0.55$, worst-case $\varepsilon \le 5$, and per-round execution time $\le 3\times$ baseline B3. However, static rules cannot adapt to heterogeneous real-world deployments with varying bandwidth, mutual trust, or threat priorities. PP-FedData introduces a requirement-driven decision engine (\texttt{ppfeddata recommend}) operating over an 11-dimensional requirement tuple:
-\begin{equation}
-\begin{aligned}
-\mathcal{R} = \langle & \text{Trust}_{\text{srv}}, \text{Trust}_{\text{cli}}, \varepsilon_{\max}, \text{BW}_{\text{rnd}}, \text{BW}_{\text{tot}}, \\
-& \text{Rounds}_{\max}, \text{Unit}, \text{Priority}, \text{Recall}_{\text{rare}}^{\min}, \text{MIA}^{\max}, h \rangle
-\end{aligned}
-\end{equation}
-
-\subsubsection{Five-Stage Recommendation Procedure}
-Operating over empirical scorecard metrics extracted directly from the immutable run ledger, the selection algorithm executes five successive filters:
-\begin{enumerate}
-    \item \textbf{Validity Filter:} Excludes configurations whose operational properties diverge from verified ledger execution;
-    \item \textbf{Trust Filter:} If the server is untrusted, only configurations supporting SecAgg$^+$ or Local DP are retained. If client collusion is possible, distributed DP is audited at $h$ honest clients;
-    \item \textbf{Constraint Pruning:} Eliminates configurations violating specified ceilings on $\varepsilon$, bandwidth, convergence rounds, or MIA leakage, or failing to satisfy rare-class recall floors;
-    \item \textbf{Pareto Optimization:} Extracts non-dominated configurations across utility, privacy, and resource dimensions;
-    \item \textbf{Tie-Breaking:} Selects the configuration maximizing the prioritized performance objective (Macro-F1, Binary F1, or Rare-Class Recall).
-\end{enumerate}
 
 \begin{table*}[!t]
 \centering
@@ -447,14 +417,52 @@ Operating over empirical scorecard metrics extracted directly from the immutable
 \end{tabularx}
 \end{table*}
 
+
+
+
+
+\subsubsection{Experiment Matrix}
+Table~\ref{tab:exp_matrix} outlines all evaluated configurations across three random seeds $\{0, 1, 2\}$. Configuration naming conventions adopt explicit suffixes:
+\begin{itemize}
+    \item \texttt{-strm\{m\}}: Enforces stream-level DP clamping to $m$ packets;
+    \item \texttt{-cap\{m\}}: Enforces capture-level DP clamping to $m$ packets;
+    \item \texttt{-t\{t\}}: Calibrates noise assuming at least $t$ honest clients contribute (default $t = K = 5$; variants evaluate $t \in \{2, 3\}$).
+\end{itemize}
+The primary configurations representing PP-FedData across privacy regimes are designated as: \texttt{MG-eps1} = \texttt{MGr-eps1}, \texttt{MG-eps5} = \texttt{MGs-eps5}, and \texttt{MG-eps10} = \texttt{MGs-eps10}, all configured at $\delta = 10^{-5}$.
+
+\subsubsection{Hyperparameter Optimization}
+Hyperparameters are tuned exclusively on the held-out validation split using Optuna~\cite{akiba2019} with the Tree-structured Parzen Estimator (TPE)~\cite{bergstra2011}. Search spaces are segmented by model route (unperturbed CVAE, proxy-scale DP CVAE, full-scale DP CVAE, FedDP-Marginal, and downstream classifiers), as detailed in Section~\ref{subsec:hpo}.
+
+\subsubsection{Robustness and Sensitivity Branches}
+Table~\ref{tab:robustness_branches} details sensitivity excursions designed to test framework stability under non-standard distributions.
+
+
+\subsection{Requirement-Driven Recommendation Framework}\label{subsec:req_rule}
+
+\subsubsection{Motivation and Relation to Heuristic R6}
+Standard benchmark studies typically rely on single static selection heuristics. For instance, heuristic rule R6 selects the configuration maximizing Random Forest TAug Macro-F1 subject to membership inference AUC $\le 0.55$, worst-case $\varepsilon \le 5$, and per-round execution time $\le 3\times$ baseline B3. However, static rules cannot adapt to heterogeneous real-world deployments with varying bandwidth, mutual trust, or threat priorities. PP-FedData introduces a requirement-driven decision engine (\texttt{ppfeddata recommend}) operating over an 11-dimensional requirement tuple:
+\begin{equation}
+\begin{aligned}
+\mathcal{R} = \langle & \text{Trust}_{\text{srv}}, \text{Trust}_{\text{cli}}, \varepsilon_{\max}, \text{BW}_{\text{rnd}}, \text{BW}_{\text{tot}}, \\
+& \text{Rounds}_{\max}, \text{Unit}, \text{Priority}, \text{Recall}_{\text{rare}}^{\min}, \text{MIA}^{\max}, h \rangle
+\end{aligned}
+\end{equation}
+
+\subsubsection{Five-Stage Recommendation Procedure}
+Operating over empirical scorecard metrics extracted directly from the immutable run ledger, the selection algorithm executes five successive filters:
+\begin{enumerate}
+    \item \textbf{Validity Filter:} Excludes configurations whose operational properties diverge from verified ledger execution;
+    \item \textbf{Trust Filter:} If the server is untrusted, only configurations supporting SecAgg$^+$ or Local DP are retained. If client collusion is possible, distributed DP is audited at $h$ honest clients;
+    \item \textbf{Constraint Pruning:} Eliminates configurations violating specified ceilings on $\varepsilon$, bandwidth, convergence rounds, or MIA leakage, or failing to satisfy rare-class recall floors;
+    \item \textbf{Pareto Optimization:} Extracts non-dominated configurations across utility, privacy, and resource dimensions;
+    \item \textbf{Tie-Breaking:} Selects the configuration maximizing the prioritized performance objective (Macro-F1, Binary F1, or Rare-Class Recall).
+\end{enumerate}
+
+
 Table~\ref{tab:scenarios} defines ten representative deployment scenarios used to validate the recommendation framework.
 
+\FloatBarrier
 \subsection{Dataset and Data Collection}\label{subsec:dataset}
-
-\subsubsection{Dataset Description}
-The primary data source of this study is the DoS/DDoS-MQTT-IoT dataset published by Alatram \textit{et al.}~\cite{alatram2023} and obtained from the authors' official Kaggle release~\cite{alatram2023kaggle}. The dataset contains benign IoT traffic together with several denial-of-service (DoS) and distributed denial-of-service (DDoS) attacks that abuse the MQTT protocol~\cite{mqtt311}. Although the release is distributed in several formats, this study uses a structured CSV representation comprising 59,624,826 rows (approximately 13\,GB).
-
-Each row represents a single network packet described by 33 feature columns. The Normal subset carries two additional columns, \texttt{Label} and \texttt{Capture\_ID}; the latter assigns the \texttt{group\_id} used for data splitting, whereas attack traffic derives its \texttt{group\_id} from the name of its source file. An initial inventory confirmed that the row counts match the expected per-class totals. Table~\ref{tab:dataset_composition} summarizes the distribution of normal traffic and the five attack families.
 
 \begin{table}[!t]
 \centering
@@ -479,11 +487,6 @@ WILL    & 114,474   & 156,055   & 270,529    & 0.45\% \\
 \parbox{\columnwidth}{\scriptsize BCF: Basic Connect Flooding; DELAYED: Delayed Connect Flooding; SYN: SYN TCP Flooding; INVALID: Invalid Subscription Flooding; WILL: Connect Flooding with WILL payload.}
 \end{table}
 
-\subsubsection{Data Provenance and Verification}\label{subsubsec:provenance}
-Attack traffic is used exactly as published: the 48 attack CSV files exported by the dataset authors~\cite{alatram2023}, whose paths and sizes match the Kaggle release~\cite{alatram2023kaggle}. Because the release provides Normal traffic only as 49 PCAP files, every Normal packet was exported with TShark~4.4.7~\cite{wireshark} into the same 33 columns, using a script maintained in the project repository.
-
-The export is complete, since the number of rows equals the total packet count of all 49 captures (45,580,102 rows), and reproducible, since re-extracting three captures yields byte-identical files. To validate the procedure, it was applied to the attack PCAP files, for which the authors' CSV files serve as ground truth: 23 of the 25 raw features used by the models match the authors' values in at least 99.98\% of rows. The two remaining discrepancies are explained by the authors' export settings, namely a display filter that retains only packets sent to the broker and two-pass dissection; enabling both settings reproduces the authors' rows in all 48 captures. The Normal export therefore contains every packet that the authors' settings would select from the same PCAP files, plus the packets sent by the broker; the implications of this difference are discussed in Section~\ref{subsec:limitations}. Table~\ref{tab:provenance} summarizes the verification checks.
-
 \begin{table*}[!t]
 \centering
 \caption{Data Provenance Verification}
@@ -506,16 +509,6 @@ What explains the remaining discrepancies? & Traced to the authors' two-pass dis
 \end{tabularx}
 \end{table*}
 
-\subsubsection{Label Harmonization and Rare Classes}
-Target labels are harmonized into a six-class configuration, namely \texttt{NORMAL}, \texttt{BCF}, \texttt{DELAYED}, \texttt{SYN}, \texttt{INVALID}, and \texttt{WILL}, in which the DoS and DDoS variants of the same attack family are merged into a single class. This merging is supported by leakage check C5 (Section~\ref{subsubsec:leakage_checks}), which shows that DoS and DDoS variants within the same family are practically indistinguishable at the packet level. The original 11-class labeling remains available in the data pipeline but is used only for the robustness analysis (Table~\ref{tab:robustness_branches}).
-
-Rare classes are defined as attack classes whose training quota does not exceed 5,000 rows, i.e., \texttt{DELAYED}, \texttt{SYN}, \texttt{INVALID}, and \texttt{WILL}. Their rarity during training is a deliberate consequence of the quota design rather than a lack of raw data: as shown in Table~\ref{tab:dataset_composition}, the raw dataset contains between 270,529 and 601,542 packets for each of these classes. The quotas impose a 60:1 imbalance between the majority class (\texttt{NORMAL}, 60,000 rows) and the smallest minority class (\texttt{WILL}, 1,000 rows), which creates a demanding setting for evaluating synthetic data generators under federated constraints~\cite{he2009}. In contrast, the validation and test sets are class-balanced (2,000 and 5,000 rows per class, respectively), so that the evaluation metrics are not dominated by the majority class.
-
-\subsubsection{Schema Harmonization and Feature Selection}
-Preprocessing begins by harmonizing the heterogeneous raw packet exports. Column names are converted to snake case. Wireshark text labels (e.g., \texttt{message\_type}, \texttt{qos\_level\_*}, and \texttt{requested\_qos}) are normalized to canonical codes, and boolean indicators (True/False, Set/Not set) are mapped to 0/1. Redundant columns with the suffix \texttt{\_1} are removed. For multi-valued cells that contain several MQTT messages, only the first element is retained, consistent with the Normal export produced with the TShark \texttt{occurrence=f} option; the \texttt{n\_mqtt\_msgs} column is therefore discarded. Rows are then filtered to those whose protocol is TCP or MQTT, followed by a format audit of time-based tokens.
-
-To prevent data leakage~\cite{kaufman2012, arp2022}, identifier and metadata columns are removed: \texttt{no} (row sequence), \texttt{epoch\_time} (absolute timestamp), and \texttt{time\_since\_reference\_\allowbreak or\_first\_frame} (which reveals the capture start time). The \texttt{stream\_index} column is retained only as grouping metadata and is not used as an input feature. The \texttt{source} column is removed because sender IP addresses would allow a model to memorize host identities instead of learning traffic patterns. Free-text payloads in the \texttt{info} column and the Normal-only \texttt{label} and \texttt{capture\_id} columns are also dropped; the raw dataset contains no MAC address or port columns. After feature selection, the final schema comprises $D = 60$ input features, as detailed in Table~\ref{tab:feature_schema}.
-
 \begin{table*}[!t]
 \centering
 \caption{Final Feature Schema ($D = 60$)}
@@ -537,6 +530,34 @@ Categorical (one-hot) & \texttt{message\_type} (12), \texttt{qos\_level\_1} (5),
 \bottomrule
 \end{tabularx}
 \end{table*}
+
+
+
+
+
+
+\subsubsection{Dataset Description}
+The primary data source of this study is the DoS/DDoS-MQTT-IoT dataset published by Alatram \textit{et al.}~\cite{alatram2023} and obtained from the authors' official Kaggle release~\cite{alatram2023kaggle}. The dataset contains benign IoT traffic together with several denial-of-service (DoS) and distributed denial-of-service (DDoS) attacks that abuse the MQTT protocol~\cite{mqtt311}. Although the release is distributed in several formats, this study uses a structured CSV representation comprising 59,624,826 rows (approximately 13\,GB).
+
+Each row represents a single network packet described by 33 feature columns. The Normal subset carries two additional columns, \texttt{Label} and \texttt{Capture\_ID}; the latter assigns the \texttt{group\_id} used for data splitting, whereas attack traffic derives its \texttt{group\_id} from the name of its source file. An initial inventory confirmed that the row counts match the expected per-class totals. Table~\ref{tab:dataset_composition} summarizes the distribution of normal traffic and the five attack families.
+
+
+\subsubsection{Data Provenance and Verification}\label{subsubsec:provenance}
+Attack traffic is used exactly as published: the 48 attack CSV files exported by the dataset authors~\cite{alatram2023}, whose paths and sizes match the Kaggle release~\cite{alatram2023kaggle}. Because the release provides Normal traffic only as 49 PCAP files, every Normal packet was exported with TShark~4.4.7~\cite{wireshark} into the same 33 columns, using a script maintained in the project repository.
+
+The export is complete, since the number of rows equals the total packet count of all 49 captures (45,580,102 rows), and reproducible, since re-extracting three captures yields byte-identical files. To validate the procedure, it was applied to the attack PCAP files, for which the authors' CSV files serve as ground truth: 23 of the 25 raw features used by the models match the authors' values in at least 99.98\% of rows. The two remaining discrepancies are explained by the authors' export settings, namely a display filter that retains only packets sent to the broker and two-pass dissection; enabling both settings reproduces the authors' rows in all 48 captures. The Normal export therefore contains every packet that the authors' settings would select from the same PCAP files, plus the packets sent by the broker; the implications of this difference are discussed in Section~\ref{subsec:limitations}. Table~\ref{tab:provenance} summarizes the verification checks.
+
+
+\subsubsection{Label Harmonization and Rare Classes}
+Target labels are harmonized into a six-class configuration, namely \texttt{NORMAL}, \texttt{BCF}, \texttt{DELAYED}, \texttt{SYN}, \texttt{INVALID}, and \texttt{WILL}, in which the DoS and DDoS variants of the same attack family are merged into a single class. This merging is supported by leakage check C5 (Section~\ref{subsubsec:leakage_checks}), which shows that DoS and DDoS variants within the same family are practically indistinguishable at the packet level. The original 11-class labeling remains available in the data pipeline but is used only for the robustness analysis (Table~\ref{tab:robustness_branches}).
+
+Rare classes are defined as attack classes whose training quota does not exceed 5,000 rows, i.e., \texttt{DELAYED}, \texttt{SYN}, \texttt{INVALID}, and \texttt{WILL}. Their rarity during training is a deliberate consequence of the quota design rather than a lack of raw data: as shown in Table~\ref{tab:dataset_composition}, the raw dataset contains between 270,529 and 601,542 packets for each of these classes. The quotas impose a 60:1 imbalance between the majority class (\texttt{NORMAL}, 60,000 rows) and the smallest minority class (\texttt{WILL}, 1,000 rows), which creates a demanding setting for evaluating synthetic data generators under federated constraints~\cite{he2009}. In contrast, the validation and test sets are class-balanced (2,000 and 5,000 rows per class, respectively), so that the evaluation metrics are not dominated by the majority class.
+
+\subsubsection{Schema Harmonization and Feature Selection}
+Preprocessing begins by harmonizing the heterogeneous raw packet exports. Column names are converted to snake case. Wireshark text labels (e.g., \texttt{message\_type}, \texttt{qos\_level\_*}, and \texttt{requested\_qos}) are normalized to canonical codes, and boolean indicators (True/False, Set/Not set) are mapped to 0/1. Redundant columns with the suffix \texttt{\_1} are removed. For multi-valued cells that contain several MQTT messages, only the first element is retained, consistent with the Normal export produced with the TShark \texttt{occurrence=f} option; the \texttt{n\_mqtt\_msgs} column is therefore discarded. Rows are then filtered to those whose protocol is TCP or MQTT, followed by a format audit of time-based tokens.
+
+To prevent data leakage~\cite{kaufman2012, arp2022}, identifier and metadata columns are removed: \texttt{no} (row sequence), \texttt{epoch\_time} (absolute timestamp), and \texttt{time\_since\_reference\_\allowbreak or\_first\_frame} (which reveals the capture start time). The \texttt{stream\_index} column is retained only as grouping metadata and is not used as an input feature. The \texttt{source} column is removed because sender IP addresses would allow a model to memorize host identities instead of learning traffic patterns. Free-text payloads in the \texttt{info} column and the Normal-only \texttt{label} and \texttt{capture\_id} columns are also dropped; the raw dataset contains no MAC address or port columns. After feature selection, the final schema comprises $D = 60$ input features, as detailed in Table~\ref{tab:feature_schema}.
+
 
 \subsubsection{Group-Based Splitting and Quota Sampling}
 The 11 fine-grained subclasses (\texttt{NORMAL} plus the DoS and DDoS variants of the five attack families) are partitioned with a group-based strategy: entire capture groups are assigned to the training, validation, or test split according to a fixed \texttt{split\_seed}. This prevents highly correlated packets from the same TCP stream or capture session from appearing in more than one split~\cite{arp2022}.
@@ -598,6 +619,7 @@ C5 & Binary classification of DoS versus DDoS variants within the same attack fa
 \end{tabularx}
 \end{table}
 
+\FloatBarrier
 \subsection{Federated Partitioning}\label{subsec:partitioning}
 
 \subsubsection{Dirichlet Label-Skew Partitioning}
@@ -661,7 +683,29 @@ Evaluating FedDP-Marginal across $\alpha_{\text{dir}} \in \{0.1, 0.5, 10\}$ ther
     \item \textbf{Record-level splits under caps:} With a group contribution cap $m$, an entity spanning several gateways is clipped independently up to $m$ times per gateway, whereas on a single gateway it would be clipped only once.
 \end{enumerate}
 
+\FloatBarrier
 \subsection{FedDP-Marginal Generator}\label{subsec:feddp_marginal}
+
+\begin{table*}[!t]
+\centering
+\caption{Architectural Variants of FedDP-Marginal}
+\label{tab:mg_variants}
+\footnotesize
+\begin{tabularx}{\textwidth}{l l l l X}
+\toprule
+\textbf{ID} & \textbf{Noise} & \textbf{Privacy Target} & \textbf{Aggregation Channel} & \textbf{Experimental Function} \\
+\midrule
+MGs & Skellam & Distributed $(\varepsilon, \delta)$ & SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$ & Primary proposed generator (additive noise sharing under SecAgg$^+$) \\
+MGr & Skellam & Distributed $(\varepsilon, \delta)$ & SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$ & MGs with inverse-variance merging and IPF consistency refinement \\
+MGd & Gaussian & Distributed $(\varepsilon, \delta)$ & In-process simulation over $\mathbb{R}$ & Continuous Gaussian comparator (analytical zCDP) \\
+MGl & Skellam / Gaussian & Local DP $(\varepsilon, \delta)$ & Direct sum (no SecAgg$^+$) & Local DP baseline (sum of $K$ unshared perturbations) \\
+MGb & Skellam & Distributed $(\varepsilon, \delta)$ & SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$ & Second-order Bayesian network ablation (PrivBayes style) \\
+MGs-nodp & None ($\varepsilon = \infty$) & None & SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$ & Non-private reference under SecAgg$^+$ (counterpart of M2) \\
+MGp-nodp & None ($\varepsilon = \infty$) & None & Plain Flower FedAvg & Non-private plaintext reference (counterpart of B3) \\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
 
 \subsubsection{Overview}
 FedDP-Marginal adapts private marginal-based tabular synthesis, specifically the MST framework of McKenna \textit{et al.}~\cite{mckenna2021winning} and the graphical-model principles of PrivBayes~\cite{zhang2017privbayes}, to a federated architecture. It is not a new generative foundation; rather, it adapts marginal-based dependency modeling to the federated setting through secure integer aggregation. Unlike deep federated models that require dozens of rounds over model weights, FedDP-Marginal uses an exact three-release query protocol coordinated via SecAgg$^+$~\cite{bell2020} in Flower~\cite{beutel2020}, as illustrated in Fig.~\ref{fig:three_release}.
@@ -781,26 +825,8 @@ For MGs and MGr, updates are transmitted through Flower SecAgg$^+$~\cite{bell202
 \end{itemize}
 Table~\ref{tab:mg_variants} summarizes the FedDP-Marginal variants.
 
-\begin{table*}[!t]
-\centering
-\caption{Architectural Variants of FedDP-Marginal}
-\label{tab:mg_variants}
-\footnotesize
-\begin{tabularx}{\textwidth}{l l l l X}
-\toprule
-\textbf{ID} & \textbf{Noise} & \textbf{Privacy Target} & \textbf{Aggregation Channel} & \textbf{Experimental Function} \\
-\midrule
-MGs & Skellam & Distributed $(\varepsilon, \delta)$ & SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$ & Primary proposed generator (additive noise sharing under SecAgg$^+$) \\
-MGr & Skellam & Distributed $(\varepsilon, \delta)$ & SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$ & MGs with inverse-variance merging and IPF consistency refinement \\
-MGd & Gaussian & Distributed $(\varepsilon, \delta)$ & In-process simulation over $\mathbb{R}$ & Continuous Gaussian comparator (analytical zCDP) \\
-MGl & Skellam / Gaussian & Local DP $(\varepsilon, \delta)$ & Direct sum (no SecAgg$^+$) & Local DP baseline (sum of $K$ unshared perturbations) \\
-MGb & Skellam & Distributed $(\varepsilon, \delta)$ & SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$ & Second-order Bayesian network ablation (PrivBayes style) \\
-MGs-nodp & None ($\varepsilon = \infty$) & None & SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$ & Non-private reference under SecAgg$^+$ (counterpart of M2) \\
-MGp-nodp & None ($\varepsilon = \infty$) & None & Plain Flower FedAvg & Non-private plaintext reference (counterpart of B3) \\
-\bottomrule
-\end{tabularx}
-\end{table*}
 
+\FloatBarrier
 \subsection{Privacy Accounting}\label{subsec:privacy_accounting}
 
 \subsubsection{Analytical zCDP Accounting for the Gaussian Comparator (MGd)}
@@ -870,6 +896,7 @@ The formal DP perimeter is defined as follows (cf.\ Section~\ref{subsec:threat_m
     \item \textbf{Relaxation parameter:} $\delta = 10^{-5}$ is fixed for all evaluations ($1/n \approx 1.13 \times 10^{-5}$ for $n = 88{,}500$).
 \end{itemize}
 
+\FloatBarrier
 \subsection{Federated CVAE Baseline}\label{subsec:cvae}
 
 \subsubsection{Architecture and Loss}
@@ -945,27 +972,8 @@ MGs & Marginal & Distributed DP~\cite{agarwal2021} & SecAgg$^+$, $\mathbb{Z}_{2^
 \end{tabularx}
 \end{table}
 
+\FloatBarrier
 \subsection{Hyperparameter Selection and Search Spaces}\label{subsec:hpo}
-
-\subsubsection{Optimization Protocol and Selection Integrity}
-Hyperparameters are optimized with Optuna~\cite{akiba2019} using the Tree-structured Parzen Estimator (TPE)~\cite{bergstra2011}, exclusively on the validation split. The objective is downstream IDS utility: the validation macro-F1 of a Random Forest~\cite{breiman2001} (100 trees during tuning to limit search time; 200 trees in the final protocols) trained on 5,000 synthetic rows per class and evaluated on real validation traffic (TSTR). The test split remains locked and is evaluated only once on the finalized configurations.
-
-Selecting hyperparameters on unperturbed validation data leaks information about the training set through the trial models. Private selection algorithms~\cite{mcsherry2007, liu2019, papernot2022} can bound this cost; this study reports the nominal training $\varepsilon$ and documents the trial budgets explicitly to enable such accounting.
-
-\subsubsection{Decoupled Search Spaces}
-Tuning is decoupled into five search spaces (Table~\ref{tab:search_spaces}):
-\begin{enumerate}
-    \item \textbf{Space (a), centralized non-DP CVAE:} 30 TPE trials on centralized data over 30 epochs (output \texttt{configs/best\_cvae.yaml});
-    \item \textbf{Space (b), CVAE DP proxy:} To limit cost, initial DP-SGD tuning runs 30 trials on a single proxy client holding 20\% of the data at $\varepsilon = 5$ (one seed per trial). Top candidates are verified in true federated training (\texttt{verify-dp}), selected by validation macro-F1 with ties within 0.01 broken by the lowest validation loss (output \texttt{configs/best\_cvae\_dp.yaml}, family M1d-t21);
-    \item \textbf{Space (c), full-scale federated DP CVAE (O1):} Full federated optimization over 5 clients on seed 0, with 30, 28, and 12 trials for $\varepsilon = 5$, $1$, and $10$, respectively; width 256 was pruned due to memory limits (output \texttt{configs/best\_cvae\_dp\_full.yaml}, configurations M1o and M3o);
-    \item \textbf{Space (d), FedDP-Marginal:} Discrete grid search scored by the mean of three seeds on the validation set, covering coarse bins, budget splits, the dependency metric (plug-in MI, Miller--Madow MI~\cite{miller1955}, or normalized MI) with a tree-stability check, MGb options (parent search, rare-class bins, fine bin counts), and MGr refinement options. Tree stability is measured by the Jaccard similarity~\cite{jaccard1912} of edge sets across partition seeds,
-    \begin{equation}
-    J(T_a^\star, T_b^\star) = \frac{|E(T_a^\star) \cap E(T_b^\star)|}{|E(T_a^\star) \cup E(T_b^\star)|}.
-    \label{eq:jaccard}
-    \end{equation}
-    Policy regimes for group caps ($m_{\text{stream}} \in \{1, 2, 4\}$, $m_{\text{capture}} \in \{25, 50, 100\}$) and honest thresholds ($t \in \{5, 3\}$, or $t = 2$ with $T_{\text{recon}} = 4$) are fixed in \texttt{best\_group\_dp.yaml};
-    \item \textbf{Space (e), downstream IDS:} Selection between Random Forest (200 trees) and MLP (hidden layers $[128, 64]$, early stopping) per protocol by validation macro-F1; the TAugR ratio (seed 0); and class-probability weights $w_c$ via a two-round coordinate search averaged over three seeds.
-\end{enumerate}
 
 \begin{table*}[!t]
 \centering
@@ -989,6 +997,28 @@ Tuning is decoupled into five search spaces (Table~\ref{tab:search_spaces}):
 \end{tabularx}
 \end{table*}
 
+
+\subsubsection{Optimization Protocol and Selection Integrity}
+Hyperparameters are optimized with Optuna~\cite{akiba2019} using the Tree-structured Parzen Estimator (TPE)~\cite{bergstra2011}, exclusively on the validation split. The objective is downstream IDS utility: the validation macro-F1 of a Random Forest~\cite{breiman2001} (100 trees during tuning to limit search time; 200 trees in the final protocols) trained on 5,000 synthetic rows per class and evaluated on real validation traffic (TSTR). The test split remains locked and is evaluated only once on the finalized configurations.
+
+Selecting hyperparameters on unperturbed validation data leaks information about the training set through the trial models. Private selection algorithms~\cite{mcsherry2007, liu2019, papernot2022} can bound this cost; this study reports the nominal training $\varepsilon$ and documents the trial budgets explicitly to enable such accounting.
+
+\subsubsection{Decoupled Search Spaces}
+Tuning is decoupled into five search spaces (Table~\ref{tab:search_spaces}):
+\begin{enumerate}
+    \item \textbf{Space (a), centralized non-DP CVAE:} 30 TPE trials on centralized data over 30 epochs (output \texttt{configs/best\_cvae.yaml});
+    \item \textbf{Space (b), CVAE DP proxy:} To limit cost, initial DP-SGD tuning runs 30 trials on a single proxy client holding 20\% of the data at $\varepsilon = 5$ (one seed per trial). Top candidates are verified in true federated training (\texttt{verify-dp}), selected by validation macro-F1 with ties within 0.01 broken by the lowest validation loss (output \texttt{configs/best\_cvae\_dp.yaml}, family M1d-t21);
+    \item \textbf{Space (c), full-scale federated DP CVAE (O1):} Full federated optimization over 5 clients on seed 0, with 30, 28, and 12 trials for $\varepsilon = 5$, $1$, and $10$, respectively; width 256 was pruned due to memory limits (output \texttt{configs/best\_cvae\_dp\_full.yaml}, configurations M1o and M3o);
+    \item \textbf{Space (d), FedDP-Marginal:} Discrete grid search scored by the mean of three seeds on the validation set, covering coarse bins, budget splits, the dependency metric (plug-in MI, Miller--Madow MI~\cite{miller1955}, or normalized MI) with a tree-stability check, MGb options (parent search, rare-class bins, fine bin counts), and MGr refinement options. Tree stability is measured by the Jaccard similarity~\cite{jaccard1912} of edge sets across partition seeds,
+    \begin{equation}
+    J(T_a^\star, T_b^\star) = \frac{|E(T_a^\star) \cap E(T_b^\star)|}{|E(T_a^\star) \cup E(T_b^\star)|}.
+    \label{eq:jaccard}
+    \end{equation}
+    Policy regimes for group caps ($m_{\text{stream}} \in \{1, 2, 4\}$, $m_{\text{capture}} \in \{25, 50, 100\}$) and honest thresholds ($t \in \{5, 3\}$, or $t = 2$ with $T_{\text{recon}} = 4$) are fixed in \texttt{best\_group\_dp.yaml};
+    \item \textbf{Space (e), downstream IDS:} Selection between Random Forest (200 trees) and MLP (hidden layers $[128, 64]$, early stopping) per protocol by validation macro-F1; the TAugR ratio (seed 0); and class-probability weights $w_c$ via a two-round coordinate search averaged over three seeds.
+\end{enumerate}
+
+
 \subsubsection{Multi-Seed Screening Rule}
 For architectural ablations within space~(d), candidates are screened with an adaptation of the one-standard-error rule~\cite{hastie2009}:
 \begin{equation}
@@ -1001,23 +1031,8 @@ Because the screening rule compares unpaired three-seed means, under the null hy
 
 The tuning protocols are asymmetric: owing to the computational cost of DP-SGD, CVAE searches used one seed per trial (space~(c) tuned on seed 0 and then evaluated on all seeds), whereas FedDP-Marginal selection used the mean of three seeds on validation data. Final test evaluations are executed on the locked test split over seeds $\{0, 1, 2\}$, and all validation and test scores are reported in Section~\ref{sec:experiments}.
 
+\FloatBarrier
 \subsection{Evaluation Protocols and Statistical Decision Rules}\label{subsec:evaluation}
-
-\subsubsection{Evaluation Protocols}
-The evaluation determines how well an IDS trained under different data regimes performs on authentic network traffic. Regardless of the training data, every protocol is evaluated on the same locked 30,000-row real test set (Section~\ref{subsec:dataset}), which provides a consistent benchmark across configurations. Building on the train-on-synthetic, test-on-real paradigm~\cite{esteban2017}, the following protocols are defined:
-\begin{itemize}
-    \item \textbf{TRTR (Train Real, Test Real):} Upper-bound reference in which the IDS is trained on the pooled real training data, including variants with balanced class weights (B1a) and SMOTE oversampling~\cite{chawla2002} (B1b);
-    \item \textbf{TSTR (Train Synthetic, Test Real):} Measures the standalone value of synthetic data when raw data cannot be pooled; the IDS is trained exclusively on synthetic records (5,000 rows per class);
-    \item \textbf{TAug (Train Augmented, Test Real):} Assesses whether synthetic data adds value when real data is available; the real training data is augmented with synthetic records until each class contains 20,000 rows;
-    \item \textbf{TAugR (Train Augmented Rare, Test Real):} Injects synthetic records only into the rare classes, at an augmentation ratio selected on the validation set;
-    \item \textbf{Local Augmentation:} Simulates gateways improving their own IDS; each client supplements its real data with synthetic records from the global model only for the classes it lacks (at most 5,000 rows per class), yielding 15 client-specific models (5 clients $\times$ 3 seeds);
-    \item \textbf{IDS-Side Options:} Examines whether the IDS can compensate for data limitations by using the full 20,000 synthetic rows per class together with class-probability weights tuned on the validation set;
-    \item \textbf{Direct FedMLP:} Non-generative reference in which a classifier is trained directly with FedAvg~\cite{mcmahan2017}, optionally under DP and SecAgg$^+$, without an intermediate synthetic data step.
-\end{itemize}
-Two downstream classifiers are implemented with scikit-learn~\cite{pedregosa2011}: a Random Forest~\cite{breiman2001} with 200 trees, and an MLP with two hidden layers of 128 and 64 units, early stopping, and at most 100 training iterations.
-
-\subsubsection{Evaluation Metrics}
-The performance, privacy, and system cost of each configuration are measured along the five dimensions summarized in Table~\ref{tab:metrics}. Macro-F1 serves as the primary utility metric. Every membership inference attack (MIA) is accompanied by a positive control, such as a deliberately overfitted model, to confirm that the attack is functional; an AUC close to 0.5 is uninformative if the positive control also fails to detect membership~\cite{carlini2022}.
 
 \begin{table*}[!t]
 \centering
@@ -1041,6 +1056,24 @@ Statistical rigor & All experiments are repeated over three seeds $\{0, 1, 2\}$ 
 \end{tabularx}
 \end{table*}
 
+
+\subsubsection{Evaluation Protocols}
+The evaluation determines how well an IDS trained under different data regimes performs on authentic network traffic. Regardless of the training data, every protocol is evaluated on the same locked 30,000-row real test set (Section~\ref{subsec:dataset}), which provides a consistent benchmark across configurations. Building on the train-on-synthetic, test-on-real paradigm~\cite{esteban2017}, the following protocols are defined:
+\begin{itemize}
+    \item \textbf{TRTR (Train Real, Test Real):} Upper-bound reference in which the IDS is trained on the pooled real training data, including variants with balanced class weights (B1a) and SMOTE oversampling~\cite{chawla2002} (B1b);
+    \item \textbf{TSTR (Train Synthetic, Test Real):} Measures the standalone value of synthetic data when raw data cannot be pooled; the IDS is trained exclusively on synthetic records (5,000 rows per class);
+    \item \textbf{TAug (Train Augmented, Test Real):} Assesses whether synthetic data adds value when real data is available; the real training data is augmented with synthetic records until each class contains 20,000 rows;
+    \item \textbf{TAugR (Train Augmented Rare, Test Real):} Injects synthetic records only into the rare classes, at an augmentation ratio selected on the validation set;
+    \item \textbf{Local Augmentation:} Simulates gateways improving their own IDS; each client supplements its real data with synthetic records from the global model only for the classes it lacks (at most 5,000 rows per class), yielding 15 client-specific models (5 clients $\times$ 3 seeds);
+    \item \textbf{IDS-Side Options:} Examines whether the IDS can compensate for data limitations by using the full 20,000 synthetic rows per class together with class-probability weights tuned on the validation set;
+    \item \textbf{Direct FedMLP:} Non-generative reference in which a classifier is trained directly with FedAvg~\cite{mcmahan2017}, optionally under DP and SecAgg$^+$, without an intermediate synthetic data step.
+\end{itemize}
+Two downstream classifiers are implemented with scikit-learn~\cite{pedregosa2011}: a Random Forest~\cite{breiman2001} with 200 trees, and an MLP with two hidden layers of 128 and 64 units, early stopping, and at most 100 training iterations.
+
+\subsubsection{Evaluation Metrics}
+The performance, privacy, and system cost of each configuration are measured along the five dimensions summarized in Table~\ref{tab:metrics}. Macro-F1 serves as the primary utility metric. Every membership inference attack (MIA) is accompanied by a positive control, such as a deliberately overfitted model, to confirm that the attack is functional; an AUC close to 0.5 is uninformative if the positive control also fails to detect membership~\cite{carlini2022}.
+
+
 \subsubsection{Statistical Decision Rule}
 To decide whether a configuration $A$ is genuinely superior to a baseline configuration $B$, a dual-condition decision rule is applied instead of comparing point estimates. Let $S$ denote the number of random seeds and $F_{A,s}$ the primary utility metric (macro-F1) of configuration $A$ at seed $s$. The mean paired difference across seeds is
 \begin{equation}
@@ -1057,6 +1090,7 @@ This study does not report $p$-values and applies no multiple-testing correction
 \subsubsection{Stream-Level Sensitivity Check}
 Because packets belonging to the same TCP stream are not independent and identically distributed, the bootstrap procedure is repeated with resampling at the TCP stream level instead of the row level. Any configuration for which the stream-level bootstrap changes the outcome of rule~\eqref{eq:decision_rule} is explicitly flagged in the analysis of Section~\ref{sec:experiments}.
 
+\FloatBarrier
 \subsection{Experimental Environment and Reproducibility}\label{subsec:reproducibility}
 
 \begin{table}[!t]
@@ -1096,6 +1130,7 @@ Experimental reproducibility is enforced via eight procedural safeguards:
     \item \textbf{Cryptographic Data Guards:} Five automated leakage checks (C1--C5) verify feature arrays against stored cryptographic hashes.
 \end{enumerate}
 
+\FloatBarrier
 \subsection{Methodological Limitations}\label{subsec:limitations}
 The empirical conclusions of this study are bounded by the following methodological constraints:
 \begin{itemize}
