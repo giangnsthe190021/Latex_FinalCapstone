@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.5)  13 OCT 2026 23:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.5)  14 OCT 2026 00:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -451,13 +451,21 @@ ase/8r.enc}
 
 
 ]) (chapters/main/Chapter2.tex [2]) (chapters/main/Chapter3.tex
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 2
+<graphics/paper/fig1_architecture.pdf, id=21, 3118.65125pt x 959.585pt>
+File: graphics/paper/fig1_architecture.pdf Graphic file (type pdf)
+<use graphics/paper/fig1_architecture.pdf>
+Package pdftex.def Info: graphics/paper/fig1_architecture.pdf  used on input li
+ne 21.
+(pdftex.def)             Requested size: 252.0pt x 77.52975pt.
+
+[3 <./graphics/paper/fig1_architecture.pdf>]
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 5
 1.
 
 (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-[3] [4]) (chapters/main/Chapter4.tex
+[4]) (chapters/main/Chapter4.tex
 (C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omsptm.fd)
 [5]) (chapters/main/Chapter5.tex [6] [7]) (chapters/main/Chapter6.tex)
 (chapters/front/thanks.tex) (main.bbl [8]
@@ -485,10 +493,10 @@ L3 programming layer <2025-12-24>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 7738 strings out of 467871
- 123018 string characters out of 5418376
- 590293 words of memory out of 5000000
- 36062 multiletter control sequences out of 15000+600000
+ 7741 strings out of 467871
+ 123174 string characters out of 5418376
+ 590348 words of memory out of 5000000
+ 36065 multiletter control sequences out of 15000+600000
  693718 words of font info for 400 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,15n,65p,1931b,385s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -524,9 +532,9 @@ Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/Admin/AppData/Local
 /Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/Admin/AppData/Local
 /Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb><C:/Users/Admin/AppData/Loca
 l/Programs/MiKTeX/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on main.pdf (9 pages, 380814 bytes).
+Output written on main.pdf (9 pages, 497769 bytes).
 PDF statistics:
- 178 PDF objects out of 1000 (max. 8388607)
+ 206 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 64513 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 64518 words of extra memory for PDF output out of 74296 (max. 10000000)
 
