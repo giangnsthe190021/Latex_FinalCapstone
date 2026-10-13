@@ -37,9 +37,9 @@ B.~McMahan, E.~Moore, D.~Ramage, S.~Hampson, and B.~A. y~Arcas,
 \bibitem{zhu2019}
 \BIBentryALTinterwordspacing
 L.~Zhu, Z.~Liu, and S.~Han, ``Deep leakage from gradients,'' in \emph{Advances
-  in Neural Information Processing Systems (NeurIPS)}, vol.~32, 2019. [Online].
-  Available:
-  \url{https://proceedings.neurips.cc/paper_files/paper/2019/file/60a6c4002cc7b29142def8871531281a-Paper.pdf}
+  in Neural Information Processing Systems (NeurIPS)}, vol.~32, 2019, pp.
+  14\,774--14\,784. [Online]. Available:
+  \url{https://proceedings.neurips.cc/paper/2019/hash/60a6c4002cc7b29142def8871531281a-Abstract.html}
 \BIBentrySTDinterwordspacing
 
 \bibitem{vyas2024}
@@ -182,7 +182,7 @@ K.~Sohn, H.~Lee, and X.~Yan, ``Learning structured output representation using
   Processing Systems (NeurIPS)}, vol.~28.\hskip 1em plus 0.5em minus
   0.4em\relax Curran Associates, Inc., 2015, pp. 3483--3491. [Online].
   Available:
-  \url{https://proceedings.neurips.cc/paper/2015/hash/8d55a249e6baa5c0677fbc52b95b178b-Abstract.html}
+  \url{https://proceedings.neurips.cc/paper/2015/hash/8d55a249e6baa5c06772297520da2051-Abstract.html}
 \BIBentrySTDinterwordspacing
 
 \bibitem{arp2022}
