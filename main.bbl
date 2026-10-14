@@ -24,23 +24,18 @@
 \bibitem{alatram2023}
 A.~Alatram, L.~F. Sikos, M.~Johnstone, P.~Szewczyk, and J.~J. Kang,
   ``{DoS/DDoS-MQTT-IoT}: A dataset for evaluating intrusions in {IoT} networks
-  using the {MQTT} protocol,'' \emph{Computer Networks}, vol. 231, p. 109809,
-  2023.
+  using the {MQTT} protocol,'' \emph{Comput. Netw.}, vol. 231, p. 109809, 2023.
 
 \bibitem{mcmahan2017}
-B.~McMahan, E.~Moore, D.~Ramage, S.~Hampson, and B.~A. y~Arcas,
+B.~McMahan, E.~Moore, D.~Ramage, S.~Hampson, and B.~Ag{\"u}era~y Arcas,
   ``Communication-efficient learning of deep networks from decentralized
-  data,'' in \emph{Proceedings of the 20th International Conference on
-  Artificial Intelligence and Statistics (AISTATS)}.\hskip 1em plus 0.5em minus
-  0.4em\relax PMLR, 2017, pp. 1273--1282.
+  data,'' in \emph{Proc. 20th Int. Conf. Artif. Intell. Statist.
+  (AISTATS)}.\hskip 1em plus 0.5em minus 0.4em\relax PMLR, 2017, pp.
+  1273--1282.
 
 \bibitem{zhu2019}
-\BIBentryALTinterwordspacing
-L.~Zhu, Z.~Liu, and S.~Han, ``Deep leakage from gradients,'' in \emph{Advances
-  in Neural Information Processing Systems (NeurIPS)}, vol.~32, 2019, pp.
-  14\,774--14\,784. [Online]. Available:
-  \url{https://proceedings.neurips.cc/paper/2019/hash/60a6c4002cc7b29142def8871531281a-Abstract.html}
-\BIBentrySTDinterwordspacing
+L.~Zhu, Z.~Liu, and S.~Han, ``Deep leakage from gradients,'' in \emph{Adv.
+  Neural Inf. Process. Syst. (NeurIPS)}, vol.~32, 2019, pp. 14\,774--14\,784.
 
 \bibitem{vyas2024}
 A.~Vyas, P.-C. Lin, R.-H. Hwang, and M.~Tripathi, ``Privacy-preserving
@@ -50,39 +45,37 @@ A.~Vyas, P.-C. Lin, R.-H. Hwang, and M.~Tripathi, ``Privacy-preserving
 \bibitem{bonawitz2017}
 K.~Bonawitz, V.~Ivanov, B.~Kreuter, A.~Marcedone, H.~B. McMahan, S.~Patel,
   D.~Ramage, A.~Segal, and K.~Seth, ``Practical secure aggregation for
-  privacy-preserving machine learning,'' in \emph{Proceedings of the 2017 ACM
-  SIGSAC Conference on Computer and Communications Security (CCS '17)}.\hskip
-  1em plus 0.5em minus 0.4em\relax ACM, 2017, pp. 1175--1191.
+  privacy-preserving machine learning,'' in \emph{Proc. ACM SIGSAC Conf.
+  Comput. Commun. Secur. (CCS)}.\hskip 1em plus 0.5em minus 0.4em\relax ACM,
+  2017, pp. 1175--1191.
 
 \bibitem{bell2020}
 J.~H. Bell, K.~A. Bonawitz, A.~Gasc{\'o}n, T.~Lepoint, and M.~Raykova, ``Secure
-  single-server aggregation with (poly)logarithmic overhead,'' in
-  \emph{Proceedings of the 2020 ACM SIGSAC Conference on Computer and
-  Communications Security (CCS '20)}.\hskip 1em plus 0.5em minus 0.4em\relax
-  ACM, 2020, pp. 1253--1269.
+  single-server aggregation with (poly)logarithmic overhead,'' in \emph{Proc.
+  ACM SIGSAC Conf. Comput. Commun. Secur. (CCS)}.\hskip 1em plus 0.5em minus
+  0.4em\relax ACM, 2020, pp. 1253--1269.
 
 \bibitem{dwork2014}
 C.~Dwork and A.~Roth, ``The algorithmic foundations of differential privacy,''
-  \emph{Foundations and Trends in Theoretical Computer Science}, vol.~9, no.
-  3--4, pp. 211--407, 2014.
+  \emph{Found. Trends Theor. Comput. Sci.}, vol.~9, no. 3--4, pp. 211--407,
+  2014.
 
 \bibitem{deng2025}
 Z.~Deng, A.~Torim, S.~Ben~Yahia, and H.~Bahsi, ``Generative {AI} in intrusion
   detection systems for internet of things: A systematic literature review,''
-  \emph{IEEE Open Journal of the Communications Society}, vol.~6, pp.
-  4689--4717, 2025.
+  \emph{IEEE Open J. Commun. Soc.}, vol.~6, pp. 4689--4717, 2025.
 
 \bibitem{hamouda2024}
 D.~Hamouda, M.~A. Ferrag, N.~Benhamida, H.~Seridi, and M.~C. Ghanem,
   ``Revolutionizing intrusion detection in industrial {IoT} with distributed
-  learning and deep generative techniques,'' \emph{Internet of Things},
-  vol.~26, p. 101149, 2024.
+  learning and deep generative techniques,'' \emph{Internet Things}, vol.~26,
+  p. 101149, 2024.
 
 \bibitem{yao2024}
 W.~Yao, H.~Zhao, and H.~Shi, ``Privacy-preserving collaborative intrusion
   detection in edge of {Internet of Things}: A robust and efficient deep
-  generative learning approach,'' \emph{IEEE Internet of Things Journal},
-  vol.~11, no.~9, pp. 15\,704--15\,722, 2024.
+  generative learning approach,'' \emph{IEEE Internet Things J.}, vol.~11,
+  no.~9, pp. 15\,704--15\,722, 2024.
 
 \bibitem{shettar2026}
 R.~Shettar, R.~Coelho, and S.~S. Veerasagar, ``{SYNAPSE}: Synthetic
@@ -91,72 +84,63 @@ R.~Shettar, R.~Coelho, and S.~S. Veerasagar, ``{SYNAPSE}: Synthetic
 
 \bibitem{abadi2016dpsgd}
 M.~Abadi, A.~Chu, I.~Goodfellow, H.~B. McMahan, I.~Mironov, K.~Talwar, and
-  L.~Zhang, ``Deep learning with differential privacy,'' in \emph{Proceedings
-  of the 2016 ACM SIGSAC Conference on Computer and Communications Security
-  (CCS '16)}.\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2016, pp. 308--318.
+  L.~Zhang, ``Deep learning with differential privacy,'' in \emph{Proc. ACM
+  SIGSAC Conf. Comput. Commun. Secur. (CCS)}.\hskip 1em plus 0.5em minus
+  0.4em\relax ACM, 2016, pp. 308--318.
 
 \bibitem{zhang2017privbayes}
 J.~Zhang, G.~Cormode, C.~M. Procopiuc, D.~Srivastava, and X.~Xiao,
   ``{PrivBayes}: Private data release via {Bayesian} networks,'' \emph{ACM
-  Transactions on Database Systems}, vol.~42, no.~4, pp. 25:1--25:41, 2017.
+  Trans. Database Syst.}, vol.~42, no.~4, pp. 25:1--25:41, 2017.
 
 \bibitem{mckenna2021mst}
 R.~McKenna, G.~Miklau, and D.~Sheldon, ``Winning the {NIST} contest: A scalable
-  and general approach to differentially private synthetic data,''
-  \emph{Journal of Privacy and Confidentiality}, vol.~11, no.~3, pp. 1--35,
-  2021.
+  and general approach to differentially private synthetic data,'' \emph{J.
+  Privacy Confidentiality}, vol.~11, no.~3, pp. 1--35, 2021.
 
 \bibitem{mckenna2024aim}
 R.~McKenna, B.~Mullins, D.~Sheldon, and G.~Miklau, ``{AIM}: An adaptive and
-  iterative mechanism for differentially private synthetic data,''
-  \emph{Proceedings of the VLDB Endowment}, vol.~15, no.~11, pp. 2599--2612,
-  2022.
+  iterative mechanism for differentially private synthetic data,'' \emph{Proc.
+  VLDB Endow.}, vol.~15, no.~11, pp. 2599--2612, 2022.
 
 \bibitem{kairouz2021}
-\BIBentryALTinterwordspacing
 P.~Kairouz, Z.~Liu, and T.~Steinke, ``The distributed discrete {Gaussian}
   mechanism for federated learning with secure aggregation,'' in \emph{Proc.
   38th Int. Conf. Mach. Learn. (ICML)}, vol. 139.\hskip 1em plus 0.5em minus
-  0.4em\relax PMLR, 2021, pp. 5201--5212. [Online]. Available:
-  \url{https://arxiv.org/abs/2102.06387}
-\BIBentrySTDinterwordspacing
+  0.4em\relax PMLR, 2021, pp. 5201--5212.
 
 \bibitem{agarwal2021}
-\BIBentryALTinterwordspacing
 N.~Agarwal, P.~Kairouz, and Z.~Liu, ``The {Skellam} mechanism for
   differentially private federated learning,'' in \emph{Adv. Neural Inf.
   Process. Syst. (NeurIPS)}, vol.~34.\hskip 1em plus 0.5em minus 0.4em\relax
-  Curran Associates, Inc., 2021, pp. 5052--5064. [Online]. Available:
-  \url{https://arxiv.org/abs/2110.04995}
-\BIBentrySTDinterwordspacing
+  Curran Associates, Inc., 2021, pp. 5052--5064.
 
 \bibitem{maddock2024}
 S.~Maddock, G.~Cormode, and C.~Maple, ``{FLAIM}: {AIM}-based synthetic data
-  generation in the federated setting,'' in \emph{Proceedings of the 30th ACM
-  SIGKDD Conference on Knowledge Discovery and Data Mining (KDD '24)}.\hskip
-  1em plus 0.5em minus 0.4em\relax ACM, 2024, pp. 2165--2176.
+  generation in the federated setting,'' in \emph{Proc. 30th ACM SIGKDD Conf.
+  Knowl. Discov. Data Mining (KDD)}.\hskip 1em plus 0.5em minus 0.4em\relax
+  ACM, 2024, pp. 2165--2176.
 
 \bibitem{pentyala2024}
 S.~Pentyala, M.~Pereira, and M.~De~Cock, ``{CaPS}: Collaborative and private
-  synthetic data generation from distributed sources,'' in \emph{Proceedings of
-  the 41st International Conference on Machine Learning (ICML '24)}, ser.
-  Proceedings of Machine Learning Research, vol. 235.\hskip 1em plus 0.5em
-  minus 0.4em\relax PMLR, 2024, pp. 40\,397--40\,413.
+  synthetic data generation from distributed sources,'' in \emph{Proc. 41st
+  Int. Conf. Mach. Learn. (ICML)}, vol. 235.\hskip 1em plus 0.5em minus
+  0.4em\relax PMLR, 2024, pp. 40\,397--40\,413.
 
 \bibitem{chow1968}
 C.~K. Chow and C.~N. Liu, ``Approximating discrete probability distributions
-  with dependence trees,'' \emph{IEEE Transactions on Information Theory},
-  vol.~14, no.~3, pp. 462--467, 1968.
+  with dependence trees,'' \emph{IEEE Trans. Inf. Theory}, vol.~14, no.~3, pp.
+  462--467, 1968.
 
 \bibitem{mironov2017rdp}
-I.~Mironov, ``R{\'e}nyi differential privacy,'' in \emph{2017 IEEE 30th
-  Computer Security Foundations Symposium (CSF)}.\hskip 1em plus 0.5em minus
-  0.4em\relax IEEE, 2017, pp. 263--275.
+I.~Mironov, ``R{\'e}nyi differential privacy,'' in \emph{Proc. IEEE 30th
+  Comput. Secur. Found. Symp. (CSF)}.\hskip 1em plus 0.5em minus 0.4em\relax
+  IEEE, 2017, pp. 263--275.
 
 \bibitem{chawla2002}
 N.~V. Chawla, K.~W. Bowyer, L.~O. Hall, and W.~P. Kegelmeyer, ``{SMOTE}:
-  Synthetic minority over-sampling technique,'' \emph{Journal of Artificial
-  Intelligence Research}, vol.~16, pp. 321--357, 2002.
+  Synthetic minority over-sampling technique,'' \emph{J. Artif. Intell. Res.},
+  vol.~16, pp. 321--357, 2002.
 
 \bibitem{hsu2019}
 T.-M.~H. Hsu, H.~Qi, and M.~Brown, ``Measuring the effects of non-identical
@@ -176,21 +160,16 @@ D.~J. Beutel, T.~Topal, A.~Mathur, X.~Qiu, J.~Fernandez-Marques, Y.~Gao,
   preprint arXiv:2007.14390}, 2020.
 
 \bibitem{sohn2015cvae}
-\BIBentryALTinterwordspacing
 K.~Sohn, H.~Lee, and X.~Yan, ``Learning structured output representation using
-  deep conditional generative models,'' in \emph{Advances in Neural Information
-  Processing Systems (NeurIPS)}, vol.~28.\hskip 1em plus 0.5em minus
-  0.4em\relax Curran Associates, Inc., 2015, pp. 3483--3491. [Online].
-  Available:
-  \url{https://proceedings.neurips.cc/paper/2015/hash/8d55a249e6baa5c06772297520da2051-Abstract.html}
-\BIBentrySTDinterwordspacing
+  deep conditional generative models,'' in \emph{Adv. Neural Inf. Process.
+  Syst. (NeurIPS)}, vol.~28.\hskip 1em plus 0.5em minus 0.4em\relax Curran
+  Associates, Inc., 2015, pp. 3483--3491.
 
 \bibitem{arp2022}
 D.~Arp, E.~Quiring, F.~Pendlebury, A.~Warnecke, F.~Pierazzi, C.~Wressnegger,
   L.~Cavallaro, and K.~Rieck, ``Dos and don'ts of machine learning in computer
-  security,'' in \emph{Proceedings of the 31st USENIX Security
-  Symposium}.\hskip 1em plus 0.5em minus 0.4em\relax USENIX Association, 2022,
-  pp. 3971--3988.
+  security,'' in \emph{Proc. 31st USENIX Secur. Symp.}\hskip 1em plus 0.5em
+  minus 0.4em\relax USENIX Association, 2022, pp. 3971--3988.
 
 \bibitem{esteban2017}
 C.~Esteban, S.~L. Hyland, and G.~R{\"a}tsch, ``Real-valued (medical) time
@@ -199,13 +178,12 @@ C.~Esteban, S.~L. Hyland, and G.~R{\"a}tsch, ``Real-valued (medical) time
 
 \bibitem{lopezpaz2017}
 D.~Lopez-Paz and M.~Oquab, ``Revisiting classifier two-sample tests,'' in
-  \emph{Proceedings of the 5th International Conference on Learning
-  Representations (ICLR)}, 2017.
+  \emph{Proc. 5th Int. Conf. Learn. Represent. (ICLR)}, 2017.
 
 \bibitem{carlini2022}
 N.~Carlini, S.~Chien, M.~Nasr, S.~Song, A.~Terzis, and F.~Tram{\`e}r,
-  ``Membership inference attacks from first principles,'' in \emph{Proceedings
-  of the 2022 IEEE Symposium on Security and Privacy (SP)}.\hskip 1em plus
-  0.5em minus 0.4em\relax IEEE, 2022, pp. 1897--1914.
+  ``Membership inference attacks from first principles,'' in \emph{Proc. IEEE
+  Symp. Secur. Privacy (SP)}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE,
+  2022, pp. 1897--1914.
 
 \end{thebibliography}

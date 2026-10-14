@@ -78,7 +78,7 @@
 \newlabel{eq:sensitivity}{{4}{4}{Privacy Accounting}{equation.4}{}}
 \newlabel{eq:skellam_rdp}{{5}{4}{Privacy Accounting}{equation.5}{}}
 \newlabel{eq:rdp_conversion}{{6}{4}{Privacy Accounting}{equation.6}{}}
-\newlabel{eq:secagg}{{7}{4}{Privacy Accounting}{equation.7}{}}
+\citation{kairouz2021,agarwal2021}
 \citation{sohn2015cvae}
 \citation{mcmahan2017}
 \citation{abadi2016dpsgd,yousefpour2021}
@@ -86,6 +86,7 @@
 \citation{arp2022}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Three-release protocol of FedDP-Marginal. Each release is a sum of count tables plus Skellam noise shares, computed with SecAgg$^+$ over $\mathbb  {Z}_{2^{32}}$. The coarse cut points (after Release~1) and the tree $T^\star $ (after Release~2) are broadcast back before the next release.}}{5}{figure.2}\protected@file@percent }
 \newlabel{fig:three_release}{{2}{5}{Three-release protocol of FedDP-Marginal. Each release is a sum of count tables plus Skellam noise shares, computed with SecAgg$^+$ over $\mathbb {Z}_{2^{32}}$. The coarse cut points (after Release~1) and the tree $T^\star $ (after Release~2) are broadcast back before the next release}{figure.2}{}}
+\newlabel{eq:secagg}{{7}{5}{Privacy Accounting}{equation.7}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Federated CVAE Baseline}{5}{subsection.3.4}\protected@file@percent }
 \newlabel{subsec:cvae}{{\mbox  {III-D}}{5}{Federated CVAE Baseline}{subsection.3.4}{}}
 \newlabel{eq:dpsgd}{{8}{5}{Federated CVAE Baseline}{equation.8}{}}
@@ -100,34 +101,36 @@
 \citation{beutel2020}
 \@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Classes, Raw Packet Counts and Split Quotas}}{6}{table.2}\protected@file@percent }
 \newlabel{tab:data}{{II}{6}{Classes, Raw Packet Counts and Split Quotas}{table.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Evaluated Configurations}}{6}{table.3}\protected@file@percent }
-\newlabel{tab:configs}{{III}{6}{Evaluated Configurations}{table.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Configurations}{6}{subsection.4.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}Evaluation Protocols and Metrics}{6}{subsection.4.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Evaluated Configurations}}{6}{table.3}\protected@file@percent }
+\newlabel{tab:configs}{{III}{6}{Evaluated Configurations}{table.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-D}}Decision Rule and Environment}{6}{subsection.4.4}\protected@file@percent }
 \newlabel{eq:decision_rule}{{9}{6}{Decision Rule and Environment}{equation.9}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {V}Results and Discussion}{6}{section.5}\protected@file@percent }
-\newlabel{sec:results}{{V}{6}{Results and Discussion}{section.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}RQ1: Utility of Federated Synthetic Data}{6}{subsection.5.1}\protected@file@percent }
-\newlabel{subsec:rq1}{{\mbox  {V-A}}{6}{RQ1: Utility of Federated Synthetic Data}{subsection.5.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Results and Discussion}{7}{section.5}\protected@file@percent }
+\newlabel{sec:results}{{V}{7}{Results and Discussion}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}RQ1: Utility of Federated Synthetic Data}{7}{subsection.5.1}\protected@file@percent }
+\newlabel{subsec:rq1}{{\mbox  {V-A}}{7}{RQ1: Utility of Federated Synthetic Data}{subsection.5.1}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces TSTR Utility and Communication at Equal Privacy Budgets}}{7}{table.4}\protected@file@percent }
 \newlabel{tab:main}{{IV}{7}{TSTR Utility and Communication at Equal Privacy Budgets}{table.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}RQ2: FedDP-Marginal Versus the Federated CVAE Under DP}{7}{subsection.5.2}\protected@file@percent }
 \newlabel{subsec:rq2}{{\mbox  {V-B}}{7}{RQ2: FedDP-Marginal Versus the Federated CVAE Under DP}{subsection.5.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces TSTR macro-F1 (bars: one seed standard deviation) against the privacy budget for FedDP-Marginal with distributed noise (MG) and local noise (MGl), and for the best CVAE configuration. Dashed lines: random forests trained on pooled real data.}}{7}{figure.3}\protected@file@percent }
-\newlabel{fig:tstr_eps}{{3}{7}{TSTR macro-F1 (bars: one seed standard deviation) against the privacy budget for FedDP-Marginal with distributed noise (MG) and local noise (MGl), and for the best CVAE configuration. Dashed lines: random forests trained on pooled real data}{figure.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-C}}RQ3: What Each Protection Costs and Protects}{7}{subsection.5.3}\protected@file@percent }
-\newlabel{subsec:rq3}{{\mbox  {V-C}}{7}{RQ3: What Each Protection Costs and Protects}{subsection.5.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces Protection Options of FedDP-Marginal ($\varepsilon \le 5$)}}{8}{table.5}\protected@file@percent }
-\newlabel{tab:protection}{{V}{8}{Protection Options of FedDP-Marginal ($\varepsilon \le 5$)}{table.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces TSTR macro-F1 (bars: one seed standard deviation) against the privacy budget for FedDP-Marginal with distributed noise (MG) and client-side noise (MGl), and for the best CVAE configuration. The $\varepsilon $ axis is categorical (equal spacing). Dashed lines: RFs trained on pooled real data.}}{8}{figure.3}\protected@file@percent }
+\newlabel{fig:tstr_eps}{{3}{8}{TSTR macro-F1 (bars: one seed standard deviation) against the privacy budget for FedDP-Marginal with distributed noise (MG) and client-side noise (MGl), and for the best CVAE configuration. The $\varepsilon $ axis is categorical (equal spacing). Dashed lines: RFs trained on pooled real data}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-C}}RQ3: What Each Protection Costs and Protects}{8}{subsection.5.3}\protected@file@percent }
+\newlabel{subsec:rq3}{{\mbox  {V-C}}{8}{RQ3: What Each Protection Costs and Protects}{subsection.5.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces Protection Options of FedDP-Marginal at $\varepsilon = 5$, With the Non-Private References}}{8}{table.5}\protected@file@percent }
+\newlabel{tab:protection}{{V}{8}{Protection Options of FedDP-Marginal at $\varepsilon = 5$, With the Non-Private References}{table.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-D}}RQ4: Requirement-Driven Configuration}{8}{subsection.5.4}\protected@file@percent }
 \newlabel{subsec:rq4}{{\mbox  {V-D}}{8}{RQ4: Requirement-Driven Configuration}{subsection.5.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-E}}Discussion and Limitations}{8}{subsection.5.5}\protected@file@percent }
-\newlabel{subsec:limitations}{{\mbox  {V-E}}{8}{Discussion and Limitations}{subsection.5.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {VI}{\ignorespaces Recommended Configuration per Deployment Requirement}}{8}{table.6}\protected@file@percent }
-\newlabel{tab:recommend}{{VI}{8}{Recommended Configuration per Deployment Requirement}{table.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces TSTR macro-F1 against total traffic per run (log scale) for all valid configurations. MG: FedDP-Marginal, including its Gaussian (MGd) and second-order (MGb) ablations. Filled markers: Pareto front over utility, $\varepsilon $ and cost.}}{8}{figure.4}\protected@file@percent }
-\newlabel{fig:pareto}{{4}{8}{TSTR macro-F1 against total traffic per run (log scale) for all valid configurations. MG: FedDP-Marginal, including its Gaussian (MGd) and second-order (MGb) ablations. Filled markers: Pareto front over utility, $\varepsilon $ and cost}{figure.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {VI}{\ignorespaces Recommended Configuration per Deployment Requirement}}{9}{table.6}\protected@file@percent }
+\newlabel{tab:recommend}{{VI}{9}{Recommended Configuration per Deployment Requirement}{table.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces TSTR macro-F1 against total traffic per run (log scale) for all valid configurations. MG: FedDP-Marginal, including its Gaussian ablation (MGd, summed in-process) and second-order ablation (MGb); MGp: plain Flower sum without SecAgg$^+$. The traffic of the client-side variants (MGl) is estimated, as in Table~\ref {tab:main}. Filled markers: Pareto front over utility, $\varepsilon $ and cost.}}{9}{figure.4}\protected@file@percent }
+\newlabel{fig:pareto}{{4}{9}{TSTR macro-F1 against total traffic per run (log scale) for all valid configurations. MG: FedDP-Marginal, including its Gaussian ablation (MGd, summed in-process) and second-order ablation (MGb); MGp: plain Flower sum without SecAgg$^+$. The traffic of the client-side variants (MGl) is estimated, as in Table~\ref {tab:main}. Filled markers: Pareto front over utility, $\varepsilon $ and cost}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-E}}Discussion and Limitations}{9}{subsection.5.5}\protected@file@percent }
+\newlabel{subsec:limitations}{{\mbox  {V-E}}{9}{Discussion and Limitations}{subsection.5.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{9}{section.6}\protected@file@percent }
+\newlabel{sec:conclusion}{{VI}{9}{Conclusion}{section.6}{}}
 \bibstyle{IEEEtran}
 \bibdata{references/reference}
 \bibcite{alatram2023}{1}
@@ -155,12 +158,10 @@
 \bibcite{hsu2019}{23}
 \bibcite{yousefpour2021}{24}
 \bibcite{beutel2020}{25}
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{9}{section.6}\protected@file@percent }
-\newlabel{sec:conclusion}{{VI}{9}{Conclusion}{section.6}{}}
-\@writefile{toc}{\contentsline {section}{References}{9}{section*.2}\protected@file@percent }
 \bibcite{sohn2015cvae}{26}
 \bibcite{arp2022}{27}
 \bibcite{esteban2017}{28}
 \bibcite{lopezpaz2017}{29}
 \bibcite{carlini2022}{30}
+\@writefile{toc}{\contentsline {section}{References}{10}{section*.2}\protected@file@percent }
 \gdef \@abspage@last{10}
