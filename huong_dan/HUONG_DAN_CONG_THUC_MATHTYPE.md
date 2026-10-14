@@ -48,11 +48,11 @@ Gõ **cả dấu phẩy hoặc dấu chấm cuối công thức** đúng như M�
 | (1) | `eq:dirichlet` | $\mathbf{p}_c = (p_{c,1}, \dots, p_{c,K}) \sim \mathrm{Dir}(\alpha_{\mathrm{dir}} \mathbf{1}_K)$, | **p** và **1** đậm (Ctrl+Shift+B); "Dir" và chỉ số "dir" ở kiểu Function; "…" lấy từ bảng Spaces and ellipses |
 | (2) | `eq:chow_liu` | $T^\star = \arg\max_T \sum_{(i,j) \in T} \hat{I}(X_i; X_j)$, | "arg max" kiểu Function, T đặt bên dưới (Underscript); tổng dùng mẫu có cận dưới |
 | (3) | `eq:tree_factorization` | $\hat{P}(\mathbf{x} \mid y = c) = \hat{P}(x_r \mid y = c) \prod_{(u,v) \in T^\star} \hat{P}(x_v \mid x_u, y = c)$, | **x** đậm; dấu "∣" lấy từ Relational symbols; tích dùng mẫu có cận dưới |
-| (4) | `eq:sensitivity` | $\Delta_{1,r} = m\,T_r, \qquad \Delta_{2,r} = m\sqrt{T_r}$. | Thêm khoảng trống lớn giữa hai vế |
+| (4) | `eq:sensitivity` | $\Delta_{1,r} = m\,M_r, \qquad \Delta_{2,r} = m\sqrt{M_r}$. | Thêm khoảng trống lớn giữa hai vế; số bảng là $M_r$ (không còn dùng $T_r$, để không trùng với cây $T^\star$) |
 | (5) | `eq:skellam_rdp` | Cận RDP của Skellam | **Hai dòng:** gõ dòng 1 đến hết phân số đầu, nhấn **Enter**, gõ dòng 2 bắt đầu bằng "+ min(…)". Sau đó **Format → Align at =** để dòng 2 lùi vào thẳng vế phải. Công thức một dòng sẽ tràn cột. |
 | (6) | `eq:rdp_conversion` | $\varepsilon = \min_\lambda [\dots]$, | "min" kiểu Function, λ bên dưới; ngoặc vuông co giãn (Ctrl+[); hai phân số; "ln" kiểu Function |
 | (7) | `eq:secagg` | $S = \sum_{k \in \mathcal{K}} (\mathbf{x}_k + \boldsymbol{\xi}_k) \bmod 2^{32}$, | 𝒦 chữ thư pháp; **x** và **ξ** đậm; "mod" kiểu Function |
-| (8) | `eq:dpsgd` | $\tilde{g} = \frac{1}{B}(\sum \dots + \mathcal{N}(0, \sigma_k^2 C^2 \mathbf{I}))$, | 𝒩 chữ thư pháp; **I** đậm; "max" kiểu Function; chuẩn ‖g_i‖₂ dùng Fence template |
+| (8) | `eq:dpsgd` | $\tilde{g} = \frac{1}{b}(\sum \dots + \mathcal{N}(0, \sigma_k^2 G^2 \mathbf{I}))$, | Batch là $b$ chữ thường, ngưỡng cắt gradient là $G$ (không dùng $B$, $C$ để không trùng với $B_{\mathrm{fine}}$ và số lớp $C$); 𝒩 chữ thư pháp; **I** đậm; "max" kiểu Function; chuẩn ‖g_i‖₂ dùng Fence template |
 | (9) | `eq:decision_rule` | $0 \notin \mathrm{CI}_{95\%}(\bar{\Delta})$ and $\lvert\bar{\Delta}\rvert > \max(\mathrm{sd}_A, \mathrm{sd}_B)$, | "CI", "sd", "max" kiểu Function; "and" kiểu **Text** (Ctrl+Shift+E), hai bên có khoảng trống lớn |
 
 ## 4. Đưa vào bài

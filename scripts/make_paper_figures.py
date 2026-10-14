@@ -1,13 +1,11 @@
-"""Figures 3 and 4 of the paper: reference renderings and coordinate tables for redrawing them in ConceptDraw.
+"""Figures 3 and 4 of the paper (Times New Roman, one IEEE column, text >= 8 pt), drawn from the PP-FedData results.
 
-The paper's figures are drawn in ConceptDraw. This script reads the result files of the PP-FedData repository (no number
-typed by hand) and writes, for each chart:
-  - a reference rendering (PDF and PNG) whose page and plot frame have exactly the sizes given in the tables, so it can be
-    placed as a locked background layer in ConceptDraw and traced;
-  - the position in millimetres of every marker, error bar, tick, reference line and label (huong_dan/SO_LIEU_HINH_3_4.md).
+The script reads the result files of the PP-FedData repository (no number typed by hand) and writes the two charts the
+paper includes, graphics/paper/Fig3.pdf (TSTR macro-F1 against epsilon) and graphics/paper/Fig4.pdf (macro-F1 against
+traffic). With --table it also writes the position in millimetres of every marker, tick and label.
 
 Usage (from the Latex_FinalCapstone folder):
-    python scripts/make_paper_figures.py --results ../results --out huong_dan/tham_chieu --table huong_dan/SO_LIEU_HINH_3_4.md
+    python scripts/make_paper_figures.py --results ../results
 
 Inputs:  <results>/scorecard.json (TSTR macro-F1, its seed std, bytes per run, validity, Pareto front),
          <results>/summary.csv (TRTR references B0-rf and B1b-rf).
@@ -46,12 +44,12 @@ EPS_ORDER = ["1", "5", "10", "inf"]
 EPS_LABEL = {"1": "1", "5": "5", "10": "10", "inf": "∞"}
 SERIES3 = [  # name, configurations, colour, marker, horizontal offset (category units)
     ("FedDP-Marginal, distributed DP", MG_DIST, "blue", "o", -0.08),
-    ("FedDP-Marginal, local DP", MG_LOCAL, "green", "s", 0.0),
+    ("FedDP-Marginal, client-side DP", MG_LOCAL, "green", "s", 0.0),
     ("Federated CVAE (best config.)", CVAE, "red", "^", 0.08),
 ]
 FAMILY4 = {  # family -> (legend text, colour, marker)
     "dist": ("MG, distributed DP", "blue", "o"),
-    "local": ("MG, local DP", "green", "s"),
+    "local": ("MG, client-side DP", "green", "s"),
     "nodp": ("MG, no DP", "purple", "D"),
     "cvae": ("Federated CVAE", "red", "^"),
 }
@@ -83,7 +81,11 @@ def style() -> None:
     plt.rcParams.update({
         "font.family": "serif",
         "font.serif": ["Times New Roman", "Times", "DejaVu Serif"],
-        "mathtext.fontset": "stix",
+        # math (epsilon, delta, exponents) in Times New Roman as well, not STIX
+        "mathtext.fontset": "custom",
+        "mathtext.rm": "Times New Roman",
+        "mathtext.it": "Times New Roman:italic",
+        "mathtext.bf": "Times New Roman:bold",
         # IEEE conference template: figure labels in about 8 pt Times New Roman at the printed size; no text below 8 pt
         "font.size": 8,
         "axes.labelsize": 8.5,
@@ -147,8 +149,7 @@ def fig3(rows: dict[str, dict], refs: dict[str, float], out: Path, md: list[str]
     ax.set_ylabel("TSTR macro-F1 (test)")
     ax.grid(axis="y", linewidth=0.4, alpha=0.5)
     ax.legend(loc="lower right", frameon=False)
-    for ext, kw in (("pdf", {}), ("png", {"dpi": 600})):
-        f.savefig(out / f"fig3_tstr_vs_eps_reference.{ext}", **kw)
+    f.savefig(out / "Fig3.pdf")
     plt.close(f)
 
     L = LAYOUT["fig3"]
@@ -206,8 +207,7 @@ def fig4(rows: dict[str, dict], out: Path, md: list[str]) -> None:
     ax.grid(linewidth=0.4, alpha=0.5)
     ax.legend(handles=handles, loc="lower center", frameon=False, ncol=2, bbox_to_anchor=(0.5, 1.0),
               columnspacing=0.8, handletextpad=0.3, borderaxespad=0.3)
-    for ext, kw in (("pdf", {}), ("png", {"dpi": 600})):
-        f.savefig(out / f"fig4_utility_vs_traffic_reference.{ext}", **kw)
+    f.savefig(out / "Fig4.pdf")
     plt.close(f)
 
     L = LAYOUT["fig4"]
@@ -243,30 +243,28 @@ def fig4(rows: dict[str, dict], out: Path, md: list[str]) -> None:
         px, py = to_mm("fig4", r["bytes_total"] / 1e6, r["tstr_f1"])
         md.append(f"| {lab} | {X:.1f} | {Y:.1f} | {px:.1f}, {py:.1f} |")
     md += ["", "**Chú giải (legend):** phía trên khung đồ thị, 2 cột, không viền: (cột 1) MG, distributed DP · "
-           "MG, local DP · MG, no DP; (cột 2) Federated CVAE · filled: Pareto front (một chấm tròn đặc màu xám). "
+           "MG, client-side DP · MG, no DP; (cột 2) Federated CVAE · filled: Pareto front (một chấm tròn đặc màu xám). "
            "Marker trong chú giải chỉ vẽ viền.", ""]
 
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--results", type=Path, default=Path("../results"))
-    ap.add_argument("--out", type=Path, default=Path("huong_dan/tham_chieu"))
-    ap.add_argument("--table", type=Path, default=Path("huong_dan/SO_LIEU_HINH_3_4.md"))
+    ap.add_argument("--out", type=Path, default=Path("graphics/paper"))
+    ap.add_argument("--table", type=Path, default=None, help="also write the mm coordinate tables (optional)")
     a = ap.parse_args()
     a.out.mkdir(parents=True, exist_ok=True)
     style()
     rows, refs = load(a.results)
-    md = ["# Số liệu và toạ độ để vẽ Hình 3 và Hình 4 bằng ConceptDraw", "",
+    md = ["# Số liệu và toạ độ của Hình 3 và Hình 4", "",
           "Tự sinh bởi `scripts/make_paper_figures.py` từ `results/scorecard.json` và `results/summary.csv` của dự án; "
-          "**không sửa tay**. Chạy lại script nếu kết quả thay đổi.", "",
-          "Toạ độ tính bằng **mm từ góc trên bên trái trang**, trục Y hướng **xuống**. Nếu ConceptDraw của nhóm đo Y từ "
-          "dưới lên, dùng Y' = (chiều cao trang) − Y. X, Y là **tâm** của hình (pin), không phải góc.", "",
-          f"Ảnh tham chiếu cùng khung: `{a.out.as_posix()}/fig3_tstr_vs_eps_reference.png` và "
-          f"`{a.out.as_posix()}/fig4_utility_vs_traffic_reference.png` (600 dpi, đúng kích thước trang ở dưới).", ""]
+          "**không sửa tay**. Hai hình trong bài (`graphics/paper/Fig3.pdf`, `Fig4.pdf`) được vẽ bằng chính script này.", "",
+          "Toạ độ tính bằng **mm từ góc trên bên trái trang**, trục Y hướng **xuống**; X, Y là **tâm** của hình.", ""]
     fig3(rows, refs, a.out, md)
     fig4(rows, a.out, md)
-    a.table.write_text("\n".join(md), encoding="utf-8")
-    print("written:", a.table.as_posix(), *sorted(p.name for p in a.out.glob("fig[34]_*")))
+    if a.table:
+        a.table.write_text("\n".join(md), encoding="utf-8")
+    print("written:", *(p.as_posix() for p in (a.out / "Fig3.pdf", a.out / "Fig4.pdf")), a.table or "")
 
 
 if __name__ == "__main__":

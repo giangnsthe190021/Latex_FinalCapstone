@@ -41,9 +41,9 @@ Toạ độ tính bằng **mm từ góc trên bên trái trang**, trục Y hư�
 | FedDP-Marginal, distributed DP | 5 | MGs-eps5 | 0.408 | 0.003 | 39.0 | 15.7 | 15.5 | 16.0 | #1F77B4 | tròn |
 | FedDP-Marginal, distributed DP | 10 | MGs-eps10 | 0.429 | 0.008 | 58.0 | 13.9 | 13.2 | 14.6 | #1F77B4 | tròn |
 | FedDP-Marginal, distributed DP | ∞ | MGs-nodp | 0.444 | 0.017 | 76.9 | 12.5 | 11.0 | 14.1 | #1F77B4 | tròn |
-| FedDP-Marginal, local DP | 1 | MGl-eps1 | 0.253 | 0.029 | 21.6 | 29.8 | 27.2 | 32.3 | #2CA02C | vuông |
-| FedDP-Marginal, local DP | 5 | MGl-eps5 | 0.374 | 0.010 | 40.5 | 18.8 | 17.9 | 19.8 | #2CA02C | vuông |
-| FedDP-Marginal, local DP | 10 | MGl-eps10 | 0.413 | 0.007 | 59.5 | 15.3 | 14.6 | 16.0 | #2CA02C | vuông |
+| FedDP-Marginal, client-side DP | 1 | MGl-eps1 | 0.253 | 0.029 | 21.6 | 29.8 | 27.2 | 32.3 | #2CA02C | vuông |
+| FedDP-Marginal, client-side DP | 5 | MGl-eps5 | 0.374 | 0.010 | 40.5 | 18.8 | 17.9 | 19.8 | #2CA02C | vuông |
+| FedDP-Marginal, client-side DP | 10 | MGl-eps10 | 0.413 | 0.007 | 59.5 | 15.3 | 14.6 | 16.0 | #2CA02C | vuông |
 | Federated CVAE (best config.) | 1 | M1-eps1 | 0.227 | 0.030 | 23.1 | 32.1 | 29.3 | 34.8 | #D62728 | tam giác |
 | Federated CVAE (best config.) | 5 | M1o-eps5 (plain) | 0.287 | 0.027 | 42.0 | 26.7 | 24.3 | 29.1 | #D62728 | tam giác |
 | Federated CVAE (best config.) | 10 | M1o-eps10 | 0.289 | 0.040 | 61.0 | 26.5 | 22.9 | 30.1 | #D62728 | tam giác |
@@ -114,9 +114,9 @@ Toạ độ tính bằng **mm từ góc trên bên trái trang**, trục Y hư�
 | MGb-eps10 | MG, distributed DP | 1.16 | 0.433 | 29.0 | 22.2 | có | #1F77B4 | tròn |
 | MGd-eps1 | MG, distributed DP | 1.32 | 0.349 | 30.2 | 31.2 | có | #1F77B4 | tròn |
 | MGr-cap25-eps1 | MG, distributed DP | 2.30 | 0.154 | 35.6 | 52.2 | không | #1F77B4 | tròn |
-| MGl-eps5 | MG, local DP | 0.83 | 0.374 | 25.7 | 28.5 | không | #2CA02C | vuông |
-| MGl-eps10 | MG, local DP | 0.93 | 0.413 | 26.8 | 24.3 | có | #2CA02C | vuông |
-| MGl-eps1 | MG, local DP | 1.56 | 0.253 | 31.9 | 41.6 | không | #2CA02C | vuông |
+| MGl-eps5 | MG, client-side DP | 0.83 | 0.374 | 25.7 | 28.5 | không | #2CA02C | vuông |
+| MGl-eps10 | MG, client-side DP | 0.93 | 0.413 | 26.8 | 24.3 | có | #2CA02C | vuông |
+| MGl-eps1 | MG, client-side DP | 1.56 | 0.253 | 31.9 | 41.6 | không | #2CA02C | vuông |
 | MGp-nodp | MG, no DP | 0.39 | 0.444 | 18.3 | 21.0 | có | #9467BD | thoi |
 | MGs-nodp | MG, no DP | 0.52 | 0.444 | 21.2 | 21.0 | không | #9467BD | thoi |
 
@@ -131,4 +131,4 @@ Toạ độ tính bằng **mm từ góc trên bên trái trang**, trục Y hư�
 | M2 | 80.6 | 28.8 | 78.8, 24.0 |
 | M1-eps1 | 76.4 | 43.0 | 64.4, 44.3 |
 
-**Chú giải (legend):** phía trên khung đồ thị, 2 cột, không viền: (cột 1) MG, distributed DP · MG, local DP · MG, no DP; (cột 2) Federated CVAE · filled: Pareto front (một chấm tròn đặc màu xám). Marker trong chú giải chỉ vẽ viền.
+**Chú giải (legend):** phía trên khung đồ thị, 2 cột, không viền: (cột 1) MG, distributed DP · MG, client-side DP · MG, no DP; (cột 2) Federated CVAE · filled: Pareto front (một chấm tròn đặc màu xám). Marker trong chú giải chỉ vẽ viền.

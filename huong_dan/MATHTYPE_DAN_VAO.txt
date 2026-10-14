@@ -27,7 +27,7 @@
 %%% (3) eq:tree_factorization KET THUC
 
 % (4) Độ nhạy theo đơn vị bảo vệ
-% Mẫu: \Delta_{1,r} = m\,T_r, \qquad \Delta_{2,r} = m\sqrt{T_r}.
+% Mẫu: \Delta_{1,r} = m\,M_r, \qquad \Delta_{2,r} = m\sqrt{M_r}.
 %%% (4) eq:sensitivity BAT DAU
 
 %%% (4) eq:sensitivity KET THUC
@@ -54,7 +54,7 @@
 %%% (7) eq:secagg KET THUC
 
 % (8) DP-SGD
-% Mẫu: \tilde{g} = \frac{1}{B} \Big( \sum_{i=1}^{B} \frac{g_i}{\max(1, \|g_i\|_2 / C)} + \mathcal{N}(0, \sigma_k^2 C^2 \mathbf{I}) \Big),
+% Mẫu: \tilde{g} = \frac{1}{b} \Big( \sum_{i=1}^{b} \frac{g_i}{\max(1, \|g_i\|_2 / G)} + \mathcal{N}(0, \sigma_k^2 G^2 \mathbf{I}) \Big),
 %%% (8) eq:dpsgd BAT DAU
 
 %%% (8) eq:dpsgd KET THUC
