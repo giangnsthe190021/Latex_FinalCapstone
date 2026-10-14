@@ -21,7 +21,7 @@
 %%% (2) eq:chow_liu KET THUC
 
 % (3) Phân rã xác suất theo cây
-% Mẫu: \hat{P}(\mathbf{x} \mid y = c) = \hat{P}(x_r \mid y = c) \prod_{(u,v) \in T^\star} \hat{P}(x_v \mid x_u, y = c),
+% Mẫu: \hat{P}(\mathbf{x} \mid c) = \hat{P}(x_r \mid c) \prod_{(u,v) \in T^\star} \hat{P}(x_v \mid x_u, c),
 %%% (3) eq:tree_factorization BAT DAU
 
 %%% (3) eq:tree_factorization KET THUC

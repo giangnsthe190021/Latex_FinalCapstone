@@ -8,3 +8,8 @@
 
 # Upload package for Overleaf (rebuilt from the sources)
 overleaf_upload.zip
+
+# Fig. 3-4 are drawn only by scripts/make_paper_figures.py (Fig3_python.pdf, Fig4_python.pdf);
+# keep hand-drawn exports under the old names out of the repository
+graphics/paper/Fig3.*
+graphics/paper/Fig4.*

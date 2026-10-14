@@ -16,10 +16,10 @@ Tên file và kích thước dưới đây khớp với các file `.tex` hiện 
 |---|---|---|---|---|
 | Fig. 1 | `graphics/paper/fig1_architecture.pdf` | **182 × 60 mm** (rộng cả trang) | `figure*`, `\textwidth` | `Chapter3.tex`, III-A |
 | Fig. 2 | `graphics/paper/Fig2.pdf` | **182 × 60 mm** (rộng cả trang); nên thu về **88 × 47 mm**, xem mục kiểm tra | `figure*`, `\textwidth` | `Chapter3.tex`, III-B |
-| Fig. 3 | `graphics/paper/Fig3.pdf` (Python) | **88 × 60 mm** (1 cột) | `figure`, `\columnwidth` | `Chapter5.tex`, V-B |
-| Fig. 4 | `graphics/paper/Fig4.pdf` (Python) | **88 × 70 mm** (1 cột) | `figure`, `\columnwidth` | `Chapter5.tex`, V-D |
+| Fig. 3 | `graphics/paper/Fig3_python.pdf` (Python, không vẽ tay) | **88 × 60 mm** (1 cột) | `figure`, `\columnwidth` | `Chapter5.tex`, V-B |
+| Fig. 4 | `graphics/paper/Fig4_python.pdf` (Python, không vẽ tay) | **88 × 70 mm** (1 cột) | `figure`, `\columnwidth` | `Chapter5.tex`, V-D |
 
-Nếu bản vẽ cao hơn chiều cao ghi ở bảng, hãy sửa tham số thứ ba của `\cdfigure` cho khớp, rồi build lại để kiểm tra giới hạn 10 trang.
+Nếu bản vẽ Fig. 1–2 cao hơn chiều cao ghi ở bảng, hãy sửa tham số thứ ba của `\cdfigure` cho khớp, rồi build lại để kiểm tra giới hạn 10 trang.
 
 ## Kết quả kiểm tra ngày 14/10/2026 (commit `73eee4c`): việc cần sửa
 
@@ -27,7 +27,7 @@ Phương pháp kiểm tra: xem từng file PDF, rồi đọc toạ độ vector 
 
 ### Fig. 3 và Fig. 4: **đã xử lý**
 
-Bản vẽ tay bằng ConceptDraw lệch số liệu tới khoảng 0.02 macro-F1, vạch trục không đều, trục log bị méo; Fig. 3 thiếu marker và thanh sai số. Ngày 14/10/2026 cả hai hình được thay bằng bản vẽ bằng Python từ `results/`, đè lên `graphics/paper/Fig3.pdf` và `Fig4.pdf`. Chú giải dùng "client-side DP" thay cho "local DP", khớp với bài.
+Bản vẽ tay bằng ConceptDraw lệch số liệu tới khoảng 0.02 macro-F1, vạch trục không đều, trục log bị méo; Fig. 3 thiếu marker và thanh sai số. Ngày 14/10/2026 cả hai hình được thay bằng bản vẽ bằng Python từ `results/`, lưu thành `graphics/paper/Fig3_python.pdf` và `Fig4_python.pdf`. Hai file cũ `Fig3.pdf`, `Fig4.pdf` đã bị xoá khỏi repo, và bảng toạ độ để vẽ tay (`SO_LIEU_HINH_3_4.md`) cũng đã bỏ. Chú giải dùng "client-side DP" thay cho "local DP", khớp với bài.
 
 ### Fig. 1: sửa trình bày (kích thước và vị trí đã ổn)
 
@@ -47,9 +47,11 @@ Kiểm tra lại bản ngày 14/10/2026 sau commit `ce2dc3e`: font đã đổi h
 
 ### Fig. 2: sửa trình bày
 
+> **Ảnh minh hoạ để vẽ theo:** [`minh_hoa/fig2_mot_cot_88x47mm.png`](minh_hoa/fig2_mot_cot_88x47mm.png) (kèm bản PDF), khổ đúng 88 × 47 mm, font Times New Roman, mọi chữ 8 pt. Ảnh này được sinh bởi `scripts/make_fig2_mockup.py` và chỉ để tham khảo: hình trong bài vẫn phải vẽ bằng ConceptDraw. Có thể đặt ảnh làm nền (layer khoá), vẽ đè lên, rồi xoá nền trước khi xuất.
+
 - Tăng các nhãn **7 pt** lên **8 pt**: "uint32" (×3), "lift" (×3), "coarse cutpoints", "tree T".
-- Đổi "tree T" và "Chow–Liu tree T" thành **T\*** (T mũ ⋆) cho khớp với bài.
-- Caption có nói "count tables plus Skellam noise shares", nhưng trên hình không thấy nhiễu. Thêm dòng "+ Skellam share ξₖ" vào ba ô Release.
+- "tree T" và "Chow–Liu tree T" đã sửa thành **T\*** (commit `e8090d9`).
+- Caption có nói "count tables plus Skellam noise shares", nhưng trên hình không thấy nhiễu. Thêm "+ share ξₖ" vào ba ô Release như trong ảnh minh hoạ.
 - **Nên làm:** phần vẽ chỉ rộng khoảng **105 mm** mà đang chiếm cả khổ 182 mm, hai bên để trắng. Nếu vẽ lại gọn **88 × 47 mm** theo mẫu ở mục Fig. 2 bên dưới, hình nằm vừa một cột và bài ngắn đi khoảng 0.2 trang (đang đúng 10 trang). Khi đó, trong `Chapter3.tex` đổi `figure*` thành `figure` và `\textwidth` thành `\columnwidth`, với chiều cao `1.85in`.
 
 ## Quy ước chung (Hình 1 và Hình 2)
@@ -175,11 +177,15 @@ Hai hình do `scripts/make_paper_figures.py` vẽ, đọc `results/scorecard.jso
 - font Times New Roman cho cả chữ và ký hiệu toán (ε, δ), nhúng trong PDF, không có font Type 3;
 - mọi chữ ≥ 8 pt; nhóm số liệu phân biệt bằng cả màu lẫn hình dạng marker, nên in đen trắng vẫn đọc được.
 
-Muốn có thêm bảng toạ độ (mm) của từng điểm, chạy với `--table huong_dan/SO_LIEU_HINH_3_4.md`.
+Script ghi ra `graphics/paper/Fig3_python.pdf` và `Fig4_python.pdf`, và `Chapter5.tex` gọi đúng hai tên này (có đuôi `.pdf`). Vì vậy file `Fig3.pdf`, `Fig4.pdf` hay `.png` vẽ tay còn sót trên máy hoặc trên Overleaf **không còn được dùng**. `.gitignore` chặn hai tên cũ, nên cũng không commit nhầm lại được. **Không vẽ lại Hình 3–4 bằng ConceptDraw**; nếu `results/` thay đổi, chỉ cần chạy lại:
+
+```
+python scripts/make_paper_figures.py --results ../results
+```
 
 ## Kiểm tra trước khi nộp
 
-- [ ] Đủ 4 file trong `graphics/paper/`, đúng tên mà `.tex` đang dùng: `fig1_architecture`, `Fig2`, `Fig3`, `Fig4` (`.pdf` hoặc `.png`).
+- [ ] Đủ 4 file trong `graphics/paper/`, đúng tên mà `.tex` đang dùng: `fig1_architecture`, `Fig2` (`.pdf` hoặc `.png`, vẽ bằng ConceptDraw), `Fig3_python.pdf`, `Fig4_python.pdf` (Python).
 - [ ] Đã xử lý hết các mục trong *Kết quả kiểm tra ngày 14/10/2026*.
 - [ ] Build trên Overleaf: không còn khung giữ chỗ nào, tổng số trang vẫn ≤ 10.
 - [ ] Chữ trong hình **≥ 8 pt** khi in, thuật ngữ khớp với bài: FedDP-Marginal, SecAgg+, Skellam, Chow–Liu, TSTR, TAug.

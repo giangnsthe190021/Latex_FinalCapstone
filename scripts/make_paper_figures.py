@@ -1,8 +1,10 @@
 """Figures 3 and 4 of the paper (Times New Roman, one IEEE column, text >= 8 pt), drawn from the PP-FedData results.
 
 The script reads the result files of the PP-FedData repository (no number typed by hand) and writes the two charts the
-paper includes, graphics/paper/Fig3.pdf (TSTR macro-F1 against epsilon) and graphics/paper/Fig4.pdf (macro-F1 against
-traffic). With --table it also writes the position in millimetres of every marker, tick and label.
+paper includes, graphics/paper/Fig3_python.pdf (TSTR macro-F1 against epsilon) and graphics/paper/Fig4_python.pdf
+(macro-F1 against traffic). The "_python" names keep any hand-drawn Fig3/Fig4 export in a working copy from being
+included instead; the paper includes these two files by their full name. With --table it also writes the position in
+millimetres of every marker, tick and label.
 
 Usage (from the Latex_FinalCapstone folder):
     python scripts/make_paper_figures.py --results ../results
@@ -25,6 +27,7 @@ import matplotlib.pyplot as plt  # noqa: E402
 from matplotlib.lines import Line2D  # noqa: E402
 
 MM = 1 / 25.4  # inches per millimetre
+FIG3, FIG4 = "Fig3_python.pdf", "Fig4_python.pdf"  # the names Chapter5.tex includes
 
 # Page and plot frame of each figure, in mm from the top-left corner of the page (y grows downwards, as in ConceptDraw).
 LAYOUT = {
@@ -149,7 +152,7 @@ def fig3(rows: dict[str, dict], refs: dict[str, float], out: Path, md: list[str]
     ax.set_ylabel("TSTR macro-F1 (test)")
     ax.grid(axis="y", linewidth=0.4, alpha=0.5)
     ax.legend(loc="lower right", frameon=False)
-    f.savefig(out / "Fig3.pdf")
+    f.savefig(out / FIG3)
     plt.close(f)
 
     L = LAYOUT["fig3"]
@@ -207,7 +210,7 @@ def fig4(rows: dict[str, dict], out: Path, md: list[str]) -> None:
     ax.grid(linewidth=0.4, alpha=0.5)
     ax.legend(handles=handles, loc="lower center", frameon=False, ncol=2, bbox_to_anchor=(0.5, 1.0),
               columnspacing=0.8, handletextpad=0.3, borderaxespad=0.3)
-    f.savefig(out / "Fig4.pdf")
+    f.savefig(out / FIG4)
     plt.close(f)
 
     L = LAYOUT["fig4"]
@@ -258,13 +261,13 @@ def main() -> None:
     rows, refs = load(a.results)
     md = ["# Số liệu và toạ độ của Hình 3 và Hình 4", "",
           "Tự sinh bởi `scripts/make_paper_figures.py` từ `results/scorecard.json` và `results/summary.csv` của dự án; "
-          "**không sửa tay**. Hai hình trong bài (`graphics/paper/Fig3.pdf`, `Fig4.pdf`) được vẽ bằng chính script này.", "",
+          f"**không sửa tay**. Hai hình trong bài (`graphics/paper/{FIG3}`, `{FIG4}`) được vẽ bằng chính script này.", "",
           "Toạ độ tính bằng **mm từ góc trên bên trái trang**, trục Y hướng **xuống**; X, Y là **tâm** của hình.", ""]
     fig3(rows, refs, a.out, md)
     fig4(rows, a.out, md)
     if a.table:
         a.table.write_text("\n".join(md), encoding="utf-8")
-    print("written:", *(p.as_posix() for p in (a.out / "Fig3.pdf", a.out / "Fig4.pdf")), a.table or "")
+    print("written:", *(p.as_posix() for p in (a.out / FIG3, a.out / FIG4)), a.table or "")
 
 
 if __name__ == "__main__":
