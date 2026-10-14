@@ -49,9 +49,9 @@ Kiểm tra lại bản ngày 14/10/2026 sau commit `ce2dc3e`: font đã đổi h
 
 > **Ảnh minh hoạ để vẽ theo:** [`minh_hoa/fig2_mot_cot_88x47mm.png`](minh_hoa/fig2_mot_cot_88x47mm.png) (kèm bản PDF), khổ đúng 88 × 47 mm, font Times New Roman, mọi chữ 8 pt. Ảnh này được sinh bởi `scripts/make_fig2_mockup.py` và chỉ để tham khảo: hình trong bài vẫn phải vẽ bằng ConceptDraw. Có thể đặt ảnh làm nền (layer khoá), vẽ đè lên, rồi xoá nền trước khi xuất.
 
-- Tăng các nhãn **7 pt** lên **8 pt**. Bản `e8090d9` còn 5 nhãn 7 pt: "lift" (×3), "coarse cut points", "tree T\*".
+- Tăng các nhãn **7 pt** lên **8 pt**. Bản `ccaaa4a` còn 8 nhãn 7 pt: "uint32" (×3, trên mũi tên từ gateway sang SecAgg+), "lift" (×3, trên mũi tên từ SecAgg+ sang server), "coarse cut points", "tree T\*".
 - "tree T" và "Chow–Liu tree T" đã sửa thành **T\*** (commit `e8090d9`).
-- Caption có nói "count tables plus Skellam noise shares", nhưng trên hình không thấy nhiễu. Thêm "+ share ξₖ" vào ba ô Release như trong ảnh minh hoạ.
+- ~~Thêm "+ share ξₖ" vào ba ô Release~~: **đã xong** (commit `5bb51e8`, `ccaaa4a`), khớp với caption "count tables plus Skellam noise shares".
 - **Nên làm:** phần vẽ chỉ rộng khoảng **105 mm** mà đang chiếm cả khổ 182 mm, hai bên để trắng. Nếu vẽ lại gọn **88 × 47 mm** theo mẫu ở mục Fig. 2 bên dưới, hình nằm vừa một cột và bài ngắn đi khoảng 0.2 trang (đang đúng 10 trang). Khi đó, trong `Chapter3.tex` đổi `figure*` thành `figure` và `\textwidth` thành `\columnwidth`, với chiều cao `1.85in`.
 
 ## Quy ước chung (Hình 1 và Hình 2)
