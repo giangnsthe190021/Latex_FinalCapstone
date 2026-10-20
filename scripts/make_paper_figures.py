@@ -34,15 +34,16 @@ LAYOUT = {
     "fig3": {"w": 88.0, "h": 60.0, "x0": 14.0, "x1": 86.0, "y0": 3.0, "y1": 48.0,
              "xlim": (-0.4, 3.4), "ylim": (0.05, 0.55), "xlog": False},
     "fig4": {"w": 88.0, "h": 70.0, "x0": 14.0, "x1": 86.0, "y0": 15.0, "y1": 58.0,
-             "xlim": (0.25, 400.0), "ylim": (0.10, 0.50), "xlog": True},
+             "xlim": (0.25, 400.0), "ylim": (0.05, 0.50), "xlog": True},
 }
 
 COLOR = {"blue": "#1F77B4", "green": "#2CA02C", "red": "#D62728", "purple": "#9467BD", "gray": "#595959"}
 
-# The configurations of Table IV: the best CVAE route on validation at each epsilon, and the headline FedDP-Marginal ones
-MG_DIST = {"1": "MGr-eps1", "5": "MGs-eps5", "10": "MGs-eps10", "inf": "MGs-nodp"}
+# The configurations of Table IV (round R, final_report 9.9b and 9.12): the best CVAE route on validation at each epsilon, and the
+# headline FedDP-Marginal ones
+MG_DIST = {"1": "MGs-eps1", "5": "MGr-eps5", "10": "MGs-eps10", "inf": "MGs-nodp"}
 MG_LOCAL = {"1": "MGl-eps1", "5": "MGl-eps5", "10": "MGl-eps10"}
-CVAE = {"1": "M1-eps1", "5": "M1o-eps5 (plain)", "10": "M1o-eps10", "inf": "B3"}
+CVAE = {"1": "M1-eps1", "5": "M3o-eps5", "10": "M1o-eps10", "inf": "B3"}
 EPS_ORDER = ["1", "5", "10", "inf"]
 EPS_LABEL = {"1": "1", "5": "5", "10": "10", "inf": "∞"}
 SERIES3 = [  # name, configurations, colour, marker, horizontal offset (category units)
@@ -57,8 +58,8 @@ FAMILY4 = {  # family -> (legend text, colour, marker)
     "cvae": ("Federated CVAE", "red", "^"),
 }
 # labelled points of Fig. 4: configuration, text position (MB, macro-F1)
-LABELS4 = [("MGs-eps10", 3.2, 0.462), ("MGs-eps5", 3.2, 0.405), ("MGr-eps1", 3.2, 0.350),
-           ("B3", 40.0, 0.462), ("M2", 230.0, 0.372), ("M1-eps1", 150.0, 0.24)]
+LABELS4 = [("MGs-eps10", 3.2, 0.470), ("MGr-eps5", 3.2, 0.405), ("MGs-eps1", 3.2, 0.340),
+           ("B3", 40.0, 0.462), ("M2", 230.0, 0.372), ("M3o-eps5", 4.0, 0.280), ("M1-eps1", 40.0, 0.110)]
 MARKER_NAME = {"o": "tròn", "s": "vuông", "^": "tam giác", "D": "thoi"}
 
 

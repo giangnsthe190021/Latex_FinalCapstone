@@ -26,9 +26,9 @@ from ppfeddata.eval.runs import load_predictions, run_id  # noqa: E402
 from ppfeddata.interpret import BOOT_SEED, load_test_split  # noqa: E402
 from ppfeddata.utils import load_config  # noqa: E402
 
-PAIRS = {  # budget: (CVAE label, MGl label, MG distributed label), as in Table IV
-    "1": ("M1-eps1", "MGl-eps1", "MGr-eps1"),
-    "5": ("M1o-eps5 (plain)", "MGl-eps5", "MGs-eps5"),
+PAIRS = {  # budget: (CVAE label, MGl label, MG distributed label), as in Table IV (round R: final_report 9.9b, 9.12)
+    "1": ("M1-eps1", "MGl-eps1", "MGs-eps1"),
+    "5": ("M3o-eps5", "MGl-eps5", "MGr-eps5"),
     "10": ("M1o-eps10", "MGl-eps10", "MGs-eps10"),
 }
 RARE = ("DELAYED", "SYN", "INVALID", "WILL")

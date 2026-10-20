@@ -1,7 +1,7 @@
 """Bootstrap confidence intervals for the membership attack on the released FedDP-Marginal tables (reviewer comment 1.8).
 
 The attack of `ppfeddata.mia_marginal` is deterministic: for each seed it fits model A on half H1 and reference B on half H2 and scores every
-record of H1 u H2. This script recomputes those per-record scores for the configurations reported in the paper (no DP, MGr-eps1, MGs-eps5,
+record of H1 u H2. This script recomputes those per-record scores for the configurations reported in the paper (no DP, MGs-eps1, MGr-eps5,
 MGs-eps10), checks that the AUCs equal results/mia_marginal.json, and resamples the records (with replacement, inside each class and
 membership group, the same resamples for every configuration so differences are paired) to get 95 % intervals of:
   - the calibrated AUC (mean over classes and over the two directions, averaged over the seeds),
@@ -31,7 +31,7 @@ from ppfeddata.mia_marginal import default_settings, fit_score  # noqa: E402
 from ppfeddata.mia_model import halves  # noqa: E402
 from ppfeddata.utils import load_config  # noqa: E402
 
-LABELS = {"none": "MGs-nodp", "eps1": "MGr-eps1", "eps5": "MGs-eps5", "eps10": "MGs-eps10"}
+LABELS = {"none": "MGs-nodp", "eps1": "MGs-eps1", "eps5": "MGr-eps5", "eps10": "MGs-eps10"}  # round R headline (final_report 9.12)
 
 
 def tpr_at(score, member, fpr=0.01):

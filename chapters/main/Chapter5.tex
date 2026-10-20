@@ -1,25 +1,26 @@
 % !TeX root = ../../main.tex
-% Every number is read from the PP-FedData repository: results/reports/final_report.md (sections 4, 5, 9.0-9.12, 10),
-% results/scorecard.json, results/recommend.json, results/reports/robustness.md, privacy_units.md, ids_followup.md, mg_nodp.md,
-% results/mia_marginal.json (per-seed AUC and TPR), results/ids_followup.json (per-pair local augmentation).
+% Every number is read from the PP-FedData repository, round R (Normal traffic extracted with the dataset authors' export settings):
+% results/reports/final_report.md (sections 4, 5, 9.0-9.12, 10), results/scorecard.json, results/recommend.json,
+% results/reports/robustness.md, privacy_units.md, ids_followup.md, mg_nodp.md, results/fed_classifier.json,
+% results/mia_marginal.json, results/ids_followup.json, and analysis/rule9_rq2.json, analysis/mia_bootstrap.json of this repository.
 % Means over seeds {0, 1, 2} on the real test split; +- is the seed standard deviation.
 \section{Results and Discussion}\label{sec:results}
 
 \subsection{RQ1: Utility of Federated Synthetic Data}\label{subsec:rq1}
-Packet-level detection of these attacks is hard even with all real data pooled. An RF trained on the imbalanced real training set (B0) reaches a test macro-F1 of 0.447 and a rare-class recall of 0.276; class weights (B1a) and SMOTE (B1b) raise the macro-F1 to 0.492 and 0.504. These references require pooling the raw traffic.
+Packet-level detection of these attacks is hard even with all real data pooled. An RF trained on the imbalanced real training set (B0) reaches a test macro-F1 of 0.448 and a rare-class recall of 0.285; class weights (B1a) and SMOTE (B1b) raise the macro-F1 to 0.496 and 0.505. These references require pooling the raw traffic.
 
-\textit{Synthetic data alone (TSTR).} Without DP, an IDS trained only on FedDP-Marginal data reaches $0.444 \pm 0.017$, and one trained on the federated CVAE data (B3) reaches $0.420 \pm 0.014$. Synthetic-only training thus comes close to the imbalanced real reference while no raw packet leaves a gateway. It stays below the class-balanced references, so part of its value comes from the class balance of the synthetic set.
+\textit{Synthetic data alone (TSTR).} Without DP, an IDS trained only on FedDP-Marginal data reaches $0.459 \pm 0.007$, and one trained on the federated CVAE data (B3) reaches $0.413 \pm 0.005$. Synthetic-only training thus reaches the level of the imbalanced real reference while no raw packet leaves a gateway. It stays below the class-balanced references, so part of its value comes from the class balance of the synthetic set.
 
-\textit{Synthetic data added to pooled real data (TAug).} Here synthetic data do not help. With the RF, 1 of 13 generator configurations improves on B0 under \eqref{eq:decision_rule}, by at most $+0.002$, against $+0.057$ for SMOTE. With the MLP, 10 of 13 improve, by at most $+0.030$, against $+0.140$ for SMOTE. The recall of the rare classes moves by at most 0.012 for any generator, against $+0.063$ to $+0.102$ for class weights and SMOTE.
+\textit{Synthetic data added to pooled real data (TAug).} Here synthetic data do not help. With the RF, 2 of 13 generator configurations improve on B0 under \eqref{eq:decision_rule}, by at most $+0.001$, against $+0.057$ for SMOTE. With the MLP, 9 of 13 improve, by at most $+0.038$, against $+0.134$ for SMOTE. The recall of the rare classes moves by at most 0.007 for any generator, against $+0.070$ to $+0.096$ for class weights and SMOTE.
 
-\textit{Local augmentation.} The picture changes when the comparison is the gateway itself. A gateway's own IDS, trained on its non-IID local rows, reaches $0.387 \pm 0.053$. Topping up the classes it lacks with FedDP-Marginal data raises this to 0.419, 0.422 and 0.425 on average at $\varepsilon = 1$, 5 and 10 ($+0.033$, $+0.036$, $+0.039$). The gains are uneven: at $\varepsilon = 5$ all 15 gateway--seed pairs gain, six of them by less than 0.005 and six by 0.055--0.147, while at $\varepsilon = 1$ five pairs lose up to 0.007. These per-pair counts are raw differences, not verdicts of \eqref{eq:decision_rule}.
+\textit{Local augmentation.} The picture changes when the comparison is the gateway itself. A gateway's own IDS, trained on its non-IID local rows, reaches $0.384 \pm 0.055$. Topping up the classes it lacks with FedDP-Marginal data raises this to 0.423, 0.426 and 0.427 on average at $\varepsilon = 1$, 5 and 10 ($+0.039$, $+0.042$, $+0.043$). The gains are uneven: 11, 13 and 13 of the 15 gateway-seed pairs gain, by up to 0.139, and the others lose at most 0.005. These per-pair counts are raw differences, not verdicts of \eqref{eq:decision_rule}.
 
-\textit{Training the detector directly.} A detector can also be trained by FedAvg without synthetic data (FedMLP in Table~\ref{tab:configs}). Without protection it reaches 0.417--0.429, close to the non-private generators (0.420--0.444). With DP-SGD at each gateway it reaches 0.246, 0.285 and 0.292 at $\varepsilon = 1$, 5 and 10: about the level of FedDP-Marginal with client-side noise at $\varepsilon = 1$, and below it at $\varepsilon = 5$ and 10 (0.374, 0.413) and below FedDP-Marginal with distributed noise at every budget (0.389--0.429).
+\textit{Training the detector directly.} A detector can also be trained by FL without synthetic data (FedMLP in Table~\ref{tab:configs}). Without protection it reaches 0.425, between the non-private CVAE (0.413) and FedDP-Marginal (0.459). With DP-SGD at each gateway it reaches 0.245, 0.276 and 0.290 at $\varepsilon = 1$, 5 and 10, against 0.267, 0.397 and 0.406 for MGl. With the noise shared across gateways (DP-FedSGD, tuned per $\varepsilon$), it reaches 0.350, 0.369 and 0.389. Against FedDP-Marginal with the same MLP classifier (0.337, 0.425, 0.433), \eqref{eq:decision_rule} finds no difference at $\varepsilon = 1$ and a loss of 0.057 and 0.043 at $\varepsilon = 5$ and 10. The direct route needs 2,593 rounds and about 7.7\,GB instead of three releases of about 0.5\,MB, and with one honest gateway its guarantee weakens to $\varepsilon = 3.1$, 58.6 and 142 against 2.4, 14.2 and 33.1.
 
-The answer to RQ1 is that federated synthetic data are useful where raw traffic cannot be pooled: to train a shared IDS, especially under DP, or to fill in the classes a gateway does not see. Without DP, a detector trained directly by FedAvg is a cheaper alternative when no shareable data are needed. Synthetic data do not improve an IDS whose real training data are already pooled.
+The answer to RQ1 is that federated synthetic data are useful where raw traffic cannot be pooled: to train a shared IDS, especially under DP, or to fill in the classes a gateway does not see. Without DP, a detector trained directly by FL is a cheaper alternative when no shareable data are needed. Synthetic data do not improve an IDS whose real training data are already pooled.
 
 \subsection{RQ2: FedDP-Marginal Versus the Federated CVAE Under DP}\label{subsec:rq2}
-Table~\ref{tab:main} compares the routes at equal budgets; for the CVAE we report its best configuration on validation data at each $\varepsilon$, including the versions re-tuned at full scale. The CVAE adds its DP-SGD noise at each gateway, i.e., it provides client-side DP, whereas MG shares the noise across honest gateways. With shared noise, FedDP-Marginal reaches 0.389, 0.408 and 0.429 against 0.227, 0.287 and 0.289, and its rare-class recall is 1.7 to 2.5 times as high. Under the CVAE's own trust model (MGl), FedDP-Marginal reaches 0.253, 0.374 and 0.413. Judged by \eqref{eq:decision_rule}, both with the row and with the stream bootstrap, MGl and the CVAE cannot be separated at $\varepsilon = 1$: the gap of 0.026 [0.022, 0.030] is smaller than the seed standard deviation (0.030), and MGl recalls the rare classes less ($-0.046$). At $\varepsilon = 5$ and 10, MGl is better by 0.087 and 0.125, and FedDP-Marginal with shared noise by 0.12--0.16 at every budget. MG needs 3 rounds of 0.15--0.20\,MB instead of 30--50 rounds of 0.54--1.46\,MB, i.e., 0.45--0.60\,MB per run against 27--44\,MB, more than 98\% less at each budget. Fig.~\ref{fig:tstr_eps} shows how utility varies with $\varepsilon$.
+Table~\ref{tab:main} compares the routes at equal budgets; for the CVAE we report its best configuration on validation data at each $\varepsilon$, including the versions re-tuned at full scale. The CVAE adds its DP-SGD noise at each gateway, i.e., it provides client-side DP, whereas MG shares the noise across honest gateways. With shared noise, FedDP-Marginal reaches 0.366, 0.425 and 0.433 against 0.176, 0.254 and 0.275, and its rare-class recall is 2.1 to 3.4 times as high. Under the CVAE's own trust model (MGl), FedDP-Marginal reaches 0.267, 0.397 and 0.406. Judged by \eqref{eq:decision_rule}, with the row and with the stream bootstrap, MGl is better than the CVAE at every budget, by 0.092 [0.088, 0.095], 0.143 and 0.131, and so is its rare-class recall; FedDP-Marginal with shared noise is better by 0.16--0.19. MG needs 3 rounds of 0.16--0.18\,MB instead of 15--50 rounds of 0.56--1.45\,MB, i.e., 0.48--0.53\,MB per run against 13.6--72.4\,MB, more than 96\% less at each budget. Fig.~\ref{fig:tstr_eps} shows how utility varies with $\varepsilon$.
 
 \begin{table}[!t]
 \centering
@@ -31,25 +32,25 @@ Table~\ref{tab:main} compares the routes at equal budgets; for the CVAE we repor
 \toprule
 $\boldsymbol{\varepsilon}$ & \textbf{Configuration} & \textbf{Macro-F1} & \textbf{Bin. F1} & \textbf{Rare rec.} & \textbf{MB/rd} & \textbf{MB/run} \\
 \midrule
-\multirow{3}{*}{1}  & M1-eps1 (CVAE, cs)        & 0.227\,$\pm$\,0.030 & 0.805 & 0.132 & 1.46 & 43.7 \\
-                    & MGl-eps1 (MG, cs)         & 0.253\,$\pm$\,0.029 & 0.773 & 0.087 & 0.52* & 1.56* \\
-                    & \textbf{MGr-eps1 (MG, dist.)} & \textbf{0.389\,$\pm$\,0.010} & 0.875 & 0.253 & 0.20 & 0.60 \\
+\multirow{3}{*}{1}  & M1-eps1 (CVAE, cs)        & 0.176\,$\pm$\,0.008 & 0.750 & 0.068 & 0.56 & 16.9 \\
+                    & MGl-eps1 (MG, cs)         & 0.267\,$\pm$\,0.021 & 0.774 & 0.117 & 0.38* & 1.13* \\
+                    & MGs-eps1 (MG, dist.)      & \textbf{0.366\,$\pm$\,0.018} & 0.813 & 0.231 & 0.18 & 0.53 \\
 \midrule
-\multirow{3}{*}{5}  & M1o-eps5 (CVAE, cs)       & 0.287\,$\pm$\,0.027 & 0.800 & 0.168 & 0.54 & 26.8 \\
-                    & MGl-eps5 (MG, cs)         & 0.374\,$\pm$\,0.010 & 0.866 & 0.226 & 0.28* & 0.83* \\
-                    & \textbf{MGs-eps5 (MG, dist.)} & \textbf{0.408\,$\pm$\,0.003} & 0.901 & 0.293 & 0.15 & 0.45 \\
+\multirow{3}{*}{5}  & M3o-eps5 (CVAE, cs)       & 0.254\,$\pm$\,0.013 & 0.814 & 0.132 & 0.91 & 13.6 \\
+                    & MGl-eps5 (MG, cs)         & 0.397\,$\pm$\,0.006 & 0.825 & 0.279 & 0.35* & 1.05* \\
+                    & MGr-eps5 (MG, dist.)      & \textbf{0.425\,$\pm$\,0.004} & 0.824 & 0.301 & 0.17 & 0.51 \\
 \midrule
-\multirow{3}{*}{10} & M1o-eps10 (CVAE, cs)      & 0.289\,$\pm$\,0.040 & 0.850 & 0.132 & 1.40 & 41.9 \\
-                    & MGl-eps10 (MG, cs)        & 0.413\,$\pm$\,0.007 & 0.899 & 0.306 & 0.31* & 0.93* \\
-                    & \textbf{MGs-eps10 (MG, dist.)} & \textbf{0.429\,$\pm$\,0.008} & 0.906 & 0.331 & 0.16 & 0.47 \\
+\multirow{3}{*}{10} & M1o-eps10 (CVAE, cs)      & 0.275\,$\pm$\,0.015 & 0.799 & 0.146 & 1.45 & 72.4 \\
+                    & MGl-eps10 (MG, cs)        & 0.406\,$\pm$\,0.015 & 0.828 & 0.277 & 0.31* & 0.94* \\
+                    & MGs-eps10 (MG, dist.)     & \textbf{0.433\,$\pm$\,0.004} & 0.843 & 0.301 & 0.16 & 0.48 \\
 \midrule
-\multirow{2}{*}{$\infty$} & B3 (CVAE)$^\dagger$  & 0.420\,$\pm$\,0.014 & 0.929 & 0.367 & 4.22 & 126.7 \\
-                    & MGs-nodp (MG)             & 0.444\,$\pm$\,0.017 & 0.908 & 0.335 & 0.17 & 0.52 \\
+\multirow{2}{*}{$\infty$} & B3 (CVAE)$^\dagger$  & 0.413\,$\pm$\,0.005 & 0.904 & 0.361 & 4.20 & 126.1 \\
+                    & MGs-nodp (MG)             & \textbf{0.459\,$\pm$\,0.007} & 0.885 & 0.367 & 0.16 & 0.47 \\
 \bottomrule
 \end{tabular}
 
 \vspace{2pt}
-\parbox{\columnwidth}{\scriptsize Bin.\ F1: binary F1 (normal vs.\ attack); Rare rec.: mean recall of \texttt{DELAYED}, \texttt{SYN}, \texttt{INVALID} and \texttt{WILL}; MB/rd: MB per round; MB/run: MB over all rounds (CVAE 30, 50 for M1o-eps5; FedDP-Marginal 3). cs: client-side DP (noise added at each gateway); dist.: distributed DP (noise shared across honest gateways). *Estimated: MGl is summed in-process, so its bytes use the bytes per value measured for M2. $^\dagger$Residual-noise decoder fitted on pooled data; with the plain decoder 0.388. Real-data references (TRTR): B0 0.447, B1a 0.492, B1b 0.504.}
+\parbox{\columnwidth}{\scriptsize Bold: best macro-F1 at each $\varepsilon$. Bin.\ F1: binary F1 (normal vs.\ attack); Rare rec.: mean recall of \texttt{DELAYED}, \texttt{SYN}, \texttt{INVALID} and \texttt{WILL}; MB/rd: MB per round; MB/run: MB over all rounds (CVAE 30, 15 for M3o-eps5, 50 for M1o-eps10; FedDP-Marginal 3). cs: client-side DP (noise added at each gateway); dist.: distributed DP (noise shared across honest gateways). *Estimated: MGl is summed in-process, so its bytes use the bytes per value measured for M2. $^\dagger$Residual-noise decoder fitted on pooled data; with the plain decoder 0.407. Real-data references (TRTR): B0 0.448, B1a 0.496, B1b 0.505.}
 \end{table}
 
 \begin{figure}[!t]
@@ -60,16 +61,16 @@ $\boldsymbol{\varepsilon}$ & \textbf{Configuration} & \textbf{Macro-F1} & \textb
 \label{fig:tstr_eps}
 \end{figure}
 
-The cost of DP differs between the routes. Measured against its own non-private release with \eqref{eq:decision_rule}, FedDP-Marginal loses 0.055 (RF) and 0.063 (MLP) at $\varepsilon = 1$, 0.036 and 0.043 at $\varepsilon = 5$, and 0.031 and 0.016 at $\varepsilon = 10$; the last difference is within noise. For the CVAE route, 8 of 12 such comparisons are worse, with losses of up to 47\% of the synthetic-only macro-F1. Without DP the marginal generator is also better than the CVAE (RF $+0.048$, MLP $+0.024$). Client-side noise costs FedDP-Marginal most at small budgets, because the sum then carries $K$ times the variance.
+The cost of DP differs between the routes. Measured against its own non-private release with \eqref{eq:decision_rule}, FedDP-Marginal loses 0.076 (RF) and 0.122 (MLP) at $\varepsilon = 1$, 0.017 and 0.033 at $\varepsilon = 5$, and 0.026 with the MLP at $\varepsilon = 10$, where the RF gains 0.012. For the CVAE route, 11 of 12 such comparisons are worse, with losses of up to 58\% of the synthetic-only macro-F1. Without DP the marginal generator is also better than the CVAE (RF $+0.044$, MLP $+0.046$). Client-side noise costs FedDP-Marginal most at small budgets, because the sum then carries $K$ times the variance.
 
-In fidelity, FedDP-Marginal matches the per-column distributions more closely (Wasserstein distance 0.047--0.066 against 0.20--0.25 for the DP-trained CVAE). However, a classifier still separates synthetic from real rows almost perfectly for every generator, private or not (C2ST AUC 0.9995--1.0000). Utility for an IDS therefore does not mean that the synthetic packets look real.
+In fidelity, FedDP-Marginal matches the per-column distributions more closely at $\varepsilon = 5$ and 10 (Wasserstein distance 0.037 and 0.049 against 0.194 and 0.176 for M1); at $\varepsilon = 1$ the two are close (0.194 against 0.235). A classifier still separates synthetic from real rows almost perfectly for every generator, private or not (C2ST AUC 0.9995--1.0000). Utility for an IDS therefore does not mean that the synthetic packets look real.
 
 \subsection{RQ3: What Each Protection Costs and Protects}\label{subsec:rq3}
-\textit{Secure aggregation.} For FedDP-Marginal, the release through SecAgg$^+$ (MGs-nodp) sends $1.34\times$ the bytes per round of the same release in plain Flower rounds (MGp-nodp; 0.174 against 0.129\,MB) and takes $1.10\times$ the time of the three rounds (23.1 against 21.1\,s, mostly simulator start-up). Utility is unchanged, because the secure sum equals the exact sum. For the CVAE, SecAgg$^+$ costs $1.12\times$ the time per round and $1.52\times$ the bytes per parameter, and none of 8 utility comparisons shows an effect. DP-SGD, in contrast, multiplies the time per round by 4.3--4.5.
+\textit{Secure aggregation.} For FedDP-Marginal, the release through SecAgg$^+$ (MGs-nodp) sends $1.39\times$ the bytes per round of the same release in plain Flower rounds (MGp-nodp; 0.158 against 0.114\,MB) and takes $1.06\times$ the time of the three rounds (21.6 against 20.4\,s, mostly simulator start-up). Utility is unchanged, because the secure sum equals the exact sum. For the CVAE, SecAgg$^+$ costs $1.12\times$ the time per round and $1.52\times$ the bytes per parameter, and 7 of 8 utility comparisons show no effect. DP-SGD multiplies the time per round by 1.9.
 
-\textit{Empirical leakage.} The attack on the released tables of FedDP-Marginal passes its positive control (AUC 0.583). Averaged over the three seeds, its AUC is 0.560 without DP and 0.514, 0.522 and 0.531 with DP at $\varepsilon = 1$, 5 and 10; a record bootstrap puts the drops at 0.046 [0.038, 0.053], 0.038 [0.031, 0.044] and 0.029 [0.022, 0.034], all of which pass \eqref{eq:decision_rule}. In absolute terms the leakage is small: at 1\% false positives the attack identifies 1.6\% of the training records without DP and 1.1--1.3\% with DP, against 1\% for a random guess. SecAgg$^+$ alone does not change these numbers, since it hides each gateway's tables, not what their sum reveals. For the CVAE, the attack on synthetic data stays near chance (0.488--0.498) at every $\varepsilon$, including $\infty$, but fails its positive control (0.519), and the model-access attack passes its control (0.664) yet finds no leakage in the federated models (0.496--0.500); there, DP provides the formal guarantee rather than a measurable reduction.
+\textit{Empirical leakage.} The attack on the released tables of FedDP-Marginal passes its positive control (AUC 0.835 on noise-free tables of 500 records). Averaged over the three seeds, its AUC is 0.573 without DP and 0.515, 0.525 and 0.539 with DP at $\varepsilon = 1$, 5 and 10; a record bootstrap puts the drops at 0.059 [0.052, 0.065], 0.048 [0.042, 0.055] and 0.034 [0.029, 0.040], all of which pass \eqref{eq:decision_rule}. In absolute terms the leakage is small: at 1\% false positives the attack identifies 1.9\% of the training records without DP and 1.1--1.4\% with DP, against 1\% for a random guess. SecAgg$^+$ alone does not change these numbers, since it hides each gateway's tables, not what their sum reveals. For the CVAE, the attack on synthetic data stays near chance (0.488--0.494) at every $\varepsilon$, including $\infty$, but fails its positive control (0.510), and the model-access attack passes its control (0.647) yet finds no leakage in the federated models (0.497--0.506); there, DP provides the formal guarantee without a measurable reduction.
 
-\textit{Trust and protected unit.} Table~\ref{tab:protection} summarizes the options of FedDP-Marginal at $\varepsilon = 5$. With the noise split over all five gateways, the guarantee degrades to $\varepsilon = 14.2$ if only one gateway is honest; this value grows with the federation (25.4 for 10 and 49.9 for 20 gateways). A threshold $t = 3$ keeps $\varepsilon \le 5$ with any three honest gateways and changes the utility by only $-0.001$ to $+0.003$ across budgets. Protecting a whole TCP stream costs 0.02--0.04 macro-F1, because 90\% of the streams contribute a single packet. A whole capture (up to 1,277 packets) can be protected only by bounding its contribution to $m = 25$ packets: the guarantee then covers the whole capture, but too little data remain (macro-F1 0.15--0.20). By design, the noise-free sums do not depend on how the rows are spread, nor the total noise on $K$ when $t = K$. Single-seed runs at $\varepsilon = 5$ agree: $\alpha_{\mathrm{dir}} = 0.1$ and 10 give the identical 0.412, and 10 and 20 gateways give 0.396 and 0.431, a spread due to the noise draws and the classifier selected on validation.
+\textit{Trust and protected unit.} Table~\ref{tab:protection} summarizes the options of FedDP-Marginal at $\varepsilon = 5$. With the noise split over all five gateways, the guarantee degrades to $\varepsilon = 14.2$ if only one gateway is honest; this value grows with the federation (25.4 for 10 and 49.9 for 20 gateways). A threshold $t = 3$ keeps $\varepsilon \le 5$ with any three honest gateways and changes the utility by $-0.005$ to $+0.016$ across budgets. Protecting a whole TCP stream costs 0.03--0.05 macro-F1, because 90\% of the streams contribute a single packet. A whole capture (up to 1,277 packets) can be protected only by bounding its contribution to $m = 25$--100 packets: the guarantee then covers the whole capture, but too little data remain (macro-F1 0.09--0.18). By design, the noise-free sums do not depend on how the rows are spread, nor the total noise on $K$ when $t = K$. Single-seed runs of MGs at $\varepsilon = 5$ agree: $\alpha_{\mathrm{dir}} = 0.1$ and 10 give the identical 0.398, and 10 and 20 gateways give 0.400 and 0.415.
 
 \begin{table}[!t]
 \centering
@@ -81,23 +82,23 @@ In fidelity, FedDP-Marginal matches the per-column distributions more closely (W
 \toprule
 \textbf{Config.} & \textbf{Protection} & \textbf{Macro-F1} & $\boldsymbol{\varepsilon_{h=5}}$ & $\boldsymbol{\varepsilon_{h=1}}$ & \textbf{MIA} \\
 \midrule
-MGp-nodp       & none                     & 0.444\,$\pm$\,0.017 & $\infty$ & $\infty$ & 0.560 \\
-MGs-nodp       & SecAgg$^+$ only          & 0.444\,$\pm$\,0.017 & $\infty$ & $\infty$ & 0.560 \\
-MGl-eps5       & client-side DP           & 0.374\,$\pm$\,0.010 & 5.00 & 5.00 & -- \\
-MGs-eps5       & distributed DP, $t = 5$  & 0.408\,$\pm$\,0.003 & 5.00 & 14.2 & 0.522 \\
-MGs-t3-eps5    & distributed DP, $t = 3$  & 0.408\,$\pm$\,0.025 & 3.72 & 10.1 & 0.520 \\
-MGs-t2-eps5    & distributed DP, $t = 2$  & 0.396\,$\pm$\,0.005 & 2.94 & 7.6  & 0.511 \\
-MGs-strm2-eps5 & stream unit, $m = 2$     & 0.371\,$\pm$\,0.004 & 5.00 & 13.3 & -- \\
-MGs-cap25-eps5 & capture unit, $m = 25$   & 0.203\,$\pm$\,0.037 & 5.00 & 13.0 & -- \\
+MGp-nodp       & none                     & 0.459\,$\pm$\,0.007 & $\infty$ & $\infty$ & 0.573 \\
+MGs-nodp       & SecAgg$^+$ only          & 0.459\,$\pm$\,0.007 & $\infty$ & $\infty$ & 0.573 \\
+MGl-eps5       & client-side DP           & 0.397\,$\pm$\,0.006 & 5.00 & 5.00 & -- \\
+MGr-eps5       & distributed DP, $t = 5$  & 0.425\,$\pm$\,0.004 & 5.00 & 14.2 & 0.525 \\
+MGr-t3-eps5    & distributed DP, $t = 3$  & 0.420\,$\pm$\,0.009 & 3.72 & 10.1 & 0.524 \\
+MGr-t2-eps5    & distributed DP, $t = 2$  & 0.425\,$\pm$\,0.011 & 2.94 & 7.6  & 0.517 \\
+MGr-strm1-eps5 & stream unit, $m = 1$     & 0.376\,$\pm$\,0.007 & 5.00 & 14.2 & -- \\
+MGr-cap50-eps5 & capture unit, $m = 50$   & 0.177\,$\pm$\,0.020 & 5.00 & 13.0 & -- \\
 \bottomrule
 \end{tabular}
 
 \vspace{2pt}
-\parbox{\columnwidth}{\scriptsize $\varepsilon_{h}$: guarantee when $h$ of the 5 gateways add their noise share; with $t < 5$ the target holds whenever $t$ gateways are honest. MIA: mean calibrated AUC of the attack on the released tables over three seeds (positive control 0.583; --: not attacked).}
+\parbox{\columnwidth}{\scriptsize $\varepsilon_{h}$: guarantee when $h$ of the 5 gateways add their noise share; with $t < 5$ the target holds whenever $t$ gateways are honest. MIA: mean calibrated AUC of the attack on the released tables over three seeds (positive control 0.835; --: not attacked).}
 \end{table}
 
 \subsection{RQ4: Requirement-Driven Configuration}\label{subsec:rq4}
-A single utility ranking does not settle the choice: the best configurations differ more in what they protect and cost than in macro-F1. The recommendation rule therefore proceeds in five steps. It (i) keeps only valid configurations (those whose guarantee covers everything they release); (ii) applies the trust requirement (an untrusted server needs SecAgg$^+$ or client-side DP, and colluding gateways need client-side DP or a threshold $t$); (iii) removes configurations that exceed the limits on $\varepsilon$, bandwidth, rounds or MIA AUC; (iv) keeps the Pareto front over utility, $\varepsilon$ and cost, where utility within the seed spread, $\varepsilon$ within 2\% and cost within 5\% count as equal; and (v) breaks ties by the priority (macro-F1 or rare-class recall). Two conventions matter. First, $\varepsilon$ is an axis even when no DP is required, so a configuration that adds a guarantee at no measurable loss of utility and with fewer bytes dominates its non-private counterpart: hidden-tables selects MGr-eps10 rather than MGs-nodp, while lab keeps the cheaper MGp-nodp. Second, a threshold configuration is credited with its target $\varepsilon$ unless the scenario fixes the number of honest gateways; MGs-t3-eps5 thus counts as $\varepsilon = 5$, not 3.72, and MGs-eps5 also has the higher rare-class recall (0.293 vs.\ 0.269). Table~\ref{tab:recommend} lists the outcome for eleven deployment scenarios.
+A single utility ranking does not settle the choice: the best configurations differ more in what they protect and cost than in macro-F1. The recommendation rule therefore proceeds in five steps. It (i) keeps only valid configurations (those whose guarantee covers everything they release); (ii) applies the trust requirement (an untrusted server needs SecAgg$^+$ or client-side DP, and colluding gateways need client-side DP or a threshold $t$); (iii) removes configurations that exceed the limits on $\varepsilon$, bandwidth, rounds or MIA AUC; (iv) keeps the Pareto front over utility, $\varepsilon$, the use of SecAgg$^+$ and cost, where utility within the seed spread, $\varepsilon$ within 2\% and cost within 5\% count as equal; and (v) picks the front member with the highest priority metric (macro-F1 or rare-class recall) and reports those within its seed spread as ties. Here $\varepsilon$ is the guarantee under the scenario's trust assumption: where gateways may collude, it is the value with one honest gateway, so consortium takes MGr-t2-eps5 (7.63) over client-side noise; where gateways are trusted, a threshold configuration counts with its target, so MGs-t3-eps5 counts as $\varepsilon = 5$, not 3.72. Table~\ref{tab:recommend} lists the outcome for eleven deployment scenarios.
 
 \begin{table}[!t]
 \centering
@@ -109,25 +110,25 @@ A single utility ranking does not settle the choice: the best configurations dif
 \toprule
 \textbf{Scenario} & \textbf{Requirement} & \textbf{Choice} & \textbf{F1} & $\boldsymbol{\varepsilon}$ \\
 \midrule
-lab              & all parties trusted, no DP           & MGp-nodp       & 0.444 & $\infty$ \\
-hidden-tables    & untrusted server, no DP              & MGr-eps10      & 0.433 & 10 \\
-cloud-aggregator & untrusted server, $\varepsilon \le 5$ & MGs-eps5      & 0.408 & 5 \\
-rare-attacks     & as above, rare recall first          & MGs-eps5       & 0.408 & 5 \\
-strict-privacy   & untrusted server, $\varepsilon \le 1$ & MGr-t3-eps1   & 0.392 & 1 \\
-low-bandwidth    & $\varepsilon \le 10$, $\le 100$\,MB total & MGr-eps10  & 0.433 & 10 \\
-consortium       & gateways may collude, $\varepsilon \le 10$ & MGl-eps10 & 0.413 & 10 \\
-honest-majority  & $\ge 3$ honest, $\varepsilon \le 10$, MIA $< 0.55$ & MGs-t3-eps10 & 0.428 & 10 \\
-gateway-dropout  & $\ge 3$ honest, $\varepsilon \le 5$  & MGs-t2-eps5    & 0.396 & 3.94 \\
-session-privacy  & TCP-stream unit, $\varepsilon \le 5$ & MGs-strm2-eps5 & 0.371 & 5 \\
-capture-privacy  & capture unit, $\varepsilon \le 10$  & MGs-cap25-eps5$^\dagger$ & 0.203 & 5 \\
+lab              & all parties trusted, no DP           & MGp-nodp       & 0.459 & $\infty$ \\
+hidden-tables    & untrusted server, no DP              & MGs-nodp       & 0.459 & $\infty$ \\
+cloud-aggregator & untrusted server, $\varepsilon \le 5$ & MGd-eps5      & 0.426 & 5 \\
+rare-attacks     & as above, rare recall first          & MGd-eps5       & 0.426 & 5 \\
+strict-privacy   & untrusted server, $\varepsilon \le 1$ & MGs-t3-eps1   & 0.373 & 1 \\
+low-bandwidth    & $\varepsilon \le 10$, $\le 100$\,MB total & MGs-t3-eps10 & 0.449 & 10 \\
+consortium       & gateways may collude, $\varepsilon \le 10$ & MGr-t2-eps5 & 0.425 & 7.63 \\
+honest-majority  & $\ge 3$ honest, $\varepsilon \le 10$, MIA $< 0.55$ & MGs-t3-eps10 & 0.449 & 10 \\
+gateway-dropout  & $\ge 3$ honest, $\varepsilon \le 5$  & MGr-t2-eps5    & 0.425 & 3.94 \\
+session-privacy  & TCP-stream unit, $\varepsilon \le 5$ & MGs-strm1-eps5 & 0.397 & 5 \\
+capture-privacy  & capture unit, $\varepsilon \le 10$  & MGr-cap50-eps5$^\dagger$ & 0.177 & 5 \\
 \bottomrule
 \end{tabularx}
 
 \vspace{2pt}
-\parbox{\columnwidth}{\scriptsize F1: TSTR macro-F1; $\varepsilon$: the guarantee that holds under the scenario's trust assumption. $^\dagger$Holds formally by using at most 25 packets of each capture; not practical at this utility.}
+\parbox{\columnwidth}{\scriptsize F1: TSTR macro-F1; $\varepsilon$: the guarantee that holds under the scenario's trust assumption. $^\dagger$Holds formally by using at most 50 packets of each capture; not practical at this utility.}
 \end{table}
 
-Fig.~\ref{fig:pareto} places every valid configuration by utility and total traffic: all FedDP-Marginal variants stay below 2.5\,MB per run, at least an order of magnitude below the CVAE routes (26.8--192\,MB), and make up 9 of the 10 configurations on the Pareto front. A deployment that cannot trust the server but trusts its gateways should take MGs-eps5 or MGs-eps10; if gateways may collude, it needs client-side noise or a threshold, at the costs listed in Table~\ref{tab:recommend}.
+Fig.~\ref{fig:pareto} places every valid configuration by utility and total traffic: all FedDP-Marginal variants stay below 1.4\,MB per run, at least six times less than any CVAE route (8.4--191\,MB), and make up 17 of the 18 configurations on the Pareto front. Two choices come with ties: lab ties MGp-nodp with MGs-nodp, the same tables sent through SecAgg$^+$ (0.158 instead of 0.114\,MB per round), and cloud-aggregator ties MGd-eps5, whose secure sum is simulated in-process, with MGs-t3-eps5 (0.420), which runs through Flower's SecAgg$^+$.
 
 \begin{figure}[!t]
 \centering
@@ -142,9 +143,9 @@ Fig.~\ref{fig:pareto} places every valid configuration by utility and total traf
 
 \textit{Limitations.}
 \begin{itemize}
-    \item \textbf{Data:} The study uses one dataset at the packet level, and generated packets have no stream context. The normal traffic was re-exported from PCAP files and, unlike the attack rows, includes broker-sent packets (44.2\% of the normal training rows). Re-scoring all runs on client-sent test rows changes the macro-F1 by $-0.019$ on average and keeps the order of the configurations (Spearman 0.993).
-    \item \textbf{Privacy scope:} $\varepsilon$ protects one packet by default. One capture group contributes up to 188 packets of a rare class, so the group bound for a whole capture is vacuous. Labels, class counts, preprocessing statistics and validation-based tuning lie outside $\varepsilon$.
-    \item \textbf{Centralized preprocessing:} The standardization statistics, the skewness test, the clipping range and the category lists are fitted on the pooled training split. A deployment would need fixed public ranges, a secure protocol, or a DP release of these statistics before Release~1, which would consume part of the budget.
-    \item \textbf{Trust and system:} The study assumes honest-but-curious parties, and the federation, including SecAgg$^+$, is simulated on one machine, so no real network or device costs are measured.
-    \item \textbf{Statistics and scope:} Three seeds give a rough spread, and the verdicts hold for this test split. A CVAE with distributed noise (one noisy sum per round), federated SMOTE, FLAIM or AIM themselves, and other deep generators were not compared.
+    \item The study uses one dataset at the packet level, and generated packets have no stream context. The normal traffic was exported from PCAP files with the authors' settings; one attack capture was published with both directions, so 18.1\% of the \texttt{SYN} training rows are packets sent by the broker.
+    \item $\varepsilon$ protects one packet by default. One capture group contributes up to 188 packets of a rare class, so the group bound for a whole capture is vacuous. Labels, class counts, preprocessing statistics and validation-based tuning lie outside $\varepsilon$.
+    \item The standardization statistics, the skewness test, the clipping range and the category lists are fitted on the pooled training split. A deployment would need fixed public ranges, a secure protocol, or a DP release of these statistics before Release~1, which would consume part of the budget.
+    \item The study assumes honest-but-curious parties, and the federation, including SecAgg$^+$, is simulated on one machine, so no real network or device costs are measured.
+    \item Three seeds give a rough spread, and the verdicts hold for this test split. A CVAE with distributed noise, FLAIM or AIM themselves, and other deep generators were not compared; the detector with shared noise used Gaussian accounting and a small grid tuned on one seed.
 \end{itemize}

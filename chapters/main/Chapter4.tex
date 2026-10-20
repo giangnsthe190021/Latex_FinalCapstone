@@ -4,11 +4,11 @@
 \section{Experimental Setup}\label{sec:setup}
 
 \subsection{Dataset and Preprocessing}\label{subsec:dataset}
-We use the DoS/DDoS-MQTT-IoT dataset~\cite{alatram2023}: 59,624,826 packets, each described by 33 columns, with normal traffic and the DoS and DDoS variants of five MQTT attack families. The attack rows are the authors' CSV exports. Normal traffic is released only as packet capture (PCAP) files, so we exported every normal packet with TShark into the same columns; with the authors' export settings, the same procedure reproduces their attack rows. The DoS and DDoS sub-classes of each family are merged into one class, so that the IDS detects the attack family. Separating them is hard at the packet level: a random forest on real data reaches a macro-F1 of only 0.326 on the eleven sub-classes (normal traffic and ten attack sub-classes), and the two sub-classes of basic connect flooding are close to chance. Merging gives six classes (Table~\ref{tab:data}).
+We use the DoS/DDoS-MQTT-IoT dataset~\cite{alatram2023}: 39,000,601 packets, each described by 33 columns, with normal traffic and the DoS and DDoS variants of five MQTT attack families. The attack rows are the authors' CSV exports. Normal traffic is released only as packet capture (PCAP) files, so we exported it with TShark into the same columns using the authors' export settings (two-pass dissection, packets sent to the broker), which reproduce their attack rows exactly in 47 of 48 captures. The DoS and DDoS sub-classes of each family are merged into one class, so that the IDS detects the attack family. Separating them is hard at the packet level: a random forest on real data reaches a macro-F1 of only 0.336 on the eleven sub-classes (normal traffic and ten attack sub-classes), and the two sub-classes of basic connect flooding are close to chance (0.59 for two classes). Merging gives six classes (Table~\ref{tab:data}).
 
-Identifiers and capture metadata (frame number, absolute and relative timestamps, source address, free-text information) are removed to avoid leakage~\cite{arp2022}. Numeric features with skewness above 2 are log-transformed, all numeric features are standardized and clipped at $\pm 5\sigma$, and categorical fields are one-hot encoded, giving $p = 60$ features. The preprocessing statistics are fitted on the pooled training split, a centralized step outside $\varepsilon$ (Section~\ref{subsec:limitations}). Diagnostic checks found no shortcut feature: no single column reaches a macro-F1 above 0.9, the missingness indicators alone reach 0.10 (chance 0.17), and a random row split scores only 0.0075 above a split by capture group.
+Identifiers and capture metadata (frame number, absolute and relative timestamps, source address, free-text information) are removed to avoid leakage~\cite{arp2022}. Numeric features with skewness above 2 are log-transformed, all numeric features are standardized and clipped at $\pm 5\sigma$, and categorical fields are one-hot encoded, giving $p = 59$ features. The preprocessing statistics are fitted on the pooled training split, a centralized step outside $\varepsilon$ (Section~\ref{subsec:limitations}). Diagnostic checks found no shortcut feature: no single column reaches a macro-F1 above 0.9, the missingness indicators alone reach 0.18 (chance 0.17), and a random row split scores only 0.009 above a split by capture group.
 
-Where a sub-class spans several capture groups (normal traffic has 49), whole groups are assigned to the training, validation or test split. Eight of the ten attack sub-classes come from a single capture file; as an exception, their validation and test rows are contiguous blocks of that capture, separated by 1,000-row buffers, and TCP streams crossing a block boundary are dropped. Neighbouring blocks can still share temporal context, so leakage is reduced but not excluded; re-running the study with two other choices of test groups kept 5 of 6 verdicts. Rows are then sampled to fixed quotas (Table~\ref{tab:data}). The training quotas impose a 60:1 imbalance between \texttt{NORMAL} and \texttt{WILL}. The validation and test sets are class-balanced, so that the metrics are not dominated by the majority class. The test set (11 capture groups, 20,343 TCP streams) is used only once for the final evaluation. We call \texttt{DELAYED}, \texttt{SYN}, \texttt{INVALID} and \texttt{WILL} the rare classes.
+Where a sub-class spans several capture groups (normal traffic has 49), whole groups are assigned to the training, validation or test split. Eight of the ten attack sub-classes come from a single capture file; as an exception, their validation and test rows are contiguous blocks of that capture, separated by 1,000-row buffers, and TCP streams crossing a block boundary are dropped. Neighboring blocks can still share temporal context, so leakage is reduced but not excluded; re-running the study with two other choices of test groups kept 8 of 10 verdicts. Rows are then sampled to fixed quotas (Table~\ref{tab:data}). The training quotas impose a 60:1 imbalance between \texttt{NORMAL} and \texttt{WILL}. The validation and test sets are class-balanced, so that the metrics are not dominated by the majority class. The test set (11 capture groups, 20,485 TCP streams) is used only once for the final evaluation. We call \texttt{DELAYED}, \texttt{SYN}, \texttt{INVALID} and \texttt{WILL} the rare classes.
 
 \begin{table}[!t]
 \centering
@@ -20,14 +20,14 @@ Where a sub-class spans several capture groups (normal traffic has 49), whole gr
 \toprule
 \textbf{Class} & \textbf{Raw packets} & \textbf{Share} & \textbf{Train} & \textbf{Val.} & \textbf{Test} \\
 \midrule
-\texttt{NORMAL}  & 45,580,102 & 76.44\% & 60,000 & 2,000 & 5,000 \\
-\texttt{BCF}     & 12,280,874 & 20.60\% & 20,000 & 2,000 & 5,000 \\
-\texttt{DELAYED} &    601,542 &  1.01\% &  3,000 & 2,000 & 5,000 \\
-\texttt{SYN}     &    601,439 &  1.01\% &  3,000 & 2,000 & 5,000 \\
-\texttt{INVALID} &    290,340 &  0.49\% &  1,500 & 2,000 & 5,000 \\
-\texttt{WILL}    &    270,529 &  0.45\% &  1,000 & 2,000 & 5,000 \\
+\texttt{NORMAL}  & 24,955,877 & 63.99\% & 60,000 & 2,000 & 5,000 \\
+\texttt{BCF}     & 12,280,874 & 31.49\% & 20,000 & 2,000 & 5,000 \\
+\texttt{DELAYED} &    601,542 &  1.54\% &  3,000 & 2,000 & 5,000 \\
+\texttt{SYN}     &    601,439 &  1.54\% &  3,000 & 2,000 & 5,000 \\
+\texttt{INVALID} &    290,340 &  0.74\% &  1,500 & 2,000 & 5,000 \\
+\texttt{WILL}    &    270,529 &  0.69\% &  1,000 & 2,000 & 5,000 \\
 \midrule
-\textbf{Total}   & 59,624,826 & 100\%   & 88,500 & 12,000 & 30,000 \\
+\textbf{Total}   & 39,000,601 & 100\%   & 88,500 & 12,000 & 30,000 \\
 \bottomrule
 \end{tabular}
 
@@ -36,7 +36,7 @@ Where a sub-class spans several capture groups (normal traffic has 49), whole gr
 \end{table}
 
 \subsection{Configurations}
-Table~\ref{tab:configs} lists the configurations. The real-data references B0, B1a and B1b pool the raw training data and are therefore not available in a federation. All federated configurations use $K = 5$ gateways and the partition of \eqref{eq:dirichlet} with $\alpha_{\mathrm{dir}} = 0.5$, drawn once per seed and shared by every configuration. Privacy budgets are $\varepsilon \in \{1, 5, 10\}$ with $\delta = 10^{-5}$ at the packet level; this $\delta$ is below $1/n \approx 1.13 \times 10^{-5}$ for the $n = 88{,}500$ training packets, but not far below it. The headline FedDP-Marginal configurations are MG-eps1 = MGr-eps1, MG-eps5 = MGs-eps5 and MG-eps10 = MGs-eps10, the variants selected on validation data. Hyperparameters were tuned on the validation split only (tree-structured Parzen search for the CVAE, a grid for FedDP-Marginal); this selection is not covered by $\varepsilon$.
+Table~\ref{tab:configs} lists the configurations. The real-data references B0, B1a and B1b pool the raw training data and are therefore not available in a federation. All federated configurations use $K = 5$ gateways and the partition of \eqref{eq:dirichlet} with $\alpha_{\mathrm{dir}} = 0.5$, drawn once per seed and shared by every configuration. Privacy budgets are $\varepsilon \in \{1, 5, 10\}$ with $\delta = 10^{-5}$ at the packet level; this $\delta$ is below $1/n \approx 1.13 \times 10^{-5}$ for the $n = 88{,}500$ training packets, but not far below it. The headline FedDP-Marginal configurations are MG-eps1 = MGs-eps1, MG-eps5 = MGr-eps5 and MG-eps10 = MGs-eps10, the variants selected on validation data. Hyperparameters were tuned on the validation split only (tree-structured Parzen search for the CVAE, a grid for FedDP-Marginal); this selection is not covered by $\varepsilon$.
 
 \begin{table}[!t]
 \centering
@@ -53,15 +53,15 @@ B3           & CVAE & none (FedAvg) & 30 \\
 M1-eps\{1,5,10\} & CVAE & DP-SGD at each gateway (client-side DP) & 30 \\
 M2           & CVAE & SecAgg$^+$ & 30 \\
 M3-eps5      & CVAE & DP-SGD and SecAgg$^+$ & 30 \\
-M1o, M3o     & CVAE & as M1, M3, re-tuned per $\varepsilon$ at full scale & 30--50 \\
+M1o, M3o     & CVAE & as M1, M3, re-tuned per $\varepsilon$ at full scale & 15--50 \\
 MGp-nodp     & Marginal & none (plain Flower sum) & 3 \\
 MGs-nodp     & Marginal & SecAgg$^+$ without noise & 3 \\
 MGs-eps\{1,5,10\} & Marginal & distributed Skellam DP and SecAgg$^+$ & 3 \\
 MGr-eps\{1,5,10\} & Marginal & MGs with post-processing (no extra $\varepsilon$) & 3 \\
 MGl-eps\{1,5,10\} & Marginal & client-side DP, plain sum & 3 \\
-FedMLP       & none & IDS trained directly by FedAvg; none, SecAgg$^+$ or DP-SGD & 30 \\
+FedMLP       & none & IDS trained by FL; none, SecAgg$^+$, DP-SGD or DP-FedSGD & 30, 2,593 \\
 \midrule
-\multicolumn{4}{p{\dimexpr\columnwidth-2\tabcolsep\relax}}{Suffixes: \texttt{-t}$t$ noise share $1/t$ (holds with $t$ honest gateways); \texttt{-strm}$m$ and \texttt{-cap}$m$ protect a TCP stream or a capture with at most $m$ packets each. Ablations shown only in Fig.~\ref{fig:pareto}: MGd (Gaussian noise, summed in-process) and MGb (second-order Bayesian network).} \\
+\multicolumn{4}{p{\dimexpr\columnwidth-2\tabcolsep\relax}}{Suffixes: \texttt{-t2}, \texttt{-t3}: noise share $1/t$ (holds with $t$ honest gateways); \texttt{-strm1}, \texttt{-cap50}: protect a TCP stream or a capture with at most $m = 1$ or 50 packets each. Ablations: MGd (Gaussian noise shared across gateways, secure sum simulated in-process) and MGb (second-order Bayesian network).} \\
 \bottomrule
 \end{tabularx}
 \end{table}
