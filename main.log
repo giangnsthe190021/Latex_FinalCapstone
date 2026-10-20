@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.30)  14 OCT 2026 13:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.30)  20 OCT 2026 17:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -505,26 +505,31 @@ File: graphics/paper/Fig2.pdf Graphic file (type pdf)
 <use graphics/paper/Fig2.pdf>
 Package pdftex.def Info: graphics/paper/Fig2.pdf  used on input line 51.
 (pdftex.def)             Requested size: 516.0pt x 170.01738pt.
- [4 <./graphics/paper/fig1_architecture.pdf>]) (chapters/main/Chapter4.tex [5 <./graphics/paper/Fig2.pdf>]
+
+Underfull \hbox (badness 2790) in paragraph at lines 75--77
+\OT1/ptm/m/n/10 (+20) through $\OML/cmm/m/it/10 ^^V[] \OT1/cmr/m/n/10 = ^^A[]\OML/cmm/m/it/10 =\OT1/cmr/m/n/10 (2\OML/cmm/m/it/10 s[]^^T\OT1/cmr/m/n/10 )$\OT1/ptm/m/n/10 (+20) , where $\OML/cmm/m/it/10 ^^T$ \OT1/ptm/m/n/10 (+20) is the largest
+ []
+
+[4 <./graphics/paper/fig1_architecture.pdf>]) (chapters/main/Chapter4.tex
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 11.
  (C:\Users\admin\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-) (C:\Users\admin\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omsptm.fd)) (chapters/main/Chapter5.tex [6]
-<graphics/paper/Fig3_python.pdf, id=344, 250.38426pt x 170.71654pt>
+) [5 <./graphics/paper/Fig2.pdf>] (C:\Users\admin\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omsptm.fd)) (chapters/main/Chapter5.tex [6]
+<graphics/paper/Fig3_python.pdf, id=341, 250.38426pt x 170.71654pt>
 File: graphics/paper/Fig3_python.pdf Graphic file (type pdf)
 <use graphics/paper/Fig3_python.pdf>
-Package pdftex.def Info: graphics/paper/Fig3_python.pdf  used on input line 58.
+Package pdftex.def Info: graphics/paper/Fig3_python.pdf  used on input line 59.
 (pdftex.def)             Requested size: 252.0pt x 171.8232pt.
+
+Underfull \vbox (badness 1342) has occurred while \output is active []
+
  [7]
-<graphics/paper/Fig4_python.pdf, id=360, 250.38426pt x 199.1693pt>
+<graphics/paper/Fig4_python.pdf, id=356, 250.38426pt x 199.1693pt>
 File: graphics/paper/Fig4_python.pdf Graphic file (type pdf)
 <use graphics/paper/Fig4_python.pdf>
-Package pdftex.def Info: graphics/paper/Fig4_python.pdf  used on input line 135.
+Package pdftex.def Info: graphics/paper/Fig4_python.pdf  used on input line 136.
 (pdftex.def)             Requested size: 252.0pt x 200.46039pt.
- [8 <./graphics/paper/Fig3_python.pdf>]) (chapters/main/Chapter6.tex) (chapters/front/thanks.tex)
-Underfull \vbox (badness 2035) has occurred while \output is active []
-
- [9 <./graphics/paper/Fig4_python.pdf>] (main.bbl
+ [8 <./graphics/paper/Fig3_python.pdf>]) (chapters/main/Chapter6.tex) (chapters/front/thanks.tex) (main.bbl [9 <./graphics/paper/Fig4_python.pdf>]
 Overfull \hbox (0.92387pt too wide) in paragraph at lines 157--161
 \OT1/ptm/m/n/8 (-20) ``Flower: A friendly federated learning research framework,'' \OT1/ptm/m/it/8 (-20) arXiv preprint
  []
@@ -550,17 +555,17 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: FDC6524C61892B3CE865DAD520222E47;4543.
  ) 
 Here is how much of TeX's memory you used:
- 14434 strings out of 467871
- 227829 string characters out of 5418376
- 696801 words of memory out of 5000000
- 42598 multiletter control sequences out of 15000+600000
- 691563 words of font info for 383 fonts, out of 8000000 for 9000
+ 14419 strings out of 467871
+ 227689 string characters out of 5418376
+ 697801 words of memory out of 5000000
+ 42597 multiletter control sequences out of 15000+600000
+ 689985 words of font info for 374 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,15n,79p,1696b,481s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,15n,79p,1672b,607s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx5.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmmib5.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb><C:/Users/admin/AppData/Local/Programs/MiKTeX/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on main.pdf (10 pages, 682638 bytes).
+Output written on main.pdf (10 pages, 684940 bytes).
 PDF statistics:
- 553 PDF objects out of 1000 (max. 8388607)
+ 550 PDF objects out of 1000 (max. 8388607)
  91 named destinations out of 1000 (max. 500000)
- 62165 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 58069 words of extra memory for PDF output out of 61914 (max. 10000000)
 

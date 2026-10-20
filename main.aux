@@ -71,6 +71,7 @@
 \citation{mironov2017rdp}
 \citation{yousefpour2021}
 \citation{beutel2020,bell2020}
+\citation{kairouz2021,agarwal2021}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces PP-FedData architecture. Gateways keep raw traffic; FedDP-Marginal sends three releases of noisy count tables and the federated CVAE sends model updates, both through SecAgg$^+$ to an honest-but-curious server, which samples synthetic packets for the downstream IDS.}}{4}{figure.1}\protected@file@percent }
 \newlabel{fig:architecture}{{1}{4}{PP-FedData architecture. Gateways keep raw traffic; FedDP-Marginal sends three releases of noisy count tables and the federated CVAE sends model updates, both through SecAgg$^+$ to an honest-but-curious server, which samples synthetic packets for the downstream IDS}{figure.1}{}}
 \newlabel{eq:tree_factorization}{{3}{4}{FedDP-Marginal}{equation.3}{}}
@@ -79,7 +80,7 @@
 \newlabel{eq:sensitivity}{{4}{4}{Privacy Accounting}{equation.4}{}}
 \newlabel{eq:skellam_rdp}{{5}{4}{Privacy Accounting}{equation.5}{}}
 \newlabel{eq:rdp_conversion}{{6}{4}{Privacy Accounting}{equation.6}{}}
-\citation{kairouz2021,agarwal2021}
+\newlabel{eq:secagg}{{7}{4}{Privacy Accounting}{equation.7}{}}
 \citation{sohn2015cvae}
 \citation{mcmahan2017}
 \citation{abadi2016dpsgd,yousefpour2021}
@@ -87,7 +88,6 @@
 \citation{arp2022}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Three-release protocol of FedDP-Marginal. Each release is a sum of count tables plus Skellam noise shares, computed with SecAgg$^+$ over $\mathbb  {Z}_{2^{32}}$. The coarse cut points (after Release~1) and the tree $T^\star $ (after Release~2) are broadcast back before the next release.}}{5}{figure.2}\protected@file@percent }
 \newlabel{fig:three_release}{{2}{5}{Three-release protocol of FedDP-Marginal. Each release is a sum of count tables plus Skellam noise shares, computed with SecAgg$^+$ over $\mathbb {Z}_{2^{32}}$. The coarse cut points (after Release~1) and the tree $T^\star $ (after Release~2) are broadcast back before the next release}{figure.2}{}}
-\newlabel{eq:secagg}{{7}{5}{Privacy Accounting}{equation.7}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Federated CVAE Baseline}{5}{subsection.3.4}\protected@file@percent }
 \newlabel{subsec:cvae}{{\mbox  {III-D}}{5}{Federated CVAE Baseline}{subsection.3.4}{}}
 \newlabel{eq:dpsgd}{{8}{5}{Federated CVAE Baseline}{equation.8}{}}
@@ -124,6 +124,9 @@
 \newlabel{tab:protection}{{V}{8}{Protection Options of FedDP-Marginal at $\varepsilon = 5$, With the Non-Private References}{table.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-D}}RQ4: Requirement-Driven Configuration}{8}{subsection.5.4}\protected@file@percent }
 \newlabel{subsec:rq4}{{\mbox  {V-D}}{8}{RQ4: Requirement-Driven Configuration}{subsection.5.4}{}}
+\bibstyle{IEEEtran}
+\bibdata{references/reference}
+\bibcite{alatram2023}{1}
 \@writefile{lot}{\contentsline {table}{\numberline {VI}{\ignorespaces Recommended Configuration per Deployment Requirement}}{9}{table.6}\protected@file@percent }
 \newlabel{tab:recommend}{{VI}{9}{Recommended Configuration per Deployment Requirement}{table.6}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces TSTR macro-F1 against total traffic per run (log scale) for all valid configurations. MG: FedDP-Marginal, including its Gaussian ablation (MGd, summed in-process) and second-order ablation (MGb); MGp: plain Flower sum without SecAgg$^+$. The traffic of the client-side variants (MGl) is estimated, as in Table~\ref {tab:main}. Filled markers: Pareto front over utility, $\varepsilon $ and cost.}}{9}{figure.4}\protected@file@percent }
@@ -132,9 +135,6 @@
 \newlabel{subsec:limitations}{{\mbox  {V-E}}{9}{Discussion and Limitations}{subsection.5.5}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{9}{section.6}\protected@file@percent }
 \newlabel{sec:conclusion}{{VI}{9}{Conclusion}{section.6}{}}
-\bibstyle{IEEEtran}
-\bibdata{references/reference}
-\bibcite{alatram2023}{1}
 \bibcite{mcmahan2017}{2}
 \bibcite{zhu2019}{3}
 \bibcite{vyas2024}{4}
