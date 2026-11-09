@@ -1,6 +1,95 @@
-\chapter{Discussion}
-The findings and their implications should be discussed in the broadest context possible and limitations of the work highlighted.
+\chapter{Discussion}\label{chap:discussion}
+This chapter returns to the problem that motivated the study, gathers the main findings, sets them in a wider context, and states how far they can be trusted.
+
 \section{Restate the Research Problem or Objectives}
+
+IoT gateways that broker MQTT traffic see attacks that a single site observes rarely, or not at all. An intrusion detection system would need data from many sites, yet raw packet traces reveal devices, topics and behaviour, and their owners cannot always share them. Secure aggregation hides what each site sends. Differential privacy bounds what the output reveals. Each has a cost in utility, bandwidth or trust, and the literature offers few controlled measurements of what these costs are for a detector on MQTT traffic.
+
+The study therefore set four objectives (Section~1.3): build a controlled evaluation on real MQTT traffic with leakage checks (O1), extend marginal-based private synthesis to the federated setting with distributed noise (O2), compare it with a federated CVAE under matched privacy budgets (O3), and turn the measurements into a configuration guide per deployment requirement (O4). Four research questions follow from them: how much IDS utility the synthetic data retain (RQ1), how the marginal and deep routes compare at the same budget (RQ2), what each protection costs and at what granularity it protects (RQ3), and which configuration suits which requirement (RQ4).
+
 \section{Summarize Key Findings}
 
+\begin{itemize}
+    \item \textbf{Utility without pooling.} An IDS trained only on the synthetic data of FedDP-Marginal reaches a test macro-F1 of 0.366, 0.425 and 0.433 at $\varepsilon = 1, 5, 10$, against 0.448 for a Random Forest on pooled real data and 0.505 with SMOTE on pooled real data. Without DP, the generator reaches 0.459.
+    \item \textbf{No gain when real data can be pooled.} Adding synthetic rows to pooled real data passes the decision rule for 2 of 13 generators with the RF, by at most $+0.001$, against $+0.057$ for SMOTE. The CVAE is worse than class weights and SMOTE in 6 of 6 comparisons.
+    \item \textbf{A real gain at the edge.} A gateway that adds synthetic rows for the classes it lacks raises its macro-F1 from 0.384 to about 0.426, and 11 to 13 of 15 client models gain, depending on $\varepsilon$.
+    \item \textbf{Marginal route ahead of the deep route.} At the same $(\varepsilon, \delta)$, FedDP-Marginal exceeds the best CVAE route by $+0.092$ to $+0.191$ of macro-F1 and $+0.049$ to $+0.169$ of rare-class recall, with all verdicts passing under both bootstraps.
+    \item \textbf{A fraction of the traffic.} FedDP-Marginal needs three rounds and at most 1.33\,MB in a run, against 8.4 to 191\,MB for the CVAE routes.
+    \item \textbf{A measurable privacy effect.} The membership attack on the released tables detects the release without DP (AUC 0.573) and detects those with DP less (0.515 to 0.539), and it passes its positive control. Attacks on the CVAE find nothing, the unprotected model included.
+    \item \textbf{A guarantee that depends on trust and unit.} At $\varepsilon = 5$, one honest gateway alone gives an effective $\varepsilon$ of 14.2. Protecting a TCP stream costs 0.03 to 0.05 of macro-F1. A whole capture is not usable on this data.
+    \item \textbf{No universal configuration.} Eleven requirements map to eight distinct configurations, 17 of the 18 configurations on the Pareto front being variants of FedDP-Marginal.
+\end{itemize}
 
+\section{Interpretation in a Broader Context}
+
+\subsubsection*{Choosing a Generator Is Choosing a Privacy Cost Structure}
+The results suggest that the architecture of a generator determines how the privacy budget is spent. A model trained over many noisy steps pays for every step. A generator whose entire interaction with the data is a small number of bounded count releases pays only for those. Under strict budgets the second design has a clear advantage on this tabular data, and it fits secure aggregation by construction, because what it sends is a sum.
+
+\subsubsection*{Different Protections Answer Different Threats}
+A recurring confusion in this area is to treat secure aggregation and differential privacy as substitutes. Here they answer different questions. SecAgg$^+$ prevents the server from seeing an individual gateway's tables and changes nothing in what the final tables reveal, as the unchanged attack AUC of 0.573 shows. DP bounds what the released output reveals. A deployment must therefore decide which adversary it fears, which is why the requirement-driven guide lets the choice depend on trust.
+
+\subsubsection*{Evaluation Protocol as a Result in Itself}
+On one dataset and one classifier, the macro-F1 moved from 0.448 to 0.941 by changing only the split and the identifier columns. The lesson is broader than this study: reported scores on network traffic data are difficult to compare without their protocol, and a high figure may partly reflect identifying columns. Earlier work had warned about such pitfalls in security datasets~\cite{arp2022, kaufman2012}, and these measurements quantify them on this dataset.
+
+\subsubsection*{The Value of Generated Data Depends on Who Lacks What}
+The same synthetic data are of no use to a classifier that already sees every real row, and of real use to a gateway that has barely seen some classes. Their value is a function of what the recipient lacks, which suggests that the question ``do synthetic data help?'' needs the qualifier ``for whom, and instead of what?''
+
+\section{Working Hypotheses and Research Questions}
+
+Table~\ref{tab:disc_answers} collects the answers. H1 and H2 are the working hypotheses of Section~\ref{par:hypotheses}.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Status of the working hypotheses and research questions}
+\label{tab:disc_answers}
+\begin{tabularx}{\textwidth}{lXp{2.8cm}}
+\toprule
+\textbf{Item} & \textbf{Finding} & \textbf{Status} \\
+\midrule
+H1 & At $\varepsilon = 1$, the marginal generator has a higher F1 on INVALID ($+0.139$) and WILL ($+0.222$) & Supported (point estimates, above the seed spread) \\
+\midrule
+H2 & The CVAE was expected to lead on BCF and SYN; instead, the marginal generator leads by $+0.138$ and $+0.312$ & Not supported \\
+\midrule
+RQ1 & Macro-F1 of 0.366 to 0.433 under TSTR with DP; no meaningful gain from TAug; about $+0.04$ from local augmentation & Answered \\
+\midrule
+RQ2 & FedDP-Marginal exceeds the CVAE under DP on macro-F1 and rare-class recall at every budget & Answered, in favour of FedDP-Marginal \\
+\midrule
+RQ3 & SecAgg$^+$ is cheap; a TCP stream is an affordable unit; a capture is not; the guarantee degrades with fewer honest gateways & Answered \\
+\midrule
+RQ4 & Eleven requirements are mapped through a transparent rule & Answered, as a rule on measured values \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Why the CVAE Was Studied and Why It Remains the Baseline}
+
+A reader may ask why this thesis keeps a generator whose results are negative. The reason lies in how the study was built.
+
+\textbf{The premise.} The study began from a specific premise: that a label-conditional CVAE trained by federated learning under non-IID clients, and protected by DP-SGD, secure aggregation or both, could generate data that balance the classes of an IDS. The CVAE was the premise of the study and was not selected by a comparison between generators. RQ1 and RQ2 are the test of that premise.
+
+\textbf{What the numbers say.} When real data can be pooled, the premise fails on utility. TAug with the CVAE is worse than class weights and SMOTE in 6 of 6 comparisons, by $-0.047$ to $-0.118$ of macro-F1. Generators pass the decision rule against real data only in 2 of 13 cases with the RF (at most $+0.001$) and in 9 of 13 with the MLP (at most $+0.038$, against $+0.134$ for SMOTE). DP lowers the synthetic-only score of the CVAE by 12\% to 58\%, and re-tuning at full scale did not close the gap.
+
+\textbf{The case that remains.} All of TRTR, TAug and TAugR need the pooled real data that the threat model excludes. Where raw data must stay at the gateways, the CVAE route without DP reaches a TSTR macro-F1 of 0.413 and has the highest binary F1 of the study, 0.904. It therefore remains a meaningful reference for the case without a formal guarantee, and its loss under DP is what motivated the move to FedDP-Marginal. It also keeps the comparison honest: without a deep baseline under the same federation, DP and SecAgg$^+$ conditions, the advantage of the marginal route would have no measured point of comparison.
+
+\textbf{What was not tested.} Other generators (WGAN-GP, TVAE or CTGAN-type models, diffusion models, and FLAIM or AIM) were not run. Other ways of using synthetic data, beyond topping classes up and local augmentation, were not studied either. The results therefore compare one CVAE with one marginal generator on one dataset, and they do not show that the CVAE family is inferior in general.
+
+\section{Limitations}
+
+\subsubsection*{Data and Features}
+All results come from one dataset, so nothing here shows that they carry over to other traffic or networks. Records are single packets generated independently, so the temporal structure of a session is not reproduced. Eight of the eleven sub-classes come from a single capture file, so their validation and test rows are consecutive blocks of that capture. The DoS and DDoS variants are merged in the main matrix. The test split comes from 11 capture groups only, and the two alternative choices in A4 cover this only in part.
+
+\subsubsection*{Privacy Scope}
+The default $\varepsilon$ protects one packet. Packets of one stream or capture are correlated, so what is protected about a whole session is weaker. Labels, class counts and client sizes are outside the guarantee. Normalisation statistics are computed centrally on the training split, as if each client had shared its data once, and a real federation would have to compute them securely or fix them beforehand. Hyper-parameter selection used the real validation split and is not covered by $\varepsilon$: 12 candidates per budget for FedDP-Marginal, and at $\varepsilon = 5$ and $\varepsilon = 10$ the two best candidates differ by less than the weight of one validation packet. Distributed DP assumes that enough gateways add their noise share, and malicious gateways are outside the threat model.
+
+\subsubsection*{Generators}
+FedDP-Marginal models each class with a Chow--Liu tree, so every attribute depends on one parent, and the numeric values inside a fine bin are drawn uniformly. Second-order structure was tried and did not help on this data, but it may on others. Synthetic rows remain easy to tell from real ones, with a C2ST AUC of at least 0.9995 for every generator. The recall of the rare classes stays below that of the non-private federated CVAE for most protected configurations. The MGd variant simulates its secure sum in process, so it has no measured deployment cost.
+
+\subsubsection*{Evaluation and Statistics}
+Three seeds give only a rough estimate of the spread, and federated training is sensitive to very small perturbations. The bootstrap intervals reflect the sampling of test rows or whole streams, and they do not cover the choice of capture groups, the hyper-parameters or the data sampling. The thresholds of the evaluation (membership AUC 0.55, $\varepsilon \le 5$, overhead 3 times) are heuristics. The empirical attacks test one family at record level and do not test group inference. The class-level analysis of H1 and H2 is based on point estimates and the seed spread.
+
+\subsubsection*{Execution Platform}
+The federation is simulated on one CPU machine with Ray actors, so times are compute times, and network latency, packet loss and constrained-device behaviour were not measured. Byte counts are measured, except for the local variant, where they are estimated from the number of cells.
+
+\subsubsection*{Comparison with Published Work}
+The literature comparison rests on three studies whose full text could be read, from a non-systematic search. The closest binary tasks are close but not identical to the published ones.

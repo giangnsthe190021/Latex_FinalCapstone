@@ -1,2 +1,44 @@
-\chapter{If Any}
+\chapter{Complete Scorecard}\label{app:scorecard}
 
+Table~\ref{tab:app_scorecard} lists every configuration of the scorecard. It is generated from \texttt{results/scorecard.json} by \texttt{scripts/make\_thesis\_tables.py}. A configuration lies on the Pareto front if no valid configuration dominates it on the axes of Section~\ref{subsec:req_rule}. The columns are the same as in Table~\ref{tab:res_scorecard}, with three additions: the gain of TAug over B0 with the same classifier, the value of $\varepsilon$ with a single honest gateway, and the presence of SecAgg$^+$.
+
+\input{chapters/back/scorecard_table.tex}
+
+\chapter{Effective Privacy Budget by Honest Gateways}\label{app:honest}
+
+Table~\ref{tab:app_honest} gives the effective $\varepsilon$ of the distributed configurations when only $h$ of the $K = 5$ gateways add their noise share. Configurations with a suffix \texttt{-t2} or \texttt{-t3} are calibrated for 2 or 3 honest gateways, and the suffixes \texttt{-strm} and \texttt{-cap} refer to a TCP stream or a capture as the protected unit.
+
+\input{chapters/back/eps_honest_table.tex}
+
+\chapter{Reproducing the Results}\label{app:repro}
+
+The code and the result files are in the project repository, \url{https://github.com/Khanh1916/PP-FedData}. The raw data are not part of the repository and must be obtained from the Kaggle release of the dataset~\cite{alatram2023kaggle}. Table~\ref{tab:app_commands} lists the commands that produce the material of Chapter~\ref{chap:results}. Each is run as \texttt{python -m ppfeddata.cli <command>}.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Commands that produce the results of Chapter~\ref{chap:results}}
+\label{tab:app_commands}
+\begin{tabularx}{\textwidth}{p{4.0cm}X}
+\toprule
+\textbf{Command} & \textbf{Output} \\
+\midrule
+\texttt{extract-normal}, \texttt{check-extraction} & Normal traffic extracted with the authors' settings, and the provenance report \\
+\texttt{check} & Leakage report C1--C5 \\
+\texttt{aggregate} & Final report and tables of the main matrix \\
+\texttt{scorecard}, \texttt{recommend} & Scorecard, Pareto front and recommendations per requirement \\
+\texttt{privacy-units} & Protected units and honest-gateway thresholds \\
+\texttt{robustness}, \texttt{sensitivity} & Robustness branches and worlds A2, A4 and A5 \\
+\texttt{ids-followup} & IDS-side options and local augmentation \\
+\texttt{mg-nodp} & FedDP-Marginal without DP, plain and with SecAgg$^+$ \\
+\texttt{fed-baseline} & The classifier trained directly by federated learning \\
+\texttt{mia} & Membership inference with access to the released CVAE \\
+\texttt{compare-published} & Comparison with published results on the dataset \\
+\texttt{accept} & Definition-of-done checklist \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{sloppypar}
+Two scripts in the thesis repository draw on these results. The script \texttt{make\_thesis\_figures.py} produces the figures of Chapter~\ref{chap:results} that are not already available in the results folder, and \texttt{make\_thesis\_tables.py} produces Tables~\ref{tab:app_scorecard} and~\ref{tab:app_honest}.
+\end{sloppypar}

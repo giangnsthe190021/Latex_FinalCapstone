@@ -1,7 +1,29 @@
-\chapter{Conclusion and Future Work}
-The 'conclusions' are a key component of the paper. It should complement the 'abstract' and is normally used by experts to value the paper's engineering content. A conclusion is not merely a summary of the main topics covered or a re-statement of your research problem, but a synthesis of key points and, if applicable, where you recommend new areas for future research.
-\section{Conclusion}
-%Viết kết luận ở đây
-\section{Future Work}
-%Viết định hướng phát triển ở đây
+\chapter{Conclusion and Future Work}\label{chap:conclusion}
 
+\section{Conclusion}
+
+This thesis studied how several MQTT gateways can jointly produce data for training an intrusion detection system without releasing their raw packets, and what each protection costs. It built PP-FedData, a framework evaluated on the DoS/DDoS-MQTT-IoT dataset under a split by capture, with five leakage checks, a locked test set and a paired-bootstrap decision rule. Two generator routes were compared under the same federation: FedDP-Marginal, which releases noisy count tables in three rounds and samples from a Chow--Liu tree, and a federated conditional variational autoencoder trained with DP-SGD.
+
+Three conclusions stand out.
+
+First, for protected generation on this data, the marginal route is the better choice. At the same privacy budget it keeps a higher macro-F1 and a higher rare-class recall than the CVAE, by $+0.092$ to $+0.191$ and $+0.049$ to $+0.169$, and it uses a run of at most 1.33\,MB in three rounds in place of 8.4 to 191\,MB over 15 to 50 rounds. Its releases are sums, so the noise can be split across gateways through secure aggregation with exact accounting.
+
+Second, generated data have a specific place. They do not improve an IDS when real data can be pooled, and class weights or SMOTE are preferable there. They are valuable where pooling is impossible, with a synthetic-only macro-F1 of 0.366 to 0.433 at $\varepsilon$ from 1 to 10 against 0.448 for real data only, and they are valuable to a gateway that lacks some classes, which gains about 0.04 of macro-F1.
+
+Third, a privacy claim is meaningful only together with its unit and its trust assumption. Protecting a TCP stream is affordable, at 0.03 to 0.05 of macro-F1, and protecting a whole capture is not usable on this data. With one honest gateway out of five, an $\varepsilon$ of 5 becomes 14.2. A configuration should therefore be selected by requirement, and the study provides a rule that does so from measured values for eleven deployment scenarios.
+
+These conclusions apply to one dataset, packet-level records, five gateways simulated on one machine, and three seeds. Marginal-based federated synthesis is not new, and this work claims no algorithmic novelty. Its contribution is the measured evaluation, the exact distributed accounting through a real secure-aggregation implementation, and the requirement-driven guide.
+
+\section{Future Work}
+
+\begin{itemize}
+    \item \textbf{Stronger generators under the same conditions.} Run FLAIM, AIM and other marginal mechanisms, together with DP-CTGAN or diffusion-based models, under the same federation, DP accounting and SecAgg$^+$, so that FedDP-Marginal can be ranked against them.
+    \item \textbf{Richer structure.} Study higher-order or class-specific graphical structures with private selection, to raise utility beyond the current plateau at moderate budgets.
+    \item \textbf{Session-level modelling.} Generate sequences of packets or flow-level records, so that temporal attack patterns are represented and capture-level protection becomes feasible.
+    \item \textbf{Private preprocessing and selection.} Compute normalisation and category statistics securely, or fix them in advance, and add a private selection step so that the tuning falls inside the privacy accounting.
+    \item \textbf{Real deployment measurements.} Run the protocol on real gateways over constrained links such as NB-IoT or LoRa, to measure latency, packet loss, dropouts and energy use.
+    \item \textbf{Other datasets and larger federations.} Repeat the study on other MQTT and IoT traffic, with a wider range of $K$ and with client dropout, so that the effect of $t$ can be studied beyond $K = 5$.
+    \item \textbf{Malicious participants.} Extend the threat model to poisoning and Byzantine behaviour, including robust aggregation compatible with distributed noise.
+    \item \textbf{Group-level attacks.} Develop membership and attribute attacks at the level of a TCP stream or capture, to test what the group bounds protect in practice.
+    \item \textbf{Hybrid detection.} Combine a privately trained detector with local augmentation by generated data, and measure whether the two routes complement each other on the rare classes.
+\end{itemize}
