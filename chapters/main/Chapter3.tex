@@ -127,7 +127,7 @@ The research proceeds in five stages (Figure~\ref{fig:overall_workflow}): data p
 \end{figure}
 
 \subsubsection*{Evolution of the Design}
-The study was originally designed around a federated conditional variational autoencoder (CVAE)~\cite{sohn2015cvae}, which is the premise of the project. After a first evaluation round, the framework adopted a marginal-based generator, FedDP-Marginal, as its primary generator and retained the CVAE as a baseline. The decision is recorded with its date and rationale in the project's deviation log (\texttt{docs/SPEC\_DEVIATIONS.md}, entries O1.9 and O2.3); Chapter~4 presents the evidence and Chapter~5 discusses it. The CVAE configurations remain in the matrix so that the comparison in RQ2 is made under identical federation, privacy, and secure-aggregation conditions.
+The study was originally designed around a federated conditional variational autoencoder (CVAE)~\cite{sohn2015cvae}, which is the premise of the project. After a first evaluation round, the framework adopted a marginal-based generator, FedDP-Marginal, as its primary generator and retained the CVAE as a baseline. Chapter~\ref{chap:results} presents the evidence and Chapter~5 discusses it. The CVAE configurations remain in the matrix so that the comparison in RQ2 is made under identical federation, privacy, and secure-aggregation conditions.
 
 \subsection{System Architecture and the Two Generator Routes}
 
@@ -140,7 +140,7 @@ The system involves three primary roles (Figure~\ref{fig:system_arch}):
 \end{itemize}
 
 \subsubsection*{Where Synthetic Data is Generated}
-Synthetic records are generated at the server, from the global model (CVAE decoder) or from the released global tables (marginal counts and dependency tree), by sampling conditionally on the class label. They are not generated at the gateways. The sampling functions are implemented in \texttt{models/generate.py} (CVAE) and \texttt{models/marginal.py} (FedDP-Marginal).
+Synthetic records are generated at the server, from the global model (CVAE decoder) or from the released global tables (marginal counts and dependency tree), by sampling conditionally on the class label. They are not generated at the gateways.
 
 \subsubsection*{What the Server Sees}
 The visibility of client contributions depends on the configuration and must not be stated in general terms:
@@ -152,7 +152,7 @@ The visibility of client contributions depends on the configuration and must not
 \end{itemize}
 
 \subsubsection*{The Two Generator Routes}
-Table~\ref{tab:two_routes} contrasts the two routes. FedDP-Marginal exchanges counts of discrete attribute combinations in three releases; the CVAE exchanges continuous model weights over many FedAvg rounds. The difference matters for privacy accounting. Each marginal release is a single additive aggregate with bounded sensitivity, so the calibrated noise can be divided among the clients and the sum computed through secure aggregation. DP-SGD~\cite{abadi2016dpsgd}, by contrast, performs many local non-linear steps per round, and noise added by one client passes through the other clients' training before aggregation; the project therefore does not claim distributed DP for the CVAE route (\texttt{SPEC\_DEVIATIONS.md}, O2.1).
+Table~\ref{tab:two_routes} contrasts the two routes. FedDP-Marginal exchanges counts of discrete attribute combinations in three releases; the CVAE exchanges continuous model weights over many FedAvg rounds. The difference matters for privacy accounting. Each marginal release is a single additive aggregate with bounded sensitivity, so the calibrated noise can be divided among the clients and the sum computed through secure aggregation. DP-SGD~\cite{abadi2016dpsgd}, by contrast, performs many local non-linear steps per round, and noise added by one client passes through the other clients' training before aggregation; the project therefore does not claim distributed DP for the CVAE route.
 
 \begin{table}[htbp]
 \centering
@@ -172,13 +172,11 @@ Table~\ref{tab:two_routes} contrasts the two routes. FedDP-Marginal exchanges co
 \textbf{Secure aggregation} & Flower SecAgg$^+$ on exact integers (uint32, arithmetic modulo $2^{32}$) & Flower SecAgg$^+$ on fixed-point quantised weights ($2^{22}$ quantisation levels, clipping range 16) \\
 \midrule
 \textbf{Distributed DP} & Valid: each release is one additive aggregate & Not claimed: multiple non-linear local steps \\
-\midrule
-\textbf{Main code} & \texttt{models/marginal.py}, \texttt{fl/mg\_app.py}, \texttt{group\_dp.py} & \texttt{models/cvae.py}, \texttt{fl/core.py}, \texttt{fl/app.py}, \texttt{fl/dp\_utils.py} \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-For the FedDP-Marginal route, the sum is carried by a patched client path: stock Flower SecAgg$^+$ sends masked vectors as 64-bit integers, so the project casts the masked vector to uint32 after the final modular reduction and lets the server's unsigned addition wrap, which equals addition modulo $2^{32}$ (\texttt{SPEC\_DEVIATIONS.md}, O2.2). The installed Flower package is not modified; the patch lives in the project process.
+For the FedDP-Marginal route, the sum is carried by a patched client path: stock Flower SecAgg$^+$ sends masked vectors as 64-bit integers, so the project casts the masked vector to uint32 after the final modular reduction and lets the server's unsigned addition wrap, which equals addition modulo $2^{32}$. The installed Flower package is not modified; the patch lives in the project process.
 
 \begin{figure}[htbp]
 \centering
@@ -243,7 +241,7 @@ For the FedDP-Marginal route, the sum is carried by a patched client path: stock
 % --- TIER 3: Aggregation Server ---
 \node[srvbox] (s1) at (17.2, 1.5) {1. Secure Aggregation\\{\tiny (Exact sum or FedAvg)}};
 \node[srvbox] (s2) at (17.2, 0) {2. Global Model Reconstruction\\{\tiny (Chow-Liu tree + IPF / Decoder)}};
-\node[srvbox] (s3) at (17.2, -1.5) {3. Class-Conditional Sampling\\{\tiny (\texttt{synthetic.npz})}};
+\node[srvbox] (s3) at (17.2, -1.5) {3. Class-Conditional Sampling\\{\tiny (synthetic records)}};
 
 % --- TIER 4: Downstream IDS ---
 \node[idsbox] (ids_eval) at (22.1, 0.75) {Evaluation on Locked\\Real Test Split\\{\tiny (30,000 packets)}};
@@ -333,7 +331,7 @@ The default unit is the record, that is, one network packet. An $\varepsilon$ at
     \item Each unit is held entirely by one client (the partition is made by unit, not by row).
     \item Each client uses at most $m$ rows of each unit.
 \end{itemize}
-When both hold, a release of $N_{\text{tab}}$ tables has sensitivities $\Delta_1 = m \cdot N_{\text{tab}}$ in $\ell_1$ and $\Delta_2 = m \sqrt{N_{\text{tab}}}$ in $\ell_2$ (\texttt{group\_dp.py}), and the noise is calibrated to these values. The CVAE routes keep record-level $\varepsilon$.
+When both hold, a release of $N_{\text{tab}}$ tables has sensitivities $\Delta_1 = m \cdot N_{\text{tab}}$ in $\ell_1$ and $\Delta_2 = m \sqrt{N_{\text{tab}}}$ in $\ell_2$, and the noise is calibrated to these values. The CVAE routes keep record-level $\varepsilon$.
 
 \subsubsection*{Why the Unit Must Be Stated}
 Packets of one stream, and packets of one capture, are correlated. Under record-level $\varepsilon$, a set of $k$ correlated records from the same source is protected only through group privacy, which weakens the guarantee to roughly $k\varepsilon$ with a correspondingly larger $\delta$~\cite{dwork2014}. A statement of $\varepsilon$ without its unit therefore says little about whether an attack session as a whole is concealed. The unit statistics of the data are: the training split contains 77,106 TCP streams and 147 capture groups, and a capture contains up to 1,277 rows.
@@ -346,7 +344,7 @@ The following are treated as known to every party and are outside the accounting
     \item The normalisation statistics, the $\log(1+x)$ choices, the category lists, and the mask of unused categories, computed centrally on the pooled training split before partitioning.
     \item The hyper-parameter selection, performed on the real validation split.
 \end{itemize}
-In the FedDP-Marginal route the client reports \texttt{num\_examples} as a fixed public constant, so client sizes do not travel through that field (\texttt{SPEC\_DEVIATIONS.md}, O2.3).
+In the FedDP-Marginal route the client reports \texttt{num\_examples} as a fixed public constant, so client sizes do not travel through that field.
 
 \subsubsection*{Standard Formulation for the Thesis}
 We assume an honest-but-curious aggregation server that follows the protocol but may analyse every message it receives. Gateways hold their own traffic and are trusted with it. In the base setting every gateway follows the protocol and adds its share of the noise; we also report the guarantee when only $h$ of the $K$ gateways do so, and an optional threshold $t$ calibrates the noise so that the target $\varepsilon$ holds whenever at least $t$ gateways add their share (the others may collude with the server or drop out). In the local-DP variant each gateway adds the full noise, so no other gateway needs to be trusted. Malicious (poisoning or Byzantine) gateways are out of scope.
@@ -414,7 +412,7 @@ To assess how far the design conclusions depend on settings fixed in the main st
 \midrule
 \textbf{Federation size} & $K \in \{10, 20\}$ (main $K = 5$) & Run for MGs (one seed) and for MGl (three seeds) \\
 \midrule
-\textbf{Label resolution} & 11-class mode separating DoS and DDoS & Run through robustness module for reference and FedDP-Marginal \\
+\textbf{Label resolution} & 11-class mode separating DoS and DDoS & Run for the real-data reference and FedDP-Marginal \\
 \midrule
 \textbf{A4} & \texttt{split\_seed} changed so other capture groups form validation/test & Run with two alternative choices \\
 \midrule
@@ -433,7 +431,7 @@ Two components exist as code and tests but were not executed after the change of
 \subsection{Requirement-Driven Recommendation Rule}\label{subsec:req_rule}
 
 \subsubsection*{Motivation and Relation to Rule R6}
-The original specification fixed a single rule, R6: among the configurations whose membership-inference AUC is at most 0.55, whose $\varepsilon$ (maximum over clients and worst seed) is at most 5 when DP is used, and whose time per round is at most three times that of B3, choose the one with the highest TAug macro-F1 of the Random Forest. Ties within the seed noise are broken by the strength of the formal protection. The thresholds are heuristics fixed by the research team (Section~\ref{sec:methodology_limitations}). R6 is retained as a reference rule. A single fixed criterion cannot express deployments that differ in trust, bandwidth, and privacy unit, so the framework adds a requirement-driven rule, implemented as \texttt{ppfeddata recommend} (\texttt{recommend.py}), which takes a deployment requirement as input.
+The original specification fixed a single rule, R6: among the configurations whose membership-inference AUC is at most 0.55, whose $\varepsilon$ (maximum over clients and worst seed) is at most 5 when DP is used, and whose time per round is at most three times that of B3, choose the one with the highest TAug macro-F1 of the Random Forest. Ties within the seed noise are broken by the strength of the formal protection. The thresholds are heuristics fixed by the research team (Section~\ref{sec:methodology_limitations}). R6 is retained as a reference rule. A single fixed criterion cannot express deployments that differ in trust, bandwidth, and privacy unit, so the framework adds a requirement-driven rule, which takes a deployment requirement as input.
 
 \subsubsection*{Requirement Formulation}
 A requirement is the tuple:
@@ -523,7 +521,7 @@ WILL (Connect Flooding with WILL payload) & 114,474 & 156,055 & 270,529 & 0.69\%
 \end{table}
 
 \subsubsection*{Data Provenance and Verification}
-The attack traffic is used as published: the 48 attack CSV files exported by the dataset authors~\cite{alatram2023}, whose paths and sizes match the Kaggle release~\cite{alatram2023kaggle}. The release provides the Normal traffic only as 49 PCAP files, so the Normal traffic was extracted with TShark 4.4.7~\cite{wireshark} into the same 33 columns, with the export settings of the dataset authors and a script kept in the project repository.
+The attack traffic is used as published: the 48 attack CSV files exported by the dataset authors~\cite{alatram2023}, whose paths and sizes match the Kaggle release~\cite{alatram2023kaggle}. The release provides the Normal traffic only as 49 PCAP files, so the Normal traffic was extracted with TShark 4.4.7~\cite{wireshark} into the same 33 columns, with the export settings of the dataset authors.
 
 The settings were recovered from the attack captures, for which both the PCAP and the authors' CSV exist. Two options reproduce the frame numbers of the official CSV exactly: two-pass dissection (\texttt{-2}) and the display filter \texttt{ip.dst==192.168.80.49}, which keeps the packets sent to the broker. They match 47 of the 48 captures. The remaining capture, SYN\_DDoS-AD\_1, was exported by the authors with the filter \texttt{ip}, which keeps both directions; it is used as published, so the SYN class also holds packets sent by the broker. Over the 14,044,724 rows of these 48 captures, 5,860 rows (0.042\%) differ in at least one column used by the models, and 3,156 of those are TCP retransmissions.
 
@@ -934,7 +932,7 @@ converted to $(\varepsilon_{\text{group}}, \delta)$ with Equation~\eqref{eq:zcdp
     \item \textbf{Linear aggregation:} Distributed DP under secure addition is valid only when each release is a single additive sum. It cannot be applied to the multi-epoch DP-SGD of the CVAE.
     \item \textbf{Uniform protection:} The noise is never reduced selectively for the rare classes, as that would weaken the protection of minority-class records below the announced $\varepsilon$.
     \item \textbf{Values sent in clear:} Flower sends the client sizes $n_i$ (\texttt{num\_examples}) in clear, outside the DP perimeter.
-    \item \textbf{Independent verification:} Every reported $(\varepsilon, \delta)$ is recomputed independently by \texttt{eval/dp\_check.py}. An audit flag (F5) is raised when the recomputed value differs from the reported one by more than 10\% ($|\varepsilon_{\text{recomp}} - \varepsilon|/\varepsilon > 0.10$).
+    \item \textbf{Independent verification:} The $\varepsilon$ of every DP-SGD run is recomputed with a separate implementation of the RDP accountant of the sampled Gaussian mechanism~\cite{mironov2019}, which does not use Opacus and takes as input the client sizes, noise multipliers, batch size and logged step counts of the run. An audit flag (F5) is raised when the recomputed value differs from the reported one by more than 10\% ($|\varepsilon_{\text{recomp}} - \varepsilon|/\varepsilon > 0.10$).
 \end{itemize}
 
 \subsubsection*{DP-SGD Accounting for the Federated CVAE}
@@ -1054,15 +1052,15 @@ Selecting hyper-parameters on the real validation split leaks information about 
 \subsubsection*{Separate Search Spaces}
 Tuning is split into five search spaces (Table~\ref{tab:search_spaces}):
 \begin{itemize}
-    \item \textbf{Space (a), centralised CVAE without DP (phase 7):} 30 TPE trials on centralised data over 30 epochs, exploring $d_z \in \{8, 16, 32\}$, hidden width $\in \{64, 128, 256\}$, $\beta \in [0.1, 2.0]$ (log-uniform), and $\eta \in [10^{-4}, 3 \times 10^{-3}]$ (log-uniform). Output: \texttt{configs/best\_cvae.yaml}.
-    \item \textbf{Space (b), CVAE with DP at proxy scale (\texttt{tune-dp}):} To limit the cost, initial DP-SGD tuning runs 30 trials on a single proxy client with 20\% of the data at $\varepsilon = 5$ (one seed per trial). The best candidates are verified in true federated training (\texttt{verify-dp}), selected by validation macro-F1, with ties within 0.01 broken by the lowest validation loss. It explores $d_z \in \{8, 16, 32\}$, hidden width $\in \{32, 64, 128, 256\}$, $B_{\text{batch}} \in \{128, 256, 512, 1024\}$, $\beta \in [0.1, 2.0]$, $\eta \in [2 \times 10^{-4}, 5 \times 10^{-3}]$ (log-uniform), and clipping norm $C_{\text{dp}} \in [0.1, 20.0]$ (log-uniform). Output: \texttt{configs/best\_cvae\_dp.yaml} (family M1d-t18).
-    \item \textbf{Space (c), CVAE with DP at full federated scale (\texttt{tune-dp-full}, round O1):} Full federated optimisation over 5 clients with seed 0, with 30 trials for $\varepsilon = 5$, 28 for $\varepsilon = 1$, and 12 for $\varepsilon = 10$. It explores $d_z \in \{8, 16, 32\}$, hidden width $\in \{64, 128\}$ (256 removed for memory reasons), $B_{\text{batch}} \in \{256, 512, 1024, 2048\}$, $\beta \in [0.1, 2.0]$, $\eta \in [5 \times 10^{-4}, 2 \times 10^{-2}]$ (log-uniform), $C_{\text{dp}} \in [0.5, 50.0]$ (log-uniform), rounds $R \in \{15, 30, 50\}$, local epochs $E \in \{1, 2, 4\}$, client class weighting \texttt{cw\_power} $\in \{0, 0.5, 1.0\}$, DP residual budget fraction \texttt{stat\_frac} $\in \{0.02, 0.05, 0.10\}$, and residual clipping \texttt{res\_clip} $\in \{0.5, 1.0, 2.0, 4.0\}$. Output: \texttt{configs/best\_cvae\_dp\_full.yaml} (M1o, M3o).
+    \item \textbf{Space (a), centralised CVAE without DP (phase 7):} 30 TPE trials on centralised data over 30 epochs, exploring $d_z \in \{8, 16, 32\}$, hidden width $\in \{64, 128, 256\}$, $\beta \in [0.1, 2.0]$ (log-uniform), and $\eta \in [10^{-4}, 3 \times 10^{-3}]$ (log-uniform).
+    \item \textbf{Space (b), CVAE with DP at proxy scale:} To limit the cost, initial DP-SGD tuning runs 30 trials on a single proxy client with 20\% of the data at $\varepsilon = 5$ (one seed per trial). The best candidates are verified in true federated training, selected by validation macro-F1, with ties within 0.01 broken by the lowest validation loss. It explores $d_z \in \{8, 16, 32\}$, hidden width $\in \{32, 64, 128, 256\}$, $B_{\text{batch}} \in \{128, 256, 512, 1024\}$, $\beta \in [0.1, 2.0]$, $\eta \in [2 \times 10^{-4}, 5 \times 10^{-3}]$ (log-uniform), and clipping norm $C_{\text{dp}} \in [0.1, 20.0]$ (log-uniform).
+    \item \textbf{Space (c), CVAE with DP at full federated scale (round O1):} Full federated optimisation over 5 clients with seed 0, with 30 trials for $\varepsilon = 5$, 28 for $\varepsilon = 1$, and 12 for $\varepsilon = 10$. It explores $d_z \in \{8, 16, 32\}$, hidden width $\in \{64, 128\}$ (256 removed for memory reasons), $B_{\text{batch}} \in \{256, 512, 1024, 2048\}$, $\beta \in [0.1, 2.0]$, $\eta \in [5 \times 10^{-4}, 2 \times 10^{-2}]$ (log-uniform), $C_{\text{dp}} \in [0.5, 50.0]$ (log-uniform), rounds $R \in \{15, 30, 50\}$, local epochs $E \in \{1, 2, 4\}$, client class weighting \texttt{cw\_power} $\in \{0, 0.5, 1.0\}$, DP residual budget fraction \texttt{stat\_frac} $\in \{0.02, 0.05, 0.10\}$, and residual clipping \texttt{res\_clip} $\in \{0.5, 1.0, 2.0, 4.0\}$. The resulting settings define M1o and M3o.
     \item \textbf{Space (d), FedDP-Marginal:} Discrete grid search scored by the mean over three seeds on the validation split. It explores the coarse bins $B_{\text{coarse}} \in \{4, 8, 16, 32\}$ crossed with the budget splits $\omega \in \{(0.3, 0.1, 0.6), (0.5, 0.1, 0.4), (0.15, 0.05, 0.8)\}$; the dependency measure (plug-in MI, Miller--Madow MI $\hat{I}_{\text{MM}}$~\cite{miller1955}, or normalised MI), with a stability check that measures the Jaccard similarity~\cite{jaccard1912} of the tree edges across partition seeds,
     \begin{equation}
     J(T_a^\star, T_b^\star) = \frac{|E(T_a^\star) \cap E(T_b^\star)|}{|E(T_a^\star) \cup E(T_b^\star)|};
     \label{eq:jaccard}
     \end{equation}
-    the second-order structure of MGb (parent search, bins specific to rare classes, number of fine bins); and the refinement options (inverse-variance merging, Laplace smoothing $\alpha_{\text{smooth}} \in \{0.1, 1.0, 10.0\}$, root chosen by noisy MI). The policy settings for unit caps ($m_{\text{stream}} \in \{1, 2, 4\}$, $m_{\text{capture}} \in \{25, 50, 100\}$) and honest thresholds ($t \in \{5, 3\}$, and $t = 2$ with $T_{\text{recon}} = 4$) are evaluated in \texttt{best\_group\_dp.yaml}.
+    the second-order structure of MGb (parent search, bins specific to rare classes, number of fine bins); and the refinement options (inverse-variance merging, Laplace smoothing $\alpha_{\text{smooth}} \in \{0.1, 1.0, 10.0\}$, root chosen by noisy MI). The policy settings for unit caps ($m_{\text{stream}} \in \{1, 2, 4\}$, $m_{\text{capture}} \in \{25, 50, 100\}$) and honest thresholds ($t \in \{5, 3\}$, and $t = 2$ with $T_{\text{recon}} = 4$) are policy choices and are evaluated separately from this search.
     \item \textbf{Space (e), downstream IDS:} Choice between Random Forest (200 trees) and MLP (hidden layers $[128, 64]$, early stopping) for each protocol by validation macro-F1; the rare-class augmentation ratio of TAugR $\in \{0.25, 0.5, 1.0, 2.0\}$ (seed 0); and class-probability weights $w_c \in \{0.25, 0.5, 1.0, 2.0, 4.0\}$, by a two-round coordinate search averaged over three seeds.
 \end{itemize}
 
@@ -1077,9 +1075,9 @@ Tuning is split into five search spaces (Table~\ref{tab:search_spaces}):
 \midrule
 \textbf{(a) Centralised CVAE} (phase 7) & CVAE without DP & 30 TPE trials, centralised data & $d_z \in \{8, 16, 32\}$; hidden $\in \{64, 128, 256\}$; $\beta \in [0.1, 2.0]$ (log); $\eta \in [10^{-4}, 3 \times 10^{-3}]$ (log) \\
 \midrule
-\textbf{(b) CVAE DP proxy} (\texttt{tune-dp}) & CVAE with DP-SGD & 1 proxy client (20\% of data), 30 trials, $\varepsilon = 5$, 1 seed; checked by \texttt{verify-dp} & $d_z \in \{8, 16, 32\}$; hidden $\in \{32, 64, 128, 256\}$; $B_{\text{batch}} \in \{128, 256, 512, 1024\}$; $\beta \in [0.1, 2.0]$; $\eta \in [2 \times 10^{-4}, 5 \times 10^{-3}]$ (log); $C_{\text{dp}} \in [0.1, 20.0]$ (log) \\
+\textbf{(b) CVAE DP proxy} & CVAE with DP-SGD & 1 proxy client (20\% of data), 30 trials, $\varepsilon = 5$, 1 seed; checked in federated training & $d_z \in \{8, 16, 32\}$; hidden $\in \{32, 64, 128, 256\}$; $B_{\text{batch}} \in \{128, 256, 512, 1024\}$; $\beta \in [0.1, 2.0]$; $\eta \in [2 \times 10^{-4}, 5 \times 10^{-3}]$ (log); $C_{\text{dp}} \in [0.1, 20.0]$ (log) \\
 \midrule
-\textbf{(c) Full federated DP CVAE} (\texttt{tune-dp-full}, O1) & Federated CVAE with DP-SGD & True federation (5 clients, seed 0); 30/28/12 trials for $\varepsilon \in \{5, 1, 10\}$ & $d_z \in \{8, 16, 32\}$; hidden $\in \{64, 128\}$; $B_{\text{batch}} \in \{256, 512, 1024, 2048\}$; $\beta \in [0.1, 2.0]$; $\eta \in [5 \times 10^{-4}, 2 \times 10^{-2}]$ (log); $C_{\text{dp}} \in [0.5, 50.0]$ (log); $R \in \{15, 30, 50\}$; $E \in \{1, 2, 4\}$; \texttt{res\_clip} $\in \{0.5, 1, 2, 4\}$; \texttt{cw\_power} $\in \{0, 0.5, 1\}$; \texttt{stat\_frac} $\in \{0.02, 0.05, 0.1\}$ \\
+\textbf{(c) Full federated DP CVAE} (round O1) & Federated CVAE with DP-SGD & True federation (5 clients, seed 0); 30/28/12 trials for $\varepsilon \in \{5, 1, 10\}$ & $d_z \in \{8, 16, 32\}$; hidden $\in \{64, 128\}$; $B_{\text{batch}} \in \{256, 512, 1024, 2048\}$; $\beta \in [0.1, 2.0]$; $\eta \in [5 \times 10^{-4}, 2 \times 10^{-2}]$ (log); $C_{\text{dp}} \in [0.5, 50.0]$ (log); $R \in \{15, 30, 50\}$; $E \in \{1, 2, 4\}$; \texttt{res\_clip} $\in \{0.5, 1, 2, 4\}$; \texttt{cw\_power} $\in \{0, 0.5, 1\}$; \texttt{stat\_frac} $\in \{0.02, 0.05, 0.1\}$ \\
 \midrule
 \textbf{(d) FedDP-Marginal} (grid on validation) & Marginal generator & Discrete grid; mean of 3 seeds on validation & $B_{\text{coarse}} \in \{4, 8, 16, 32\}$; $\omega \in \{(0.3, 0.1, 0.6),$ $(0.5, 0.1, 0.4),$ $(0.15, 0.05, 0.8)\}$; MI: plug-in, Miller--Madow~\cite{miller1955}, NMI; tree stability (Jaccard~\cite{jaccard1912}); MGb order 2; refinement $\alpha_{\text{smooth}} \in \{0.1, 1, 10\}$; policy: $m_{\text{strm}} \in \{1, 2, 4\}$, $m_{\text{cap}} \in \{25, 50, 100\}$, $t \in \{5, 3\}$ (or $t = 2$, $T_{\text{recon}} = 4$) \\
 \midrule
@@ -1189,7 +1187,7 @@ The rule has known limits, stated here so that the results are read with them. T
 \subsection{Experimental Environment and Reproducibility}
 
 \subsubsection*{Environment}
-All experiments ran on one Windows 11 machine (build 10.0.26200) with an Intel x86-64 CPU and 16\,GB of RAM, using the CPU only. Federated learning is simulated with Flower and Ray; each client is a Ray actor sharing the machine's CPU, so no network latency is measured (see Section~\ref{sec:methodology_limitations}). The values come from the environment record \texttt{results/repro/environment.json} and the project's deviation log (Table~\ref{tab:env_spec}).
+All experiments ran on one Windows 11 machine (build 10.0.26200) with an Intel x86-64 CPU and 16\,GB of RAM, using the CPU only. Federated learning is simulated with Flower and Ray; each client is a Ray actor sharing the machine's CPU, so no network latency is measured (see Section~\ref{sec:methodology_limitations}). The values come from the environment record \texttt{results/repro/environment.json} (Table~\ref{tab:env_spec}). The code, configuration files and result files named in this section are in the project repository described in Appendix~\ref{app:repro}.
 
 \begin{table}[htbp]
 \centering
@@ -1224,20 +1222,20 @@ Every experiment is run with seeds $\{0, 1, 2\}$. The seed controls weight initi
     \item \textbf{Reproducibility bundle:} \texttt{results/repro/} holds the exact package list (\texttt{pip\_freeze.txt}, identical to \texttt{requirements-lock.txt}), the configuration files, the environment record, and a manifest with SHA-256 digests of the ledger, the split and schema manifests, and the report.
     \item \textbf{Acceptance command:} \texttt{python -m ppfeddata.cli accept} checks the repository against the Definition of Done and writes a checklist of twelve items (D1--D10, with D6 split into three). This command does not run the test suite; the suite is run separately.
     \item \textbf{Clean-copy re-execution:} Phases 1--5 (inventory, harmonisation, sampling, preprocessing, leakage check) were re-run from the raw data in a clean copy of the repository with a fresh virtual environment, and the processed train, validation, and test arrays were compared with those of the main checkout. Phases 6--14 were not re-run in the clean copy.
-    \item \textbf{Controlled trial:} A trial run of all ten configurations of the base matrix with seed 0 was compared row by row with the ledger of the main checkout (\texttt{SPEC\_DEVIATIONS.md}, 11.6).
+    \item \textbf{Controlled trial:} A trial run of all ten configurations of the base matrix with seed 0 was compared row by row with the ledger of the main checkout.
     \item \textbf{Leakage checks:} The data pipeline is guarded by five checks (C1--C5, Section~3.2.6), and the real test split is verified against a stored hash.
 \end{itemize}
 
 \clearpage
 \section{Limitations of the Methodology}\label{sec:methodology_limitations}
-The limitations below arise from the design of the study and the scope of the techniques. The full list is maintained in \texttt{limitations.py}, which feeds the final report and the README; this section groups them. None of the statements below reports a result.
+The limitations below arise from the design of the study and the scope of the techniques. This section groups them by topic. None of the statements below reports a result.
 
 \subsubsection*{Data and Features}
 \begin{itemize}
     \item Only one dataset is used; the study offers no evidence about other traffic or networks.
     \item The release has no CSV of the Normal traffic, so it was extracted from the original PCAP files with the authors' export settings. The one attack capture exported by the authors with another filter, SYN\_DDoS-AD\_1, is used as published, so the SYN class also holds packets sent by the broker (Section~\ref{subsec:dataset}).
     \item Records are single packets, and the generators produce packets independently. Session-level temporal structure is therefore not reproduced, and the time-based features depend on how the captures were exported.
-    \item Eight of the eleven sub-classes originate from a single capture file, so their validation and test rows are consecutive blocks of the same capture and not other captures. Removing TCP streams that straddle two blocks (\texttt{drop\_cross\_block\_streams}) reduces leakage between splits but biases the sample toward short connections; the share removed per sub-class is documented in the split manifest.
+    \item Eight of the eleven sub-classes originate from a single capture file, so their validation and test rows are consecutive blocks of the same capture and not other captures. Removing TCP streams that straddle two blocks reduces leakage between splits but biases the sample toward short connections; the share removed per sub-class is documented in the split manifest.
     \item The pipeline keeps only rows with protocol TCP or MQTT, keeps the first element of multi-valued cells, clips the tail of the time-gap feature at $5\sigma$, and treats nearly empty columns with the statistics of the rows where they apply plus an indicator.
     \item DoS and DDoS are merged in the six-class mode used for the experiment matrix.
     \item The validation and test splits are class-balanced (5,000 test rows per class) and do not follow the class proportions of real traffic.

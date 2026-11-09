@@ -1,6 +1,6 @@
 \chapter{Complete Scorecard}\label{app:scorecard}
 
-Table~\ref{tab:app_scorecard} lists every configuration of the scorecard. It is generated from \texttt{results/scorecard.json} by \texttt{scripts/make\_thesis\_tables.py}. A configuration lies on the Pareto front if no valid configuration dominates it on the axes of Section~\ref{subsec:req_rule}. The columns are the same as in Table~\ref{tab:res_scorecard}, with three additions: the gain of TAug over B0 with the same classifier, the value of $\varepsilon$ with a single honest gateway, and the presence of SecAgg$^+$.
+Table~\ref{tab:app_scorecard} lists every configuration of the scorecard. A configuration lies on the Pareto front if no valid configuration dominates it on the axes of Section~\ref{subsec:req_rule}. The columns are the same as in Table~\ref{tab:res_scorecard}, with three additions: the gain of TAug over B0 with the same classifier, the value of $\varepsilon$ with a single honest gateway, and the presence of SecAgg$^+$.
 
 \input{chapters/back/scorecard_table.tex}
 
@@ -38,7 +38,3 @@ The code and the result files are in the project repository, \url{https://github
 \bottomrule
 \end{tabularx}
 \end{table}
-
-\begin{sloppypar}
-Two scripts in the thesis repository draw on these results. The script \texttt{make\_thesis\_figures.py} produces the figures of Chapter~\ref{chap:results} that are not already available in the results folder, and \texttt{make\_thesis\_tables.py} produces Tables~\ref{tab:app_scorecard} and~\ref{tab:app_honest}.
-\end{sloppypar}
