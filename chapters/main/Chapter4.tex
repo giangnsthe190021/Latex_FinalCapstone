@@ -19,6 +19,7 @@ Three configurations are the main ones of the framework: MG-eps1 is MGs-eps1, MG
 \subsubsection*{Organisation}
 Section~\ref{sec:res_data} presents the data as they were used, the leakage checks, the settings selected on validation, and the consolidated scorecard. Section~\ref{sec:res_analysis} analyses the results per research question. Section~\ref{sec:res_interpretation} explains the patterns, Section~\ref{sec:res_literature} compares them with published work, and Section~\ref{sec:res_implications} draws the practical consequences.
 
+\clearpage
 \section{Presentation of Data}\label{sec:res_data}
 
 \subsection{The Data as Used}
@@ -41,7 +42,7 @@ Table~\ref{tab:res_leakage} gives the outcome of the five checks of Table~\ref{t
 \small
 \caption{Results of the leakage and label-reliability checks (Random Forest with 100 trees, validation split, three seeds)}
 \label{tab:res_leakage}
-\begin{tabularx}{\textwidth}{lXp{3.2cm}}
+\begin{tabularx}{\textwidth}{lXL{3.2cm}}
 \toprule
 \textbf{Check} & \textbf{Result} & \textbf{Decision} \\
 \midrule
@@ -95,7 +96,7 @@ Table~\ref{tab:res_settings} lists the settings selected for FedDP-Marginal over
 \label{tab:res_settings}
 \begin{tabularx}{\textwidth}{cXcc}
 \toprule
-$\boldsymbol{\varepsilon}$ & \textbf{FedDP-Marginal setting} & \textbf{Coarse bins} & \textbf{Budget split $\mathbf{s}$} \\
+$\boldsymbol{\varepsilon}$ & \textbf{FedDP-Marginal setting} & \textbf{Coarse bins} & \textbf{Budget split $\boldsymbol{\omega}$} \\
 \midrule
 1 & MGs & 16 & $(0.3, 0.1, 0.6)$ \\
 5 & MGr: inverse-variance fusion, IPF, smoothing $\alpha = 0.1$, root by noisy MI & 16 & $(0.15, 0.05, 0.8)$ \\
@@ -111,7 +112,8 @@ Table~\ref{tab:res_scorecard} gathers the main configurations. Appendix~\ref{app
 
 \begin{table}[htbp]
 \centering
-\footnotesize
+\small
+\setlength{\tabcolsep}{4pt}
 \caption{Main configurations under TSTR. An asterisk marks byte counts estimated from the number of cells, because MGl runs in process.}
 \label{tab:res_scorecard}
 \begin{tabularx}{\textwidth}{Xcccccccc}
@@ -155,6 +157,7 @@ Figure~\ref{fig:res_tstr_eps} draws the TSTR macro-F1 of the main routes against
 \end{figure}
 
 \FloatBarrier
+\clearpage
 \section{Analysis of Results}\label{sec:res_analysis}
 
 \subsection{RQ1: Utility of the Synthetic Data for the IDS}\label{subsec:res_rq1}
@@ -171,7 +174,8 @@ The targeted variant does no better. In the scorecard, the gain of TAugR over B0
 
 \begin{table}[htbp]
 \centering
-\scriptsize
+\small
+\setlength{\tabcolsep}{4pt}
 \caption{TAug: difference of test macro-F1 against real data only (B0), with the 95\% paired bootstrap interval}
 \label{tab:res_taug}
 \begin{tabularx}{\textwidth}{Xllll}
@@ -236,7 +240,8 @@ A federation that needs only a detector can train the classifier itself by FedAv
 
 \begin{table}[htbp]
 \centering
-\footnotesize
+\small
+\setlength{\tabcolsep}{4pt}
 \caption{The classifier trained directly by federated learning, compared with the generator routes at the same protection (TSTR with the MLP on the generator side)}
 \label{tab:res_direct}
 \begin{tabularx}{\textwidth}{Xcccl}
@@ -270,7 +275,8 @@ Table~\ref{tab:res_rq2} applies the decision rule to the difference between FedD
 
 \begin{table}[htbp]
 \centering
-\footnotesize
+\small
+\setlength{\tabcolsep}{4pt}
 \caption{FedDP-Marginal minus the best CVAE route with DP (TSTR on the real test split). All verdicts are ``better'' under both bootstraps.}
 \label{tab:res_rq2}
 \begin{tabularx}{\textwidth}{cXccc}
@@ -299,7 +305,8 @@ Table~\ref{tab:res_per_class} and Figure~\ref{fig:res_per_class} break the score
 
 \begin{table}[htbp]
 \centering
-\footnotesize
+\small
+\setlength{\tabcolsep}{4pt}
 \caption{Test F1 per class (mean over three seeds; classifier chosen on validation)}
 \label{tab:res_per_class}
 \begin{tabularx}{\textwidth}{Xcccccc}
@@ -543,7 +550,8 @@ The rule of Section~\ref{subsec:req_rule} takes each requirement of Table~\ref{t
 
 \begin{table}[htbp]
 \centering
-\footnotesize
+\small
+\setlength{\tabcolsep}{4pt}
 \caption{Recommended configuration per deployment requirement. The value of $\varepsilon$ is the one that holds under the trust assumed by the requirement.}
 \label{tab:res_recommend}
 \begin{tabularx}{\textwidth}{lXcccc}
@@ -571,6 +579,7 @@ Three remarks qualify the table. MGd is a comparator whose Gaussian noise and se
 The choice depends more on trust than on utility. No configuration is best everywhere. Where the operator trusts every party, the versions without DP suffice and give the best detection. Where the aggregator must not see any gateway's tables but the released data stay inside the company, secure aggregation alone meets the requirement. Where a formal guarantee is required, the distributed variants at $\varepsilon = 5$ to 10 give macro-F1 values of 0.408 to 0.449. A demand for $\varepsilon \le 1$ costs about 0.05 to 0.08 in macro-F1 at the same protection level.
 
 \FloatBarrier
+\clearpage
 \section{Interpretation of Results}\label{sec:res_interpretation}
 
 \subsubsection*{Why FedDP-Marginal Withstands DP Better Than the CVAE}
@@ -596,6 +605,7 @@ With one honest gateway and calibration at $t = K$, the effective $\varepsilon$ 
 \subsubsection*{Limits of These Interpretations}
 These explanations are consistent with the measured results, but only the comparisons in Section~\ref{sec:res_analysis} were tested. The causal statements in this section were not tested separately, and they apply to one dataset, packet-level features and three seeds.
 
+\clearpage
 \section{Comparison with Literature}\label{sec:res_literature}
 
 \subsection{Published Results on the Same Dataset}
@@ -603,10 +613,11 @@ Published scores on this dataset are far above the macro-F1 of this study, but t
 
 \begin{table}[htbp]
 \centering
-\footnotesize
+\small
+\setlength{\tabcolsep}{4pt}
 \caption{Published results on the DoS/DDoS-MQTT-IoT dataset, with the task, input and split of each study}
 \label{tab:res_lit}
-\begin{tabularx}{\textwidth}{p{2.2cm}p{2.6cm}XXp{2.4cm}}
+\begin{tabularx}{\textwidth}{L{2.2cm}L{2.6cm}XXL{2.4cm}}
 \toprule
 \textbf{Study} & \textbf{Task} & \textbf{Input} & \textbf{Split} & \textbf{Reported result} \\
 \midrule
@@ -668,6 +679,7 @@ The split alone explains little: going from capture to row by row moves the macr
 \subsection{Against Federated and Private Data Generation}
 None of the studies read combines federated learning, differential privacy and synthetic data on this dataset, so the protected results have no direct published reference. Marginal-based DP synthesis in federated settings already exists. FLAIM~\cite{maddock2024} adapts AIM~\cite{mckenna2024aim} to the federated setting, and CaPS~\cite{pentyala2024} relies on secure multi-party computation. As Chapter~2 notes, these studies evaluate workload error, negative log-likelihood, runtime and communication, on tabular benchmarks that are not intrusion-detection traffic. FLAIM and AIM themselves were not run here, since Private-PGM was not installed, so the study cannot rank FedDP-Marginal against them. To the best of our knowledge, based on a non-systematic search, the contribution here is an evaluation that puts these pieces together: exact distributed DP with Skellam noise~\cite{agarwal2021} through a real SecAgg$^+$ implementation, measured byte counts, the $\varepsilon$ per number of honest gateways, a comparison with a CVAE under the same federation, and a configuration guide per requirement. The study claims no algorithmic novelty.
 
+\clearpage
 \section{Implications of the Results}\label{sec:res_implications}
 
 \subsubsection*{For Operators of MQTT Deployments}

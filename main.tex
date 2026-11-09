@@ -60,6 +60,12 @@
 \makeoddfoot{chapter}{}{\thepage}{}
 \makeevenfoot{chapter}{}{\thepage}{}
 
+% Tables: left-aligned cells, so that word spacing is not stretched in narrow columns
+\renewcommand{\tabularxcolumn}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+% File, command and option names use the body typeface
+\renewcommand{\ttdefault}{ptm}
+
 \input{chapters/front/glossaries.tex}
 \makeglossaries
 % Bỏ trang trắng khi dùng cleardoublepage
@@ -82,6 +88,7 @@
 	\input{chapters/main/Abstract.tex}
 	\glsaddall
 	\printglossaries
+	\input{chapters/front/symbols.tex}
 	% ========== MAIN MATTER ==========
 	\mainthesis
 	% Dùng \input, KHÔNG có \clearpage giữa các chapter

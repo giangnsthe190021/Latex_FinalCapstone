@@ -7,6 +7,7 @@ IoT gateways that broker MQTT traffic see attacks that a single site observes ra
 
 The study therefore set four objectives (Section~1.3): build a controlled evaluation on real MQTT traffic with leakage checks (O1), extend marginal-based private synthesis to the federated setting with distributed noise (O2), compare it with a federated CVAE under matched privacy budgets (O3), and turn the measurements into a configuration guide per deployment requirement (O4). Four research questions follow from them: how much IDS utility the synthetic data retain (RQ1), how the marginal and deep routes compare at the same budget (RQ2), what each protection costs and at what granularity it protects (RQ3), and which configuration suits which requirement (RQ4).
 
+\clearpage
 \section{Summarize Key Findings}
 
 \begin{itemize}
@@ -20,6 +21,7 @@ The study therefore set four objectives (Section~1.3): build a controlled evalua
     \item \textbf{No universal configuration.} Eleven requirements map to eight distinct configurations, 17 of the 18 configurations on the Pareto front being variants of FedDP-Marginal.
 \end{itemize}
 
+\clearpage
 \section{Interpretation in a Broader Context}
 
 \subsubsection*{Choosing a Generator Is Choosing a Privacy Cost Structure}
@@ -34,6 +36,7 @@ On one dataset and one classifier, the macro-F1 moved from 0.448 to 0.941 by cha
 \subsubsection*{The Value of Generated Data Depends on Who Lacks What}
 The same synthetic data are of no use to a classifier that already sees every real row, and of real use to a gateway that has barely seen some classes. Their value is a function of what the recipient lacks, which suggests that the question ``do synthetic data help?'' needs the qualifier ``for whom, and instead of what?''
 
+\clearpage
 \section{Working Hypotheses and Research Questions}
 
 Table~\ref{tab:disc_answers} collects the answers. H1 and H2 are the working hypotheses of Section~\ref{par:hypotheses}.
@@ -43,7 +46,7 @@ Table~\ref{tab:disc_answers} collects the answers. H1 and H2 are the working hyp
 \small
 \caption{Status of the working hypotheses and research questions}
 \label{tab:disc_answers}
-\begin{tabularx}{\textwidth}{lXp{2.8cm}}
+\begin{tabularx}{\textwidth}{lXL{2.8cm}}
 \toprule
 \textbf{Item} & \textbf{Finding} & \textbf{Status} \\
 \midrule
@@ -62,18 +65,24 @@ RQ4 & Eleven requirements are mapped through a transparent rule & Answered, as a
 \end{tabularx}
 \end{table}
 
+\clearpage
 \section{Why the CVAE Was Studied and Why It Remains the Baseline}
 
 A reader may ask why this thesis keeps a generator whose results are negative. The reason lies in how the study was built.
 
-\textbf{The premise.} The study began from a specific premise: that a label-conditional CVAE trained by federated learning under non-IID clients, and protected by DP-SGD, secure aggregation or both, could generate data that balance the classes of an IDS. The CVAE was the premise of the study and was not selected by a comparison between generators. RQ1 and RQ2 are the test of that premise.
+\subsubsection*{The Premise}
+The study began from a specific premise: that a label-conditional CVAE trained by federated learning under non-IID clients, and protected by DP-SGD, secure aggregation or both, could generate data that balance the classes of an IDS. The CVAE was the premise of the study and was not selected by a comparison between generators. RQ1 and RQ2 are the test of that premise.
 
-\textbf{What the numbers say.} When real data can be pooled, the premise fails on utility. TAug with the CVAE is worse than class weights and SMOTE in 6 of 6 comparisons, by $-0.047$ to $-0.118$ of macro-F1. Generators pass the decision rule against real data only in 2 of 13 cases with the RF (at most $+0.001$) and in 9 of 13 with the MLP (at most $+0.038$, against $+0.134$ for SMOTE). DP lowers the synthetic-only score of the CVAE by 12\% to 58\%, and re-tuning at full scale did not close the gap.
+\subsubsection*{What the Numbers Say}
+When real data can be pooled, the premise fails on utility. TAug with the CVAE is worse than class weights and SMOTE in 6 of 6 comparisons, by $-0.047$ to $-0.118$ of macro-F1. Generators pass the decision rule against real data only in 2 of 13 cases with the RF (at most $+0.001$) and in 9 of 13 with the MLP (at most $+0.038$, against $+0.134$ for SMOTE). DP lowers the synthetic-only score of the CVAE by 12\% to 58\%, and re-tuning at full scale did not close the gap.
 
-\textbf{The case that remains.} All of TRTR, TAug and TAugR need the pooled real data that the threat model excludes. Where raw data must stay at the gateways, the CVAE route without DP reaches a TSTR macro-F1 of 0.413 and has the highest binary F1 of the study, 0.904. It therefore remains a meaningful reference for the case without a formal guarantee, and its loss under DP is what motivated the move to FedDP-Marginal. It also keeps the comparison honest: without a deep baseline under the same federation, DP and SecAgg$^+$ conditions, the advantage of the marginal route would have no measured point of comparison.
+\subsubsection*{The Case That Remains}
+All of TRTR, TAug and TAugR need the pooled real data that the threat model excludes. Where raw data must stay at the gateways, the CVAE route without DP reaches a TSTR macro-F1 of 0.413 and has the highest binary F1 of the study, 0.904. It therefore remains a meaningful reference for the case without a formal guarantee, and its loss under DP is what motivated the move to FedDP-Marginal. It also keeps the comparison honest: without a deep baseline under the same federation, DP and SecAgg$^+$ conditions, the advantage of the marginal route would have no measured point of comparison.
 
-\textbf{What was not tested.} Other generators (WGAN-GP, TVAE or CTGAN-type models, diffusion models, and FLAIM or AIM) were not run. Other ways of using synthetic data, beyond topping classes up and local augmentation, were not studied either. The results therefore compare one CVAE with one marginal generator on one dataset, and they do not show that the CVAE family is inferior in general.
+\subsubsection*{What Was Not Tested}
+Other generators (WGAN-GP, TVAE or CTGAN-type models, diffusion models, and FLAIM or AIM) were not run. Other ways of using synthetic data, beyond topping classes up and local augmentation, were not studied either. The results therefore compare one CVAE with one marginal generator on one dataset, and they do not show that the CVAE family is inferior in general.
 
+\clearpage
 \section{Limitations}
 
 \subsubsection*{Data and Features}

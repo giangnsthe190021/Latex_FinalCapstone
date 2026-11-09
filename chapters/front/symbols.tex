@@ -1,0 +1,122 @@
+%#############################
+%DANH MỤC KÝ HIỆU            #
+%#############################
+\chapter*{List of Symbols}
+\addcontentsline{toc}{chapter}{List of Symbols}
+
+The symbols are grouped by topic. The last column gives where each symbol is first defined or used. Vectors and matrices are set in the same italic type as scalars; their dimensions are stated where they are defined.
+
+\begingroup
+\small
+\begin{longtable}{lL{10.5cm}L{2.9cm}}
+\toprule
+\textbf{Symbol} & \textbf{Meaning} & \textbf{First used} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Symbol} & \textbf{Meaning} & \textbf{First used} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\multicolumn{3}{l}{\textbf{Data and classes}} \\
+$N$ & Number of rows in the training split ($N = 88{,}500$) & Sec.~\ref{subsec:partitioning} \\
+$D$ & Number of encoded input columns ($D = 59$) & Sec.~\ref{subsec:schema} \\
+$\mathcal{D}, \mathcal{D}'$ & Two neighbouring datasets, written $D \sim D'$ & Sec.~\ref{subsec:feddp_marginal} \\
+$d$ & Number of attributes of the tabular schema ($d = 37$) & Sec.~\ref{subsec:feddp_marginal} \\
+$C$ & Number of classes ($C = 6$ in the main matrix) & Sec.~\ref{subsec:partitioning} \\
+$\mathcal{C}$ & Set of classes & Eq.~\eqref{eq:macro_f1} \\
+$c$ & Index of a class & Sec.~\ref{subsec:partitioning} \\
+$x, x_i$ & Encoded features of a record; record number $i$ & Eq.~\eqref{eq:hist_sum} \\
+$X_i, Y$ & Attribute $i$ and class label, as random variables & Sec.~\ref{subsec:feddp_marginal} \\
+$y$ & Class label of a record & Eq.~\eqref{eq:tree_factorisation} \\
+\midrule
+\multicolumn{3}{l}{\textbf{Federation and trust}} \\
+$K, k$ & Number of gateways ($K = 5$ in the main study); index of a gateway & Sec.~\ref{subsec:partitioning} \\
+$\mathcal{D}_k$ & Records held by gateway $k$ & Eq.~\eqref{eq:hist_sum} \\
+$n_k, n_{k,c}$ & Rows of gateway $k$; rows of class $c$ at gateway $k$ & Sec.~\ref{subsec:partitioning} \\
+$\alpha_{\text{dir}}$ & Concentration of the Dirichlet partition & Eq.~\eqref{eq:dirichlet} \\
+$p_c$ & Shares of class $c$ across the $K$ gateways & Eq.~\eqref{eq:dirichlet} \\
+$s$ & Random seed, $s \in \{0, 1, 2\}$ & Sec.~\ref{subsec:partitioning} \\
+$R, E$ & Number of global rounds; local epochs per round & Sec.~\ref{subsec:privacy_accounting} \\
+$h$ & Number of honest gateways, those that add their noise share & Sec.~\ref{subsec:threat_model} \\
+$t$ & Number of honest gateways for which the noise is calibrated & Sec.~\ref{subsec:privacy_accounting} \\
+$T_{\text{recon}}$ & Reconstruction threshold of the Shamir shares in SecAgg$^+$ & Sec.~\ref{subsec:privacy_accounting} \\
+$n_{\text{col}}$ & Number of colluding gateways, $n_{\text{col}} = K - t$ & Sec.~\ref{subsec:privacy_accounting} \\
+$m$ & Cap on the records of one protected unit & Sec.~\ref{subsec:threat_model} \\
+$\ell$ & Number of records of a unit under record-level privacy & Sec.~\ref{subsec:privacy_accounting} \\
+$\mathcal{A}$ & Set of clients active in a round & Sec.~\ref{subsec:cvae} \\
+\midrule
+\multicolumn{3}{l}{\textbf{FedDP-Marginal}} \\
+$B_{\text{fine}}, B_{\text{coarse}}$ & Number of fine bins (64) and coarse bins of a numeric attribute & Sec.~\ref{subsec:feddp_marginal} \\
+$f_k, f_{\text{global}}$ & Histogram of gateway $k$; sum over the gateways & Eq.~\eqref{eq:hist_sum} \\
+$e(x_i)$ & Indicator vector of the bin that contains record $x_i$ & Eq.~\eqref{eq:hist_sum} \\
+$N_{\text{tab}}$ & Number of tables in one release & Sec.~\ref{subsec:threat_model} \\
+$T^\star$ & Global Chow--Liu tree & Eq.~\eqref{eq:chow_liu} \\
+$T_a^\star, T_b^\star$ & Trees obtained with two partition seeds & Eq.~\eqref{eq:jaccard} \\
+$\hat{I}, \hat{I}_{\text{MM}}$ & Plug-in mutual information; Miller--Madow corrected value & Eq.~\eqref{eq:chow_liu}, \eqref{eq:miller_madow} \\
+$H$ & Entropy of an attribute, used in normalised mutual information & Sec.~\ref{subsec:feddp_marginal} \\
+$a, b$ & Values or bins of two attributes & Eq.~\eqref{eq:chow_liu} \\
+$c_{i,j}$ & Noisy pairwise counts of attributes $i$ and $j$ & Eq.~\eqref{eq:phat} \\
+$\hat{p}, \hat{P}$ & Estimated probability from noisy tables & Eq.~\eqref{eq:phat}, \eqref{eq:tree_factorisation} \\
+$\alpha_{\text{smooth}}$ & Laplace smoothing added to the counts & Eq.~\eqref{eq:phat} \\
+$\hat{N}$ & Total truncated count of a pairwise table & Eq.~\eqref{eq:miller_madow} \\
+$x_{\text{root}}$ & Value of the root attribute of the tree & Eq.~\eqref{eq:tree_factorisation} \\
+$(u, v)$ & Parent and child attributes of a tree edge & Eq.~\eqref{eq:tree_factorisation} \\
+$\deg(u)$ & Degree of attribute $u$ in $T^\star$ & Sec.~\ref{subsec:feddp_marginal} \\
+$b_{\text{low}}, b_{\text{high}}$ & Limits of a fine bin & Sec.~\ref{subsec:feddp_marginal} \\
+$k_b$ & Number of fine bins inside coarse bin $b$ & Sec.~\ref{subsec:feddp_marginal} \\
+$\hat{C}_{u,j}, w_{u,j}$ & Estimator $j$ of the counts of attribute $u$, and its inverse-variance weight & Eq.~\eqref{eq:ivw_merge} \\
+$\hat{C}_{\text{merged}}$ & Merged counts of an attribute (MGr) & Eq.~\eqref{eq:ivw_merge} \\
+$r$ & Index of a release, $r \in \{1, 2, 3\}$ & Sec.~\ref{subsec:feddp_marginal} \\
+$\omega, \omega_r$ & Split of the privacy budget; share of release $r$ & Sec.~\ref{subsec:feddp_marginal} \\
+$u_1, u_2$ & The two parents of an attribute in MGb & Sec.~\ref{subsec:feddp_marginal} \\
+$x_{k,j}, \xi_{k,j}, c_{k,j}$ & True count, noise and noisy count of cell $j$ at gateway $k$ & Sec.~\ref{subsec:feddp_marginal} \\
+$\mathbb{Z}_M, M$ & Integer ring of secure aggregation; its modulus ($M = 2^{32}$) & Sec.~\ref{subsec:feddp_marginal} \\
+$S$ & Sum recovered by the server through secure aggregation & Sec.~\ref{subsec:feddp_marginal} \\
+$C_{\text{clip}}$ & Clipping range of secure aggregation under group DP & Sec.~\ref{subsec:feddp_marginal} \\
+\midrule
+\multicolumn{3}{l}{\textbf{Privacy accounting}} \\
+$\varepsilon, \delta$ & Privacy budget and relaxation of $(\varepsilon, \delta)$-DP ($\delta = 10^{-5}$) & Sec.~\ref{subsec:threat_model} \\
+$\varepsilon_k, \varepsilon_{\text{effective}}$ & Budget of client $k$; worst value over the clients & Eq.~\eqref{eq:eps_effective} \\
+$\rho, \rho_r, \rho_{\text{group}}$ & zCDP parameter: total, of release $r$, for a group & Eq.~\eqref{eq:zcdp}, \eqref{eq:group_zcdp} \\
+$\lambda, \varepsilon(\lambda)$ & Rényi order; RDP guarantee at that order & Eq.~\eqref{eq:skellam_rdp} \\
+$\Delta_1, \Delta_2$ & $\ell_1$ and $\ell_2$ sensitivities of a release & Sec.~\ref{subsec:threat_model} \\
+$\Delta_{2,r}, \sigma_r$ & $\ell_2$ sensitivity and Gaussian noise of release $r$ & Sec.~\ref{subsec:feddp_marginal} \\
+$\mu_{\text{sk}}, \mu_{\text{sk},r}$ & Variance of the Skellam noise; its value for release $r$ & Sec.~\ref{subsec:feddp_marginal} \\
+$\mu_{\text{sk},k}$ & Noise share added by gateway $k$ & Sec.~\ref{subsec:privacy_accounting} \\
+$\kappa$ & Global factor of the Skellam calibration, found by binary search & Sec.~\ref{subsec:feddp_marginal} \\
+$\sigma_{\text{agg}}$ & Standard deviation of the aggregate noise & Sec.~\ref{subsec:feddp_marginal} \\
+$\sigma_{\text{share}}$ & Standard deviation of the noise share of a gateway & Sec.~\ref{subsec:feddp_marginal} \\
+\midrule
+\multicolumn{3}{l}{\textbf{CVAE, FedAvg, DP-SGD and SecAgg$^+$}} \\
+$q_\phi, p_\theta$ & Encoder and decoder of the CVAE, with parameters $\phi$ and $\theta$ & Sec.~\ref{subsec:cvae} \\
+$z, d_z$ & Latent vector; its dimension & Sec.~\ref{subsec:cvae} \\
+$\mu_z, \sigma_z^2$ & Mean and variance output by the encoder & Sec.~\ref{subsec:cvae} \\
+$\beta$ & Weight of the Kullback--Leibler term & Eq.~\eqref{eq:cvae_loss} \\
+$\mathcal{L}_{\text{CVAE}}$ & Loss of the CVAE & Eq.~\eqref{eq:cvae_loss} \\
+$x_b, x_g$ & Numeric or binary column $b$; categorical group $g$ & Eq.~\eqref{eq:cvae_loss} \\
+$D_{\mathrm{KL}}$ & Kullback--Leibler divergence & Eq.~\eqref{eq:cvae_loss} \\
+$\mathcal{N}(0, I)$ & Standard normal distribution; $I$ is the identity matrix & Eq.~\eqref{eq:cvae_loss} \\
+$\eta$ & Learning rate & Sec.~\ref{subsec:cvae} \\
+$w^{\tau}, w_k^{\tau}$ & Global and client weights at round $\tau$ & Eq.~\eqref{eq:fedavg} \\
+$g_i, \bar{g}_i, \tilde{g}$ & Gradient of example $i$; clipped gradient; noisy mean gradient & Eq.~\eqref{eq:dpsgd} \\
+$C_{\text{dp}}$ & Clipping norm of DP-SGD & Sec.~\ref{subsec:privacy_accounting} \\
+$\sigma_k$ & Noise multiplier of client $k$ in DP-SGD & Sec.~\ref{subsec:privacy_accounting} \\
+$q_k$ & Sampling rate of client $k$ & Sec.~\ref{subsec:privacy_accounting} \\
+$B_{\text{batch}}, B_k$ & Batch size; effective batch size of client $k$ & Sec.~\ref{subsec:privacy_accounting} \\
+$Q$ & Number of quantisation levels ($Q = 2^{22}$) & Sec.~\ref{subsec:cvae} \\
+$p_k$ & Relative weight of client $k$ in the round & Sec.~\ref{subsec:cvae} \\
+$\bar{w}_k, u_k, \tilde{u}_k$ & Clipped update; update scaled by $p_k$; its quantised form & Eq.~\eqref{eq:secagg_sum} \\
+\midrule
+\multicolumn{3}{l}{\textbf{Evaluation and recommendation}} \\
+$\mathrm{F1}_c$ & F1 score of class $c$ & Eq.~\eqref{eq:macro_f1} \\
+$\mathrm{TP}_c, \mathrm{FP}_c, \mathrm{FN}_c$ & True positives, false positives and false negatives of class $c$ & Eq.~\eqref{eq:macro_f1} \\
+$\Delta$ & Difference of a test metric between two configurations & Eq.~\eqref{eq:decision_rule} \\
+$A, B$ & Two configurations under comparison & Eq.~\eqref{eq:decision_rule} \\
+$\mathrm{sd}_s$ & Standard deviation over the seeds & Eq.~\eqref{eq:decision_rule} \\
+$J$ & Jaccard similarity of the edges of two trees & Eq.~\eqref{eq:jaccard} \\
+$w_c$ & Class-probability weight of the IDS & Sec.~\ref{subsec:hpo} \\
+$\mathcal{R}$ & Deployment requirement & Eq.~\eqref{eq:requirement} \\
+\end{longtable}
+\endgroup
