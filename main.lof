@@ -2,9 +2,18 @@
 \addvspace {10pt}
 \addvspace {10pt}
 \addvspace {10pt}
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Overall research workflow of PP-FedData.}}{26}{figure.caption.10}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces System architecture with both generator routes.}}{28}{figure.caption.12}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Three-release protocol of FedDP-Marginal. The coarse cut-points (after Release~1) and the tree $T^\star $ (after Release~2) are sent back to the gateways before the next release.}}{45}{figure.caption.23}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Overall research workflow of PP-FedData.}}{29}{figure.caption.12}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces System architecture with both generator routes.}}{31}{figure.caption.14}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Three-release protocol of FedDP-Marginal. The coarse cut-points (after Release~1) and the tree $T^\star $ (after Release~2) are sent back to the gateways before the next release.}}{50}{figure.caption.24}%
+\addvspace {10pt}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Non-IID partition of the training rows over the five gateways (Dirichlet $\alpha = 0.5$, seed 0). Each cell gives the number of rows of a sub-class at a gateway; the colour gives the share of that sub-class held by the gateway.}}{79}{figure.caption.30}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Test macro-F1 by configuration and classifier. Upper row: real plus synthetic data (TAug) and the real-data references. Lower row: synthetic data only (TSTR), with the B0 level as a dashed line. MG-$\varepsilon $ denotes the main FedDP-Marginal configurations.}}{83}{figure.caption.35}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces TSTR macro-F1 against the privacy budget $\varepsilon $ for the main routes (mean over three seeds, with the seed standard deviation), with the reference levels on pooled real data.}}{84}{figure.caption.36}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Test F1 per class for the real-data reference, the CVAE without DP, and the two generator routes at $\varepsilon = 5$.}}{90}{figure.caption.42}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces TSTR macro-F1 against the total traffic of a run. Filled markers belong to the Pareto front.}}{93}{figure.caption.45}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Effective $\varepsilon $ as a function of the number of honest gateways $h$, for $K = 5$ and calibration at $t = K$.}}{94}{figure.caption.47}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Calibrated membership-inference AUC on the released tables, with the 95\% bootstrap interval, against the chance level and the heuristic detection threshold.}}{96}{figure.caption.50}%
+\addvspace {10pt}
 \addvspace {10pt}
 \addvspace {10pt}
 \addvspace {10pt}

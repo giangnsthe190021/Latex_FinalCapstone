@@ -4,57 +4,78 @@
 \contentsline {chapter}{Contents}{iii}{chapter*.3}%
 \contentsline {chapter}{List of Figures}{vi}{chapter*.4}%
 \contentsline {chapter}{List of Tables}{vii}{chapter*.5}%
-\contentsline {chapter}{Abstract}{viii}{chapter*.7}%
+\contentsline {chapter}{Abstract}{ix}{chapter*.7}%
+\contentsline {chapter}{List of Symbols}{x}{chapter*.9}%
 \contentsline {chapter}{\chapternumberline {1}Introduction}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Background}{1}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Problem Statement}{2}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Research Objectives and Research Questions}{3}{section.1.3}%
-\contentsline {subsection}{\numberline {1.3.1}Objectives}{3}{subsection.1.3.1}%
-\contentsline {subsection}{\numberline {1.3.2}Research Questions}{4}{subsection.1.3.2}%
-\contentsline {section}{\numberline {1.4}Significance of the Study}{5}{section.1.4}%
-\contentsline {section}{\numberline {1.5}Scope and Limitations}{6}{section.1.5}%
-\contentsline {section}{\numberline {1.6}Thesis Structure}{7}{section.1.6}%
-\contentsline {chapter}{\chapternumberline {2}Literature Review}{9}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Review of Previous Studies}{9}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Overview of Privacy-Preserving Mechanisms in Federated Learning}{9}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Data Generation}{12}{subsection.2.1.2}%
-\contentsline {subsection}{\numberline {2.1.3}Privacy-Preserving Generative Defenses and Research Gap}{15}{subsection.2.1.3}%
-\contentsline {section}{\numberline {2.2}Summary of the Literature Review}{18}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Contribution of Research}{20}{section.2.3}%
-\contentsline {chapter}{\chapternumberline {3}Methodology}{23}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Research Design}{23}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Research Type and Design Overview}{23}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}System Architecture and the Two Generator Routes}{26}{subsection.3.1.2}%
-\contentsline {subsection}{\numberline {3.1.3}Threat Model, Trust Assumptions and Privacy Units}{29}{subsection.3.1.3}%
-\contentsline {subsection}{\numberline {3.1.4}Experimental Configurations}{31}{subsection.3.1.4}%
-\contentsline {subsection}{\numberline {3.1.5}Requirement-Driven Recommendation Rule}{34}{subsection.3.1.5}%
-\contentsline {section}{\numberline {3.2}Data Collection Methods}{36}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Dataset}{36}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Label Harmonisation and Rare Classes}{38}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Schema Harmonisation and Feature Selection}{39}{subsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.2.4}Group-Based Split and Quota Sampling}{39}{subsection.3.2.4}%
-\contentsline {subsection}{\numberline {3.2.5}Preprocessing and Encoding}{41}{subsection.3.2.5}%
-\contentsline {subsection}{\numberline {3.2.6}Leakage and Label-Reliability Checks}{41}{subsection.3.2.6}%
-\contentsline {section}{\numberline {3.3}Sampling Data Analysis Techniques}{42}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Federated Partitioning}{42}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}FedDP-Marginal}{45}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Privacy Accounting}{51}{subsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.3.4}Federated CVAE, DP-SGD and SecAgg$^+$ (Baseline)}{55}{subsection.3.3.4}%
-\contentsline {subsection}{\numberline {3.3.5}Hyper-parameter Selection and Search Spaces}{58}{subsection.3.3.5}%
-\contentsline {subsection}{\numberline {3.3.6}Experimental Environment and Reproducibility}{62}{subsection.3.3.6}%
-\contentsline {section}{\numberline {3.4}Limitations of the Methodology}{64}{section.3.4}%
-\contentsline {chapter}{\chapternumberline {4}Experimental and Results}{67}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Introduction}{67}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Presentation of Data}{67}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Analysis of Results}{67}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Interpretation of Results}{67}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Comparison with Literature}{67}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Implications of the Results}{67}{section.4.6}%
-\contentsline {chapter}{\chapternumberline {5}Discussion}{68}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Restate the Research Problem or Objectives}{68}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Summarize Key Findings}{68}{section.5.2}%
-\contentsline {chapter}{\chapternumberline {6}Conclusion and Future Work}{69}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Conclusion}{69}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Future Work}{69}{section.6.2}%
-\contentsline {appendix}{\chapternumberline {A}If Any}{70}{appendix.A}%
-\contentsline {chapter}{References}{71}{chapter*.29}%
+\contentsline {section}{\numberline {1.2}Problem Statement}{3}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Research Objectives and Research Questions}{5}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Objectives}{5}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Research Questions}{6}{subsection.1.3.2}%
+\contentsline {section}{\numberline {1.4}Significance of the Study}{7}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Scope and Limitations}{8}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Thesis Structure}{10}{section.1.6}%
+\contentsline {chapter}{\chapternumberline {2}Literature Review}{11}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Review of Previous Studies}{11}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Overview of Privacy-Preserving Mechanisms in Federated Learning}{11}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Data Generation}{14}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Privacy-Preserving Generative Defenses and Research Gap}{17}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Summary of the Literature Review}{21}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Contribution of Research}{24}{section.2.3}%
+\contentsline {chapter}{\chapternumberline {3}Methodology}{26}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Research Design}{26}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Research Type and Design Overview}{26}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}System Architecture and the Two Generator Routes}{29}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Threat Model, Trust Assumptions and Privacy Units}{31}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.4}Experimental Configurations}{34}{subsection.3.1.4}%
+\contentsline {subsection}{\numberline {3.1.5}Requirement-Driven Recommendation Rule}{38}{subsection.3.1.5}%
+\contentsline {section}{\numberline {3.2}Data Collection Methods}{41}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Dataset}{41}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Label Harmonisation and Rare Classes}{42}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Schema Harmonisation and Feature Selection}{43}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Group-Based Split and Quota Sampling}{44}{subsection.3.2.4}%
+\contentsline {subsection}{\numberline {3.2.5}Preprocessing and Encoding}{45}{subsection.3.2.5}%
+\contentsline {subsection}{\numberline {3.2.6}Leakage and Label-Reliability Checks}{45}{subsection.3.2.6}%
+\contentsline {section}{\numberline {3.3}Sampling Data Analysis Techniques}{47}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Federated Partitioning}{47}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}FedDP-Marginal}{49}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Privacy Accounting}{56}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Federated CVAE, DP-SGD and SecAgg$^+$ (Baseline)}{60}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.5}Hyper-parameter Selection and Search Spaces}{63}{subsection.3.3.5}%
+\contentsline {subsection}{\numberline {3.3.6}Evaluation Protocols and Metrics}{67}{subsection.3.3.6}%
+\contentsline {subsection}{\numberline {3.3.7}Statistical Decision Rule}{70}{subsection.3.3.7}%
+\contentsline {subsection}{\numberline {3.3.8}Experimental Environment and Reproducibility}{71}{subsection.3.3.8}%
+\contentsline {section}{\numberline {3.4}Limitations of the Methodology}{74}{section.3.4}%
+\contentsline {chapter}{\chapternumberline {4}Experimental and Results}{77}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Introduction}{77}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Presentation of Data}{79}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}The Data as Used}{79}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Leakage and Label-Reliability Checks}{79}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}References on Real Data}{80}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Settings Selected on Validation}{81}{subsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.2.5}Consolidated Scorecard}{81}{subsection.4.2.5}%
+\contentsline {section}{\numberline {4.3}Analysis of Results}{85}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}RQ1: Utility of the Synthetic Data for the IDS}{85}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}RQ2: FedDP-Marginal Against the Federated CVAE}{88}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}RQ3: Overhead, Granularity and Honest Gateways}{91}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}RQ4: Configuration per Deployment Requirement}{98}{subsection.4.3.4}%
+\contentsline {section}{\numberline {4.4}Interpretation of Results}{100}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Comparison with Literature}{102}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Published Results on the Same Dataset}{102}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}How Much the Protocol Alone Moves a Score}{102}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Against Federated and Private Data Generation}{102}{subsection.4.5.3}%
+\contentsline {section}{\numberline {4.6}Implications of the Results}{105}{section.4.6}%
+\contentsline {chapter}{\chapternumberline {5}Discussion}{107}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Restate the Research Problem or Objectives}{107}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Summarize Key Findings}{108}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Interpretation in a Broader Context}{109}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Working Hypotheses and Research Questions}{110}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Why the CVAE Was Studied and Why It Remains the Baseline}{111}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Limitations}{113}{section.5.6}%
+\contentsline {chapter}{\chapternumberline {6}Conclusion and Future Work}{115}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Conclusion}{115}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Future Work}{117}{section.6.2}%
+\contentsline {appendix}{\chapternumberline {A}Complete Scorecard}{118}{appendix.A}%
+\contentsline {appendix}{\chapternumberline {B}Effective Privacy Budget by Honest Gateways}{122}{appendix.B}%
+\contentsline {appendix}{\chapternumberline {C}Reproducing the Results}{124}{appendix.C}%
+\contentsline {chapter}{References}{125}{chapter*.60}%

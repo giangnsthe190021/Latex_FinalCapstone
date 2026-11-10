@@ -14,7 +14,7 @@ Reallocating 'singl_function' (item size: 4) to 100 items.
 Reallocating 'wiz_functions' (item size: 4) to 6000 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
 Database file #1: references/reference.bib
--- IEEEtranN.bst version 1.14 (2015/08/26) by Michael Shell.
+-- IEEEtranN.bst version 1.13 (2008/09/30) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
 ** Natbib version - not for normal IEEE work.
@@ -23,44 +23,44 @@ Reallocating 'glb_str_ptr' (item size: 4) to 20 items.
 Reallocating 'global_strs' (item size: 1) to 4000000 items.
 
 Done.
-You've used 73 entries,
-            4855 wiz_defined-function locations,
-            1362 strings with 23416 characters,
-and the built_in function-call counts, 75713 in all, are:
-= -- 6511
-> -- 2537
-< -- 596
-+ -- 1294
-- -- 607
-* -- 4392
-:= -- 11055
-add.period$ -- 165
-call.type$ -- 73
-change.case$ -- 146
-chr.to.int$ -- 1431
-cite$ -- 73
-duplicate$ -- 4872
-empty$ -- 5302
-format.name$ -- 722
-if$ -- 17188
+You've used 76 entries,
+            4783 wiz_defined-function locations,
+            1367 strings with 23854 characters,
+and the built_in function-call counts, 77645 in all, are:
+= -- 6732
+> -- 2620
+< -- 604
++ -- 1330
+- -- 629
+* -- 4321
+:= -- 11440
+add.period$ -- 171
+call.type$ -- 76
+change.case$ -- 153
+chr.to.int$ -- 1434
+cite$ -- 76
+duplicate$ -- 5045
+empty$ -- 5471
+format.name$ -- 754
+if$ -- 17492
 int.to.chr$ -- 2
-int.to.str$ -- 74
-missing$ -- 763
-newline$ -- 263
-num.names$ -- 221
-pop$ -- 1937
+int.to.str$ -- 77
+missing$ -- 795
+newline$ -- 272
+num.names$ -- 230
+pop$ -- 2013
 preamble$ -- 1
-purify$ -- 73
+purify$ -- 76
 quote$ -- 2
-skip$ -- 5489
+skip$ -- 5671
 stack$ -- 0
-substring$ -- 3556
-swap$ -- 3848
-text.length$ -- 121
+substring$ -- 3577
+swap$ -- 3962
+text.length$ -- 127
 text.prefix$ -- 0
 top$ -- 6
-type$ -- 1141
+type$ -- 1189
 warning$ -- 0
-while$ -- 347
+while$ -- 355
 width$ -- 0
-write$ -- 905
+write$ -- 942

@@ -1,25 +1,52 @@
 \babel@toc {english}{}\relax 
 \addvspace {10pt}
 \addvspace {10pt}
-\contentsline {table}{\numberline {2.1}{\ignorespaces Unified comparison of the reviewed studies}}{19}{table.caption.8}%
+\contentsline {table}{\numberline {2.1}{\ignorespaces Unified comparison of the reviewed studies}}{21}{table.caption.10}%
 \addvspace {10pt}
-\contentsline {table}{\numberline {3.1}{\ignorespaces Research questions and their experimental design}}{25}{table.caption.9}%
-\contentsline {table}{\numberline {3.2}{\ignorespaces Comparison of the two generator routes}}{28}{table.caption.11}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces Comparison of protection mechanisms}}{30}{table.caption.13}%
-\contentsline {table}{\numberline {3.4}{\ignorespaces Experiment matrix of PP-FedData}}{32}{table.caption.14}%
-\contentsline {table}{\numberline {3.5}{\ignorespaces Robustness and sensitivity branches}}{33}{table.caption.15}%
-\contentsline {table}{\numberline {3.6}{\ignorespaces Deployment scenarios (inputs only)}}{36}{table.caption.16}%
-\contentsline {table}{\numberline {3.7}{\ignorespaces Composition of the DoS/DDoS-MQTT-IoT dataset}}{37}{table.caption.17}%
-\contentsline {table}{\numberline {3.8}{\ignorespaces Data provenance verification}}{38}{table.caption.18}%
-\contentsline {table}{\numberline {3.9}{\ignorespaces Final feature schema ($D = 60$)}}{40}{table.caption.19}%
-\contentsline {table}{\numberline {3.10}{\ignorespaces Class quotas of the training, validation, and test splits}}{40}{table.caption.20}%
-\contentsline {table}{\numberline {3.11}{\ignorespaces Leakage and label-reliability checks}}{42}{table.caption.21}%
-\contentsline {table}{\numberline {3.12}{\ignorespaces Federated partition parameters}}{44}{table.caption.22}%
-\contentsline {table}{\numberline {3.13}{\ignorespaces Variants of FedDP-Marginal}}{51}{table.caption.24}%
-\contentsline {table}{\numberline {3.14}{\ignorespaces Configuration matrix of the baseline and proposed generators}}{58}{table.caption.25}%
-\contentsline {table}{\numberline {3.15}{\ignorespaces Hyper-parameter search spaces of the model components}}{61}{table.caption.26}%
-\contentsline {table}{\numberline {3.16}{\ignorespaces Experimental environment specification}}{63}{table.caption.27}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces Research questions and their experimental design}}{28}{table.caption.11}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Comparison of the two generator routes}}{31}{table.caption.13}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Comparison of protection mechanisms}}{33}{table.caption.15}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Experiment matrix of PP-FedData}}{35}{table.3.4}%
+\contentsline {table}{\numberline {3.5}{\ignorespaces Robustness and sensitivity branches}}{37}{table.caption.16}%
+\contentsline {table}{\numberline {3.6}{\ignorespaces Deployment scenarios (inputs only)}}{40}{table.caption.17}%
+\contentsline {table}{\numberline {3.7}{\ignorespaces Composition of the DoS/DDoS-MQTT-IoT dataset}}{41}{table.caption.18}%
+\contentsline {table}{\numberline {3.8}{\ignorespaces Data provenance verification}}{42}{table.caption.19}%
+\contentsline {table}{\numberline {3.9}{\ignorespaces Final feature schema ($D = 59$)}}{44}{table.caption.20}%
+\contentsline {table}{\numberline {3.10}{\ignorespaces Class quotas of the training, validation, and test splits}}{45}{table.caption.21}%
+\contentsline {table}{\numberline {3.11}{\ignorespaces Leakage and label-reliability checks}}{46}{table.caption.22}%
+\contentsline {table}{\numberline {3.12}{\ignorespaces Federated partition parameters}}{48}{table.caption.23}%
+\contentsline {table}{\numberline {3.13}{\ignorespaces Variants of FedDP-Marginal}}{56}{table.caption.25}%
+\contentsline {table}{\numberline {3.14}{\ignorespaces Configuration matrix of the baseline and proposed generators}}{64}{table.caption.26}%
+\contentsline {table}{\numberline {3.15}{\ignorespaces Hyper-parameter search spaces of the model components}}{66}{table.caption.27}%
+\contentsline {table}{\numberline {3.16}{\ignorespaces Evaluation protocols}}{68}{table.caption.28}%
+\contentsline {table}{\numberline {3.17}{\ignorespaces Experimental environment specification}}{72}{table.caption.29}%
+\addvspace {10pt}
+\contentsline {table}{\numberline {4.1}{\ignorespaces Results of the leakage and label-reliability checks (Random Forest with 100 trees, validation split, three seeds)}}{80}{table.caption.31}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces References trained on the pooled real training split (TRTR)}}{81}{table.caption.32}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Settings selected on the validation split}}{81}{table.caption.33}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Main configurations under TSTR. An asterisk marks byte counts estimated from the number of cells, because MGl runs in process.}}{82}{table.caption.34}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces TAug: difference of test macro-F1 against real data only (B0), with the 95\% paired bootstrap interval}}{86}{table.caption.37}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces Local augmentation at each gateway (RF, 15 client models over 5 clients and 3 seeds, mean $\pm $ standard deviation)}}{87}{table.caption.38}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces The classifier trained directly by federated learning, compared with the generator routes at the same protection (TSTR with the MLP on the generator side)}}{88}{table.caption.39}%
+\contentsline {table}{\numberline {4.8}{\ignorespaces FedDP-Marginal minus the best CVAE route with DP (TSTR on the real test split). All verdicts are ``better'' under both bootstraps.}}{89}{table.caption.40}%
+\contentsline {table}{\numberline {4.9}{\ignorespaces Test F1 per class (mean over three seeds; classifier chosen on validation)}}{90}{table.caption.41}%
+\contentsline {table}{\numberline {4.10}{\ignorespaces Fidelity of the synthetic sets (mean over classes and seeds)}}{92}{table.caption.43}%
+\contentsline {table}{\numberline {4.11}{\ignorespaces Measured overhead of secure aggregation}}{92}{table.caption.44}%
+\contentsline {table}{\numberline {4.12}{\ignorespaces TSTR macro-F1 by protected unit (rows kept in brackets when capped)}}{93}{table.caption.46}%
+\contentsline {table}{\numberline {4.13}{\ignorespaces Effect of the honest-gateway threshold $t$ ($K = 5$)}}{95}{table.caption.48}%
+\contentsline {table}{\numberline {4.14}{\ignorespaces Membership inference on the released tables of FedDP-Marginal (calibrated attack, 1,000 bootstrap resamples)}}{96}{table.caption.49}%
+\contentsline {table}{\numberline {4.15}{\ignorespaces Robustness of FedDP-Marginal at $\varepsilon = 5$, and the eleven-class mode}}{97}{table.caption.51}%
+\contentsline {table}{\numberline {4.16}{\ignorespaces Sensitivity worlds: test macro-F1 (mean $\pm $ standard deviation over three seeds)}}{97}{table.caption.52}%
+\contentsline {table}{\numberline {4.17}{\ignorespaces Recommended configuration per deployment requirement. The value of $\varepsilon $ is the one that holds under the trust assumed by the requirement.}}{98}{table.caption.53}%
+\contentsline {table}{\numberline {4.18}{\ignorespaces Published results on the DoS/DDoS-MQTT-IoT dataset, with the task, input and split of each study}}{103}{table.caption.54}%
+\contentsline {table}{\numberline {4.19}{\ignorespaces Binary F1 on the closest tasks (mean of three seeds)}}{103}{table.caption.55}%
+\contentsline {table}{\numberline {4.20}{\ignorespaces Effect of the split and the identifier columns on the real-data RF (three seeds)}}{104}{table.caption.56}%
+\addvspace {10pt}
+\contentsline {table}{\numberline {5.1}{\ignorespaces Status of the working hypotheses and research questions}}{110}{table.caption.57}%
 \addvspace {10pt}
 \addvspace {10pt}
+\contentsline {table}{\numberline {A.1}{\ignorespaces Scorecard of all configurations (TSTR on the real test split, classifier chosen on validation). Configurations marked with a dagger use statistics outside $\varepsilon $ and are excluded from the Pareto front.}}{119}{table.A.1}%
 \addvspace {10pt}
+\contentsline {table}{\numberline {B.1}{\ignorespaces Effective $\varepsilon $ of the distributed configurations as a function of the number of honest gateways $h$ ($K = 5$)}}{122}{table.B.1}%
 \addvspace {10pt}
+\contentsline {table}{\numberline {C.1}{\ignorespaces Commands that produce the results of Chapter~\ref {chap:results}}}{124}{table.caption.58}%
