@@ -4,7 +4,7 @@
 \addvspace {10pt}
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Overall research workflow of PP-FedData.}}{29}{figure.caption.12}%
 \contentsline {figure}{\numberline {3.2}{\ignorespaces System architecture with both generator routes.}}{31}{figure.caption.14}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Three-release protocol of FedDP-Marginal. The coarse cut-points (after Release~1) and the tree $T^\star $ (after Release~2) are sent back to the gateways before the next release.}}{50}{figure.caption.24}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Three-release protocol of FedDP-Marginal.}}{50}{figure.caption.24}%
 \addvspace {10pt}
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Non-IID partition of the training rows over the five gateways (Dirichlet $\alpha = 0.5$, seed 0). Each cell gives the number of rows of a sub-class at a gateway; the colour gives the share of that sub-class held by the gateway.}}{79}{figure.caption.30}%
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Test macro-F1 by configuration and classifier. Upper row: real plus synthetic data (TAug) and the real-data references. Lower row: synthetic data only (TSTR), with the B0 level as a dashed line. MG-$\varepsilon $ denotes the main FedDP-Marginal configurations.}}{83}{figure.caption.35}%

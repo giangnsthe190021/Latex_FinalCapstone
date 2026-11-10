@@ -180,113 +180,9 @@ For the FedDP-Marginal route, the sum is carried by a patched client path: stock
 
 \begin{figure}[htbp]
 \centering
-% Use the font sizes of the IEEE version (10pt class) inside this figure
-\renewcommand{\scriptsize}{\fontsize{7}{8}\selectfont}%
-\renewcommand{\tiny}{\fontsize{5}{6}\selectfont}%
-\resizebox{\textwidth}{!}{%
-\begin{tikzpicture}[
-    >=Stealth,
-    node distance=0.6cm,
-    font=\scriptsize,
-    tier/.style={
-        rectangle, draw=gray!40, fill=gray!3, rounded corners=6pt, inner sep=8pt
-    },
-    gwbox/.style={
-        rectangle, draw=slate!80!black, fill=slate!10, rounded corners=3pt, thick,
-        text width=2.4cm, minimum height=0.65cm, align=center, font=\scriptsize\bfseries
-    },
-    route1box/.style={
-        rectangle, draw=indigo!80!black, fill=indigo!8, rounded corners=3pt, thick,
-        text width=2.8cm, minimum height=0.75cm, align=center
-    },
-    route2box/.style={
-        rectangle, draw=teal!80!black, fill=teal!8, rounded corners=3pt, thick,
-        text width=2.8cm, minimum height=0.75cm, align=center
-    },
-    srvbox/.style={
-        rectangle, draw=crimson!80!black, fill=crimson!8, rounded corners=3pt, thick,
-        text width=3.3cm, minimum height=0.75cm, align=center
-    },
-    idsbox/.style={
-        rectangle, draw=violet!80!black, fill=violet!8, rounded corners=3pt, thick,
-        text width=2.7cm, minimum height=0.85cm, align=center
-    },
-    arr/.style={->, thick, draw=black!80}
-]
-
-% Define color aliases
-\colorlet{slate}{blue!40!gray}
-\colorlet{indigo}{blue!70!black}
-\colorlet{crimson}{red!60!black}
-\colorlet{violet}{purple!70!black}
-
-% --- TIER 1: Edge Gateways ---
-\node[gwbox] (g1) at (0, 1.15) {Gateway 1};
-\node[gwbox] (g2) [below=0.2cm of g1] {Gateway 2};
-\node[font=\bfseries] (gdots) [below=0.02cm of g2] {$\vdots$};
-\node[gwbox] (gk) [below=0.02cm of gdots] {Gateway $K = 5$};
-\node[text width=2.5cm, align=center, font=\tiny\itshape, text=slate] (gnote) [below=0.15cm of gk] {Raw traffic stays local\\on edge gateways};
-
-% --- TIER 2: Dual Generator Routes ---
-% Route 1 (Top lane)
-\node[route1box] (r1_1) at (5.4, 1.5) {1. Local Count Tables\\{\tiny (1-way, pairwise, tree)}};
-\node[route1box] (r1_2) [right=0.45cm of r1_1] {2. DP Noise Share\\{\tiny (Skellam / Gaussian)}};
-\node[route1box] (r1_3) [right=0.45cm of r1_2] {3. SecAgg$^+$ uint32\\{\tiny (Modulo $2^{32}$ sum)}};
-
-% Route 2 (Bottom lane)
-\node[route2box] (r2_1) at (5.4, -1.5) {1. Local CVAE Training\\{\tiny (Encoder / Decoder)}};
-\node[route2box] (r2_2) [right=0.45cm of r2_1] {2. DP-SGD Opacus\\{\tiny (Gradient clip \& noise)}};
-\node[route2box] (r2_3) [right=0.45cm of r2_2] {3. SecAgg$^+$ Fixed-Pt\\{\tiny ($2^{22}$ levels, range 16)}};
-
-% --- TIER 3: Aggregation Server ---
-\node[srvbox] (s1) at (17.2, 1.5) {1. Secure Aggregation\\{\tiny (Exact sum or FedAvg)}};
-\node[srvbox] (s2) at (17.2, 0) {2. Global Model Reconstruction\\{\tiny (Chow-Liu tree + IPF / Decoder)}};
-\node[srvbox] (s3) at (17.2, -1.5) {3. Class-Conditional Sampling\\{\tiny (synthetic records)}};
-
-% --- TIER 4: Downstream IDS ---
-\node[idsbox] (ids_eval) at (22.1, 0.75) {Evaluation on Locked\\Real Test Split\\{\tiny (30,000 packets)}};
-\node[idsbox] (ids_train) at (22.1, -1.5) {Downstream Classifiers\\{\tiny Random Forest \& MLP}};
-
-% --- Background frames (all tiers share the same top/bottom edges) ---
-\begin{scope}[on background layer]
-    \node[tier, fit=(g1) (gnote) (g1 |- s1.north) (g1 |- s3.south), label={[font=\scriptsize\bfseries, text=slate]above:Edge Gateways (FL Clients)}] (tier1) {};
-    \node[tier, fit=(r1_1) (r1_3), fill=indigo!3, draw=indigo!40, label={[font=\scriptsize\bfseries, text=indigo]above:Route 1: FedDP-Marginal (Primary Generator)}] (box_r1) {};
-    \node[tier, fit=(r2_1) (r2_3), fill=teal!3, draw=teal!40, label={[font=\scriptsize\bfseries, text=teal]below:Route 2: Federated CVAE (Baseline Generator)}] (box_r2) {};
-    \node[tier, fit=(s1) (s3), fill=crimson!3, draw=crimson!40, label={[font=\scriptsize\bfseries, text=crimson]above:Honest-but-Curious Server}] (tier3) {};
-    \node[tier, fit=(ids_eval) (ids_train) (ids_train |- s1.north) (ids_train |- s3.south), fill=violet!3, draw=violet!40, label={[font=\scriptsize\bfseries, text=violet]above:Downstream IDS}] (tier4) {};
-\end{scope}
-
-% --- CONNECTIONS ---
-% Gateways fork into the two routes
-\coordinate (fork) at ($(tier1.east)+(0.35,0)$);
-\draw[thick, draw=black!80] (tier1.east) -- (fork);
-\fill[black!80] (fork) circle (1.5pt);
-\draw[arr, indigo] (fork) |- node[pos=0.75, above, font=\tiny\bfseries, align=center] {3 table\\releases} (r1_1.west);
-\draw[arr, teal] (fork) |- node[pos=0.75, below, font=\tiny\bfseries, align=center] {30 training\\rounds} (r2_1.west);
-
-% Inside Route 1
-\draw[arr, indigo] (r1_1) -- (r1_2);
-\draw[arr, indigo] (r1_2) -- (r1_3);
-
-% Inside Route 2
-\draw[arr, teal] (r2_1) -- (r2_2);
-\draw[arr, teal] (r2_2) -- (r2_3);
-
-% Routes merge into the server's aggregation stage
-\draw[arr, indigo] ([yshift=1.5mm]r1_3.east) -- ([yshift=1.5mm]s1.west);
-\draw[arr, teal] (r2_3.east) -- ($(r2_3.east)!0.5!(r2_3.east -| s1.west)$) |- ([yshift=-1.5mm]s1.west);
-
-% Inside Server
-\draw[arr, crimson] (s1) -- (s2);
-\draw[arr, crimson] (s2) -- (s3);
-
-% Server to IDS
-\draw[arr, crimson] (s3.east) -- node[above, font=\tiny\bfseries, align=center] {synthetic\\data} (ids_train.west);
-\draw[arr, violet] (ids_train) -- node[right, font=\tiny\bfseries, align=left] {TSTR /\\TAug} (ids_eval);
-
-\end{tikzpicture}%
-}
-\caption{System architecture with both generator routes.}
+% Drawn in ConceptDraw; the same file as Fig. 1 of the IEEE paper (branch IEEE)
+\includegraphics[width=\textwidth, trim=2 5 3 8, clip]{graphics/paper/fig1_architecture.pdf}
+\caption[System architecture with both generator routes.]{System architecture with both generator routes. Gateways keep their raw traffic; FedDP-Marginal sends three releases of noisy count tables and the federated CVAE sends model updates, both through SecAgg$^+$ to an honest-but-curious server, which samples synthetic packets for the downstream IDS.}
 \label{fig:system_arch}
 \end{figure}
 
@@ -730,31 +626,9 @@ FedDP-Marginal adapts private marginal-based synthesis of tabular data, namely t
 
 \begin{figure}[htbp]
 \centering
-\resizebox{\textwidth}{!}{%
-\begin{tikzpicture}[
-    font=\small, >=stealth,
-    cbox/.style={rectangle, draw=blue!70!black, fill=blue!5, rounded corners=3pt, thick, text width=4.6cm, minimum height=1.7cm, align=center},
-    sbox/.style={rectangle, draw=red!60!black, fill=red!5, rounded corners=3pt, thick, text width=4.2cm, minimum height=1.7cm, align=center},
-    arr/.style={->, thick, draw=black!75},
-    lbl/.style={font=\scriptsize\bfseries, above}
-]
-\node[cbox] (c1) at (0, 0)    {\textbf{Release 1}\\1-way histograms\\{\scriptsize ($d$ tables, per class, fine bins)}};
-\node[cbox] (c2) at (0, -2.4) {\textbf{Release 2}\\Pairwise counts\\{\scriptsize ($\binom{d}{2}$ tables, pooled, coarse bins)}};
-\node[cbox] (c3) at (0, -4.8) {\textbf{Release 3}\\Tree-edge tables\\{\scriptsize ($d$ tables, per class)}};
-\node[rectangle, draw=teal!70!black, fill=teal!5, rounded corners=3pt, thick, text width=3.0cm, minimum height=6.5cm, align=center] (sa) at (5.9, -2.4) {\textbf{SecAgg}$^+$\\over $\mathbb{Z}_{2^{32}}$\\[6pt]{\scriptsize Sum modulo $2^{32}$}\\{\scriptsize Centred lift}\\{\scriptsize No rounding error}};
-\node[sbox] (s1) at (11.6, 0)    {Univariate densities\\{\scriptsize and coarse cut-points}};
-\node[sbox] (s2) at (11.6, -2.4) {Global MI graph\\{\scriptsize and Chow--Liu tree $T^\star$}};
-\node[sbox] (s3) at (11.6, -4.8) {Edge conditionals\\{\scriptsize and root-to-leaf sampling}};
-\node[font=\small\bfseries, text=blue!70!black, anchor=base] at (c1 |- 0, 1.25) {Gateways ($k = 1, \dots, K$)};
-\node[font=\small\bfseries, text=teal!70!black, anchor=base] at (sa |- 0, 1.25) {Secure channel};
-\node[font=\small\bfseries, text=red!60!black, anchor=base] at (s1 |- 0, 1.25) {Aggregation server};
-\foreach \i in {1,2,3} {
-    \draw[arr] (c\i.east) -- node[lbl] {uint32} (sa.west |- c\i.east);
-    \draw[arr] (sa.east |- s\i.west) -- node[lbl] {lift} (s\i.west);
-}
-\end{tikzpicture}%
-}
-\caption{Three-release protocol of FedDP-Marginal. The coarse cut-points (after Release~1) and the tree $T^\star$ (after Release~2) are sent back to the gateways before the next release.}
+% Drawn in ConceptDraw; the same file as Fig. 2 of the IEEE paper (branch IEEE), with the empty side margins trimmed
+\includegraphics[width=0.9\textwidth, trim=105 8 106 0, clip]{graphics/paper/Fig2.pdf}
+\caption[Three-release protocol of FedDP-Marginal.]{Three-release protocol of FedDP-Marginal. Each release is a sum of count tables plus Skellam noise shares, computed with SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$. The coarse cut-points (after Release~1) and the tree $T^\star$ (after Release~2) are sent back to the gateways before the next release.}
 \label{fig:three_release}
 \end{figure}
 
@@ -779,7 +653,7 @@ The protocol issues three releases in sequence and divides the privacy budget be
 \end{itemize}
 
 \subsubsection*{One Global Chow--Liu Tree}
-FedDP-Marginal builds a single global Chow--Liu dependency tree~\cite{chow1968}, pooled over all classes, rather than one tree per class. From the post-processed tables of Release~2, the server computes the empirical mutual information (MI) between attributes and extracts the maximum spanning tree $T^\star$ with Kruskal's algorithm~\cite{kruskal1956}:
+FedDP-Marginal builds a single global Chow--Liu dependency tree~\cite{chow1968}, pooled over all classes, rather than one tree per class. From the post-processed tables of Release~2, the server computes the empirical mutual information (MI)~\cite[Def.~1]{chow1968} between attributes and extracts the maximum-weight dependence tree~\cite[Def.~2]{chow1968} $T^\star$, which gives the optimal tree approximation~\cite[Sec.~III]{chow1968}, with Kruskal's algorithm~\cite[Construction~A]{kruskal1956} applied to the edges in decreasing order of weight~\cite[Sec.~IV]{chow1968}:
 \begin{equation}
 T^\star = \arg\max_{T} \sum_{(i,j) \in T} \hat{I}(X_i; X_j), \qquad \hat{I}(X_i; X_j) = \sum_{a, b} \hat{p}(a, b) \log \frac{\hat{p}(a, b)}{\hat{p}(a)\, \hat{p}(b)}.
 \label{eq:chow_liu}
@@ -795,7 +669,7 @@ The univariate terms $\hat{p}(a)$ and $\hat{p}(b)$ are obtained by summing out t
 The class-conditional MI $\hat{I}(X_i; X_j \mid Y = c)$ would match class-conditional synthesis more closely. However, splitting Release~2 by class leaves the sensitivity per cell unchanged while dividing the signal per cell by about $C$, and the total noise over the $C\binom{d}{2}$ tables grows $C$-fold. The signal-to-noise ratio of each cell therefore drops by a factor of $C$, which corrupts the choice of edges. FedDP-Marginal deliberately pools the pairwise counts over classes to maximise the signal-to-noise ratio of the skeleton $T^\star$. The pooled MI then reflects the overall dependency structure, which is dominated by NORMAL traffic (67.8\% of the training quota); class-specific relations are captured afterwards by the class-conditional edge tables of Release~3.
 
 \subsubsection*{Cardinality Bias}
-The plug-in MI on noisy tables has a finite-sample bias proportional to the degrees of freedom of the table, $(|X_i| - 1)(|X_j| - 1)$. Numeric attributes have a higher coarse cardinality ($B_{\text{coarse}} = 16$) than binary flags ($|\cdot| = 2$), so a pair of numeric attributes has up to $(16 - 1)^2 = 225$ degrees of freedom against $(2 - 1)^2 = 1$ for a pair of flags. Kruskal's algorithm on unnormalised plug-in MI therefore tends to favour edges between high-cardinality numeric attributes. Laplace smoothing adds a uniform pseudo-mass $\alpha_{\text{smooth}} |X_i||X_j|$, which dilutes the probabilities more in larger tables. The Miller--Madow correction~\cite{miller1955}
+The plug-in MI on noisy tables has a finite-sample bias proportional to the degrees of freedom of the table, $(|X_i| - 1)(|X_j| - 1)$. Numeric attributes have a higher coarse cardinality ($B_{\text{coarse}} = 16$) than binary flags ($|\cdot| = 2$), so a pair of numeric attributes has up to $(16 - 1)^2 = 225$ degrees of freedom against $(2 - 1)^2 = 1$ for a pair of flags. Kruskal's algorithm on unnormalised plug-in MI therefore tends to favour edges between high-cardinality numeric attributes. Laplace smoothing adds a uniform pseudo-mass $\alpha_{\text{smooth}} |X_i||X_j|$, which dilutes the probabilities more in larger tables. The Miller--Madow correction~\cite{miller1955}, in the form for MI given by Treves and Panzeri as the first-order bias term~\cite[eq.~(2.12)]{treves1995} (there in bits, here in nats),
 \begin{equation}
 \hat{I}_{\text{MM}}(X_i; X_j) = \hat{I}(X_i; X_j) - \frac{(|X_i| - 1)(|X_j| - 1)}{2\hat{N}},
 \label{eq:miller_madow}
@@ -803,7 +677,7 @@ The plug-in MI on noisy tables has a finite-sample bias proportional to the degr
 where $\hat{N} = \sum_{a,b} \max(0, c_{i,j}(a,b))$ is the total truncated count, corrects the asymptotic multinomial sampling bias but not the additive Skellam noise or the non-linear truncation $\max(0, \cdot)$. The main pipeline keeps the uncorrected plug-in MI with coarse bins ($B_{\text{coarse}} \le 16$) as the baseline heuristic. To measure the effect of the cardinality bias on the structure, separately from downstream utility, search space~(d) (Section~\ref{subsec:hpo}) includes an ablation that compares plug-in MI, Miller--Madow MI, and normalised MI ($\hat{I}(X_i; X_j)/\sqrt{H(X_i) H(X_j)}$), together with a check of the stability of the tree edges across partition seeds. The normalised MI uses the geometric mean of the two entropies~\cite[eq.~(2)]{strehl2002}.
 
 \subsubsection*{Class-Conditional Sampling}
-Synthetic records of class $c$ are generated by traversing $T^\star$ from the root to the leaves~\cite{chow1968}:
+Synthetic records of class $c$ are generated by traversing $T^\star$ from the root to the leaves, following the tree-dependence factorisation~\cite[eq.~(1)]{chow1968}:
 \begin{equation}
 \hat{P}(x \mid y = c) = \hat{P}(x_{\text{root}} \mid y = c) \prod_{(u,v) \in T^\star} \hat{P}(x_v \mid x_u, y = c),
 \label{eq:tree_factorisation}
@@ -962,7 +836,7 @@ The formal DP perimeter is as follows (see also Section~\ref{subsec:threat_model
 The deep baseline is a label-conditional variational autoencoder (CVAE)~\cite{sohn2015cvae}. The encoder $q_\phi(z \mid x, y)$ maps the features $x \in \mathbb{R}^{D}$ ($D = 59$) and the one-hot label $y \in \{0, 1\}^{C}$ to latent parameters $(\mu_z, \log \sigma_z^2) \in \mathbb{R}^{2 d_z}$, and the decoder $p_\theta(x \mid z, y)$ reconstructs the input.
 \begin{itemize}
     \item \textbf{No batch normalisation:} The CVAE has no batch-normalisation layers. This is required for per-example gradients to be independent, so that Opacus can clip each example's gradient without coupling between examples~\cite{yousefpour2021}. The parameters form a fixed-size vector, compatible with FedAvg and SecAgg$^+$.
-    \item \textbf{Loss:} The model minimises the negative variational lower bound~\cite[eq.~(3)]{kingma2014} in its label-conditional form~\cite[eq.~(4)]{sohn2015cvae}, with a weight $\beta$ on the Kullback--Leibler term~\cite{higgins2017}:
+    \item \textbf{Loss:} The model minimises the negative variational lower bound~\cite[eq.~(3)]{kingma2014} in its label-conditional form~\cite[eq.~(4)]{sohn2015cvae}, with a weight $\beta$ on the Kullback--Leibler term~\cite[eq.~(4)]{higgins2017}:
     \begin{equation}
     \begin{split}
     \mathcal{L}_{\text{CVAE}}(\phi, \theta) ={}& \sum_{b \in \text{num}} \|x_b - \hat{x}_b\|_2^2 + \sum_{b \in \text{bin}} \mathrm{BCE}(x_b, \hat{x}_b) + \sum_{g \in \text{cat}} \mathrm{CE}(x_g, \hat{x}_g) \\
@@ -1000,7 +874,7 @@ For M2 and M3, the updates are aggregated with Flower's \texttt{SecAggPlusWorkfl
 \begin{itemize}
     \item \textbf{Protocol topology:} \texttt{num\_shares} $= 5$ and \texttt{reconstruction\_threshold} $= 3$, which tolerates up to two dropped clients per round.
     \item \textbf{Bounds:} \texttt{clipping\_range} $= 16$ (checked against the largest absolute parameter value $|w|$), uniform quantisation over $Q = 2^{22}$ levels, \texttt{max\_weight} $= 100{,}000$ (above the largest client size, $n_k \le N = 88{,}500$), and modulus $M = 2^{32}$ (uint32).
-    \item \textbf{Weight scaling and modular bound:} To compute the exact weighted average of Equation~\eqref{eq:fedavg} without overflow in $\mathbb{Z}_{2^{32}}$, each client scales its update by its relative weight before quantisation. Let $\mathcal{A}$ be the clients active in the round, whose sizes $n_k$ are sent in clear (Section~\ref{subsec:privacy_accounting}). Each client computes $p_k = n_k / \sum_{j \in \mathcal{A}} n_j \in (0, 1]$ and scales its clipped update $\bar{w}_k$ ($\|\bar{w}_k\|_\infty \le 16$) to $u_k = p_k \bar{w}_k$, which still satisfies $\|u_k\|_\infty \le 16$ because $p_k \le 1$. It then quantises $u_k$ uniformly into integers $\tilde{u}_k \in \{0, 1, \dots, Q - 1\}$. Through SecAgg$^+$, the server receives the modular sum~\cite{bell2020}
+    \item \textbf{Weight scaling and modular bound:} To compute the exact weighted average of Equation~\eqref{eq:fedavg} without overflow in $\mathbb{Z}_{2^{32}}$, each client scales its update by its relative weight before quantisation. Let $\mathcal{A}$ be the clients active in the round, whose sizes $n_k$ are sent in clear (Section~\ref{subsec:privacy_accounting}). Each client computes $p_k = n_k / \sum_{j \in \mathcal{A}} n_j \in (0, 1]$ and scales its clipped update $\bar{w}_k$ ($\|\bar{w}_k\|_\infty \le 16$) to $u_k = p_k \bar{w}_k$, which still satisfies $\|u_k\|_\infty \le 16$ because $p_k \le 1$. It then quantises $u_k$ uniformly into integers $\tilde{u}_k \in \{0, 1, \dots, Q - 1\}$. Through SecAgg$^+$, the server receives the modular sum~\cite[Sec.~3.1]{bell2020}
     \begin{equation}
     S = \sum_{k \in \mathcal{A}} \tilde{u}_k \pmod{2^{32}}.
     \label{eq:secagg_sum}
@@ -1055,7 +929,7 @@ Tuning is split into five search spaces (Table~\ref{tab:search_spaces}):
     \item \textbf{Space (a), centralised CVAE without DP (phase 7):} 30 TPE trials on centralised data over 30 epochs, exploring $d_z \in \{8, 16, 32\}$, hidden width $\in \{64, 128, 256\}$, $\beta \in [0.1, 2.0]$ (log-uniform), and $\eta \in [10^{-4}, 3 \times 10^{-3}]$ (log-uniform).
     \item \textbf{Space (b), CVAE with DP at proxy scale:} To limit the cost, initial DP-SGD tuning runs 30 trials on a single proxy client with 20\% of the data at $\varepsilon = 5$ (one seed per trial). The best candidates are verified in true federated training, selected by validation macro-F1, with ties within 0.01 broken by the lowest validation loss. It explores $d_z \in \{8, 16, 32\}$, hidden width $\in \{32, 64, 128, 256\}$, $B_{\text{batch}} \in \{128, 256, 512, 1024\}$, $\beta \in [0.1, 2.0]$, $\eta \in [2 \times 10^{-4}, 5 \times 10^{-3}]$ (log-uniform), and clipping norm $C_{\text{dp}} \in [0.1, 20.0]$ (log-uniform).
     \item \textbf{Space (c), CVAE with DP at full federated scale (round O1):} Full federated optimisation over 5 clients with seed 0, with 30 trials for $\varepsilon = 5$, 28 for $\varepsilon = 1$, and 12 for $\varepsilon = 10$. It explores $d_z \in \{8, 16, 32\}$, hidden width $\in \{64, 128\}$ (256 removed for memory reasons), $B_{\text{batch}} \in \{256, 512, 1024, 2048\}$, $\beta \in [0.1, 2.0]$, $\eta \in [5 \times 10^{-4}, 2 \times 10^{-2}]$ (log-uniform), $C_{\text{dp}} \in [0.5, 50.0]$ (log-uniform), rounds $R \in \{15, 30, 50\}$, local epochs $E \in \{1, 2, 4\}$, client class weighting \texttt{cw\_power} $\in \{0, 0.5, 1.0\}$, DP residual budget fraction \texttt{stat\_frac} $\in \{0.02, 0.05, 0.10\}$, and residual clipping \texttt{res\_clip} $\in \{0.5, 1.0, 2.0, 4.0\}$. The resulting settings define M1o and M3o.
-    \item \textbf{Space (d), FedDP-Marginal:} Discrete grid search scored by the mean over three seeds on the validation split. It explores the coarse bins $B_{\text{coarse}} \in \{4, 8, 16, 32\}$ crossed with the budget splits $\omega \in \{(0.3, 0.1, 0.6), (0.5, 0.1, 0.4), (0.15, 0.05, 0.8)\}$; the dependency measure (plug-in MI, Miller--Madow MI $\hat{I}_{\text{MM}}$~\cite{miller1955}, or normalised MI), with a stability check that measures the Jaccard similarity~\cite{jaccard1912} of the tree edges across partition seeds,
+    \item \textbf{Space (d), FedDP-Marginal:} Discrete grid search scored by the mean over three seeds on the validation split. It explores the coarse bins $B_{\text{coarse}} \in \{4, 8, 16, 32\}$ crossed with the budget splits $\omega \in \{(0.3, 0.1, 0.6), (0.5, 0.1, 0.4), (0.15, 0.05, 0.8)\}$; the dependency measure (plug-in MI, Miller--Madow MI $\hat{I}_{\text{MM}}$~\cite{miller1955}, or normalised MI), with a stability check that measures the Jaccard similarity~\cite[p.~39]{jaccard1912} of the tree edges across partition seeds,
     \begin{equation}
     J(T_a^\star, T_b^\star) = \frac{|E(T_a^\star) \cap E(T_b^\star)|}{|E(T_a^\star) \cup E(T_b^\star)|};
     \label{eq:jaccard}
@@ -1087,7 +961,7 @@ Tuning is split into five search spaces (Table~\ref{tab:search_spaces}):
 \end{table}
 
 \subsubsection*{Multi-Seed Screening Rule and Asymmetries}
-For the ablations within space (d), candidates are screened with an adaptation of the one-standard-error rule~\cite{hastie2009}:
+For the ablations within space (d), candidates are screened with an adaptation of the one-standard-error rule~\cite[Sec.~7.10.1]{hastie2009}:
 \begin{equation}
 \text{Macro-F1}_{\text{candidate}} > \text{Macro-F1}_{\text{baseline}} + \mathrm{std}_{\text{seeds}}(\text{baseline}),
 \label{eq:screening}
@@ -1141,7 +1015,7 @@ For class $c$ with true positives $\mathrm{TP}_c$, false positives $\mathrm{FP}_
 \mathrm{F1}_c = \frac{2\,\mathrm{TP}_c}{2\,\mathrm{TP}_c + \mathrm{FP}_c + \mathrm{FN}_c}, \qquad \text{Macro-F1} = \frac{1}{|\mathcal{C}|} \sum_{c \in \mathcal{C}} \mathrm{F1}_c,
 \label{eq:macro_f1}
 \end{equation}
-where $\mathcal{C}$ is the set of six classes. Macro-F1 gives every class the same weight, so a model that ignores the rare classes cannot score well. Three further measures are reported:
+where $\mathcal{C}$ is the set of six classes and an undefined $\mathrm{F1}_c$ (zero denominator) is set to 0. This is the averaged F1 of Opitz and Burst~\cite[eq.~(2)]{opitz2019}, the arithmetic mean of the per-class scores~\cite[eq.~(1)]{opitz2019}, and not the F1 of the macro-averaged precision and recall~\cite[eq.~(3)]{opitz2019}, which can give a different value. Macro-F1 gives every class the same weight, so a model that ignores the rare classes cannot score well. Three further measures are reported:
 \begin{itemize}
     \item \textbf{Binary F1:} the same predictions read as attack against normal, with every attack class counted as ``attack'' and no retraining. This is the score closest to the binary tasks common in the literature.
     \item \textbf{Rare-class recall:} the mean recall over DELAYED, SYN, INVALID and WILL.
@@ -1180,7 +1054,7 @@ Let $\Delta$ be the difference of a test metric between configurations $A$ and $
 \end{equation}
 where $\mathrm{sd}_s$ is the standard deviation over the seeds with $\mathrm{ddof} = 0$, as in every table of this thesis. The verdict is \emph{better} or \emph{worse} according to the sign of $\Delta$, and \emph{no effect} otherwise.
 
-The interval comes from a paired percentile bootstrap~\cite{efron1993}. The 30,000 real test rows are resampled with replacement, stratified by class, with the same 1,000 resamples for every run, so that the two configurations of a comparison are evaluated on identical resamples. Packets of one TCP stream are correlated, which makes this interval too narrow. Every verdict is therefore repeated with a bootstrap over whole streams (20,485 streams in the test split), and any verdict that changes is marked with a dagger ($\dagger$).
+The interval comes from a paired percentile bootstrap~\cite[Sec.~13.3]{efron1993}. The 30,000 real test rows are resampled with replacement, stratified by class, with the same 1,000 resamples for every run, so that the two configurations of a comparison are evaluated on identical resamples. Packets of one TCP stream are correlated, which makes this interval too narrow. Every verdict is therefore repeated with a bootstrap over whole streams (20,485 streams in the test split), and any verdict that changes is marked with a dagger ($\dagger$).
 
 The rule has known limits, stated here so that the results are read with them. The interval reflects the sampling of the test rows and three training seeds. It does not reflect which capture groups form the test split, the sampling of the training rows, or the choice of hyper-parameters. Branch A4 covers the first of these only in part. The rule uses no $p$-values and no correction for multiple comparisons, so a verdict is a statement about this test split and these seeds.
 
