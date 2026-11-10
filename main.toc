@@ -41,7 +41,7 @@
 \contentsline {subsection}{\numberline {3.3.2}FedDP-Marginal}{49}{subsection.3.3.2}%
 \contentsline {subsection}{\numberline {3.3.3}Privacy Accounting}{56}{subsection.3.3.3}%
 \contentsline {subsection}{\numberline {3.3.4}Federated CVAE, DP-SGD and SecAgg$^+$ (Baseline)}{61}{subsection.3.3.4}%
-\contentsline {subsection}{\numberline {3.3.5}Hyper-parameter Selection and Search Spaces}{63}{subsection.3.3.5}%
+\contentsline {subsection}{\numberline {3.3.5}Hyper-parameter Selection and Search Spaces}{64}{subsection.3.3.5}%
 \contentsline {subsection}{\numberline {3.3.6}Evaluation Protocols and Metrics}{67}{subsection.3.3.6}%
 \contentsline {subsection}{\numberline {3.3.7}Statistical Decision Rule}{71}{subsection.3.3.7}%
 \contentsline {subsection}{\numberline {3.3.8}Experimental Environment and Reproducibility}{71}{subsection.3.3.8}%

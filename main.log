@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.11.9)  10 NOV 2026 10:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.11.9)  10 NOV 2026 10:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2314,7 +2314,7 @@ Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/b/n/8.66673'. Switching off
 (microtype)                protrusion for this font on input line 756.
 
-[49] [50] [51] [52] [53] [54] [55] [56] [57] [58] [59]
+[49] [50] [51] [52] [53] [54] [55] [56] [57] [58] [59] [60]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 959.
@@ -2327,7 +2327,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 959.
 
-[60] [61] [62] [63] [64] [65] [66] [67] [68] [69] [70]
+[61] [62] [63] [64] [65] [66] [67] [68] [69] [70]
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/m/it/13'. Switching off
@@ -2520,7 +2520,7 @@ syr.pfb><E:/MiKTeX/fonts/type1/vntex/urwvn/utmb8v.pfb><E:/MiKTeX/fonts/type1/ur
 w/times/utmr8a.pfb><E:/MiKTeX/fonts/type1/vntex/urwvn/utmr8v.pfb><E:/MiKTeX/fon
 ts/type1/urw/times/utmri8a.pfb><E:/MiKTeX/fonts/type1/vntex/urwvn/utmri8v.pfb><
 E:/MiKTeX/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on main.pdf (146 pages, 1145305 bytes).
+Output written on main.pdf (146 pages, 1145468 bytes).
 PDF statistics:
  2100 PDF objects out of 2487 (max. 8388607)
  383 named destinations out of 1000 (max. 500000)

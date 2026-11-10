@@ -1,6 +1,6 @@
 # Danh sách công thức và trích dẫn trong đồ án (nhánh `main`)
 
-Cập nhật: 2026-11-10 (lần 2). Đối chiếu với bản PDF 146 trang build từ mã nguồn hiện tại.
+Cập nhật: 2026-11-10 (lần 3). Đối chiếu với bản PDF 146 trang build từ mã nguồn hiện tại.
 
 File này liệt kê **mọi công thức** trong đồ án, công thức nào đã cite đúng chuẩn IEEE, công thức nào còn thiếu, thiếu vì sao, và **nhóm cần gửi gì** để hoàn thiện.
 
@@ -37,7 +37,7 @@ Với công thức lấy từ tài liệu khác, IEEE cho phép ghi **vị trí 
 | Chưa có cite (không bắt buộc) | 1 | 3.22 |
 | Nhóm tự đặt / tự suy ra, không cần cite | 4 | 3.1, 3.3, 3.14, 3.19 |
 
-Ngoài ra có **4 công thức viết trong dòng** (không đánh số): 3 công thức đã có cite, 1 công thức còn thiếu nguồn (Mục 5).
+Ngoài ra có **4 công thức viết trong dòng** (không đánh số): 3 công thức đã có cite, 1 công thức đã sửa thành xấp xỉ nên không cần nguồn (Mục 5).
 
 ---
 
@@ -55,19 +55,19 @@ Cột "Dòng" là dòng trong `chapters/main/Chapter3.tex` (bấm để mở tr�
 | (3.6) | 52 | [799](../chapters/main/Chapter3.tex#L799) | Hiệu chỉnh Miller–Madow cho MI | [62] Miller 1955 | **Thiếu pinpoint** |
 | (3.7) | 53 | [807](../chapters/main/Chapter3.tex#L807) | Phân tích phân phối theo cây | [10] Chow–Liu 1968 | **Thiếu pinpoint** |
 | (3.8) | 54 | [834](../chapters/main/Chapter3.tex#L834) | Gộp theo trọng số nghịch đảo phương sai | [11, App. E.1] Private-PGM | Chuẩn |
-| (3.9) | 56 | [881](../chapters/main/Chapter3.tex#L881) | ρ của zCDP và chuyển sang (ε, δ) | [53, Prop. 1.3], [53, Prop. 1.6], [53, Lemma 1.7] | Chuẩn |
+| (3.9) | 57 | [881](../chapters/main/Chapter3.tex#L881) | ρ của zCDP và chuyển sang (ε, δ) | [53, Prop. 1.3], [53, Prop. 1.6], [53, Lemma 1.7] | Chuẩn |
 | (3.10) | 57 | [891](../chapters/main/Chapter3.tex#L891) | Cận RDP của cơ chế Skellam | [22, Corollary 3.6, eq. (3.2)] | Chuẩn |
 | (3.11) | 57 | [896](../chapters/main/Chapter3.tex#L896) | Chuyển RDP sang (ε, δ) | [65, Th. 21]; cộng dồn RDP [42, Proposition 1] | Chuẩn |
 | (3.12) | 58 | [917](../chapters/main/Chapter3.tex#L917) | Độ nhạy theo nhóm Δ_group = m·Δ | [51, Defs. 3.1 and 3.8], [51, Th. 2.2] | Chuẩn |
-| (3.13) | 58 | [924](../chapters/main/Chapter3.tex#L924) | ρ_group = ℓ²ρ | [53, Prop. 1.9] | Chuẩn |
+| (3.13) | 59 | [924](../chapters/main/Chapter3.tex#L924) | ρ_group = ℓ²ρ | [53, Prop. 1.9] | Chuẩn |
 | (3.14) | 60 | [942](../chapters/main/Chapter3.tex#L942) | ε hiệu dụng = max theo client | không (quy ước của nhóm) | Không cần cite |
 | (3.15) | 61 | [966](../chapters/main/Chapter3.tex#L966) | Hàm mất mát CVAE | [68, eq. (3)] Kingma–Welling; [41, eq. (4)] Sohn; [69] Higgins | **Chuẩn một phần**: Higgins thiếu pinpoint |
 | (3.16) | 61 | [980](../chapters/main/Chapter3.tex#L980) | FedAvg | [4, Algorithm 1] | Chuẩn |
 | (3.17) | 62 | [992](../chapters/main/Chapter3.tex#L992) | Kẹp gradient và thêm nhiễu DP-SGD | [43, Algorithm 1] | Chuẩn |
-| (3.18) | 62 | [1004](../chapters/main/Chapter3.tex#L1004) | Tổng modulo 2³² của SecAgg⁺ | [18] Bell 2020 | **Thiếu pinpoint** |
-| (3.19) | 62 | [1009](../chapters/main/Chapter3.tex#L1009) | Cận chống tràn số modulo | không | Nhóm tự suy ra, không cần cite |
+| (3.18) | 63 | [1004](../chapters/main/Chapter3.tex#L1004) | Tổng modulo 2³² của SecAgg⁺ | [18] Bell 2020 | **Thiếu pinpoint** |
+| (3.19) | 63 | [1009](../chapters/main/Chapter3.tex#L1009) | Cận chống tràn số modulo | không | Nhóm tự suy ra, không cần cite |
 | (3.20) | 65 | [1059](../chapters/main/Chapter3.tex#L1059) | Hệ số Jaccard | [73] Jaccard 1912 | Pinpoint không bắt buộc |
-| (3.21) | 65 | [1091](../chapters/main/Chapter3.tex#L1091) | Quy tắc lọc một độ lệch chuẩn | [74] Hastie ESL 2009 | **Thiếu pinpoint** |
+| (3.21) | 67 | [1091](../chapters/main/Chapter3.tex#L1091) | Quy tắc lọc một độ lệch chuẩn | [74] Hastie ESL 2009 | **Thiếu pinpoint** |
 | (3.22) | 69 | [1140](../chapters/main/Chapter3.tex#L1140) | F1 theo lớp và Macro-F1 | không | Không bắt buộc (chỉ số chuẩn) |
 | (3.23) | 71 | [1177](../chapters/main/Chapter3.tex#L1177) | Quy tắc quyết định thống kê | [75] Efron–Tibshirani 1993 (cho bootstrap, đoạn sau) | Quy tắc tự đặt; pinpoint bootstrap không bắt buộc |
 
@@ -117,11 +117,12 @@ Chỉ còn các nguồn Claude **không đọc được**. Mỗi mục ghi: thi�
 | [825](../chapters/main/Chapter3.tex#L825) | σ_r = Δ_{2,r} / √(2ω_r ρ) | Đã cite `[53, Proposition 1.6]` |
 | [923](../chapters/main/Chapter3.tex#L923) | Cận nhóm ℓ·e^{(ℓ−1)ε}·δ cho (ε, δ)-DP | Đã cite `[51, Sec. 2.3]` (chú thích 1 của Mục 2.3) |
 | [803](../chapters/main/Chapter3.tex#L803) | MI chuẩn hoá I / √(H(X_i)·H(X_j)) | Đã cite `[63, eq. (2)]` Strehl–Ghosh 2002 (nguồn mới thêm vào `reference.bib`) |
-| [851](../chapters/main/Chapter3.tex#L851) | "by the Skellam tail bound" (xác suất vượt ngưỡng < 10⁻⁹) | **Còn thiếu nguồn**, xem ghi chú dưới |
+| [851](../chapters/main/Chapter3.tex#L851) | Xác suất một giá trị nhiễu vượt C_clip, khoảng 10⁻⁹ | Đã sửa: ghi rõ là xấp xỉ Gauss, không cần nguồn |
 
-**Ghi chú về dòng 851.** Bài Skellam của Agarwal et al. [22] không có cận đuôi nào được đánh số trong các phần đã đọc. Con số 10⁻⁹ với ngưỡng 6σ khớp với **xấp xỉ Gauss một phía** (khoảng 9,9 × 10⁻¹⁰); nếu tính hai phía thì khoảng 2 × 10⁻⁹, tức là **không** nhỏ hơn 10⁻⁹. Nhóm cần chọn một trong hai:
-- (a) gửi một nguồn có cận đuôi của phân phối Skellam (hoặc hiệu hai biến Poisson) kèm số bổ đề; hoặc
-- (b) đồng ý để Claude sửa câu thành "by the Gaussian approximation of the Skellam tail, the probability that a noisy count exceeds C_clip is about 10⁻⁹" (một phía, đúng với việc vượt ngưỡng trên).
+**Ghi chú về dòng 851.** Câu cũ viết "below 10⁻⁹ by the Skellam tail bound" nhưng không có nguồn: bài Skellam của Agarwal et al. [22] không có cận đuôi nào được đánh số trong các phần đã đọc. Câu mới (nhóm đồng ý ngày 2026-11-10) nói rõ ba điều:
+- Chỉ một ô chứa gần đủ N bản ghi, với nhiễu lệch lên trên quá 6σ, mới có thể vượt C_clip (trường hợp xấu nhất, một phía).
+- Con số khoảng 10⁻⁹ là **xấp xỉ Gauss** (một phía ở 6σ: khoảng 9,9 × 10⁻¹⁰). Xấp xỉ này chính xác vì phương sai nhiễu lớn: đuôi Skellam chỉ nặng hơn đuôi Gauss khoảng e^(54/μ) lần. Cận Chernoff chặt chẽ chỉ cho khoảng 1,5 × 10⁻⁸, nên không được viết "nhỏ hơn 10⁻⁹" như một cận.
+- Xác suất này **không** được cộng vào δ.
 
 ---
 
@@ -138,6 +139,7 @@ Chỉ còn các nguồn Claude **không đọc được**. Mỗi mục ghi: thi�
 | Dòng 825 | không cite | `[53, Proposition 1.6]` | Nhãn đã đọc trước đó trong Bun–Steinke |
 | Dòng 923 | không cite | `[51, Sec. 2.3]` | Chú thích 1 của Mục 2.3, sách Dwork–Roth |
 | Dòng 803 | không cite | `[63, eq. (2)]`, thêm `strehl2002` vào `reference.bib` | Đọc trong bài Strehl–Ghosh: eq. (2) định nghĩa NMI theo trung bình nhân |
+| Dòng 851 | "below 10⁻⁹ by the Skellam tail bound" | Khoảng 10⁻⁹ cho mỗi ô theo xấp xỉ Gauss của đuôi Skellam; ghi rõ không phải cận chặt và không cộng vào δ | Không có nguồn cho cận đuôi; cận Chernoff chỉ cho khoảng 1,5 × 10⁻⁸ |
 
 ---
 
