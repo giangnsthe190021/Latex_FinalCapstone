@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.11.9)  10 NOV 2026 10:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.11.9)  10 NOV 2026 10:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2327,26 +2327,26 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 959.
 
-[60] [61] [62] [63] [64] [65] [66] [67] [68] [69]
+[60] [61] [62] [63] [64] [65] [66] [67] [68] [69] [70]
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/m/it/13'. Switching off
 (microtype)                protrusion for this font on input line 1181.
 
-[70] [71]
+[71] [72]
 Underfull \hbox (badness 6526) in paragraph at lines 1224--1225
 []\T5/ptm/b/n/13 (+20) Clean-copy re-execution: \T5/ptm/m/n/13 (+20) Phases 1--
 5 (in-ven-tory, har-mon-i-sa-tion, sam-pling,
  []
 
-[72] [73] [74
+[73] [74
 
 ] [75]) (chapters/main/Chapter4.tex [76]
 Chapter 4.
 [77
 
 ] [78]
-<graphics/chapter4/partition_alpha0.5_seed0.png, id=1517, 787.743pt x 289.08pt>
+<graphics/chapter4/partition_alpha0.5_seed0.png, id=1522, 787.743pt x 289.08pt>
 
 File: graphics/chapter4/partition_alpha0.5_seed0.png Graphic file (type png)
 <use graphics/chapter4/partition_alpha0.5_seed0.png>
@@ -2356,13 +2356,13 @@ n input line 32.
  [79
 
  <./graphics/chapter4/partition_alpha0.5_seed0.png>] [80]
-<graphics/chapter4/f1_by_config.png, id=1537, 867.24pt x 542.025pt>
+<graphics/chapter4/f1_by_config.png, id=1542, 867.24pt x 542.025pt>
 File: graphics/chapter4/f1_by_config.png Graphic file (type png)
 <use graphics/chapter4/f1_by_config.png>
 Package pdftex.def Info: graphics/chapter4/f1_by_config.png  used on input line
  145.
 (pdftex.def)             Requested size: 483.69687pt x 302.31615pt.
-<graphics/chapter4/tstr_vs_eps.pdf, id=1539, 250.38426pt x 170.71654pt>
+<graphics/chapter4/tstr_vs_eps.pdf, id=1544, 250.38426pt x 170.71654pt>
 File: graphics/chapter4/tstr_vs_eps.pdf Graphic file (type pdf)
 <use graphics/chapter4/tstr_vs_eps.pdf>
 Package pdftex.def Info: graphics/chapter4/tstr_vs_eps.pdf  used on input line 
@@ -2374,28 +2374,28 @@ vs_eps.pdf>] [85
 
 
 ] [86] [87] [88]
-<graphics/chapter4/per_class_f1.pdf, id=1599, 433.62pt x 238.49101pt>
+<graphics/chapter4/per_class_f1.pdf, id=1604, 433.62pt x 238.49101pt>
 File: graphics/chapter4/per_class_f1.pdf Graphic file (type pdf)
 <use graphics/chapter4/per_class_f1.pdf>
 Package pdftex.def Info: graphics/chapter4/per_class_f1.pdf  used on input line
  334.
 (pdftex.def)             Requested size: 411.14528pt x 226.14304pt.
  [89] [90 <./graphics/chapter4/per_class_f1.pdf>] [91]
-<graphics/chapter4/f1_vs_traffic.pdf, id=1639, 250.38426pt x 199.1693pt>
+<graphics/chapter4/f1_vs_traffic.pdf, id=1644, 250.38426pt x 199.1693pt>
 File: graphics/chapter4/f1_vs_traffic.pdf Graphic file (type pdf)
 <use graphics/chapter4/f1_vs_traffic.pdf>
 Package pdftex.def Info: graphics/chapter4/f1_vs_traffic.pdf  used on input lin
 e 399.
 (pdftex.def)             Requested size: 386.95897pt x 307.81874pt.
  [92] [93 <./graphics/chapter4/f1_vs_traffic.pdf>]
-<graphics/chapter4/eps_by_honest.pdf, id=1658, 404.712pt x 238.49101pt>
+<graphics/chapter4/eps_by_honest.pdf, id=1663, 404.712pt x 238.49101pt>
 File: graphics/chapter4/eps_by_honest.pdf Graphic file (type pdf)
 <use graphics/chapter4/eps_by_honest.pdf>
 Package pdftex.def Info: graphics/chapter4/eps_by_honest.pdf  used on input lin
 e 428.
 (pdftex.def)             Requested size: 362.77264pt x 213.78838pt.
  [94 <./graphics/chapter4/eps_by_honest.pdf>]
-<graphics/chapter4/mia_tables.pdf, id=1691, 404.712pt x 180.675pt>
+<graphics/chapter4/mia_tables.pdf, id=1696, 404.712pt x 180.675pt>
 File: graphics/chapter4/mia_tables.pdf Graphic file (type pdf)
 <use graphics/chapter4/mia_tables.pdf>
 Package pdftex.def Info: graphics/chapter4/mia_tables.pdf  used on input line 4
@@ -2471,7 +2471,7 @@ Underfull \hbox (badness 1953) in paragraph at lines 249--253
  M. C. Ghanem,
  []
 
-[128] [129] [130] [131]) [132
+[128] [129] [130] [131] [132]) [133
 runsystem(makeindex -s "kpsewhich:majorissue:Sofar,youhavenotcheckedforMiKTeXup
 dates."\main.ist -t "kpsewhich:majorissue:Sofar,youhavenotcheckedforMiKTeXupdat
 es."\main.glg -o "kpsewhich:majorissue:Sofar,youhavenotcheckedforMiKTeXupdates.
@@ -2504,10 +2504,10 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: B54AD4C41DC864F8432D1765235BCBC3;15827.
  ) 
 Here is how much of TeX's memory you used:
- 46564 strings out of 469789
- 863666 string characters out of 5472184
- 1547364 words of memory out of 5000000
- 73640 multiletter control sequences out of 15000+600000
+ 46569 strings out of 469789
+ 863743 string characters out of 5472184
+ 1547400 words of memory out of 5000000
+ 73643 multiletter control sequences out of 15000+600000
  798913 words of font info for 432 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  123i,19n,121p,2538b,1487s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -2520,9 +2520,9 @@ syr.pfb><E:/MiKTeX/fonts/type1/vntex/urwvn/utmb8v.pfb><E:/MiKTeX/fonts/type1/ur
 w/times/utmr8a.pfb><E:/MiKTeX/fonts/type1/vntex/urwvn/utmr8v.pfb><E:/MiKTeX/fon
 ts/type1/urw/times/utmri8a.pfb><E:/MiKTeX/fonts/type1/vntex/urwvn/utmri8v.pfb><
 E:/MiKTeX/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on main.pdf (145 pages, 1142515 bytes).
+Output written on main.pdf (146 pages, 1145305 bytes).
 PDF statistics:
- 2090 PDF objects out of 2487 (max. 8388607)
- 381 named destinations out of 1000 (max. 500000)
+ 2100 PDF objects out of 2487 (max. 8388607)
+ 383 named destinations out of 1000 (max. 500000)
  76461 words of extra memory for PDF output out of 89155 (max. 10000000)
 

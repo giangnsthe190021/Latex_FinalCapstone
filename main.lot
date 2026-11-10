@@ -14,7 +14,7 @@
 \contentsline {table}{\numberline {3.9}{\ignorespaces Final feature schema ($D = 59$)}}{44}{table.caption.20}%
 \contentsline {table}{\numberline {3.10}{\ignorespaces Class quotas of the training, validation, and test splits}}{45}{table.caption.21}%
 \contentsline {table}{\numberline {3.11}{\ignorespaces Leakage and label-reliability checks}}{46}{table.caption.22}%
-\contentsline {table}{\numberline {3.12}{\ignorespaces Federated partition parameters}}{48}{table.caption.23}%
+\contentsline {table}{\numberline {3.12}{\ignorespaces Federated partition parameters}}{49}{table.caption.23}%
 \contentsline {table}{\numberline {3.13}{\ignorespaces Variants of FedDP-Marginal}}{56}{table.caption.25}%
 \contentsline {table}{\numberline {3.14}{\ignorespaces Configuration matrix of the baseline and proposed generators}}{64}{table.caption.26}%
 \contentsline {table}{\numberline {3.15}{\ignorespaces Hyper-parameter search spaces of the model components}}{66}{table.caption.27}%
