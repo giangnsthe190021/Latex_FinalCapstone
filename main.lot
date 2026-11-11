@@ -7,7 +7,7 @@
 \contentsline {table}{\numberline {3.2}{\ignorespaces Comparison of the two generator routes}}{31}{table.caption.13}%
 \contentsline {table}{\numberline {3.3}{\ignorespaces Comparison of protection mechanisms}}{33}{table.caption.15}%
 \contentsline {table}{\numberline {3.4}{\ignorespaces Experiment matrix of PP-FedData}}{35}{table.3.4}%
-\contentsline {table}{\numberline {3.5}{\ignorespaces Robustness and sensitivity branches}}{37}{table.caption.16}%
+\contentsline {table}{\numberline {3.5}{\ignorespaces Robustness and sensitivity branches}}{38}{table.caption.16}%
 \contentsline {table}{\numberline {3.6}{\ignorespaces Deployment scenarios (inputs only)}}{40}{table.caption.17}%
 \contentsline {table}{\numberline {3.7}{\ignorespaces Composition of the DoS/DDoS-MQTT-IoT dataset}}{41}{table.caption.18}%
 \contentsline {table}{\numberline {3.8}{\ignorespaces Data provenance verification}}{42}{table.caption.19}%
@@ -15,10 +15,10 @@
 \contentsline {table}{\numberline {3.10}{\ignorespaces Class quotas of the training, validation, and test splits}}{45}{table.caption.21}%
 \contentsline {table}{\numberline {3.11}{\ignorespaces Leakage and label-reliability checks}}{46}{table.caption.22}%
 \contentsline {table}{\numberline {3.12}{\ignorespaces Federated partition parameters}}{49}{table.caption.23}%
-\contentsline {table}{\numberline {3.13}{\ignorespaces Variants of FedDP-Marginal}}{56}{table.caption.25}%
+\contentsline {table}{\numberline {3.13}{\ignorespaces Variants of FedDP-Marginal}}{57}{table.caption.25}%
 \contentsline {table}{\numberline {3.14}{\ignorespaces Configuration matrix of the baseline and proposed generators}}{64}{table.caption.26}%
-\contentsline {table}{\numberline {3.15}{\ignorespaces Hyper-parameter search spaces of the model components}}{66}{table.caption.27}%
-\contentsline {table}{\numberline {3.16}{\ignorespaces Evaluation protocols}}{68}{table.caption.28}%
+\contentsline {table}{\numberline {3.15}{\ignorespaces Hyper-parameter search spaces of the model components}}{67}{table.caption.27}%
+\contentsline {table}{\numberline {3.16}{\ignorespaces Evaluation protocols}}{69}{table.caption.28}%
 \contentsline {table}{\numberline {3.17}{\ignorespaces Experimental environment specification}}{72}{table.caption.29}%
 \addvspace {10pt}
 \contentsline {table}{\numberline {4.1}{\ignorespaces Results of the leakage and label-reliability checks (Random Forest with 100 trees, validation split, three seeds)}}{80}{table.caption.31}%

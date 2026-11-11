@@ -26,9 +26,9 @@
 \contentsline {section}{\numberline {3.1}Research Design}{26}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1}Research Type and Design Overview}{26}{subsection.3.1.1}%
 \contentsline {subsection}{\numberline {3.1.2}System Architecture and the Two Generator Routes}{29}{subsection.3.1.2}%
-\contentsline {subsection}{\numberline {3.1.3}Threat Model, Trust Assumptions and Privacy Units}{32}{subsection.3.1.3}%
-\contentsline {subsection}{\numberline {3.1.4}Experimental Configurations}{34}{subsection.3.1.4}%
-\contentsline {subsection}{\numberline {3.1.5}Requirement-Driven Recommendation Rule}{38}{subsection.3.1.5}%
+\contentsline {subsection}{\numberline {3.1.3}Threat Model, Trust Assumptions and Privacy Units}{31}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.4}Experimental Configurations}{35}{subsection.3.1.4}%
+\contentsline {subsection}{\numberline {3.1.5}Requirement-Driven Recommendation Rule}{37}{subsection.3.1.5}%
 \contentsline {section}{\numberline {3.2}Data Collection Methods}{41}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Dataset}{41}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}Label Harmonisation and Rare Classes}{42}{subsection.3.2.2}%
@@ -42,9 +42,9 @@
 \contentsline {subsection}{\numberline {3.3.3}Privacy Accounting}{56}{subsection.3.3.3}%
 \contentsline {subsection}{\numberline {3.3.4}Federated CVAE, DP-SGD and SecAgg$^+$ (Baseline)}{61}{subsection.3.3.4}%
 \contentsline {subsection}{\numberline {3.3.5}Hyper-parameter Selection and Search Spaces}{64}{subsection.3.3.5}%
-\contentsline {subsection}{\numberline {3.3.6}Evaluation Protocols and Metrics}{67}{subsection.3.3.6}%
+\contentsline {subsection}{\numberline {3.3.6}Evaluation Protocols and Metrics}{68}{subsection.3.3.6}%
 \contentsline {subsection}{\numberline {3.3.7}Statistical Decision Rule}{71}{subsection.3.3.7}%
-\contentsline {subsection}{\numberline {3.3.8}Experimental Environment and Reproducibility}{71}{subsection.3.3.8}%
+\contentsline {subsection}{\numberline {3.3.8}Experimental Environment and Reproducibility}{72}{subsection.3.3.8}%
 \contentsline {section}{\numberline {3.4}Limitations of the Methodology}{74}{section.3.4}%
 \contentsline {chapter}{\chapternumberline {4}Experimental and Results}{77}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Introduction}{77}{section.4.1}%

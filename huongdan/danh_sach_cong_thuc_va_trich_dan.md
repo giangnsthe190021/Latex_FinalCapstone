@@ -1,6 +1,6 @@
 # Danh sách công thức và trích dẫn trong đồ án (nhánh `main`)
 
-Cập nhật: 2026-11-10 (lần 5: thêm trích dẫn Macro-F1, thay Hình 3.2 và 3.3 bằng hình ConceptDraw của bài báo IEEE). Đối chiếu với bản PDF 146 trang build từ mã nguồn hiện tại.
+Cập nhật: 2026-11-11 (lần 6: Hình 3.2 và 3.3 vẽ lại bằng TikZ; số dòng và số trang trong các bảng đã tính lại theo mã nguồn mới). Đối chiếu với bản PDF 146 trang build từ mã nguồn hiện tại.
 
 File này liệt kê **mọi công thức** trong đồ án, công thức nào đã cite đúng chuẩn IEEE, cite ở đâu, căn cứ vào đâu, và những gì còn lại.
 
@@ -45,29 +45,29 @@ Cột "Dòng" là dòng trong `chapters/main/Chapter3.tex` (bấm để mở tr�
 
 | Số | Trang | Dòng | Nội dung | Cite hiện tại | Trạng thái |
 |---|---|---|---|---|---|
-| (3.1) | 38 | [334](../chapters/main/Chapter3.tex#L334) | Bộ yêu cầu triển khai R | không | Nhóm tự đặt, không cần cite |
-| (3.2) | 47 | [559](../chapters/main/Chapter3.tex#L559) | Phân hoạch Dirichlet theo lớp | [44, Sec. 3] Hsu 2019 | Chuẩn (bài gốc không đánh số công thức nên cite theo mục) |
-| (3.3) | 48 | [610](../chapters/main/Chapter3.tex#L610) | Tổng các bảng đếm qua SecAgg⁺ bằng bảng tập trung | [18] Bell 2020 (cho SecAgg⁺) | Phép cộng tự suy ra, không cần pinpoint |
-| (3.4) | 51 | [657](../chapters/main/Chapter3.tex#L657) | Cây Chow–Liu và thông tin tương hỗ | [10, Def. 1], [10, Def. 2], [10, Sec. III], [10, Sec. IV]; [61, Construction A] | Chuẩn |
-| (3.5) | 52 | [662](../chapters/main/Chapter3.tex#L662) | p̂: cắt ở 0, làm trơn Laplace, chuẩn hoá | [40, eq. (2)] MST | Chuẩn |
-| (3.6) | 52 | [673](../chapters/main/Chapter3.tex#L673) | Hiệu chỉnh Miller–Madow cho MI | [62] Miller 1955; [63, eq. (2.12)] Treves–Panzeri 1995 | Chuẩn (dạng cho MI lấy từ Treves–Panzeri) |
-| (3.7) | 53 | [681](../chapters/main/Chapter3.tex#L681) | Phân tích phân phối theo cây | [10, eq. (1)] | Chuẩn |
-| (3.8) | 54 | [708](../chapters/main/Chapter3.tex#L708) | Gộp theo trọng số nghịch đảo phương sai | [11, App. E.1] Private-PGM | Chuẩn |
-| (3.9) | 57 | [755](../chapters/main/Chapter3.tex#L755) | ρ của zCDP và chuyển sang (ε, δ) | [53, Prop. 1.3], [53, Prop. 1.6], [53, Lemma 1.7] | Chuẩn |
-| (3.10) | 57 | [765](../chapters/main/Chapter3.tex#L765) | Cận RDP của cơ chế Skellam | [22, Corollary 3.6, eq. (3.2)] | Chuẩn |
-| (3.11) | 57 | [770](../chapters/main/Chapter3.tex#L770) | Chuyển RDP sang (ε, δ) | [66, Th. 21]; cộng dồn RDP [42, Proposition 1] | Chuẩn |
-| (3.12) | 58 | [791](../chapters/main/Chapter3.tex#L791) | Độ nhạy theo nhóm Δ_group = m·Δ | [51, Defs. 3.1 and 3.8], [51, Th. 2.2] | Chuẩn |
-| (3.13) | 59 | [798](../chapters/main/Chapter3.tex#L798) | ρ_group = ℓ²ρ | [53, Prop. 1.9] | Chuẩn |
-| (3.14) | 60 | [816](../chapters/main/Chapter3.tex#L816) | ε hiệu dụng = max theo client | không (quy ước của nhóm) | Không cần cite |
-| (3.15) | 61 | [840](../chapters/main/Chapter3.tex#L840) | Hàm mất mát CVAE | [69, eq. (3)] Kingma–Welling; [41, eq. (4)] Sohn; [70, eq. (4)] Higgins | Chuẩn |
-| (3.16) | 62 | [854](../chapters/main/Chapter3.tex#L854) | FedAvg | [4, Algorithm 1] | Chuẩn |
-| (3.17) | 62 | [866](../chapters/main/Chapter3.tex#L866) | Kẹp gradient và thêm nhiễu DP-SGD | [43, Algorithm 1] | Chuẩn |
-| (3.18) | 63 | [878](../chapters/main/Chapter3.tex#L878) | Tổng modulo 2³² của SecAgg⁺ | [18, Sec. 3.1] Bell 2020 | Chuẩn |
-| (3.19) | 63 | [883](../chapters/main/Chapter3.tex#L883) | Cận chống tràn số modulo | không | Nhóm tự suy ra, không cần cite |
-| (3.20) | 65 | [933](../chapters/main/Chapter3.tex#L933) | Hệ số Jaccard | [74, p. 39] Jaccard 1912 | Chuẩn (bài gốc định nghĩa ở chú thích 1, trang 39) |
-| (3.21) | 67 | [965](../chapters/main/Chapter3.tex#L965) | Quy tắc lọc một độ lệch chuẩn | [75, Sec. 7.10.1] Hastie ESL | Chuẩn |
-| (3.22) | 69 | [1014](../chapters/main/Chapter3.tex#L1014) | F1 theo lớp và Macro-F1 | [77, eq. (1)], [77, eq. (2)], phân biệt với [77, eq. (3)] Opitz–Burst | Chuẩn |
-| (3.23) | 71 | [1051](../chapters/main/Chapter3.tex#L1051) | Quy tắc quyết định thống kê | [76, Sec. 13.3] Efron–Tibshirani (khoảng percentile, đoạn sau) | Quy tắc tự đặt; nguồn bootstrap đã có pinpoint |
+| (3.1) | 38 | [405](../chapters/main/Chapter3.tex#L405) | Bộ yêu cầu triển khai R | không | Nhóm tự đặt, không cần cite |
+| (3.2) | 47 | [630](../chapters/main/Chapter3.tex#L630) | Phân hoạch Dirichlet theo lớp | [44, Sec. 3] Hsu 2019 | Chuẩn (bài gốc không đánh số công thức nên cite theo mục) |
+| (3.3) | 48 | [681](../chapters/main/Chapter3.tex#L681) | Tổng các bảng đếm qua SecAgg⁺ bằng bảng tập trung | [18] Bell 2020 (cho SecAgg⁺) | Phép cộng tự suy ra, không cần pinpoint |
+| (3.4) | 52 | [766](../chapters/main/Chapter3.tex#L766) | Cây Chow–Liu và thông tin tương hỗ | [10, Def. 1], [10, Def. 2], [10, Sec. III], [10, Sec. IV]; [61, Construction A] | Chuẩn |
+| (3.5) | 52 | [771](../chapters/main/Chapter3.tex#L771) | p̂: cắt ở 0, làm trơn Laplace, chuẩn hoá | [40, eq. (2)] MST | Chuẩn |
+| (3.6) | 53 | [782](../chapters/main/Chapter3.tex#L782) | Hiệu chỉnh Miller–Madow cho MI | [62] Miller 1955; [63, eq. (2.12)] Treves–Panzeri 1995 | Chuẩn (dạng cho MI lấy từ Treves–Panzeri) |
+| (3.7) | 53 | [790](../chapters/main/Chapter3.tex#L790) | Phân tích phân phối theo cây | [10, eq. (1)] | Chuẩn |
+| (3.8) | 55 | [817](../chapters/main/Chapter3.tex#L817) | Gộp theo trọng số nghịch đảo phương sai | [11, App. E.1] Private-PGM | Chuẩn |
+| (3.9) | 56 | [864](../chapters/main/Chapter3.tex#L864) | ρ của zCDP và chuyển sang (ε, δ) | [53, Prop. 1.3], [53, Prop. 1.6], [53, Lemma 1.7] | Chuẩn |
+| (3.10) | 57 | [874](../chapters/main/Chapter3.tex#L874) | Cận RDP của cơ chế Skellam | [22, Corollary 3.6, eq. (3.2)] | Chuẩn |
+| (3.11) | 58 | [879](../chapters/main/Chapter3.tex#L879) | Chuyển RDP sang (ε, δ) | [66, Th. 21]; cộng dồn RDP [42, Proposition 1] | Chuẩn |
+| (3.12) | 59 | [900](../chapters/main/Chapter3.tex#L900) | Độ nhạy theo nhóm Δ_group = m·Δ | [51, Defs. 3.1 and 3.8], [51, Th. 2.2] | Chuẩn |
+| (3.13) | 59 | [907](../chapters/main/Chapter3.tex#L907) | ρ_group = ℓ²ρ | [53, Prop. 1.9] | Chuẩn |
+| (3.14) | 60 | [925](../chapters/main/Chapter3.tex#L925) | ε hiệu dụng = max theo client | không (quy ước của nhóm) | Không cần cite |
+| (3.15) | 61 | [949](../chapters/main/Chapter3.tex#L949) | Hàm mất mát CVAE | [69, eq. (3)] Kingma–Welling; [41, eq. (4)] Sohn; [70, eq. (4)] Higgins | Chuẩn |
+| (3.16) | 62 | [963](../chapters/main/Chapter3.tex#L963) | FedAvg | [4, Algorithm 1] | Chuẩn |
+| (3.17) | 62 | [975](../chapters/main/Chapter3.tex#L975) | Kẹp gradient và thêm nhiễu DP-SGD | [43, Algorithm 1] | Chuẩn |
+| (3.18) | 63 | [987](../chapters/main/Chapter3.tex#L987) | Tổng modulo 2³² của SecAgg⁺ | [18, Sec. 3.1] Bell 2020 | Chuẩn |
+| (3.19) | 63 | [992](../chapters/main/Chapter3.tex#L992) | Cận chống tràn số modulo | không | Nhóm tự suy ra, không cần cite |
+| (3.20) | 65 | [1042](../chapters/main/Chapter3.tex#L1042) | Hệ số Jaccard | [74, p. 39] Jaccard 1912 | Chuẩn (bài gốc định nghĩa ở chú thích 1, trang 39) |
+| (3.21) | 66 | [1074](../chapters/main/Chapter3.tex#L1074) | Quy tắc lọc một độ lệch chuẩn | [75, Sec. 7.10.1] Hastie ESL | Chuẩn |
+| (3.22) | 68 | [1123](../chapters/main/Chapter3.tex#L1123) | F1 theo lớp và Macro-F1 | [77, eq. (1)], [77, eq. (2)], phân biệt với [77, eq. (3)] Opitz–Burst | Chuẩn |
+| (3.23) | 71 | [1160](../chapters/main/Chapter3.tex#L1160) | Quy tắc quyết định thống kê | [76, Sec. 13.3] Efron–Tibshirani (khoảng percentile, đoạn sau) | Quy tắc tự đặt; nguồn bootstrap đã có pinpoint |
 
 **Vì sao 4 công thức (3.1), (3.3), (3.14), (3.19) không có pinpoint:** cả bốn không lấy từ tài liệu nào. (3.1) là định nghĩa của nhóm, (3.3) là phép cộng số nguyên, (3.14) là quy ước báo cáo, (3.19) là phép tính số học. Theo chuẩn IEEE, định nghĩa và suy luận của chính tác giả không cần trích dẫn; gắn đại một nguồn vào là cite sai.
 
@@ -77,7 +77,6 @@ Cột "Dòng" là dòng trong `chapters/main/Chapter3.tex` (bấm để mở tr�
 
 - **Miller 1955 [62]:** vẫn cite không pinpoint vì chưa có file. Công thức (3.6) đã có căn cứ đầy đủ nhờ Treves–Panzeri eq. (2.12). Nếu nhóm có bản scan, Claude có thể thêm số trang.
 - **Skellam 1946 [67]:** bài chỉ có một trang (tr. 296) và không đánh số công thức, nên cite không pinpoint là đúng.
-- **Lỗi chữ trong Hình 3.3 (Fig. 2 của bài báo IEEE):** ba mũi tên ghi **"unit 32"**, đúng ra là **"uint32"** (số nguyên không dấu 32 bit, như hình TikZ cũ). Hình vẽ bằng ConceptDraw nên Claude không sửa được file PDF; nhóm cần sửa trong ConceptDraw rồi xuất lại `graphics/paper/Fig2.pdf` cho **cả hai nhánh** `main` và `IEEE`.
 
 ---
 
@@ -85,12 +84,12 @@ Cột "Dòng" là dòng trong `chapters/main/Chapter3.tex` (bấm để mở tr�
 
 | Dòng | Công thức | Tình trạng |
 |---|---|---|
-| [699](../chapters/main/Chapter3.tex#L699) | σ_r = Δ_{2,r} / √(2ω_r ρ) | Đã cite `[53, Proposition 1.6]` |
-| [797](../chapters/main/Chapter3.tex#L797) | Cận nhóm ℓ·e^{(ℓ−1)ε}·δ cho (ε, δ)-DP | Đã cite `[51, Sec. 2.3]` (chú thích 1 của Mục 2.3) |
-| [677](../chapters/main/Chapter3.tex#L677) | MI chuẩn hoá I / √(H(X_i)·H(X_j)) | Đã cite `[64, eq. (2)]` Strehl–Ghosh 2002 |
-| [725](../chapters/main/Chapter3.tex#L725) | Xác suất một giá trị nhiễu vượt C_clip, khoảng 10⁻⁹ | Đã sửa: ghi rõ là xấp xỉ Gauss, không cần nguồn |
+| [808](../chapters/main/Chapter3.tex#L808) | σ_r = Δ_{2,r} / √(2ω_r ρ) | Đã cite `[53, Proposition 1.6]` |
+| [906](../chapters/main/Chapter3.tex#L906) | Cận nhóm ℓ·e^{(ℓ−1)ε}·δ cho (ε, δ)-DP | Đã cite `[51, Sec. 2.3]` (chú thích 1 của Mục 2.3) |
+| [786](../chapters/main/Chapter3.tex#L786) | MI chuẩn hoá I / √(H(X_i)·H(X_j)) | Đã cite `[64, eq. (2)]` Strehl–Ghosh 2002 |
+| [834](../chapters/main/Chapter3.tex#L834) | Xác suất một giá trị nhiễu vượt C_clip, khoảng 10⁻⁹ | Đã sửa: ghi rõ là xấp xỉ Gauss, không cần nguồn |
 
-**Ghi chú về dòng 725.** Câu cũ viết "below 10⁻⁹ by the Skellam tail bound" nhưng không có nguồn: bài Skellam của Agarwal et al. [22] không có cận đuôi nào được đánh số trong các phần đã đọc. Câu mới (nhóm đồng ý ngày 2026-11-10) nói rõ ba điều:
+**Ghi chú về dòng 834.** Câu cũ viết "below 10⁻⁹ by the Skellam tail bound" nhưng không có nguồn: bài Skellam của Agarwal et al. [22] không có cận đuôi nào được đánh số trong các phần đã đọc. Câu mới (nhóm đồng ý ngày 2026-11-10) nói rõ ba điều:
 - Chỉ một ô chứa gần đủ N bản ghi, với nhiễu lệch lên trên quá 6σ, mới có thể vượt C_clip (trường hợp xấu nhất, một phía).
 - Con số khoảng 10⁻⁹ là **xấp xỉ Gauss** (một phía ở 6σ: khoảng 9,9 × 10⁻¹⁰). Xấp xỉ này chính xác vì phương sai nhiễu lớn: đuôi Skellam chỉ nặng hơn đuôi Gauss khoảng e^(54/μ) lần. Cận Chernoff chặt chẽ chỉ cho khoảng 1,5 × 10⁻⁸, nên không được viết "nhỏ hơn 10⁻⁹" như một cận.
 - Xác suất này **không** được cộng vào δ.
@@ -119,14 +118,16 @@ Các nhãn đã dùng từ trước cũng được kiểm tra lại bằng file 
 
 ---
 
-## 7. Hình vẽ thay bằng bản ConceptDraw (ngày 2026-11-10)
+## 7. Hình 3.2 và 3.3 vẽ lại bằng TikZ (ngày 2026-11-11)
 
-| Hình trong đồ án | Trước | Sau | File |
-|---|---|---|---|
-| Hình 3.2 (tr. 31), kiến trúc hệ thống với hai nhánh sinh dữ liệu | Vẽ bằng TikZ trong `Chapter3.tex` | Fig. 1 của bài báo IEEE (ConceptDraw), chú thích dài hơn theo bài báo | `graphics/paper/fig1_architecture.pdf` |
-| Hình 3.3 (tr. 50), giao thức ba lần phát hành của FedDP-Marginal | Vẽ bằng TikZ trong `Chapter3.tex` | Fig. 2 của bài báo IEEE (ConceptDraw), cắt bỏ khoảng trắng hai bên khi chèn; file gốc giữ nguyên | `graphics/paper/Fig2.pdf` |
+Ngày 2026-11-10 hai hình được thay bằng file ConceptDraw của bài báo IEEE. Ngày 2026-11-11 nhóm quyết định quay về TikZ, và Claude vẽ lại cả hai hình ngay trong `Chapter3.tex`, sửa hết các lỗi đã tìm thấy ở bản TikZ cũ và bản ConceptDraw ("unit 32", ℤ₂³², chữ quá nhỏ, mũi tên chỉ sai chỗ, thuật ngữ lệch với lời văn).
 
-Hai file được chép nguyên từ nhánh `IEEE`, nên khi nhóm sửa hình trong ConceptDraw cần chép bản mới vào **cả hai nhánh**. Nhãn `fig:system_arch` và `fig:three_release` giữ nguyên, nên mọi chỗ dẫn "Figure 3.2", "Figure 3.3" trong đồ án vẫn đúng. Danh mục hình dùng chú thích ngắn như cũ.
+| Hình trong đồ án | Mã nguồn | Đã sửa so với bản TikZ cũ và bản ConceptDraw |
+|---|---|---|
+| Hình 3.2 (tr. 32), kiến trúc hệ thống với hai nhánh sinh dữ liệu | [Chapter3.tex dòng 181–258](../chapters/main/Chapter3.tex#L181) | Chữ in ra 10 pt (nhãn 9 pt), không thu nhỏ; mũi tên đi ra từ cả cột gateway; thêm mũi tên nét đứt server gửi về gateway; hai bước tuỳ cấu hình của CVAE vẽ viền nét đứt; ô server ghi "Global tables + T⋆ or global CVAE"; IDS ghi RF & MLP và chỉ TSTR |
+| Hình 3.3 (tr. 50), giao thức ba lần phát hành của FedDP-Marginal | [Chapter3.tex dòng 698–742](../chapters/main/Chapter3.tex#L698) | Chữ in ra 11 pt (chi tiết 9.5 pt); uint32, ℤ_{2^{32}}, T⋆, cut-points đúng ký hiệu; mỗi lần phát hành một hộp SecAgg⁺; thêm hai mũi tên nét đứt (cut-points, T⋆) chỉ đúng vào Release 2 và Release 3; Release 3 ghi d − 1 bảng cạnh và 1 bảng gốc trên bin thô |
+
+Nhãn `fig:system_arch` và `fig:three_release` giữ nguyên, nên mọi chỗ dẫn "Figure 3.2", "Figure 3.3" trong đồ án vẫn đúng. Caption hai hình được viết lại cho khớp với hình mới. Thư mục `graphics/paper/` (hai file ConceptDraw) đã xoá khỏi nhánh `main`. Nhánh `IEEE` giữ nguyên.
 
 ---
 
@@ -148,10 +149,10 @@ Hai file được chép nguyên từ nhánh `IEEE`, nên khi nhóm sửa hình t
 | (3.21) | `[75]` | `[75, Sec. 7.10.1]` | ESL tr. 244 |
 | (3.22) | không cite | `[77, eq. (1)]`, `[77, eq. (2)]`, nói rõ không phải `[77, eq. (3)]`; thêm `opitz2019` vào `reference.bib` | Opitz–Burst arXiv v3; code tính trung bình cộng các F1 theo lớp |
 | (3.23) | `[76]` | `[76, Sec. 13.3]` | Efron–Tibshirani tr. 170 |
-| Dòng 699 | không cite | `[53, Proposition 1.6]` | Bun–Steinke |
-| Dòng 797 | không cite | `[51, Sec. 2.3]` | Dwork–Roth, chú thích 1 của Mục 2.3 |
-| Dòng 677 | không cite | `[64, eq. (2)]`, thêm `strehl2002` vào `reference.bib` | Strehl–Ghosh eq. (2) |
-| Dòng 725 | "below 10⁻⁹ by the Skellam tail bound" | Khoảng 10⁻⁹ mỗi ô theo xấp xỉ Gauss; không phải cận chặt, không cộng vào δ | Không có nguồn cho cận đuôi |
+| Dòng 808 | không cite | `[53, Proposition 1.6]` | Bun–Steinke |
+| Dòng 906 | không cite | `[51, Sec. 2.3]` | Dwork–Roth, chú thích 1 của Mục 2.3 |
+| Dòng 786 | không cite | `[64, eq. (2)]`, thêm `strehl2002` vào `reference.bib` | Strehl–Ghosh eq. (2) |
+| Dòng 834 | "below 10⁻⁹ by the Skellam tail bound" | Khoảng 10⁻⁹ mỗi ô theo xấp xỉ Gauss; không phải cận chặt, không cộng vào δ | Không có nguồn cho cận đuôi |
 
 ---
 

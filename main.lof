@@ -3,7 +3,7 @@
 \addvspace {10pt}
 \addvspace {10pt}
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Overall research workflow of PP-FedData.}}{29}{figure.caption.12}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces System architecture with both generator routes.}}{31}{figure.caption.14}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces System architecture with both generator routes.}}{32}{figure.caption.14}%
 \contentsline {figure}{\numberline {3.3}{\ignorespaces Three-release protocol of FedDP-Marginal.}}{50}{figure.caption.24}%
 \addvspace {10pt}
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Non-IID partition of the training rows over the five gateways (Dirichlet $\alpha = 0.5$, seed 0). Each cell gives the number of rows of a sub-class at a gateway; the colour gives the share of that sub-class held by the gateway.}}{79}{figure.caption.30}%

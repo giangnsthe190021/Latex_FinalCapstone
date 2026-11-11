@@ -180,9 +180,80 @@ For the FedDP-Marginal route, the sum is carried by a patched client path: stock
 
 \begin{figure}[htbp]
 \centering
-% Drawn in ConceptDraw; the same file as Fig. 1 of the IEEE paper (branch IEEE)
-\includegraphics[width=\textwidth, trim=2 5 3 8, clip]{graphics/paper/fig1_architecture.pdf}
-\caption[System architecture with both generator routes.]{System architecture with both generator routes. Gateways keep their raw traffic; FedDP-Marginal sends three releases of noisy count tables and the federated CVAE sends model updates, both through SecAgg$^+$ to an honest-but-curious server, which samples synthetic packets for the downstream IDS.}
+% Drawn in TikZ at its printed size (no scaling): 10 pt in the boxes, 9 pt in the labels; width 16.85 cm of the 17 cm text block
+\colorlet{figgw}{blue!40!gray}%
+\colorlet{figrone}{blue!70!black}%
+\colorlet{figrtwo}{teal!80!black}%
+\colorlet{figsrv}{red!60!black}%
+\colorlet{figids}{purple!70!black}%
+\begin{tikzpicture}[
+    x=1cm, y=1cm, >=Stealth,
+    font=\fontsize{10}{12}\selectfont,
+    frame/.style={rounded corners=5pt, line width=0.6pt},
+    box/.style={rectangle, rounded corners=3pt, line width=0.8pt, align=center, inner sep=2pt, minimum height=0.95cm},
+    gw/.style={box, draw=figgw, fill=figgw!10, text width=1.75cm, minimum height=0.6cm},
+    rone/.style={box, draw=figrone, fill=figrone!8, text width=2.45cm},
+    rtwo/.style={box, draw=figrtwo, fill=figrtwo!8, text width=2.45cm},
+    srv/.style={box, draw=figsrv, fill=figsrv!8, text width=3.5cm},
+    ids/.style={box, draw=figids, fill=figids!8},
+    head/.style={font=\fontsize{10}{12}\selectfont\bfseries, align=center},
+    lbl/.style={font=\fontsize{9}{11}\selectfont},
+    note/.style={font=\fontsize{9}{11}\selectfont\itshape},
+    arr/.style={->, line width=0.8pt},
+]
+% Frames
+\draw[frame, draw=figgw!50, fill=figgw!4] (0,0) rectangle (2.4,-4.1);
+\draw[frame, draw=figrone!45, fill=figrone!3] (3.0,0) rectangle (12.1,-1.5);
+\draw[frame, draw=figrtwo!45, fill=figrtwo!3] (3.0,-2.6) rectangle (12.1,-4.1);
+\draw[frame, draw=figsrv!45, fill=figsrv!3] (12.7,0) rectangle (16.8,-4.1);
+\draw[frame, draw=figids!45, fill=figids!3] (8.3,-5.3) rectangle (16.8,-7.0);
+% Frame titles
+\node[head, text=figgw, anchor=south] at (1.2,0.05) {Edge gateways\\($K = 5$ clients)};
+\node[head, text=figrone, anchor=south west] at (3.0,0.05) {Route 1: FedDP-Marginal (main)};
+\node[note, text=figrone, anchor=south east] at (12.1,0.05) {3 count table releases};
+\node[head, text=figrtwo, anchor=south west] at (3.0,-2.55) {Route 2: Federated CVAE (baseline)};
+\node[note, text=figrtwo, anchor=south east] at (12.1,-2.55) {30 rounds $\times$ 2 epochs};
+\node[head, text=figsrv, anchor=south] at (14.75,0.05) {Honest-but-curious\\server};
+\node[head, text=figids, anchor=south] at (12.55,-5.25) {Downstream IDS};
+% Gateways
+\node[gw] (g1) at (1.2,-0.55) {Gateway 1};
+\node[gw] (g2) at (1.2,-1.35) {Gateway 2};
+\node at (1.2,-2.0) {$\vdots$};
+\node[gw] (gk) at (1.2,-2.65) {Gateway $K$};
+\node[note, text=figgw!80!black, align=center] at (1.2,-3.5) {Raw traffic\\stays local};
+% Route 1: FedDP-Marginal
+\node[rone] (a1) at (4.55,-0.75) {1. Local count\\tables};
+\node[rone] (a2) at (7.55,-0.75) {2. Skellam\\noise share $\xi_k$};
+\node[rone] (a3) at (10.55,-0.75) {3. SecAgg$^+$\\(uint32)};
+% Route 2: federated CVAE (dashed boxes: only in some configurations)
+\node[rtwo] (b1) at (4.55,-3.35) {1. Local CVAE\\training};
+\node[rtwo, dashed] (b2) at (7.55,-3.35) {2. DP-SGD\\(Opacus)};
+\node[rtwo, dashed] (b3) at (10.55,-3.35) {3. SecAgg$^+$\\(fixed-point)};
+% Server
+\node[srv] (s1) at (14.75,-0.75) {1. Aggregation:\\table sums or FedAvg};
+\node[srv] (s2) at (14.75,-2.05) {2. Global tables + $T^\star$\\or global CVAE};
+\node[srv] (s3) at (14.75,-3.35) {3. Class-conditional\\sampling};
+% Downstream IDS
+\node[ids, text width=2.6cm] (cls) at (14.75,-6.15) {RF \& MLP\\classifiers};
+\node[ids, text width=3.6cm] (eval) at (10.45,-6.15) {Evaluation on the\\locked real test split\\(30,000 packets)};
+% Arrows
+\draw[arr, figrone] (2.4,-0.75) -- (a1.west);
+\draw[arr, figrtwo] (2.4,-3.35) -- (b1.west);
+\draw[arr, figrone] (a1) -- (a2);
+\draw[arr, figrone] (a2) -- (a3);
+\draw[arr, figrtwo] (b1) -- (b2);
+\draw[arr, figrtwo] (b2) -- (b3);
+\draw[arr, figrone] ($(a3.east)+(0,0.2)$) -- ($(s1.west)+(0,0.2)$);
+\draw[arr, figrtwo] (b3.east) -- (12.4,-3.35) -- (12.4,-0.95) -- ($(s1.west)+(0,-0.2)$);
+\draw[arr, figsrv] (s1) -- (s2);
+\draw[arr, figsrv] (s2) -- (s3);
+\draw[arr, figsrv] (s3.south) -- node[lbl, right, align=left] {synthetic\\data} (cls.north);
+\draw[arr, figids] (cls.west) -- node[lbl, above] {TSTR} (eval.east);
+% Server back to the gateways
+\draw[arr, dashed, black!70] (13.2,-4.1) -- (13.2,-4.55) -- (1.2,-4.55) -- (1.2,-4.1);
+\node[note, text=black!70, anchor=north west] at (1.5,-4.6) {cut-points and $T^\star$ (route 1); global weights (route 2)};
+\end{tikzpicture}
+\caption[System architecture with both generator routes.]{System architecture with both generator routes. Gateways keep their raw traffic. FedDP-Marginal sends three releases of noisy count tables through SecAgg$^+$; the federated CVAE sends model updates over 30 FedAvg rounds of 2 local epochs (default configuration). The honest-but-curious server sends the cut-points and the tree $T^\star$, or the global weights, back to the gateways (dashed arrow) and samples synthetic packets, on which the downstream IDS is trained (TSTR). Dashed boxes mark CVAE steps that only some configurations use (Table~\ref{tab:generator_matrix}).}
 \label{fig:system_arch}
 \end{figure}
 
@@ -626,9 +697,47 @@ FedDP-Marginal adapts private marginal-based synthesis of tabular data, namely t
 
 \begin{figure}[htbp]
 \centering
-% Drawn in ConceptDraw; the same file as Fig. 2 of the IEEE paper (branch IEEE), with the empty side margins trimmed
-\includegraphics[width=0.9\textwidth, trim=105 8 106 0, clip]{graphics/paper/Fig2.pdf}
-\caption[Three-release protocol of FedDP-Marginal.]{Three-release protocol of FedDP-Marginal. Each release is a sum of count tables plus Skellam noise shares, computed with SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$. The coarse cut-points (after Release~1) and the tree $T^\star$ (after Release~2) are sent back to the gateways before the next release.}
+% Drawn in TikZ at its printed size (no scaling): 11 pt, details and labels 9.5 pt; width 15.9 cm
+\def\figsmall{\fontsize{9.5}{11.5}\selectfont}%
+\begin{tikzpicture}[
+    x=1cm, y=1cm, >=Stealth,
+    font=\fontsize{11}{13.5}\selectfont,
+    box/.style={rectangle, rounded corners=3pt, line width=0.8pt, align=center, inner sep=3pt, minimum height=2.2cm},
+    rel/.style={box, draw=blue!70!black, fill=blue!5, text width=4.9cm},
+    sec/.style={box, draw=teal!70!black, fill=teal!5, text width=2.6cm},
+    srv/.style={box, draw=red!60!black, fill=red!5, text width=4.9cm},
+    head/.style={font=\fontsize{11}{13.5}\selectfont\bfseries, align=center, anchor=south},
+    lbl/.style={font=\fontsize{9.5}{11.5}\selectfont},
+    arr/.style={->, line width=0.8pt, draw=black!75},
+    back/.style={->, line width=0.8pt, dashed, draw=green!45!black},
+    backlbl/.style={font=\fontsize{9.5}{11.5}\selectfont\itshape, text=green!40!black, fill=white, inner sep=1.5pt},
+]
+% Column headings
+\node[head, text=blue!70!black] at (2.55,1.25) {Gateways ($k = 1, \dots, K$)};
+\node[head, text=teal!70!black] at (8.0,1.25) {Secure aggregation\\{\normalfont\figsmall over $\mathbb{Z}_{2^{32}}$, no rounding}};
+\node[head, text=red!60!black] at (13.35,1.25) {Aggregation server};
+% Gateways: the three releases
+\node[rel] (r1) at (2.55,0) {\textbf{Release 1}\\1-way histograms\\{\figsmall ($d$ tables, per class, fine bins)}};
+\node[rel] (r2) at (2.55,-2.95) {\textbf{Release 2}\\Pairwise counts\\{\figsmall ($\tbinom{d}{2}$ tables, pooled over\\classes, coarse bins)}};
+\node[rel] (r3) at (2.55,-5.9) {\textbf{Release 3}\\Tree-edge tables\\{\figsmall ($d - 1$ edge tables and 1 root\\table, per class, coarse bins)}};
+% One SecAgg+ sum per release
+\node[sec] (m1) at (8.0,0) {SecAgg$^+$\\{\figsmall sum mod $2^{32}$}};
+\node[sec] (m2) at (8.0,-2.95) {SecAgg$^+$\\{\figsmall sum mod $2^{32}$}};
+\node[sec] (m3) at (8.0,-5.9) {SecAgg$^+$\\{\figsmall sum mod $2^{32}$}};
+% Server: post-processing of each noisy sum
+\node[srv] (s1) at (13.35,0) {Noisy 1-way histograms\\{\figsmall $\rightarrow$ coarse cut-points at quantiles}};
+\node[srv] (s2) at (13.35,-2.95) {Noisy MI of all pairs\\{\figsmall $\rightarrow$ global Chow--Liu tree $T^\star$}};
+\node[srv] (s3) at (13.35,-5.9) {Edge conditionals and\\root-to-leaf sampling\\{\figsmall per class, along $T^\star$}};
+% Solid arrows: noisy counts up, lifted sums to the server
+\foreach \i in {1,2,3} {
+    \draw[arr] (r\i.east) -- node[lbl, above] {$x_k + \xi_k$} node[lbl, below] {uint32} (m\i.west);
+    \draw[arr] (m\i.east) -- node[lbl, above] {lift} (s\i.west);
+}
+% Dashed arrows: what the server sends back before the next release
+\draw[back] (11.6,-1.1) -- (11.6,-1.475) -- node[backlbl, pos=0.5] {coarse cut-points} (4.3,-1.475) -- (4.3,-1.85);
+\draw[back] (11.6,-4.05) -- (11.6,-4.425) -- node[backlbl, pos=0.5] {tree $T^\star$} (4.3,-4.425) -- (4.3,-4.8);
+\end{tikzpicture}
+\caption[Three-release protocol of FedDP-Marginal.]{Three-release protocol of FedDP-Marginal. Each release is a sum of count tables plus Skellam noise shares, computed with SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$: gateway $k$ sends its counts $x_k$ plus its noise share $\xi_k$ as uint32 values, and the server recovers the signed sum by the centred lift. The coarse cut-points (after Release~1) and the tree $T^\star$ (after Release~2) are sent back to the gateways before the next release (dashed arrows).}
 \label{fig:three_release}
 \end{figure}
 

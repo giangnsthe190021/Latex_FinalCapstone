@@ -26,8 +26,7 @@ Mỗi slide chỉ mang một thông điệp, và tiêu đề chính là thông �
 
 - **Nội dung:** tối đa một hình hoặc một bảng rút gọn trên một slide. Phần giải thích để vào lời nói.
 - **Hình Chương 4:** lấy từ thư mục `graphics/chapter4/` của repo. File PDF là hình vector, chèn vẫn nét.
-- **Hình 3.1:** vẽ bằng TikZ nên không có file ảnh riêng. Chụp từ `main.pdf` ở mức phóng to 300%, không vẽ lại.
-- **Hình 3.2, 3.3:** vẽ bằng ConceptDraw (giống Fig. 1 và Fig. 2 của bài báo IEEE). Chèn thẳng file `graphics/paper/fig1_architecture.pdf` và `graphics/paper/Fig2.pdf`, không chụp màn hình. Fig2 có khoảng trắng rộng hai bên, cắt bớt khi chèn.
+- **Hình 3.1, 3.2, 3.3:** vẽ bằng TikZ nên không có file ảnh riêng. Chụp từ `main.pdf` ở mức phóng to 300%, không vẽ lại. Hình 3.2 ở trang 32, Hình 3.3 ở trang 50 (số trang in ở chân trang). Không dùng hình ConceptDraw của bài báo IEEE: hai hình đó chưa sửa và khác chữ với đồ án.
 - **Bảng:** chỉ giữ các dòng được nêu trong hướng dẫn, không dán nguyên bảng của đồ án.
 - **Số liệu:** chép đúng số và đúng nhãn cấu hình trong `main.pdf`. Macro-F1 luôn kèm tên bộ phân loại nếu so sánh RF và MLP.
 - **Công thức:** chỉ dùng ở slide 20, 22 và 25. Trích nguồn theo dạng đã dùng trong đồ án, ví dụ [22, Cor. 3.6, eq. (3.2)]. Số tài liệu lấy theo danh mục của `main.pdf`.
