@@ -63,6 +63,27 @@ Three facts from these checks shape the rest of the chapter. First, no column gi
 
 Check C5 also bears on the six-class merge. Only BCF falls below the threshold, so the merge does not rest on the two variants being inseparable. It is a design choice that keeps enough rows per class, and Section~\ref{subsec:res_robustness} reports the eleven-class results for reference.
 
+\subsection{Testing on a Block of the Same Capture}\label{subsec:res_split_check}
+The test rows of DELAYED, SYN, INVALID and WILL are a block of the capture their training rows come from (Table~\ref{tab:split_kind}). Whether this makes their scores higher than a test on a new capture cannot be measured on those classes, since each has only one capture. It can be measured on NORMAL and BCF, which have 49 and 40 captures. Their sampled rows were pooled and drawn again in two ways, with the class sizes of the study: by whole capture, as in the study, and by block of the same capture, with one contiguous stretch of every capture as test rows, training rows before and after it, and the TCP streams that straddle the boundary dropped, as in the study's block split. Both arms use the same number of training rows (55,186 to 55,448 NORMAL rows instead of 60,000, because the block arm drops the straddling streams). The other classes keep the rows of the study. Table~\ref{tab:res_split_check} gives the result for the real-data RF (B0, three seeds).
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Real-data RF with NORMAL and BCF tested on unseen captures or on a block of their training captures (three seeds)}
+\label{tab:res_split_check}
+\begin{tabularx}{\textwidth}{Xcccc}
+\toprule
+\textbf{Split of NORMAL and BCF} & \textbf{Macro-F1} & \textbf{F1 NORMAL} & \textbf{F1 BCF} & \textbf{Recall BCF} \\
+\midrule
+Split of the study (by capture) & $0.448 \pm 0.000$ & 0.521 & 0.559 & 0.780 \\
+Redrawn by whole capture & $0.448 \pm 0.001$ & 0.521 & 0.555 & 0.780 \\
+Redrawn by block of the same capture & $0.447 \pm 0.001$ & 0.517 & 0.559 & 0.784 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The block split moves the F1 of NORMAL by $-0.004$ and that of BCF by $+0.003$, within twice the largest seed-to-seed standard deviation of the two arms (0.009). For these two classes, once the identifier columns are removed, testing on another part of the same capture scores about as testing on an unseen capture. This supports, but does not prove, that the scores of DELAYED, SYN, INVALID and WILL are not inflated by their block split: those classes may carry more capture-specific traits than NORMAL and BCF, and no new capture exists to check them. The measurement also covers only the real-data classifier, not each generator. Because every configuration uses the same split, the comparisons between configurations are less exposed to this question than the absolute level of the scores.
+
 \subsection{References on Real Data}
 Table~\ref{tab:res_references} gives the references. They train on the pooled real split and therefore need what the threat model forbids. They mark how far a detector can go on these features when pooling is allowed.
 

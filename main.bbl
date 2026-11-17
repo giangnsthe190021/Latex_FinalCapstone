@@ -281,6 +281,13 @@ R.~McKenna, G.~Miklau, and D.~Sheldon, ``Winning the {NIST} contest: A scalable
   \emph{Journal of Privacy and Confidentiality}, vol.~11, no.~3, pp. 1--35,
   2021.
 
+\bibitem[Abadi et~al.(2016)Abadi, Chu, Goodfellow, McMahan, Mironov, Talwar,
+  and Zhang]{abadi2016dpsgd}
+M.~Abadi, A.~Chu, I.~Goodfellow, H.~B. McMahan, I.~Mironov, K.~Talwar, and
+  L.~Zhang, ``Deep learning with differential privacy,'' in \emph{Proceedings
+  of the 2016 ACM SIGSAC Conference on Computer and Communications Security
+  (CCS '16)}.\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2016, pp. 308--318.
+
 \bibitem[Sohn et~al.(2015)Sohn, Lee, and Yan]{sohn2015cvae}
 \BIBentryALTinterwordspacing
 K.~Sohn, H.~Lee, and X.~Yan, ``Learning structured output representation using
@@ -290,18 +297,6 @@ K.~Sohn, H.~Lee, and X.~Yan, ``Learning structured output representation using
   Available:
   \url{https://proceedings.neurips.cc/paper/2015/hash/8d55a249e6baa5c0677fbc52b95b178b-Abstract.html}
 \BIBentrySTDinterwordspacing
-
-\bibitem[Mironov(2017)]{mironov2017rdp}
-I.~Mironov, ``R{\'e}nyi differential privacy,'' in \emph{2017 IEEE 30th
-  Computer Security Foundations Symposium (CSF)}.\hskip 1em plus 0.5em minus
-  0.4em\relax IEEE, 2017, pp. 263--275.
-
-\bibitem[Abadi et~al.(2016)Abadi, Chu, Goodfellow, McMahan, Mironov, Talwar,
-  and Zhang]{abadi2016dpsgd}
-M.~Abadi, A.~Chu, I.~Goodfellow, H.~B. McMahan, I.~Mironov, K.~Talwar, and
-  L.~Zhang, ``Deep learning with differential privacy,'' in \emph{Proceedings
-  of the 2016 ACM SIGSAC Conference on Computer and Communications Security
-  (CCS '16)}.\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2016, pp. 308--318.
 
 \bibitem[Hsu et~al.(2019)Hsu, Qi, and Brown]{hsu2019}
 T.-M.~H. Hsu, H.~Qi, and M.~Brown, ``Measuring the effects of non-identical
@@ -448,6 +443,11 @@ J.~G. Skellam, ``The frequency distribution of the difference between two
   {Poisson} variates belonging to different populations,'' \emph{Journal of the
   Royal Statistical Society: Series A (General)}, vol. 109, no.~3, p. 296,
   1946.
+
+\bibitem[Mironov(2017)]{mironov2017rdp}
+I.~Mironov, ``R{\'e}nyi differential privacy,'' in \emph{2017 IEEE 30th
+  Computer Security Foundations Symposium (CSF)}.\hskip 1em plus 0.5em minus
+  0.4em\relax IEEE, 2017, pp. 263--275.
 
 \bibitem[Mironov et~al.(2019)Mironov, Talwar, and Zhang]{mironov2019}
 I.~Mironov, K.~Talwar, and L.~Zhang, ``{R{\'e}nyi} differential privacy of the

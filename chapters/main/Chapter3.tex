@@ -268,8 +268,48 @@ The aggregation server is assumed to be honest-but-curious, also called semi-hon
     \item \textbf{Local DP (MGl):} Each gateway adds the full noise itself, so no other gateway needs to be trusted~\cite{kasiviswanathan2011}; the total noise variance in the aggregate grows with the number of clients.
 \end{itemize}
 
+\subsubsection*{Parties and What They See}
+Table~\ref{tab:parties} lists every party, what it is assumed to do, what it receives, and which mechanism protects the records of the honest gateways from it.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Parties of the threat model}
+\label{tab:parties}
+\begin{tabularx}{\textwidth}{L{2.3cm}L{3.3cm}XL{3.4cm}}
+\toprule
+\textbf{Party} & \textbf{Assumption} & \textbf{What it receives} & \textbf{What protects the honest gateways' records} \\
+\midrule
+Aggregation server & Honest-but-curious: follows the protocol, analyses every message & With SecAgg$^+$: masked vectors and their sum (noisy tables or summed weights), public information and, in the CVAE routes, client sizes. Without SecAgg$^+$ (B3, M1, MGl): each gateway's update or noisy table & SecAgg$^+$ hides each contribution; DP bounds what the sum, and everything derived from it, reveals \\
+\midrule
+Honest gateway & Follows the protocol, adds its noise share, is trusted with its own traffic & Its own traffic; what the server sends back: cut-points and $T^\star$ (FedDP-Marginal) or the global model after every round (CVAE) & DP only; SecAgg$^+$ protects the uplink, not what is sent back \\
+\midrule
+Colluding gateway & Follows the protocol but shares its keys and shares with the server, or withholds its noise share & Its own masks and secret shares, in addition to what an honest gateway receives & DP with the noise of the remaining $h$ honest gateways; SecAgg$^+$ while fewer than $T_{\text{recon}}$ gateways collude \\
+\midrule
+Compromised gateway & Controlled by an attacker but still running the protocol & Its own traffic in clear, and the same messages as a colluding gateway & Nothing for its own traffic; for the other gateways, the same as against a colluding gateway \\
+\midrule
+Reader of the released output & Receives the synthetic data, the released tables, or the model & The released output only & DP, through post-processing; no formal protection in configurations without DP \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection*{Collusion}
+Collusion between the server and some gateways has two effects, and the study accounts for both.
+\begin{itemize}
+    \item \textbf{Missing noise:} a colluding gateway may skip its noise share, or its share may be known to the server. Only the $h$ honest gateways then contribute noise that the server does not know, and the effective $\varepsilon(h)$ is recomputed from the reduced variance (Section~\ref{subsec:privacy_accounting}). Chapter~4 reports it for every $h$.
+    \item \textbf{Unmasking:} SecAgg$^+$ shares the masking seeds by Shamir secret sharing with threshold $T_{\text{recon}} = 3$. If $T_{\text{recon}}$ or more gateways hand their shares to the server, the server can remove the masks of an honest gateway and read its individual vector. In FedDP-Marginal that vector carries only $1/t$ of the noise variance, so the records of that gateway are then protected only at the level of a single noise share, the same as with one honest gateway. This is weaker than local DP, in which every gateway adds the full noise. In the CVAE routes the unmasked vector is a model update, protected by DP-SGD in M3 and not at all in M2.
+\end{itemize}
+
+\subsubsection*{A Compromised Gateway}
+An attacker who takes control of a gateway, for example through a vulnerability of the device, reads that gateway's traffic in clear; no mechanism of this study can protect it. Toward the other gateways, a compromised gateway learns what a colluding gateway learns: the messages sent back by the server, and more if it cooperates with the server as described above. It can also skip its noise share, which lowers $h$, or send altered tables, which is poisoning and out of scope. In the configurations without DP (B3, M2, and FedDP-Marginal without noise), the global model or the released tables that it receives carry no formal protection, so it learns whatever they reveal about the other gateways' data. Secure aggregation does not help here, because it protects only what travels from the gateways to the server.
+
 \subsubsection*{Out of Scope}
-Active attacks by malicious gateways, namely data poisoning, model poisoning, and Byzantine behaviour, are outside the threat model. Statements in this thesis about privacy do not extend to them.
+The following are outside the threat model, and statements in this thesis about privacy do not extend to them:
+\begin{itemize}
+    \item Active attacks by gateways: data poisoning, model poisoning, and Byzantine behaviour.
+    \item A server that deviates from the protocol, for example by sending different cut-points to different gateways, by excluding honest gateways to isolate one contribution, or by forging messages. Flower's SecAgg$^+$ is used in its semi-honest setting.
+    \item Attacks on the network links and side channels (timing, message sizes). The links are assumed to be authenticated and encrypted; the simulation does not implement or measure this.
+\end{itemize}
 
 \subsubsection*{Roles of Secure Aggregation and Differential Privacy}
 The two mechanisms address different threats and are not interchangeable (Table~\ref{tab:protection_mechanisms}).
@@ -313,8 +353,20 @@ The following are treated as known to every party and are outside the accounting
 \end{itemize}
 In the FedDP-Marginal route the client reports \texttt{num\_examples} as a fixed public constant, so client sizes do not travel through that field.
 
+\subsubsection*{What the Guarantee Means and What It Does Not}
+A mechanism $\mathcal{M}$ is $(\varepsilon, \delta)$-differentially private if, for any two training sets $\mathcal{D}$ and $\mathcal{D}'$ that differ by one packet and any set $S$ of outputs, $\Pr[\mathcal{M}(\mathcal{D}) \in S] \le e^{\varepsilon} \Pr[\mathcal{M}(\mathcal{D}') \in S] + \delta$~\cite{dwork2014}. Whatever an adversary knows beforehand, seeing the release changes its odds on whether a given packet was in the training data by at most a factor $e^{\varepsilon}$, apart from the probability $\delta$.
+\begin{itemize}
+    \item \textbf{Size of the factor:} $e^{\varepsilon}$ is about 2.7 at $\varepsilon = 1$, 148 at $\varepsilon = 5$, and 22,026 at $\varepsilon = 10$. The bound at $\varepsilon = 1$ is meaningful; at $\varepsilon = 5$ and $\varepsilon = 10$ it is weak as a statement about one packet. These budgets are best read as levels of noise to compare configurations at, not as strong individual protection.
+    \item \textbf{Size of $\delta$:} with $N = 88{,}500$ training records, $N\delta \approx 0.89$, so $\delta = 10^{-5}$ is only just below $1/N$ and not far below it. A mechanism that published each record independently with probability $\delta$ would satisfy the definition and publish about one record in expectation. The mechanisms used here do not behave like that, but the chosen $\delta$ does not exclude it.
+    \item \textbf{What is covered:} the three releases together (their composition is accounted), and everything computed from them, by post-processing: the cut-points, the tree, the generator, the synthetic data, and any classifier trained on them. In the CVAE routes with DP (M1, M3), the trained model and the data it generates are covered for each client by its own DP-SGD.
+    \item \textbf{What is not covered:} larger units than a packet, except through group privacy or the unit-level variants; the public side information listed above; the hyper-parameter selection; and the case where fewer than the assumed number of gateways add their noise.
+    \item \textbf{What DP does not try to hide:} properties of the population. A release is meant to reveal, for example, the typical packet length of an attack class; DP only ensures that this would be learned with or without any one packet.
+    \item \textbf{What the guarantee rests on:} exact sampling of the noise, correct accounting, and the absence of implementation side channels. The implementation transmits and sums the noisy counts as exact integers (Section~\ref{subsec:privacy_accounting}) but was not audited for side channels, and the rare event that a noisy count exceeds the clipping range is approximated, not added to $\delta$.
+    \item \textbf{Role of the empirical attacks:} the membership attacks of Section~\ref{subsec:eval_protocols} can show that a release leaks, but an attack that fails does not prove that a release is private; the formal bound is the guarantee.
+\end{itemize}
+
 \subsubsection*{Standard Formulation for the Thesis}
-We assume an honest-but-curious aggregation server that follows the protocol but may analyse every message it receives. Gateways hold their own traffic and are trusted with it. In the base setting every gateway follows the protocol and adds its share of the noise; we also report the guarantee when only $h$ of the $K$ gateways do so, and an optional threshold $t$ calibrates the noise so that the target $\varepsilon$ holds whenever at least $t$ gateways add their share (the others may collude with the server or drop out). In the local-DP variant each gateway adds the full noise, so no other gateway needs to be trusted. Malicious (poisoning or Byzantine) gateways are out of scope.
+We assume an honest-but-curious aggregation server that follows the protocol but may analyse every message it receives. Gateways hold their own traffic and are trusted with it. In the base setting every gateway follows the protocol and adds its share of the noise; we also report the guarantee when only $h$ of the $K$ gateways do so, and an optional threshold $t$ calibrates the noise so that the target $\varepsilon$ holds whenever at least $t$ gateways add their share (the others may collude with the server or drop out). If $T_{\text{recon}}$ or more gateways collude, an honest gateway's contribution is protected only by its own noise share. A compromised gateway exposes its own traffic and learns what the server sends back, which only DP protects. In the local-DP variant each gateway adds the full noise, so no other gateway needs to be trusted. Malicious gateways (poisoning, Byzantine behaviour) and a server that deviates from the protocol are out of scope.
 
 Secure aggregation hides each gateway's contribution from the server, which learns only the sum; it does not limit what the aggregate reveals and receives no privacy credit. Differential privacy bounds what the released tables, model, or synthetic data reveal about one record (one packet) with $\delta = 10^{-5}$. Class labels, class counts, and client sizes are treated as public side information and are not protected.
 
@@ -559,7 +611,41 @@ Categorical (one-hot) & \texttt{message\_type} (11), \texttt{qos\_level\_1} (5),
 \subsection{Group-Based Split and Quota Sampling}\label{subsec:split}
 The eleven sub-classes (NORMAL and the DoS and DDoS variants of the five attack families) are split by group: whole capture groups are assigned to the training, validation, or test split according to a fixed \texttt{split\_seed}. This keeps highly correlated packets of the same TCP stream or capture session from appearing in more than one split~\cite{arp2022}.
 
-The source data limits this approach: 8 of the 11 sub-classes come from a single capture file. For these sub-classes, the validation and test rows are taken as consecutive blocks of the same capture used for training (block split), separated by buffers of 1,000 rows to reduce adjacency leakage. TCP streams that straddle a block boundary are dropped entirely. This removes between 1.2\% and 9.9\% of the eligible rows of each affected sub-class and biases the sample slightly toward shorter connections.
+The source data limits this approach: 8 of the 11 sub-classes come from a single capture file. For these sub-classes, the capture is cut into 10 consecutive blocks; the fixed \texttt{split\_seed} sends one block to testing, one to validation and the other 8 to training (block split), so the test block usually has training blocks before and after it, separated by buffers of 1,000 rows to reduce adjacency leakage. TCP streams that straddle a block boundary are dropped entirely. This removes between 1.2\% and 9.9\% of the eligible rows of each affected sub-class and biases the sample slightly toward shorter connections. Table~\ref{tab:split_kind} gives the split of every sub-class.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption[Split of each sub-class]{Split of each sub-class. Group: whole captures go to one split; validation and test each take one capture. Block: the single capture is cut into 10 blocks; validation and test each take one block, training the other 8. The last column gives the share of eligible rows dropped because their TCP stream straddles two blocks.}
+\label{tab:split_kind}
+\begin{tabular}{lcl rrr r}
+\toprule
+\textbf{Sub-class} & \textbf{Captures} & \textbf{Split} & \textbf{Train} & \textbf{Val} & \textbf{Test} & \textbf{Dropped} \\
+\midrule
+NORMAL & 49 & group & 60,000 & 2,000 & 5,000 & n/a \\
+BCF\_DoS & 19 & group & 10,000 & 1,000 & 2,500 & n/a \\
+BCF\_DDoS & 21 & group & 10,000 & 1,000 & 2,500 & n/a \\
+\midrule
+DELAYED\_DoS & 1 & block & 1,500 & 1,000 & 2,500 & 4.4\% \\
+DELAYED\_DDoS & 1 & block & 1,500 & 1,000 & 2,500 & 2.6\% \\
+SYN\_DoS & 1 & block & 1,500 & 1,000 & 2,500 & 2.6\% \\
+SYN\_DDoS & 1 & block & 1,500 & 1,000 & 2,500 & 9.9\% \\
+INVALID\_DoS & 1 & block & 750 & 1,000 & 2,500 & 1.2\% \\
+INVALID\_DDoS & 1 & block & 750 & 1,000 & 2,500 & 4.9\% \\
+WILL\_DoS & 1 & block & 500 & 1,000 & 2,500 & 1.3\% \\
+WILL\_DDoS & 1 & block & 500 & 1,000 & 2,500 & 1.6\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection*{What the Split Means for Generalisation}
+The split decides what a test score measures, and it does not measure the same thing for every class.
+\begin{itemize}
+    \item \textbf{NORMAL and BCF:} the test rows come from a capture that contributed no training row. Their scores measure detection on a recording the model has not seen, although only one test capture per sub-class.
+    \item \textbf{DELAYED, SYN, INVALID and WILL:} the test rows are one block of the same capture as the training rows, usually with training blocks before and after it. Their scores measure detection of other traffic from the same attack run, on the same testbed and with the same tool settings, not of a new run of the attack. No TCP stream is shared between the splits, but packets of one capture can share characteristics that a new capture would not have.
+    \item \textbf{Comparisons between configurations:} every configuration uses the same split, so a difference between two generators or two protections is measured on the same test rows; the split affects the absolute level of the scores more than their comparison.
+\end{itemize}
+Two measurements in Chapter~4 bound the effect of this choice: how much the score of the real-data IDS changes when the split or the identifier columns change, and, for the classes that have several captures, whether a test on a block of the same capture scores differently from a test on an unseen capture. Neither can test DELAYED, SYN, INVALID or WILL on a new capture, because none exists in the data.
 
 After the split, rows are drawn at random without replacement according to the class quotas in Table~\ref{tab:quota}. The training quotas impose a strong imbalance, whereas the validation and test quotas are balanced.
 
@@ -890,7 +976,7 @@ The noise is calibrated under three trust assumptions:
     \begin{itemize}
         \item $t = 5$: distributed DP ($n_{\text{col}} = 0$, $T_{\text{recon}} = 3$), assuming full honest participation;
         \item $t = 3$: threshold DP ($n_{\text{col}} \le 2 < T_{\text{recon}} = 3$), tolerating up to two dropouts or two semi-honest colluders while the server still sees only the aggregate;
-        \item $t = 2$ (hardened threshold DP): to tolerate $n_{\text{col}} = 3$ colluders, $T_{\text{recon}}$ must be raised to at least 4 (leaving one dropout of tolerance). With $T_{\text{recon}} = 3$, three colluders would hold three shares, enough to reconstruct the honest gateways' masks and reduce the distributed guarantee to local DP. Evaluating $t = 2$ therefore requires $T_{\text{recon}} = 4$.
+        \item $t = 2$ (hardened threshold DP): to tolerate $n_{\text{col}} = 3$ colluders, $T_{\text{recon}}$ must be raised to at least 4 (leaving one dropout of tolerance). With $T_{\text{recon}} = 3$, three colluders would hold three shares, enough to reconstruct the honest gateways' masks; each exposed contribution would then carry only its own noise share of variance $\mu_{\text{sk}}/t$, which is weaker than local DP, where each gateway adds the full variance. Evaluating $t = 2$ therefore requires $T_{\text{recon}} = 4$.
     \end{itemize}
     \item \textbf{Local DP (MGl):} Each gateway adds the full noise variance, $\mu_{\text{sk},k} = \mu_{\text{sk}}$. No other gateway and not the server need to be trusted, and SecAgg$^+$ is not used, but the aggregate carries $K$ times the noise variance ($K\mu_{\text{sk}}$).
 \end{itemize}

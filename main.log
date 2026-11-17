@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.11.9)  11 NOV 2026 10:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.11.9)  17 NOV 2026 23:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2004,7 +2004,7 @@ Package microtype Warning: I cannot find a protrusion list for font
 \openout2 = `chapters/front/head.aux'.
 
 (chapters/front/head.tex
-<graphics/Image/logo.jpg, id=322, 515.9275pt x 172.645pt>
+<graphics/Image/logo.jpg, id=326, 515.9275pt x 172.645pt>
 File: graphics/Image/logo.jpg Graphic file (type jpg)
 <use graphics/Image/logo.jpg>
 Package pdftex.def Info: graphics/Image/logo.jpg  used on input line 11.
@@ -2135,9 +2135,9 @@ Package microtype Warning: I cannot find a protrusion list for font
 
 ] (main.lot [7
 
-]) [8]
+] [8]) [9]
 (chapters/main/Abstract.tex) (main.gls) (main.acr) (chapters/front/symbols.tex
-[9
+[10
 
 
 ]
@@ -2169,11 +2169,11 @@ Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/m/n/7.11761'. Switching off
 (microtype)                protrusion for this font on input line 38.
 
-ignored error: Infinite glue shrinkage found in box being split [10
+ignored error: Infinite glue shrinkage found in box being split [11
 
 ]
-ignored error: Infinite glue shrinkage found in box being split [11]
-ignored error: Infinite glue shrinkage found in box being split [12]) [13]
+ignored error: Infinite glue shrinkage found in box being split [12]
+ignored error: Infinite glue shrinkage found in box being split [13]) [14]
 (chapters/main/Chapter1.tex
 Chapter 1.
 
@@ -2202,15 +2202,21 @@ Package microtype Warning: I cannot find a protrusion list for font
 
 ] [6] [7
 
-] [8
+] [8] [9
 
-] [9]) (chapters/main/Chapter2.tex [10
+]
+Underfull \hbox (badness 10000) in paragraph at lines 73--74
+[]\T5/ptm/b/n/13 (+20) Constrained Threat Model: \T5/ptm/m/n/13 (+20) The ag-gr
+e-ga-tion server is as-sumed to be
+ []
+
+[10]) (chapters/main/Chapter2.tex [11
 
 ]
 Chapter 2.
-[11
+[12
 
-] [12] [13] [14]
+] [13] [14] [15]
 Underfull \hbox (badness 2913) in paragraph at lines 48--49
 []\T5/ptm/b/n/13 (+20) Transformer-Based Gen-er-a-tive Mod-els: \T5/ptm/m/n/13 
 (+20) Ar-chi-tec-tures lever-ag-ing multi-head
@@ -2222,13 +2228,13 @@ Underfull \hbox (badness 1253) in paragraph at lines 52--54
 inct com-pu-ta-tional bot-tle-necks, train-ing
  []
 
-[15]
+[16]
 Underfull \hbox (badness 1231) in paragraph at lines 65--66
 \T5/ptm/m/n/13 (+20) Dif-fer-en-tial pri-vacy (DP) and cryp-to-graphic pro-to-c
 ols bound gra-di-ent in-ver-sion and
  []
 
-[16] [17]
+[17] [18]
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/m/n/9.62007'. Switching off
@@ -2239,21 +2245,27 @@ Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/m/n/7.80008'. Switching off
 (microtype)                protrusion for this font on input line 74.
 
-[18] [19] [20] [21
+[19] [20] [21] [22
 
-]
-Underfull \hbox (badness 1622) in paragraph at lines 148--149
-\T5/ptm/m/n/13 (+20) sta-tis-ti-cal noise but in-curs com-mu-ni-ca-tion and rou
-nd com-plex-ity. Con-versely,
+] [23] [24]
+Underfull \hbox (badness 1701) in paragraph at lines 158--159
+\T5/ptm/m/n/13 (+20) PrivBayes [[]]), Chow--Liu trees [[]], Skel-lam noise [[]]
+, se-cure ag-gre-ga-tion [[]],
  []
 
-[22] [23] [24
 
-]) (chapters/main/Chapter3.tex [25]
+Underfull \hbox (badness 4846) in paragraph at lines 170--171
+[]\T5/ptm/b/n/13 (+20) Compared with prior work: \T5/ptm/m/n/13 (+20) the deep 
+fed-er-ated gen-er-a-tors for in-tru-sion
+ []
+
+[25
+
+] [26]) (chapters/main/Chapter3.tex [27]
 Chapter 3.
-[26
+[28
 
-] [27]
+] [29]
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/m/n/7'. Switching off
@@ -2268,7 +2280,7 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 124.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 124.
-[28] [29]
+[30] [31]
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/m/n/10'. Switching off
@@ -2297,165 +2309,164 @@ Package microtype Warning: I cannot find a protrusion list for font
 
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 215.
-[30] [31] [32] [33] [34]
-ignored error: Infinite glue shrinkage found in box being split [35] [36]
-[37] [38] [39] [40] [41
+[32] [33] [34] [35] [36] [37] [38] [39]
+ignored error: Infinite glue shrinkage found in box being split [40]
+ignored error: Infinite glue shrinkage found in box being split [41] [42]
+[43] [44] [45] [46] [47
 
-] [42] [43] [44] [45] [46] [47
+] [48] [49] [50] [51] [52] [53] [54
 
-] [48]
+] [55]
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/m/n/11'. Switching off
-(microtype)                protrusion for this font on input line 716.
+(microtype)                protrusion for this font on input line 802.
 
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/b/n/11'. Switching off
-(microtype)                protrusion for this font on input line 716.
+(microtype)                protrusion for this font on input line 802.
 
-LaTeX Font Info:    Calculating math sizes for size <11> on input line 716.
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 802.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <11> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 716.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 802.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.14006> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 716.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 802.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6.60007> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 716.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 802.
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/m/n/9.5'. Switching off
-(microtype)                protrusion for this font on input line 717.
+(microtype)                protrusion for this font on input line 803.
 
-LaTeX Font Info:    Calculating math sizes for size <9.5> on input line 717.
+LaTeX Font Info:    Calculating math sizes for size <9.5> on input line 803.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9.5> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 717.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 803.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.03004> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 717.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 803.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5.70006> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 717.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 803.
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/m/it/9.5'. Switching off
-(microtype)                protrusion for this font on input line 737.
+(microtype)                protrusion for this font on input line 823.
 
-[49] [50] [51] [52] [53] [54] [55] [56] [57] [58] [59] [60]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 942.
-
+[56] [57] [58] [59] [60] [61] [62] [63] [64] [65] [66] [67]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 942.
+(hyperref)                removing `math shift' on input line 1028.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 942.
+(hyperref)                removing `superscript' on input line 1028.
 
-[61] [62] [63] [64] [65] [66] [67] [68] [69] [70]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1028.
+
+[68] [69] [70] [71] [72] [73] [74] [75] [76] [77]
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/m/it/13'. Switching off
-(microtype)                protrusion for this font on input line 1164.
+(microtype)                protrusion for this font on input line 1250.
 
-[71] [72]
-Underfull \hbox (badness 6526) in paragraph at lines 1207--1208
+[78] [79]
+Underfull \hbox (badness 6526) in paragraph at lines 1293--1294
 []\T5/ptm/b/n/13 (+20) Clean-copy re-execution: \T5/ptm/m/n/13 (+20) Phases 1--
 5 (in-ven-tory, har-mon-i-sa-tion, sam-pling,
  []
 
-[73] [74
+[80] [81] [82
 
-] [75]) (chapters/main/Chapter4.tex [76]
+] [83]) (chapters/main/Chapter4.tex [84]
 Chapter 4.
-[77
+[85
 
-] [78]
-<graphics/chapter4/partition_alpha0.5_seed0.png, id=1532, 787.743pt x 289.08pt>
+] [86]
+<graphics/chapter4/partition_alpha0.5_seed0.png, id=1601, 787.743pt x 289.08pt>
 
 File: graphics/chapter4/partition_alpha0.5_seed0.png Graphic file (type png)
 <use graphics/chapter4/partition_alpha0.5_seed0.png>
 Package pdftex.def Info: graphics/chapter4/partition_alpha0.5_seed0.png  used o
 n input line 32.
 (pdftex.def)             Requested size: 483.69687pt x 177.50745pt.
- [79
+ [87
 
- <./graphics/chapter4/partition_alpha0.5_seed0.png>] [80]
-<graphics/chapter4/f1_by_config.png, id=1552, 867.24pt x 542.025pt>
+ <./graphics/chapter4/partition_alpha0.5_seed0.png>] [88] [89]
+<graphics/chapter4/f1_by_config.png, id=1628, 867.24pt x 542.025pt>
 File: graphics/chapter4/f1_by_config.png Graphic file (type png)
 <use graphics/chapter4/f1_by_config.png>
 Package pdftex.def Info: graphics/chapter4/f1_by_config.png  used on input line
- 145.
+ 166.
 (pdftex.def)             Requested size: 483.69687pt x 302.31615pt.
-<graphics/chapter4/tstr_vs_eps.pdf, id=1554, 250.38426pt x 170.71654pt>
+<graphics/chapter4/tstr_vs_eps.pdf, id=1630, 250.38426pt x 170.71654pt>
 File: graphics/chapter4/tstr_vs_eps.pdf Graphic file (type pdf)
 <use graphics/chapter4/tstr_vs_eps.pdf>
 Package pdftex.def Info: graphics/chapter4/tstr_vs_eps.pdf  used on input line 
-154.
+175.
 (pdftex.def)             Requested size: 386.95897pt x 263.84464pt.
- [81]
-[82] [83 <./graphics/chapter4/f1_by_config.png>] [84 <./graphics/chapter4/tstr_
-vs_eps.pdf>] [85
+
+[90] [91] [92 <./graphics/chapter4/f1_by_config.png>] [93 <./graphics/chapter4/
+tstr_vs_eps.pdf>] [94
 
 
-] [86] [87] [88]
-<graphics/chapter4/per_class_f1.pdf, id=1614, 433.62pt x 238.49101pt>
+] [95] [96] [97]
+<graphics/chapter4/per_class_f1.pdf, id=1690, 433.62pt x 238.49101pt>
 File: graphics/chapter4/per_class_f1.pdf Graphic file (type pdf)
 <use graphics/chapter4/per_class_f1.pdf>
 Package pdftex.def Info: graphics/chapter4/per_class_f1.pdf  used on input line
- 334.
+ 355.
 (pdftex.def)             Requested size: 411.14528pt x 226.14304pt.
- [89] [90 <./graphics/chapter4/per_class_f1.pdf>] [91]
-<graphics/chapter4/f1_vs_traffic.pdf, id=1654, 250.38426pt x 199.1693pt>
+ [98] [99 <./graphics/chapter4/per_class_f1.pdf>] [100]
+<graphics/chapter4/f1_vs_traffic.pdf, id=1729, 250.38426pt x 199.1693pt>
 File: graphics/chapter4/f1_vs_traffic.pdf Graphic file (type pdf)
 <use graphics/chapter4/f1_vs_traffic.pdf>
 Package pdftex.def Info: graphics/chapter4/f1_vs_traffic.pdf  used on input lin
-e 399.
+e 420.
 (pdftex.def)             Requested size: 386.95897pt x 307.81874pt.
- [92] [93 <./graphics/chapter4/f1_vs_traffic.pdf>]
-<graphics/chapter4/eps_by_honest.pdf, id=1673, 404.712pt x 238.49101pt>
+ [101] [102 <./graphics/chapter4/f1_vs_traffic.pdf>]
+<graphics/chapter4/eps_by_honest.pdf, id=1749, 404.712pt x 238.49101pt>
 File: graphics/chapter4/eps_by_honest.pdf Graphic file (type pdf)
 <use graphics/chapter4/eps_by_honest.pdf>
 Package pdftex.def Info: graphics/chapter4/eps_by_honest.pdf  used on input lin
-e 428.
+e 449.
 (pdftex.def)             Requested size: 362.77264pt x 213.78838pt.
- [94 <./graphics/chapter4/eps_by_honest.pdf>]
-<graphics/chapter4/mia_tables.pdf, id=1706, 404.712pt x 180.675pt>
+ [103 <./graphics/chapter4/eps_by_honest.pdf>]
+<graphics/chapter4/mia_tables.pdf, id=1782, 404.712pt x 180.675pt>
 File: graphics/chapter4/mia_tables.pdf Graphic file (type pdf)
 <use graphics/chapter4/mia_tables.pdf>
-Package pdftex.def Info: graphics/chapter4/mia_tables.pdf  used on input line 4
-87.
+Package pdftex.def Info: graphics/chapter4/mia_tables.pdf  used on input line 5
+08.
 (pdftex.def)             Requested size: 362.77264pt x 161.96088pt.
- [95] [96 <./graphics/chapter4/mia_tables.pdf>] [97]
-[98] [99] [100
+ [104] [105 <./graphics/chapter4/mia_tables.pdf>] [106] [107] [108] [109
 
-] [101] [102
+] [110] [111
 
-] [103] [104]) (chapters/main/Chapter5.tex [105
+] [112] [113]) (chapters/main/Chapter5.tex [114
 
-]
-[106]
+] [115]
 Chapter 5.
-[107
+[116
 
-] [108
+] [117
 
-] [109
+] [118
 
-] [110
+] [119
 
-] [111
+] [120
 
-] [112] [113
+] [121] [122
 
-]) (chapters/main/Chapter6.tex [114]
+]) (chapters/main/Chapter6.tex [123]
 Chapter 6.
-[115
+[124
 
-] [116]) (chapters/back/apendixA.tex [117
+] [125]) (chapters/back/apendixA.tex [126
 
 ]
 Appendix A.
-(chapters/back/scorecard_table.tex [118
+(chapters/back/scorecard_table.tex [127
 
 ]
 
@@ -2475,17 +2486,17 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6.41342> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 6.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5.20009> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 6.
-[119
+[128
 
-] [120] [121])
+] [129] [130])
 Appendix B.
 (chapters/back/eps_honest_table.tex
-ignored error: Infinite glue shrinkage found in box being split [122
+ignored error: Infinite glue shrinkage found in box being split [131
 
 
-]) [123]
+]) [132]
 Appendix C.
-) (main.bbl [124
+) (main.bbl [133
 
 ]
 Underfull \hbox (badness 7221) in paragraph at lines 31--35
@@ -2499,7 +2510,7 @@ Underfull \hbox (badness 5077) in paragraph at lines 43--48
 A. y Ar-cas,
  []
 
-[125
+[134
 
 ]
 Underfull \hbox (badness 1810) in paragraph at lines 120--123
@@ -2507,13 +2518,13 @@ Underfull \hbox (badness 1810) in paragraph at lines 120--123
 d-er-ated learn-ing with
  []
 
-[126] [127]
+[135] [136]
 Underfull \hbox (badness 1953) in paragraph at lines 249--253
 []\T5/ptm/m/n/13 (+20) D. Hamouda, M. A. Fer-rag, N. Ben-hamida, H. Seridi, and
  M. C. Ghanem,
  []
 
-[128] [129] [130] [131] [132]) [133
+[137] [138] [139] [140] [141]) [142
 runsystem(makeindex -s "kpsewhich:majorissue:Sofar,youhavenotcheckedforMiKTeXup
 dates."\main.ist -t "kpsewhich:majorissue:Sofar,youhavenotcheckedforMiKTeXupdat
 es."\main.glg -o "kpsewhich:majorissue:Sofar,youhavenotcheckedforMiKTeXupdates.
@@ -2543,14 +2554,14 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2020/03/25>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B54AD4C41DC864F8432D1765235BCBC3;15827.
+(rerunfilecheck)             Checksum: BC0D7CE4FDCD1CA9F47AFFB224335D31;16100.
  ) 
 Here is how much of TeX's memory you used:
- 46777 strings out of 469789
- 867065 string characters out of 5472184
- 1547341 words of memory out of 5000000
- 73789 multiletter control sequences out of 15000+600000
- 865767 words of font info for 567 fonts, out of 8000000 for 9000
+ 46801 strings out of 469789
+ 867352 string characters out of 5472184
+ 1547783 words of memory out of 5000000
+ 73795 multiletter control sequences out of 15000+600000
+ 866047 words of font info for 569 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  123i,19n,121p,2538b,1487s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <E:/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><E:/MiKTeX/fonts/type1/p
@@ -2562,9 +2573,9 @@ syr.pfb><E:/MiKTeX/fonts/type1/vntex/urwvn/utmb8v.pfb><E:/MiKTeX/fonts/type1/ur
 w/times/utmr8a.pfb><E:/MiKTeX/fonts/type1/vntex/urwvn/utmr8v.pfb><E:/MiKTeX/fon
 ts/type1/urw/times/utmri8a.pfb><E:/MiKTeX/fonts/type1/vntex/urwvn/utmri8v.pfb><
 E:/MiKTeX/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on main.pdf (146 pages, 1149481 bytes).
+Output written on main.pdf (156 pages, 1180257 bytes).
 PDF statistics:
- 2111 PDF objects out of 2487 (max. 8388607)
- 385 named destinations out of 1000 (max. 500000)
- 102061 words of extra memory for PDF output out of 106986 (max. 10000000)
+ 2190 PDF objects out of 2487 (max. 8388607)
+ 399 named destinations out of 1000 (max. 500000)
+ 102069 words of extra memory for PDF output out of 106986 (max. 10000000)
 
