@@ -2,10 +2,10 @@
 \babel@toc {english}{}\relax 
 \contentsline {chapter}{Acknowledgments}{ii}{chapter*.2}%
 \contentsline {chapter}{Contents}{iii}{chapter*.3}%
-\contentsline {chapter}{List of Figures}{vi}{chapter*.4}%
-\contentsline {chapter}{List of Tables}{vii}{chapter*.5}%
-\contentsline {chapter}{Abstract}{x}{chapter*.7}%
-\contentsline {chapter}{List of Symbols}{xi}{chapter*.9}%
+\contentsline {chapter}{List of Figures}{vii}{chapter*.4}%
+\contentsline {chapter}{List of Tables}{viii}{chapter*.5}%
+\contentsline {chapter}{Abstract}{xi}{chapter*.7}%
+\contentsline {chapter}{List of Symbols}{xii}{chapter*.9}%
 \contentsline {chapter}{\chapternumberline {1}Introduction}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Background}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Problem Statement}{3}{section.1.2}%
@@ -57,26 +57,27 @@
 \contentsline {subsection}{\numberline {4.2.6}Consolidated Scorecard}{90}{subsection.4.2.6}%
 \contentsline {section}{\numberline {4.3}Analysis of Results}{94}{section.4.3}%
 \contentsline {subsection}{\numberline {4.3.1}RQ1: Utility of the Synthetic Data for the IDS}{94}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}RQ2: FedDP-Marginal Against the Federated CVAE}{97}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}RQ3: Overhead, Granularity and Honest Gateways}{100}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.2}RQ2: FedDP-Marginal Against the Federated CVAE}{98}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}RQ3: Overhead, Granularity and Honest Gateways}{101}{subsection.4.3.3}%
 \contentsline {subsection}{\numberline {4.3.4}RQ4: Configuration per Deployment Requirement}{107}{subsection.4.3.4}%
-\contentsline {section}{\numberline {4.4}Interpretation of Results}{109}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Comparison with Literature}{111}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Published Results on the Same Dataset}{111}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}How Much the Protocol Alone Moves a Score}{111}{subsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.5.3}Against Federated and Private Data Generation}{111}{subsection.4.5.3}%
-\contentsline {section}{\numberline {4.6}Implications of the Results}{114}{section.4.6}%
-\contentsline {chapter}{\chapternumberline {5}Discussion}{116}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Restate the Research Problem or Objectives}{116}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Summarize Key Findings}{117}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Interpretation in a Broader Context}{118}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Working Hypotheses and Research Questions}{119}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Why the CVAE Was Studied and Why It Remains the Baseline}{120}{section.5.5}%
-\contentsline {section}{\numberline {5.6}Limitations}{122}{section.5.6}%
-\contentsline {chapter}{\chapternumberline {6}Conclusion and Future Work}{124}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Conclusion}{124}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Future Work}{126}{section.6.2}%
-\contentsline {appendix}{\chapternumberline {A}Complete Scorecard}{127}{appendix.A}%
-\contentsline {appendix}{\chapternumberline {B}Effective Privacy Budget by Honest Gateways}{131}{appendix.B}%
-\contentsline {appendix}{\chapternumberline {C}Reproducing the Results}{133}{appendix.C}%
-\contentsline {chapter}{References}{134}{chapter*.63}%
+\contentsline {subsection}{\numberline {4.3.5}When Synthetic Data Are Worth Using}{108}{subsection.4.3.5}%
+\contentsline {section}{\numberline {4.4}Interpretation of Results}{110}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Comparison with Literature}{112}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Published Results on the Same Dataset}{112}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}How Much the Protocol Alone Moves a Score}{112}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Against Federated and Private Data Generation}{112}{subsection.4.5.3}%
+\contentsline {chapter}{\chapternumberline {5}Discussion}{115}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Restate the Research Problem or Objectives}{115}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Summarize Key Findings}{116}{section.5.2}%
+\contentsline {section}{\numberline {5.3}What Is Verified, What Is Assumed, and What Is Proposed}{118}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Interpretation in a Broader Context}{120}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Implications for Practice}{121}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Why the CVAE Was Studied and Why It Remains the Baseline}{122}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Limitations}{124}{section.5.7}%
+\contentsline {chapter}{\chapternumberline {6}Conclusion and Future Work}{126}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Conclusion}{126}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Future Work}{128}{section.6.2}%
+\contentsline {appendix}{\chapternumberline {A}Complete Scorecard}{129}{appendix.A}%
+\contentsline {appendix}{\chapternumberline {B}Effective Privacy Budget by Honest Gateways}{133}{appendix.B}%
+\contentsline {appendix}{\chapternumberline {C}Reproducing the Results}{135}{appendix.C}%
+\contentsline {chapter}{References}{136}{chapter*.66}%

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.11.9)  17 NOV 2026 23:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.11.9)  17 NOV 2026 23:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2004,7 +2004,7 @@ Package microtype Warning: I cannot find a protrusion list for font
 \openout2 = `chapters/front/head.aux'.
 
 (chapters/front/head.tex
-<graphics/Image/logo.jpg, id=326, 515.9275pt x 172.645pt>
+<graphics/Image/logo.jpg, id=330, 515.9275pt x 172.645pt>
 File: graphics/Image/logo.jpg Graphic file (type jpg)
 <use graphics/Image/logo.jpg>
 Package pdftex.def Info: graphics/Image/logo.jpg  used on input line 11.
@@ -2131,13 +2131,13 @@ Package microtype Warning: I cannot find a protrusion list for font
 (main.toc [3
 
 
-] [4]) [5] (main.lof) [6
+] [4]) [5] [6] (main.lof) [7
 
-] (main.lot [7
+] (main.lot [8
 
-] [8]) [9]
+] [9]) [10]
 (chapters/main/Abstract.tex) (main.gls) (main.acr) (chapters/front/symbols.tex
-[10
+[11
 
 
 ]
@@ -2169,11 +2169,11 @@ Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `T5/ptm/m/n/7.11761'. Switching off
 (microtype)                protrusion for this font on input line 38.
 
-ignored error: Infinite glue shrinkage found in box being split [11
+ignored error: Infinite glue shrinkage found in box being split [12
 
 ]
-ignored error: Infinite glue shrinkage found in box being split [12]
-ignored error: Infinite glue shrinkage found in box being split [13]) [14]
+ignored error: Infinite glue shrinkage found in box being split [13]
+ignored error: Infinite glue shrinkage found in box being split [14]) [15]
 (chapters/main/Chapter1.tex
 Chapter 1.
 
@@ -2383,7 +2383,7 @@ Chapter 4.
 [85
 
 ] [86]
-<graphics/chapter4/partition_alpha0.5_seed0.png, id=1601, 787.743pt x 289.08pt>
+<graphics/chapter4/partition_alpha0.5_seed0.png, id=1620, 787.743pt x 289.08pt>
 
 File: graphics/chapter4/partition_alpha0.5_seed0.png Graphic file (type png)
 <use graphics/chapter4/partition_alpha0.5_seed0.png>
@@ -2393,13 +2393,13 @@ n input line 32.
  [87
 
  <./graphics/chapter4/partition_alpha0.5_seed0.png>] [88] [89]
-<graphics/chapter4/f1_by_config.png, id=1628, 867.24pt x 542.025pt>
+<graphics/chapter4/f1_by_config.png, id=1647, 867.24pt x 542.025pt>
 File: graphics/chapter4/f1_by_config.png Graphic file (type png)
 <use graphics/chapter4/f1_by_config.png>
 Package pdftex.def Info: graphics/chapter4/f1_by_config.png  used on input line
  166.
 (pdftex.def)             Requested size: 483.69687pt x 302.31615pt.
-<graphics/chapter4/tstr_vs_eps.pdf, id=1630, 250.38426pt x 170.71654pt>
+<graphics/chapter4/tstr_vs_eps.pdf, id=1649, 250.38426pt x 170.71654pt>
 File: graphics/chapter4/tstr_vs_eps.pdf Graphic file (type pdf)
 <use graphics/chapter4/tstr_vs_eps.pdf>
 Package pdftex.def Info: graphics/chapter4/tstr_vs_eps.pdf  used on input line 
@@ -2410,63 +2410,69 @@ Package pdftex.def Info: graphics/chapter4/tstr_vs_eps.pdf  used on input line
 tstr_vs_eps.pdf>] [94
 
 
-] [95] [96] [97]
-<graphics/chapter4/per_class_f1.pdf, id=1690, 433.62pt x 238.49101pt>
+] [95] [96] [97] [98]
+<graphics/chapter4/per_class_f1.pdf, id=1714, 433.62pt x 238.49101pt>
 File: graphics/chapter4/per_class_f1.pdf Graphic file (type pdf)
 <use graphics/chapter4/per_class_f1.pdf>
 Package pdftex.def Info: graphics/chapter4/per_class_f1.pdf  used on input line
- 355.
+ 363.
 (pdftex.def)             Requested size: 411.14528pt x 226.14304pt.
- [98] [99 <./graphics/chapter4/per_class_f1.pdf>] [100]
-<graphics/chapter4/f1_vs_traffic.pdf, id=1729, 250.38426pt x 199.1693pt>
+ [99] [100 <./graphics/chapter4/per_class_f1.pdf>] [101]
+<graphics/chapter4/f1_vs_traffic.pdf, id=1754, 250.38426pt x 199.1693pt>
 File: graphics/chapter4/f1_vs_traffic.pdf Graphic file (type pdf)
 <use graphics/chapter4/f1_vs_traffic.pdf>
 Package pdftex.def Info: graphics/chapter4/f1_vs_traffic.pdf  used on input lin
-e 420.
+e 431.
 (pdftex.def)             Requested size: 386.95897pt x 307.81874pt.
- [101] [102 <./graphics/chapter4/f1_vs_traffic.pdf>]
-<graphics/chapter4/eps_by_honest.pdf, id=1749, 404.712pt x 238.49101pt>
+ [102 <./graphics/chapter4/f1_vs_traffic.pdf>]
+<graphics/chapter4/eps_by_honest.pdf, id=1769, 404.712pt x 238.49101pt>
 File: graphics/chapter4/eps_by_honest.pdf Graphic file (type pdf)
 <use graphics/chapter4/eps_by_honest.pdf>
 Package pdftex.def Info: graphics/chapter4/eps_by_honest.pdf  used on input lin
-e 449.
+e 460.
 (pdftex.def)             Requested size: 362.77264pt x 213.78838pt.
- [103 <./graphics/chapter4/eps_by_honest.pdf>]
-<graphics/chapter4/mia_tables.pdf, id=1782, 404.712pt x 180.675pt>
+ [103]
+[104 <./graphics/chapter4/eps_by_honest.pdf>]
+<graphics/chapter4/mia_tables.pdf, id=1806, 404.712pt x 180.675pt>
 File: graphics/chapter4/mia_tables.pdf Graphic file (type pdf)
 <use graphics/chapter4/mia_tables.pdf>
 Package pdftex.def Info: graphics/chapter4/mia_tables.pdf  used on input line 5
-08.
+19.
 (pdftex.def)             Requested size: 362.77264pt x 161.96088pt.
- [104] [105 <./graphics/chapter4/mia_tables.pdf>] [106] [107] [108] [109
+ [105] [106 <./graphics/chapter4/mia_tables.pdf>] [107] [108] [109] [110
 
-] [110] [111
+] [111]) (chapters/main/Chapter5.tex
+[112
 
-] [112] [113]) (chapters/main/Chapter5.tex [114
-
-] [115]
+] [113] [114]
 Chapter 5.
-[116
+[115
 
-] [117
+] [116
 
-] [118
+] [117] [118
 
-] [119
+] [119] [120
 
-] [120
+] [121
 
-] [121] [122
+] [122
 
-]) (chapters/main/Chapter6.tex [123]
+] [123]
+
+LaTeX Warning: Float too large for page by 12.63118pt on input line 162.
+
+) (chapters/main/Chapter6.tex [124
+
+] [125]
 Chapter 6.
-[124
+[126
 
-] [125]) (chapters/back/apendixA.tex [126
+] [127]) (chapters/back/apendixA.tex [128
 
 ]
 Appendix A.
-(chapters/back/scorecard_table.tex [127
+(chapters/back/scorecard_table.tex [129
 
 ]
 
@@ -2486,17 +2492,17 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6.41342> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 6.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5.20009> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 6.
-[128
+[130
 
-] [129] [130])
+] [131] [132])
 Appendix B.
 (chapters/back/eps_honest_table.tex
-ignored error: Infinite glue shrinkage found in box being split [131
+ignored error: Infinite glue shrinkage found in box being split [133
 
 
-]) [132]
+]) [134]
 Appendix C.
-) (main.bbl [133
+) (main.bbl [135
 
 ]
 Underfull \hbox (badness 7221) in paragraph at lines 31--35
@@ -2510,7 +2516,7 @@ Underfull \hbox (badness 5077) in paragraph at lines 43--48
 A. y Ar-cas,
  []
 
-[134
+[136
 
 ]
 Underfull \hbox (badness 1810) in paragraph at lines 120--123
@@ -2518,13 +2524,13 @@ Underfull \hbox (badness 1810) in paragraph at lines 120--123
 d-er-ated learn-ing with
  []
 
-[135] [136]
+[137] [138]
 Underfull \hbox (badness 1953) in paragraph at lines 249--253
 []\T5/ptm/m/n/13 (+20) D. Hamouda, M. A. Fer-rag, N. Ben-hamida, H. Seridi, and
  M. C. Ghanem,
  []
 
-[137] [138] [139] [140] [141]) [142
+[139] [140] [141] [142] [143]) [144
 runsystem(makeindex -s "kpsewhich:majorissue:Sofar,youhavenotcheckedforMiKTeXup
 dates."\main.ist -t "kpsewhich:majorissue:Sofar,youhavenotcheckedforMiKTeXupdat
 es."\main.glg -o "kpsewhich:majorissue:Sofar,youhavenotcheckedforMiKTeXupdates.
@@ -2554,14 +2560,14 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2020/03/25>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: BC0D7CE4FDCD1CA9F47AFFB224335D31;16100.
+(rerunfilecheck)             Checksum: 4AFC739D38D44C642BF07C9C53CC3ECC;16424.
  ) 
 Here is how much of TeX's memory you used:
- 46801 strings out of 469789
- 867352 string characters out of 5472184
- 1547783 words of memory out of 5000000
- 73795 multiletter control sequences out of 15000+600000
- 866047 words of font info for 569 fonts, out of 8000000 for 9000
+ 46821 strings out of 469789
+ 867646 string characters out of 5472184
+ 1548248 words of memory out of 5000000
+ 73804 multiletter control sequences out of 15000+600000
+ 866359 words of font info for 571 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  123i,19n,121p,2538b,1487s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <E:/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><E:/MiKTeX/fonts/type1/p
@@ -2573,9 +2579,9 @@ syr.pfb><E:/MiKTeX/fonts/type1/vntex/urwvn/utmb8v.pfb><E:/MiKTeX/fonts/type1/ur
 w/times/utmr8a.pfb><E:/MiKTeX/fonts/type1/vntex/urwvn/utmr8v.pfb><E:/MiKTeX/fon
 ts/type1/urw/times/utmri8a.pfb><E:/MiKTeX/fonts/type1/vntex/urwvn/utmri8v.pfb><
 E:/MiKTeX/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on main.pdf (156 pages, 1180257 bytes).
+Output written on main.pdf (159 pages, 1198929 bytes).
 PDF statistics:
- 2190 PDF objects out of 2487 (max. 8388607)
- 399 named destinations out of 1000 (max. 500000)
- 102069 words of extra memory for PDF output out of 106986 (max. 10000000)
+ 2327 PDF objects out of 2487 (max. 8388607)
+ 406 named destinations out of 1000 (max. 500000)
+ 102077 words of extra memory for PDF output out of 106986 (max. 10000000)
 

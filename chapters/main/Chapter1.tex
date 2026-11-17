@@ -72,6 +72,7 @@ The study is subject to the following limitations:
     \item \textbf{Simulation Environment:} Conducting the simulation on a centralized physical machine does not fully capture real-world network latency, packet loss rates, or the physical hardware constraints of resource-limited edge IoT devices.
     \item \textbf{Constrained Threat Model:} The aggregation server is assumed to be honest-but-curious. Gateways follow the protocol; some of them may collude with the server or fail to add their noise share, and the guarantee is reported for each number of honest gateways (Section~\ref{subsec:threat_model}). Active attacks, such as data or model poisoning and Byzantine behaviour, are outside the scope of this investigation.
 \end{itemize}
+Section~\ref{sec:methodology_limitations} lists these limitations in full, and Section~\ref{sec:disc_limits} states which findings each of them bounds.
 
 \clearpage
 \section{Thesis Structure}
@@ -81,7 +82,7 @@ The remainder of this thesis is structured into six chapters as follows:
     \item \textbf{Chapter 2: Literature Review:} Reviews relevant studies and identifies the research gap and the position of this study in the existing literature.
     \item \textbf{Chapter 3: Methodology:} Details the research design, the dataset and its preparation, the two generators, the privacy mechanisms and accounting, and the evaluation protocol.
     \item \textbf{Chapter 4: Experimental and Results:} Describes the experimental setup and reports synthetic-data, IDS, and system overhead results.
-    \item \textbf{Chapter 5: Discussion:} Interprets the findings, examines the observed trade-offs, and discusses the limitations and implications of the study.
+    \item \textbf{Chapter 5: Discussion:} Summarises the answers to the research questions, separates what was measured from what is assumed or proposed, interprets the findings, and discusses their implications and limitations.
     \item \textbf{Chapter 6: Conclusion and Future Work:} Summarizes the conclusions and outlines directions for further research.
 \end{itemize}
 

@@ -34,22 +34,25 @@
 \contentsline {table}{\numberline {4.9}{\ignorespaces FedDP-Marginal minus the best CVAE route with DP (TSTR on the real test split). All verdicts are ``better'' under both bootstraps.}}{98}{table.caption.43}%
 \contentsline {table}{\numberline {4.10}{\ignorespaces Test F1 per class (mean over three seeds; classifier chosen on validation)}}{99}{table.caption.44}%
 \contentsline {table}{\numberline {4.11}{\ignorespaces Fidelity of the synthetic sets (mean over classes and seeds)}}{101}{table.caption.46}%
-\contentsline {table}{\numberline {4.12}{\ignorespaces Measured overhead of secure aggregation}}{101}{table.caption.47}%
-\contentsline {table}{\numberline {4.13}{\ignorespaces TSTR macro-F1 by protected unit (rows kept in brackets when capped)}}{102}{table.caption.49}%
+\contentsline {table}{\numberline {4.12}{\ignorespaces Measured overhead of secure aggregation}}{102}{table.caption.47}%
+\contentsline {table}{\numberline {4.13}{\ignorespaces TSTR macro-F1 by protected unit (rows kept in brackets when capped)}}{103}{table.caption.49}%
 \contentsline {table}{\numberline {4.14}{\ignorespaces Effect of the honest-gateway threshold $t$ ($K = 5$)}}{104}{table.caption.51}%
 \contentsline {table}{\numberline {4.15}{\ignorespaces Membership inference on the released tables of FedDP-Marginal (calibrated attack, 1,000 bootstrap resamples)}}{105}{table.caption.52}%
 \contentsline {table}{\numberline {4.16}{\ignorespaces Robustness of FedDP-Marginal at $\varepsilon = 5$, and the eleven-class mode}}{106}{table.caption.54}%
-\contentsline {table}{\numberline {4.17}{\ignorespaces Sensitivity worlds: test macro-F1 (mean $\pm $ standard deviation over three seeds)}}{106}{table.caption.55}%
-\contentsline {table}{\numberline {4.18}{\ignorespaces Recommended configuration per deployment requirement. The value of $\varepsilon $ is the one that holds under the trust assumed by the requirement.}}{107}{table.caption.56}%
-\contentsline {table}{\numberline {4.19}{\ignorespaces Published results on the DoS/DDoS-MQTT-IoT dataset, with the task, input and split of each study}}{112}{table.caption.57}%
-\contentsline {table}{\numberline {4.20}{\ignorespaces Binary F1 on the closest tasks (mean of three seeds)}}{112}{table.caption.58}%
-\contentsline {table}{\numberline {4.21}{\ignorespaces Effect of the split and the identifier columns on the real-data RF (three seeds)}}{113}{table.caption.59}%
+\contentsline {table}{\numberline {4.17}{\ignorespaces Sensitivity worlds: test macro-F1 (mean $\pm $ standard deviation over three seeds)}}{107}{table.caption.55}%
+\contentsline {table}{\numberline {4.18}{\ignorespaces Recommended configuration per deployment requirement. The value of $\varepsilon $ is the one that holds under the trust assumed by the requirement.}}{108}{table.caption.56}%
+\contentsline {table}{\numberline {4.19}{\ignorespaces When synthetic data are worth using, on this dataset}}{109}{table.caption.57}%
+\contentsline {table}{\numberline {4.20}{\ignorespaces Published results on the DoS/DDoS-MQTT-IoT dataset, with the task, input and split of each study}}{113}{table.caption.58}%
+\contentsline {table}{\numberline {4.21}{\ignorespaces Binary F1 on the closest tasks (mean of three seeds)}}{113}{table.caption.59}%
+\contentsline {table}{\numberline {4.22}{\ignorespaces Effect of the split and the identifier columns on the real-data RF (three seeds)}}{114}{table.caption.60}%
 \addvspace {10pt}
-\contentsline {table}{\numberline {5.1}{\ignorespaces Status of the working hypotheses and research questions}}{119}{table.caption.60}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces Answers to the research questions and the working hypotheses}}{116}{table.caption.61}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Status of the main statements of the thesis}}{119}{table.caption.62}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Main limitations, the findings they bound, and their measured effect}}{125}{table.caption.63}%
 \addvspace {10pt}
 \addvspace {10pt}
-\contentsline {table}{\numberline {A.1}{\ignorespaces Scorecard of all configurations (TSTR on the real test split, classifier chosen on validation). Configurations marked with a dagger use statistics outside $\varepsilon $ and are excluded from the Pareto front.}}{128}{table.A.1}%
+\contentsline {table}{\numberline {A.1}{\ignorespaces Scorecard of all configurations (TSTR on the real test split, classifier chosen on validation). Configurations marked with a dagger use statistics outside $\varepsilon $ and are excluded from the Pareto front.}}{130}{table.A.1}%
 \addvspace {10pt}
-\contentsline {table}{\numberline {B.1}{\ignorespaces Effective $\varepsilon $ of the distributed configurations as a function of the number of honest gateways $h$ ($K = 5$)}}{131}{table.B.1}%
+\contentsline {table}{\numberline {B.1}{\ignorespaces Effective $\varepsilon $ of the distributed configurations as a function of the number of honest gateways $h$ ($K = 5$)}}{133}{table.B.1}%
 \addvspace {10pt}
-\contentsline {table}{\numberline {C.1}{\ignorespaces Commands that produce the results of Chapter~\ref {chap:results}}}{133}{table.caption.61}%
+\contentsline {table}{\numberline {C.1}{\ignorespaces Commands that produce the results of Chapter~\ref {chap:results}}}{135}{table.caption.64}%

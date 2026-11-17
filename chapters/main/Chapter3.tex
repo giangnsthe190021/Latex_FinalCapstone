@@ -12,7 +12,7 @@ The object of study is a framework, PP-FedData, that lets several IoT/MQTT gatew
 \subsubsection*{Experimental Control}
 Internal validity rests on holding everything except the studied factors fixed. Every configuration in the experiment matrix (Section~\ref{subsec:exp_configs}) is run with:
 \begin{itemize}
-    \item The same train/validation/test split, formed by capture group, with a real test split that is locked and never used for tuning (train 88,500, validation 12,000, test 30,000 rows; class quotas fixed in the configuration).
+    \item The same train/validation/test split, formed by capture group, or by block of the capture for the sub-classes recorded in a single capture (Section~\ref{subsec:split}), with a real test split that is locked and never used for tuning (train 88,500, validation 12,000, test 30,000 rows; class quotas fixed in the configuration).
     \item The same non-IID partition of the training rows over $K = 5$ clients, drawn from a Dirichlet distribution with concentration $\alpha = 0.5$~\cite{hsu2019} and fixed by the seed.
     \item The same preprocessing ($\log(1+x)$ transformation of skewed columns, standardisation, clipping at $\pm 5\sigma$, one-hot encoding of categorical columns), which turns the harmonised packet attributes into 59 model input columns.
     \item The same downstream classifiers: a Random Forest~\cite{breiman2001} with 200 trees and a multilayer perceptron with hidden layers $[128, 64]$.
@@ -71,7 +71,7 @@ The research proceeds in five stages (Figure~\ref{fig:overall_workflow}): data p
 \node (s1) [stagebox] {
     \begin{center}\tikz\node[header]{Stage 1: Preparation};\end{center}\vspace{-2pt}
     $\bullet$ Harmonise packet features\\
-    $\bullet$ Split by capture group\\
+    $\bullet$ Split by capture or block\\
     $\bullet$ Class quota enforcement\\
     $\bullet$ Standardize 60 columns\\
     $\bullet$ Leakage checks C1--C5

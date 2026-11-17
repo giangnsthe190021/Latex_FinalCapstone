@@ -17,7 +17,7 @@ Four conventions apply to every table and figure below.
 Three configurations are the main ones of the framework: MG-eps1 is MGs-eps1, MG-eps5 is MGr-eps5, and MG-eps10 is MGs-eps10. MGs, MGr, MGd and MGl are the variants of Table~\ref{tab:mg_variants}. On the CVAE side, B3 has no protection, M2 adds SecAgg$^+$, M1 adds DP-SGD, and M3 combines both. The suffix ``o'' (M1o, M3o) marks the settings searched at full federated scale in round O1. For each $\varepsilon$, the CVAE row used against FedDP-Marginal is the best valid CVAE route on validation: M1-eps1, M3o-eps5 and M1o-eps10.
 
 \subsubsection*{Organisation}
-Section~\ref{sec:res_data} presents the data as they were used, the leakage checks, the settings selected on validation, and the consolidated scorecard. Section~\ref{sec:res_analysis} analyses the results per research question. Section~\ref{sec:res_interpretation} explains the patterns, Section~\ref{sec:res_literature} compares them with published work, and Section~\ref{sec:res_implications} draws the practical consequences.
+Section~\ref{sec:res_data} presents the data as they were used, the leakage checks, the settings selected on validation, and the consolidated scorecard. Section~\ref{sec:res_analysis} answers each research question, with the answer first and the evidence after it, and closes with the settings in which synthetic data are worth using (Section~\ref{subsec:res_when_synthetic}). Section~\ref{sec:res_interpretation} explains the patterns, and Section~\ref{sec:res_literature} compares them with published work. The practical consequences, and the line between what is measured and what is proposed, are discussed in Chapter~\ref{chap:discussion}.
 
 \clearpage
 \section{Presentation of Data}\label{sec:res_data}
@@ -183,6 +183,11 @@ Figure~\ref{fig:res_tstr_eps} draws the TSTR macro-F1 of the main routes against
 
 \subsection{RQ1: Utility of the Synthetic Data for the IDS}\label{subsec:res_rq1}
 
+\begin{center}
+\fcolorbox{black!40}{black!3}{\parbox{0.95\textwidth}{\textbf{Answer to RQ1.} When raw traffic cannot be pooled, an IDS trained only on the data of FedDP-Marginal reaches a macro-F1 of 0.366 to 0.433 at $\varepsilon$ from 1 to 10, which is 82\% to 97\% of the RF on pooled real data (0.448). When real data can be pooled, synthetic rows add nothing that matters ($+0.001$ at most with the RF), and class weights or SMOTE do better. The clearest gain is at a single gateway that lacks some classes: about $+0.04$ of macro-F1. Section~\ref{subsec:res_when_synthetic} turns these results into the settings where synthetic data are, and are not, worth using.}}
+\end{center}
+The evidence follows: synthetic data alone, synthetic data added to pooled real data, local augmentation, and the alternative of training the detector directly.
+
 \subsubsection*{Synthetic Data Alone (TSTR)}
 Where the raw traffic cannot be pooled, the classifier has only the synthetic data. Table~\ref{tab:res_scorecard} shows what remains. Without DP, FedDP-Marginal reaches 0.459 and the CVAE route reaches 0.413. With DP, FedDP-Marginal keeps 0.366, 0.425 and 0.433 at $\varepsilon = 1, 5, 10$, close to the RF on pooled real data (0.448). The SMOTE and class-weight references on pooled real data stay higher, at 0.505 and 0.496.
 
@@ -286,10 +291,13 @@ DP-FedSGD, $\varepsilon = 10$ & $0.389 \pm 0.011$ & 0.433 & $-0.043$ $[-0.047, -
 
 The two routes cost very different amounts of communication. DP-FedSGD needs 2,593 model rounds and about 7.7\,GB in total over the clients (an estimate from the bytes per parameter measured for M2), against three rounds and 0.48 to 0.53\,MB for FedDP-Marginal. Its epsilon with a single honest gateway grows to 3.1, 58.6 and 142.0, against 2.4, 14.2 and 33.1 for FedDP-Marginal. Without noise, the same recipe reaches $0.467 \pm 0.008$, against $0.459$ for FedDP-Marginal without DP. That difference of $+0.008$ $[+0.004, +0.012]$ passes the rule. Federated SMOTE, with no generator and no protection, reaches $0.445 \pm 0.016$.
 
-\subsubsection*{Answer to RQ1}
-When real data can be pooled, synthetic data do not improve the IDS in any way that matters in this study, and class weights or SMOTE do better. When raw traffic cannot be pooled, the data from FedDP-Marginal keep a TSTR macro-F1 between 0.366 and 0.433 at $\varepsilon$ from 1 to 10, which is 82\% to 97\% of the RF on pooled real data. The most useful role is local augmentation, where a gateway with few rows of some classes gains about 0.04 of macro-F1.
 
 \subsection{RQ2: FedDP-Marginal Against the Federated CVAE}\label{subsec:res_rq2}
+
+\begin{center}
+\fcolorbox{black!40}{black!3}{\parbox{0.95\textwidth}{\textbf{Answer to RQ2.} At the same $(\varepsilon, \delta)$, FedDP-Marginal achieves a higher TSTR macro-F1 and a higher rare-class recall than the federated CVAE with DP at every tested budget, by $+0.092$ to $+0.191$ of macro-F1, and it needs three rounds and at most 1.33\,MB per run against 8.4 to 191\,MB. It also has a higher score without DP ($+0.044$ RF, $+0.046$ MLP against B3). The remaining advantage of the non-private CVAE is the binary F1, 0.904 against 0.885 for FedDP-Marginal without DP.}}
+\end{center}
+The evidence follows: utility at the same budget, the cost of DP for each generator, the per-class behaviour against the working hypotheses, and fidelity.
 
 \subsubsection*{Utility at the Same Budget}
 Table~\ref{tab:res_rq2} applies the decision rule to the difference between FedDP-Marginal and the best CVAE route at each budget. All 12 comparisons are ``better'' under both the record and the stream bootstrap.
@@ -389,10 +397,13 @@ MGl-eps10 & 0.0722 & 0.0059 & 0.0995 & 0.9997 \\
 \end{tabularx}
 \end{table}
 
-\subsubsection*{Answer to RQ2}
-At the same $(\varepsilon, \delta)$, FedDP-Marginal achieves a higher TSTR macro-F1 and a higher rare-class recall than the federated CVAE with DP at every tested budget, by $+0.092$ to $+0.191$ of macro-F1. It also has a higher score without DP ($+0.044$ RF, $+0.046$ MLP against B3). The remaining advantage of the non-private CVAE is the binary F1, 0.904 against 0.885 for FedDP-Marginal without DP.
 
 \subsection{RQ3: Overhead, Granularity and Honest Gateways}\label{subsec:res_rq3}
+
+\begin{center}
+\fcolorbox{black!40}{black!3}{\parbox{0.95\textwidth}{\textbf{Answer to RQ3.} SecAgg$^+$ is cheap, at 1.02 to 1.12 times the time and 1.39 to 1.62 times the bytes, and it leaves utility intact. Splitting the noise across gateways is what lifts the distributed variant above the local one, but its guarantee depends on how many gateways stay honest: at a target of $\varepsilon = 5$, one honest gateway out of five leaves an effective $\varepsilon$ of 14.2. A smaller threshold $t$ protects against collusion at almost no cost in utility for $K = 5$. A TCP stream is an affordable unit of protection, whereas a whole capture is not usable on this data.}}
+\end{center}
+The evidence follows: the cost of secure aggregation, the protected unit, honest gateways, the empirical privacy checks, and robustness.
 
 \subsubsection*{Cost of Secure Aggregation}
 Table~\ref{tab:res_secagg} gives the overhead. Time is compute time on one machine and network latency is not measured. SecAgg$^+$ adds little to either route. Its effect on utility is negligible: for the CVAE route, 7 of 8 comparisons with the unprotected route show no effect and one is better ($+0.0216$, TAug with the MLP). For FedDP-Marginal the secure sum equals the exact sum, so the runs with and without SecAgg$^+$ release the same tables and the same synthetic data at every seed, and the TSTR difference is 0.000.
@@ -562,10 +573,11 @@ A2: rare quotas $\times 0.3$ & $0.405 \pm 0.001$ & $0.386 \pm 0.038$ & $0.388 \p
 \end{tabularx}
 \end{table}
 
-\subsubsection*{Answer to RQ3}
-SecAgg$^+$ is cheap, at 1.02 to 1.12 times the time and 1.39 to 1.62 times the bytes, and it leaves utility intact. Distributed noise is the main source of the difference between MGs and MGl, but its guarantee depends on how many gateways stay honest. A smaller $t$ gives protection against collusion at almost no cost in utility for $K = 5$. A TCP stream is an affordable unit of protection, whereas a whole capture is not usable on this data.
-
 \subsection{RQ4: Configuration per Deployment Requirement}\label{subsec:res_rq4}
+
+\begin{center}
+\fcolorbox{black!40}{black!3}{\parbox{0.95\textwidth}{\textbf{Answer to RQ4.} No configuration is best everywhere, and the choice depends more on trust than on utility. Where every party is trusted, the versions without DP give the best detection. Where the aggregator must not see any gateway's tables but the released data stay inside the organisation, secure aggregation alone meets the requirement. Where a formal guarantee is required, the distributed variants at $\varepsilon = 5$ to 10 give macro-F1 values of 0.408 to 0.449, and a demand for $\varepsilon \le 1$ costs about 0.05 to 0.08 more. The table below is a proposal for deployment: it applies a fixed rule to measured values, but the requirements and their thresholds are assumptions of the study, not measurements.}}
+\end{center}
 
 The rule of Section~\ref{subsec:req_rule} takes each requirement of Table~\ref{tab:scenarios} and returns the configuration on its Pareto front with the best value on the requested priority. Table~\ref{tab:res_recommend} gives the outcome. The front of the scorecard holds 18 configurations, 17 of which are FedDP-Marginal variants. The remaining one is B3, retained for its binary F1 and rare-class recall.
 
@@ -596,8 +608,34 @@ The rule of Section~\ref{subsec:req_rule} takes each requirement of Table~\ref{t
 
 Three remarks qualify the table. MGd is a comparator whose Gaussian noise and secure sum are simulated in one process, so a deployment that selects it needs a real implementation of the mechanism. The difference between MGd-eps5 and MGs-t3-eps5 (0.420) lies within the seed noise. The \texttt{capture-privacy} row is the best the data permit, and its macro-F1 of 0.177 does not make it a usable detector.
 
-\subsubsection*{Answer to RQ4}
-The choice depends more on trust than on utility. No configuration is best everywhere. Where the operator trusts every party, the versions without DP suffice and give the best detection. Where the aggregator must not see any gateway's tables but the released data stay inside the company, secure aggregation alone meets the requirement. Where a formal guarantee is required, the distributed variants at $\varepsilon = 5$ to 10 give macro-F1 values of 0.408 to 0.449. A demand for $\varepsilon \le 1$ costs about 0.05 to 0.08 in macro-F1 at the same protection level.
+\subsection{When Synthetic Data Are Worth Using}\label{subsec:res_when_synthetic}
+The results of RQ1 to RQ3 answer a practical question: in which situations is a generator the right tool, and in which is it not needed? Table~\ref{tab:res_when_synthetic} collects the answer. Every row rests on a comparison measured in this chapter, on this dataset.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{When synthetic data are worth using, on this dataset}
+\label{tab:res_when_synthetic}
+\begin{tabularx}{\textwidth}{L{3.6cm}L{3.3cm}X}
+\toprule
+\textbf{Situation} & \textbf{Better choice} & \textbf{Evidence} \\
+\midrule
+Real data can be pooled in one place & Class weights or SMOTE; synthetic data not needed & Synthetic rows pass the decision rule for 2 of 13 generators with the RF, by at most $+0.001$, against $+0.057$ for SMOTE and $+0.048$ for class weights (Table~\ref{tab:res_taug}); TAug with the CVAE is worse than both in 6 of 6 comparisons \\
+\midrule
+Raw data cannot be pooled, only a detector is needed, no formal guarantee & Either route: a generator or a detector trained directly by federated learning & The direct MLP reaches 0.467 against 0.459 for FedDP-Marginal without DP, and is not different from the CVAE without protection (Table~\ref{tab:res_direct}) \\
+\midrule
+Raw data cannot be pooled, formal DP at $\varepsilon = 1$ & Either route & DP-FedSGD 0.350 against 0.337 for the generator route: no effect (Table~\ref{tab:res_direct}) \\
+\midrule
+Raw data cannot be pooled, formal DP at $\varepsilon = 5$ or 10 & Generator (FedDP-Marginal) & 0.425 and 0.433 against 0.369 and 0.389 for DP-FedSGD; 0.5\,MB against about 7.7\,GB of traffic; effective $\varepsilon$ with one honest gateway 14.2 and 33.1 against 58.6 and 142.0 (Table~\ref{tab:res_direct}) \\
+\midrule
+A gateway holds few or no rows of some classes & Local augmentation with generated rows & Macro-F1 of a client model from 0.384 to 0.423--0.427, with 11 to 13 of 15 client models gaining; with the CVAE under DP the gain is only $+0.014$ (Table~\ref{tab:res_local_aug}) \\
+\midrule
+A dataset is needed that passes for real traffic & Not supported by any generator here & C2ST AUC between 0.9995 and 1.0000 for every generator (Table~\ref{tab:res_fidelity}) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+In short, synthetic data are a substitute for pooling, not an addition to it. They are worth using when the raw traffic cannot leave the gateways and either a formal guarantee at a moderate budget is required, traffic must stay small, a shareable dataset is wanted, or one gateway lacks classes that others have. They are not needed when the real data can be pooled, and they are not the only option when only a detector is wanted without a formal guarantee. These statements hold for packet-level records of one dataset; a richer generator or another detector could move the boundaries between the rows.
 
 \FloatBarrier
 \clearpage
@@ -698,24 +736,4 @@ Random, row by row & All of them & $0.939 \pm 0.002$ & $0.987 \pm 0.001$ \\
 The split alone explains little: going from capture to row by row moves the macro-F1 by $+0.017$. Source IP alone adds $+0.032$. The time and stream columns explain the bulk of the gap, adding $+0.476$, because each capture was recorded at its own time and absolute time can identify the capture, and hence the class. A deployed detector cannot rely on such a column, which is why the study removes them. A split by capture does not stop this leak (0.842 with all identifiers), likely because the test rows of 8 of the 11 sub-classes are a block of the same capture as their training rows. These measurements describe this classifier on this data. They do not establish how the classifiers in the cited studies were trained, because those papers do not say, and the study does not claim that their scores are inflated. Differences in task (binary against six classes), input (payload against header features) and identifier columns are enough to make the scores incomparable.
 
 \subsection{Against Federated and Private Data Generation}
-None of the studies read combines federated learning, differential privacy and synthetic data on this dataset, so the protected results have no direct published reference. Marginal-based DP synthesis in federated settings already exists. FLAIM~\cite{maddock2024} adapts AIM~\cite{mckenna2024aim} to the federated setting, and CaPS~\cite{pentyala2024} relies on secure multi-party computation. As Chapter~2 notes, these studies evaluate workload error, negative log-likelihood, runtime and communication, on tabular benchmarks that are not intrusion-detection traffic. FLAIM and AIM themselves were not run here, since Private-PGM was not installed, so the study cannot rank FedDP-Marginal against them. To the best of our knowledge, based on a non-systematic search, the contribution here is an evaluation that puts these pieces together: exact distributed DP with Skellam noise~\cite{agarwal2021} through a real SecAgg$^+$ implementation, measured byte counts, the $\varepsilon$ per number of honest gateways, a comparison with a CVAE under the same federation, and a configuration guide per requirement. The study claims no algorithmic novelty.
-
-\clearpage
-\section{Implications of the Results}\label{sec:res_implications}
-
-\subsubsection*{For Operators of MQTT Deployments}
-A federation of gateways can train a detector without pooling raw traffic. On this data, three short releases of less than 1\,MB in total give a TSTR macro-F1 between 0.366 and 0.433, with a formal guarantee at record level. The cost in bandwidth is low enough for constrained backhaul such as NB-IoT or metered 4G, although the times here are compute times and network behaviour was not measured.
-
-\subsubsection*{For the Design of Privacy-Preserving IDS}
-\begin{itemize}
-    \item A marginal generator is the better default than a deep generator when a formal guarantee is required at small or moderate $\varepsilon$ on tabular traffic data, in the setting tested.
-    \item The $\varepsilon$ must be reported with its unit and its trust assumption. A value of 5 per packet with all gateways honest is not the same guarantee as 14.2 with one honest gateway, or as 5 per TCP stream.
-    \item A protected detector can be obtained by another route. If only the detector matters and traffic is not a constraint, the direct federated classifier is a competitor. Where a shareable dataset is needed, or where communication is scarce, the generator route is preferable.
-    \item Secure aggregation hides individual gateways from the aggregator at modest cost and does not protect what the final tables reveal. Both mechanisms are needed for different reasons.
-\end{itemize}
-
-\subsubsection*{For Evaluation Practice}
-The score of an IDS on this dataset moves from 0.448 to 0.941 when only the protocol changes. Reports on this dataset should therefore state the task, the input columns, and the split. Generators should be judged with a positive control for every privacy attack, since an attack at chance says nothing when it cannot detect a deliberately exposed target.
-
-\subsubsection*{What the Results Do Not Allow Us to Claim}
-The results do not show that synthetic data improve an IDS when real data can be pooled. They do not show that synthetic rows look real, nor that the framework would behave the same on other traffic. The empirical attacks measure one family of attacks at record level and do not replace the formal guarantee.
+None of the studies read combines federated learning, differential privacy and synthetic data on this dataset, so the protected results have no direct published reference. Marginal-based DP synthesis in federated settings already exists. FLAIM~\cite{maddock2024} adapts AIM~\cite{mckenna2024aim} to the federated setting, and CaPS~\cite{pentyala2024} relies on secure multi-party computation. As Chapter~2 notes, these studies evaluate workload error, negative log-likelihood, runtime and communication, on tabular benchmarks that are not intrusion-detection traffic. FLAIM and AIM themselves were not run here, since Private-PGM was not installed, so the study cannot rank FedDP-Marginal against them. What this study adds relative to these works is stated in Section~\ref{sec:contribution}; it claims no algorithmic novelty.

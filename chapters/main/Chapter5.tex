@@ -1,69 +1,112 @@
 \chapter{Discussion}\label{chap:discussion}
-This chapter returns to the problem that motivated the study, gathers the main findings, sets them in a wider context, and states how far they can be trusted.
+This chapter returns to the problem that motivated the study, gathers the main findings without repeating their evidence, separates what was measured from what is assumed or proposed, sets the findings in a wider context, and states how far they can be trusted.
 
 \section{Restate the Research Problem or Objectives}
 
 IoT gateways that broker MQTT traffic see attacks that a single site observes rarely, or not at all. An intrusion detection system would need data from many sites, yet raw packet traces reveal devices, topics and behaviour, and their owners cannot always share them. Secure aggregation hides what each site sends. Differential privacy bounds what the output reveals. Each has a cost in utility, bandwidth or trust, and the literature offers few controlled measurements of what these costs are for a detector on MQTT traffic.
 
-The study therefore set four objectives (Section~1.3): build a controlled evaluation on real MQTT traffic with leakage checks (O1), extend marginal-based private synthesis to the federated setting with distributed noise (O2), compare it with a federated CVAE under matched privacy budgets (O3), and turn the measurements into a configuration guide per deployment requirement (O4). Four research questions follow from them: how much IDS utility the synthetic data retain (RQ1), how the marginal and deep routes compare at the same budget (RQ2), what each protection costs and at what granularity it protects (RQ3), and which configuration suits which requirement (RQ4).
+The study therefore set four objectives (Section~1.3): build a federated architecture in which each gateway is a client that sends only protected statistics to an honest-but-curious server (O1), extend marginal-based private synthesis to this federation, with the noise split across gateways or added locally (O2), implement a federated CVAE baseline under the same partitions and protections (O3), and evaluate every configuration on a locked real test split and turn the measurements into a configuration guide per deployment requirement (O4). Four research questions follow from them: how much IDS utility the synthetic data retain (RQ1), how the marginal and deep routes compare at the same budget (RQ2), what each protection costs and at what granularity it protects (RQ3), and which configuration suits which requirement (RQ4).
 
 \clearpage
 \section{Summarize Key Findings}
 
-\begin{itemize}
-    \item \textbf{Utility without pooling.} An IDS trained only on the synthetic data of FedDP-Marginal reaches a test macro-F1 of 0.366, 0.425 and 0.433 at $\varepsilon = 1, 5, 10$, against 0.448 for a Random Forest on pooled real data and 0.505 with SMOTE on pooled real data. Without DP, the generator reaches 0.459.
-    \item \textbf{No gain when real data can be pooled.} Adding synthetic rows to pooled real data passes the decision rule for 2 of 13 generators with the RF, by at most $+0.001$, against $+0.057$ for SMOTE. The CVAE is worse than class weights and SMOTE in 6 of 6 comparisons.
-    \item \textbf{A real gain at the edge.} A gateway that adds synthetic rows for the classes it lacks raises its macro-F1 from 0.384 to about 0.426, and 11 to 13 of 15 client models gain, depending on $\varepsilon$.
-    \item \textbf{Marginal route ahead of the deep route.} At the same $(\varepsilon, \delta)$, FedDP-Marginal exceeds the best CVAE route by $+0.092$ to $+0.191$ of macro-F1 and $+0.049$ to $+0.169$ of rare-class recall, with all verdicts passing under both bootstraps.
-    \item \textbf{A fraction of the traffic.} FedDP-Marginal needs three rounds and at most 1.33\,MB in a run, against 8.4 to 191\,MB for the CVAE routes.
-    \item \textbf{A measurable privacy effect.} The membership attack on the released tables detects the release without DP (AUC 0.573) and detects those with DP less (0.515 to 0.539), and it passes its positive control. Attacks on the CVAE find nothing, the unprotected model included.
-    \item \textbf{A guarantee that depends on trust and unit.} At $\varepsilon = 5$, one honest gateway alone gives an effective $\varepsilon$ of 14.2. Protecting a TCP stream costs 0.03 to 0.05 of macro-F1. A whole capture is not usable on this data.
-    \item \textbf{No universal configuration.} Eleven requirements map to eight distinct configurations, 17 of the 18 configurations on the Pareto front being variants of FedDP-Marginal.
-\end{itemize}
+Table~\ref{tab:disc_answers} gives the answer to every research question and working hypothesis, with the section of Chapter~4 that holds the evidence. H1 and H2 are the working hypotheses of Section~\ref{par:hypotheses}.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Answers to the research questions and the working hypotheses}
+\label{tab:disc_answers}
+\begin{tabularx}{\textwidth}{lXL{3.1cm}}
+\toprule
+\textbf{Item} & \textbf{Finding} & \textbf{Status and evidence} \\
+\midrule
+RQ1 & Synthetic data alone keep a macro-F1 of 0.366, 0.425 and 0.433 at $\varepsilon = 1, 5, 10$, which is 82\% to 97\% of the RF on pooled real data (0.448). Added to pooled real data they bring at most $+0.001$, against $+0.057$ for SMOTE. A gateway that lacks some classes gains about $+0.04$ & Answered; Section~\ref{subsec:res_rq1} \\
+\midrule
+RQ2 & At the same budget, FedDP-Marginal exceeds the best CVAE route by $+0.092$ to $+0.191$ of macro-F1 and $+0.049$ to $+0.169$ of rare-class recall, with at most 1.33\,MB per run against 8.4 to 191\,MB & Answered, in favour of FedDP-Marginal; Section~\ref{subsec:res_rq2} \\
+\midrule
+RQ3 & SecAgg$^+$ costs 1.02 to 1.12 times the time and 1.39 to 1.62 times the bytes. At $\varepsilon = 5$, one honest gateway alone leaves an effective $\varepsilon$ of 14.2. A TCP stream costs 0.03 to 0.05 of macro-F1 to protect; a whole capture is not usable. The membership attack on the released tables detects the release without DP (AUC 0.573) and less the releases with DP (0.515 to 0.539), and passes its positive control & Answered; Section~\ref{subsec:res_rq3} \\
+\midrule
+RQ4 & Eleven requirements map to eight distinct configurations; 17 of the 18 configurations on the Pareto front are variants of FedDP-Marginal & Answered as a rule on measured values; a proposal (Section~\ref{sec:disc_status}); Section~\ref{subsec:res_rq4} \\
+\midrule
+H1 & At $\varepsilon = 1$, the marginal generator has a higher F1 on INVALID ($+0.139$) and WILL ($+0.222$) & Supported (point estimates, above the seed spread) \\
+\midrule
+H2 & The CVAE was expected to lead on BCF and SYN; instead, the marginal generator leads by $+0.138$ and $+0.312$ & Not supported \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Two further measurements qualify these answers. Training the detector directly by federated learning is level with the generator route without DP and at $\varepsilon = 1$, and behind it at $\varepsilon = 5$ and $\varepsilon = 10$ (Table~\ref{tab:res_direct}). Where it could be measured, testing on a block of the training capture scored like testing on an unseen capture (Section~\ref{subsec:res_split_check}).
+
+\clearpage
+\section{What Is Verified, What Is Assumed, and What Is Proposed}\label{sec:disc_status}
+The statements of this thesis are of three kinds, and they should not be read with the same confidence. Table~\ref{tab:disc_status} sorts them.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Status of the main statements of the thesis}
+\label{tab:disc_status}
+\begin{tabularx}{\textwidth}{XL{3.6cm}}
+\toprule
+\textbf{Statement} & \textbf{Basis} \\
+\midrule
+\multicolumn{2}{l}{\textbf{Verified:} measured on this dataset, three seeds, locked test split} \\
+Utility of synthetic data alone, added to pooled real data, and at a single gateway & Section~\ref{subsec:res_rq1} \\
+FedDP-Marginal ahead of the federated CVAE at the same budget, with less traffic & Sections~\ref{subsec:res_rq2} and~\ref{subsec:res_rq3} \\
+Cost of SecAgg$^+$ in bytes and in compute time on one machine & Section~\ref{subsec:res_rq3} \\
+Effective $\varepsilon$ for each number of honest gateways and each threshold, computed by the accountants & Section~\ref{subsec:res_rq3} \\
+Membership attack on the tables, with its positive control & Section~\ref{subsec:res_rq3} \\
+Effect of the split and of the identifier columns; block against capture split for NORMAL and BCF & Section~\ref{subsec:res_split_check}, Table~\ref{tab:res_protocol} \\
+\midrule
+\multicolumn{2}{l}{\textbf{Assumed:} not tested; the results hold only if true} \\
+The server is honest-but-curious, gateways follow the protocol, at least $t$ of them add their noise, and fewer than $T_{\text{recon}}$ collude & Section~\ref{subsec:threat_model} \\
+Links are authenticated and encrypted, and there are no side channels & Section~\ref{subsec:threat_model} \\
+Labels, class counts, client sizes and preprocessing statistics are public; hyper-parameter selection is not charged to $\varepsilon$ & Section~\ref{subsec:threat_model} \\
+Packets can be modelled as independent records, and one dataset stands for DoS traffic on MQTT & Section~\ref{sec:methodology_limitations} \\
+The four single-capture classes are affected by the block split no more than NORMAL and BCF & Section~\ref{subsec:res_split_check} \\
+\midrule
+\multicolumn{2}{l}{\textbf{Proposed:} derived from the measurements, not tested in a deployment} \\
+The configuration guide per deployment requirement; the requirements and their thresholds are choices of the study & Section~\ref{subsec:res_rq4} \\
+That three releases of less than 1\,MB suit constrained links such as NB-IoT or metered 4G; bytes were measured, the network was not & Section~\ref{sec:disc_implications} \\
+A marginal generator as the default when a formal guarantee is required on tabular traffic & Section~\ref{sec:disc_implications} \\
+Reporting practice: $\varepsilon$ with its unit and trust assumption; task, columns and split of an IDS score; positive controls for privacy attacks & Section~\ref{sec:disc_implications} \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 \clearpage
 \section{Interpretation in a Broader Context}
 
 \subsubsection*{Choosing a Generator Is Choosing a Privacy Cost Structure}
-The results suggest that the architecture of a generator determines how the privacy budget is spent. A model trained over many noisy steps pays for every step. A generator whose entire interaction with the data is a small number of bounded count releases pays only for those. Under strict budgets the second design has a clear advantage on this tabular data, and it fits secure aggregation by construction, because what it sends is a sum.
+The results suggest that the architecture of a generator determines how the privacy budget is spent. A model trained over many noisy steps pays for every step. A generator whose entire interaction with the data is a small number of bounded count releases pays only for those. Under strict budgets the second design has a clear advantage on this tabular data, and it fits secure aggregation by construction, because what it sends is a sum. The mechanisms behind this are discussed in Section~\ref{sec:res_interpretation}; they are consistent with the results but were not isolated experimentally.
 
 \subsubsection*{Different Protections Answer Different Threats}
-A recurring confusion in this area is to treat secure aggregation and differential privacy as substitutes. Here they answer different questions. SecAgg$^+$ prevents the server from seeing an individual gateway's tables and changes nothing in what the final tables reveal, as the unchanged attack AUC of 0.573 shows. DP bounds what the released output reveals. A deployment must therefore decide which adversary it fears, which is why the requirement-driven guide lets the choice depend on trust.
+Secure aggregation and differential privacy are often treated as substitutes. Here they answer different questions (Table~\ref{tab:protection_mechanisms}): SecAgg$^+$ left the attack AUC on the released tables unchanged at 0.573, while DP lowered it. A deployment must therefore decide which adversary it fears, which is why the configuration guide lets the choice depend on trust.
 
 \subsubsection*{Evaluation Protocol as a Result in Itself}
-On one dataset and one classifier, the macro-F1 moved from 0.448 to 0.941 by changing only the split and the identifier columns. The lesson is broader than this study: reported scores on network traffic data are difficult to compare without their protocol, and a high figure may partly reflect identifying columns. Earlier work had warned about such pitfalls in security datasets~\cite{arp2022, kaufman2012}, and these measurements quantify them on this dataset.
+On one dataset and one classifier, the macro-F1 moved from 0.448 to 0.941 when identifier columns were added, while the split by capture against a split by row moved it by $+0.017$, and a block split scored like a capture split where both could be compared. Reported scores on network traffic are therefore difficult to compare without their protocol, and a high figure may partly reflect identifying columns. Earlier work had warned about such pitfalls in security datasets~\cite{arp2022, kaufman2012}; these measurements quantify them on this dataset.
 
 \subsubsection*{The Value of Generated Data Depends on Who Lacks What}
-The same synthetic data are of no use to a classifier that already sees every real row, and of real use to a gateway that has barely seen some classes. Their value is a function of what the recipient lacks, which suggests that the question ``do synthetic data help?'' needs the qualifier ``for whom, and instead of what?''
+The same synthetic data are of no use to a classifier that already sees every real row, and of real use to a gateway that has barely seen some classes, or to a federation that cannot pool and needs a formal guarantee at a moderate budget (Table~\ref{tab:res_when_synthetic}). The question ``do synthetic data help?'' needs the qualifier ``for whom, and instead of what?''
 
 \clearpage
-\section{Working Hypotheses and Research Questions}
+\section{Implications for Practice}\label{sec:disc_implications}
+The implications below are proposals derived from the measurements (Section~\ref{sec:disc_status}). None of them was tested in a deployment.
 
-Table~\ref{tab:disc_answers} collects the answers. H1 and H2 are the working hypotheses of Section~\ref{par:hypotheses}.
+\subsubsection*{For Operators of MQTT Deployments}
+A federation of gateways can train a detector without pooling raw traffic. On this data, three short releases of less than 1\,MB in total give a TSTR macro-F1 between 0.366 and 0.433, with a formal guarantee at record level. That volume should fit constrained backhaul such as NB-IoT or metered 4G, but the times measured here are compute times and network behaviour was not measured.
 
-\begin{table}[htbp]
-\centering
-\small
-\caption{Status of the working hypotheses and research questions}
-\label{tab:disc_answers}
-\begin{tabularx}{\textwidth}{lXL{2.8cm}}
-\toprule
-\textbf{Item} & \textbf{Finding} & \textbf{Status} \\
-\midrule
-H1 & At $\varepsilon = 1$, the marginal generator has a higher F1 on INVALID ($+0.139$) and WILL ($+0.222$) & Supported (point estimates, above the seed spread) \\
-\midrule
-H2 & The CVAE was expected to lead on BCF and SYN; instead, the marginal generator leads by $+0.138$ and $+0.312$ & Not supported \\
-\midrule
-RQ1 & Macro-F1 of 0.366 to 0.433 under TSTR with DP; no meaningful gain from TAug; about $+0.04$ from local augmentation & Answered \\
-\midrule
-RQ2 & FedDP-Marginal exceeds the CVAE under DP on macro-F1 and rare-class recall at every budget & Answered, in favour of FedDP-Marginal \\
-\midrule
-RQ3 & SecAgg$^+$ is cheap; a TCP stream is an affordable unit; a capture is not; the guarantee degrades with fewer honest gateways & Answered \\
-\midrule
-RQ4 & Eleven requirements are mapped through a transparent rule & Answered, as a rule on measured values \\
-\bottomrule
-\end{tabularx}
-\end{table}
+\subsubsection*{For the Design of Privacy-Preserving IDS}
+\begin{itemize}
+    \item A marginal generator is a better default than a deep generator when a formal guarantee is required at small or moderate $\varepsilon$ on tabular traffic data, in the setting tested.
+    \item The $\varepsilon$ should be reported with its unit and its trust assumption. A value of 5 per packet with all gateways honest is not the same guarantee as 14.2 with one honest gateway, or as 5 per TCP stream.
+    \item If only the detector matters and traffic is not a constraint, the directly trained federated classifier is a competitor. Where a shareable dataset is needed, where communication is scarce, or where the budget is moderate, the generator route is preferable.
+    \item Secure aggregation hides individual gateways from the aggregator at modest cost and does not protect what the final tables reveal. Both mechanisms are needed, for different reasons.
+\end{itemize}
+
+\subsubsection*{For Evaluation Practice}
+Reports on this dataset should state the task, the input columns and the split, since the protocol alone moves the score from 0.448 to 0.941. Generators should be judged with a positive control for every privacy attack, since an attack at chance says nothing when it cannot detect a deliberately exposed target.
 
 \clearpage
 \section{Why the CVAE Was Studied and Why It Remains the Baseline}
@@ -83,22 +126,37 @@ All of TRTR, TAug and TAugR need the pooled real data that the threat model excl
 Other generators (WGAN-GP, TVAE or CTGAN-type models, diffusion models, and FLAIM or AIM) were not run. Other ways of using synthetic data, beyond topping classes up and local augmentation, were not studied either. The results therefore compare one CVAE with one marginal generator on one dataset, and they do not show that the CVAE family is inferior in general.
 
 \clearpage
-\section{Limitations}
+\section{Limitations}\label{sec:disc_limits}
+The limitations that follow from the method are listed in full in Section~\ref{sec:methodology_limitations}. Table~\ref{tab:disc_limits} states which findings the main ones bound, and how much they move the results where this was measured.
 
-\subsubsection*{Data and Features}
-All results come from one dataset, so nothing here shows that they carry over to other traffic or networks. Records are single packets generated independently, so the temporal structure of a session is not reproduced. Eight of the eleven sub-classes, which make up DELAYED, SYN, INVALID and WILL, come from a single capture file, so their test rows are a block of the capture used for training, and their scores measure other traffic of the same attack run rather than a new run. On NORMAL and BCF, a block split scored like a split by capture (Section~\ref{subsec:res_split_check}), but this cannot be checked on the four single-capture classes. The DoS and DDoS variants are merged in the main matrix. The test split comes from 11 capture groups only, one per sub-class, and the two alternative choices in A4 cover this only in part.
-
-\subsubsection*{Privacy Scope}
-The default $\varepsilon$ protects one packet. Packets of one stream or capture are correlated, so what is protected about a whole session is weaker. Labels, class counts and client sizes are outside the guarantee. Normalisation statistics are computed centrally on the training split, as if each client had shared its data once, and a real federation would have to compute them securely or fix them beforehand. Hyper-parameter selection used the real validation split and is not covered by $\varepsilon$: 12 candidates per budget for FedDP-Marginal, and at $\varepsilon = 5$ and $\varepsilon = 10$ the two best candidates differ by less than the weight of one validation packet. Distributed DP assumes that enough gateways add their noise share, and malicious gateways are outside the threat model.
-
-\subsubsection*{Generators}
-FedDP-Marginal models each class with a Chow--Liu tree, so every attribute depends on one parent, and the numeric values inside a fine bin are drawn uniformly. Second-order structure was tried and did not help on this data, but it may on others. Synthetic rows remain easy to tell from real ones, with a C2ST AUC of at least 0.9995 for every generator. The recall of the rare classes stays below that of the non-private federated CVAE for most protected configurations. The MGd variant simulates its secure sum in process, so it has no measured deployment cost.
-
-\subsubsection*{Evaluation and Statistics}
-Three seeds give only a rough estimate of the spread, and federated training is sensitive to very small perturbations. The bootstrap intervals reflect the sampling of test rows or whole streams, and they do not cover the choice of capture groups, the hyper-parameters or the data sampling. The thresholds of the evaluation (membership AUC 0.55, $\varepsilon \le 5$, overhead 3 times) are heuristics. The empirical attacks test one family at record level and do not test group inference. The class-level analysis of H1 and H2 is based on point estimates and the seed spread.
-
-\subsubsection*{Execution Platform}
-The federation is simulated on one CPU machine with Ray actors, so times are compute times, and network latency, packet loss and constrained-device behaviour were not measured. Byte counts are measured, except for the local variant, where they are estimated from the number of cells.
-
-\subsubsection*{Comparison with Published Work}
-The literature comparison rests on three studies whose full text could be read, from a non-systematic search. The closest binary tasks are close but not identical to the published ones.
+\begin{table}[htbp]
+\centering
+\small
+\caption{Main limitations, the findings they bound, and their measured effect}
+\label{tab:disc_limits}
+\begin{tabularx}{\textwidth}{L{3.6cm}L{3.0cm}X}
+\toprule
+\textbf{Limitation} & \textbf{Findings bounded} & \textbf{Measured effect} \\
+\midrule
+One dataset, packet-level records generated independently & All findings & Not measured: nothing shows that the results carry over to other traffic or to session-level patterns \\
+\midrule
+DELAYED, SYN, INVALID and WILL tested on a block of their training capture & Absolute scores of these classes & On NORMAL and BCF, a block split moved the class F1 by at most 0.004 (Section~\ref{subsec:res_split_check}); untestable on the four classes themselves \\
+\midrule
+One test capture per sub-class & Absolute scores & Two other choices of test groups (A4) give a real-data RF of 0.457 and 0.462 against 0.448, and 8 of 10 verdicts stay the same in both (Table~\ref{tab:res_sensitivity}) \\
+\midrule
+Record-level $\varepsilon$; side information and tuning outside $\varepsilon$ & Privacy findings & Protecting a TCP stream costs 0.03 to 0.05 of macro-F1; a capture is not usable. FedDP-Marginal was tuned over 12 candidates per budget, and at $\varepsilon = 5$ and $\varepsilon = 10$ the two best differ by less than the weight of one validation packet \\
+\midrule
+Trust assumptions of distributed noise & Every $\varepsilon$ of the distributed variants & With one honest gateway out of five, a target of 5 becomes 14.2 (Section~\ref{subsec:res_rq3}) \\
+\midrule
+Three seeds; heuristic decision thresholds & Verdicts & Verdicts that change under the bootstrap over whole TCP streams are marked in Chapter~4 \\
+\midrule
+One generator per family; FLAIM, AIM and deep tabular generators not run & RQ2 & Not measured \\
+\midrule
+Synthetic rows remain easy to tell from real ones & Any claim of realism & C2ST AUC of at least 0.9995 for every generator \\
+\midrule
+Simulation on one CPU machine & Overhead & Bytes are measured; times are compute times; latency, loss and device behaviour were not measured \\
+\midrule
+Literature comparison on three studies read in full, from a non-systematic search & Section~\ref{sec:res_literature} & Not applicable \\
+\bottomrule
+\end{tabularx}
+\end{table}
