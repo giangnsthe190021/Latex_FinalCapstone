@@ -1,6 +1,6 @@
 \chapter{Complete Scorecard}\label{app:scorecard}
 
-Table~\ref{tab:app_scorecard} lists every configuration of the scorecard. A configuration lies on the Pareto front if no valid configuration dominates it on the axes of Section~\ref{subsec:req_rule}. The columns are the same as in Table~\ref{tab:res_scorecard}, with three additions: the gain of TAug over B0 with the same classifier, the value of $\varepsilon$ with a single honest gateway, and the presence of SecAgg$^+$.
+Table~\ref{tab:app_scorecard} lists every configuration of the scorecard. A configuration lies on the Pareto front if no valid configuration dominates it on the axes of Section~\ref{subsec:req_rule}. The columns are the same as in Table~\ref{tab:res_scorecard}, with three additions: the gain of TAug over B0 with the same classifier, the value of $\varepsilon$ with a single honest gateway, and the presence of SecAgg$^+$. The SecAgg$^+$ column marks the protection a configuration models. Only the CVAE routes M2 and M3, and MGs, MGr and MGs-nodp, ran through the Flower SecAgg$^+$ transport; MGd, MGl and MGb simulate the aggregate in one process, and their traffic columns are estimates from measured bytes per value or per parameter (Section~\ref{subsec:feddp_marginal}). All traffic columns count the bytes of the whole federation, uploads and downloads.
 
 \input{chapters/back/scorecard_table.tex}
 
@@ -12,29 +12,28 @@ Table~\ref{tab:app_honest} gives the effective $\varepsilon$ of the distributed 
 
 \chapter{Reproducing the Results}\label{app:repro}
 
-The code and the result files are in the project repository, \url{https://github.com/Khanh1916/PP-FedData}. The raw data are not part of the repository and must be obtained from the Kaggle release of the dataset~\cite{alatram2023kaggle}. Table~\ref{tab:app_commands} lists the commands that produce the material of Chapter~\ref{chap:results}. Each is run as \texttt{python -m ppfeddata.cli <command>}.
+\subsubsection*{What the Repository Holds and What Must Be Regenerated}
+The code, the configurations, the reports and the JSON result files are in the project repository, \url{https://github.com/Khanh1916/PP-FedData}. Four kinds of evidence are not in the public repository, because they are large or derived from the data:
+\begin{itemize}
+    \item the raw data, which must be obtained from the Kaggle release of the dataset~\cite{alatram2023kaggle};
+    \item the processed splits (\texttt{data/processed/}) and the partitions, which steps 2 to 4 below regenerate deterministically from the raw data;
+    \item the run ledger (\texttt{results/runs.csv}) and its summary (\texttt{results/summary.csv}), which the training steps write and \texttt{aggregate} summarises;
+    \item the per-run artifacts (\texttt{artifacts/}), including the saved test predictions and the run specifications.
+\end{itemize}
+The confidence intervals of Chapter~\ref{chap:results} need the saved predictions, so they can be recomputed only after the training steps have been run again, or from an archived copy of the ledger and the artifacts. The digests in \texttt{results/repro/MANIFEST.json} identify the files of the main study; they were computed on a Windows machine where many text files have CRLF line endings, so they must be compared after normalising line endings on another system.
 
-\begin{table}[htbp]
-\centering
-\small
-\caption{Commands that produce the results of Chapter~\ref{chap:results}}
-\label{tab:app_commands}
-\begin{tabularx}{\textwidth}{L{4.0cm}X}
-\toprule
-\textbf{Command} & \textbf{Output} \\
-\midrule
-\texttt{extract-normal}, \texttt{check-extraction} & Normal traffic extracted with the authors' settings, and the provenance report \\
-\texttt{check} & Leakage report C1--C5 \\
-\texttt{aggregate} & Final report and tables of the main matrix \\
-\texttt{scorecard}, \texttt{recommend} & Scorecard, Pareto front and recommendations per requirement \\
-\texttt{privacy-units} & Protected units and honest-gateway thresholds \\
-\texttt{robustness}, \texttt{sensitivity} & Robustness branches and worlds A2, A4 and A5 \\
-\texttt{ids-followup} & IDS-side options and local augmentation \\
-\texttt{mg-nodp} & FedDP-Marginal without DP, plain and with SecAgg$^+$ \\
-\texttt{fed-baseline} & The classifier trained directly by federated learning \\
-\texttt{mia} & Membership inference with access to the released CVAE \\
-\texttt{compare-published} & Comparison with published results on the dataset \\
-\texttt{accept} & Definition-of-done checklist \\
-\bottomrule
-\end{tabularx}
-\end{table}
+\subsubsection*{Order of Execution}
+Each command is run from the repository root as \texttt{python -m ppfeddata.cli <command>}. The order below produces the material of Chapter~\ref{chap:results}; the repository README gives the options and outputs of every command.
+\begin{enumerate}
+    \item \textbf{Install:} Python 3.13, \texttt{pip install -r requirements-lock.txt} and \texttt{pip install -e .}; TShark for steps 2 and 3.
+    \item \textbf{Provenance of the raw data:} \texttt{extract-normal}, then \texttt{check-extraction}.
+    \item \textbf{Data:} \texttt{inventory}, \texttt{harmonize}, \texttt{sample}, \texttt{preprocess}, and \texttt{check} (leakage checks C1--C5).
+    \item \textbf{Baselines and CVAE routes:} \texttt{baseline}; \texttt{tune}, \texttt{b2}, \texttt{benchmark}, \texttt{b3}; \texttt{m1}, \texttt{tune-dp}, \texttt{verify-dp}, \texttt{m1 --tuned}; \texttt{m2}, \texttt{m3}, \texttt{secagg-check}, \texttt{secagg-report}; \texttt{run --stage trial}, then \texttt{run --stage full --approve-g4}.
+    \item \textbf{Full-scale CVAE search:} \texttt{tune-dp-full}, then \texttt{tune-dp-full --final}; \texttt{taug-rare}.
+    \item \textbf{FedDP-Marginal:} \texttt{tune-marginal}, then \texttt{tune-marginal --final}; \texttt{tune-marginal --bn}; \texttt{mg-nodp}.
+    \item \textbf{Privacy units and thresholds:} \texttt{privacy-units} (the $t = 2$ runs use $T_{\text{recon}} = 4$).
+    \item \textbf{Follow-up studies:} \texttt{robustness}, \texttt{sensitivity}, \texttt{ids-followup}, \texttt{split-check}, \texttt{fed-baseline} (also with \texttt{--protected} and \texttt{--distributed}).
+    \item \textbf{Membership attacks:} \texttt{mia} (released CVAE) and \texttt{mia-marginal} (released tables, Table~\ref{tab:res_mia}).
+    \item \textbf{Aggregation:} \texttt{scorecard}, \texttt{recommend}, \texttt{aggregate}, \texttt{compare-published}, \texttt{package} and \texttt{accept}.
+    \item \textbf{Thesis material}, from the thesis folder: \texttt{python scripts/make\_mia\_bootstrap.py --repo <repository>} writes \texttt{analysis/mia\_bootstrap.json}, the intervals of the attack on the released tables (a re-run reproduces the point estimates exactly, and the interval endpoints move by at most 0.001 with the resampling seed); \texttt{scripts/make\_thesis\_tables.py} and \texttt{scripts/make\_thesis\_figures.py} write the tables and figures from the result files.
+\end{enumerate}

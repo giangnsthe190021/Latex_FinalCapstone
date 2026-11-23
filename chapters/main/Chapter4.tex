@@ -1,4 +1,4 @@
-\chapter{Experimental and Results}\label{chap:results}
+\chapter{Experiments and Results}\label{chap:results}
 This chapter reports the results of the experiments designed in Chapter~3 and answers the four research questions of Section~1.3 in order. Every number is computed from the records of the runs and from the test predictions saved by each run. All results use the data of Section~\ref{sec:data_collection}, with the Normal traffic extracted under the export settings of the dataset authors.
 
 \section{Introduction}\label{sec:res_intro}
@@ -14,7 +14,7 @@ Four conventions apply to every table and figure below.
 \end{itemize}
 
 \subsubsection*{Names Used in This Chapter}
-Three configurations are the main ones of the framework: MG-eps1 is MGs-eps1, MG-eps5 is MGr-eps5, and MG-eps10 is MGs-eps10. MGs, MGr, MGd and MGl are the variants of Table~\ref{tab:mg_variants}. On the CVAE side, B3 has no protection, M2 adds SecAgg$^+$, M1 adds DP-SGD, and M3 combines both. The suffix ``o'' (M1o, M3o) marks the settings searched at full federated scale in round O1. For each $\varepsilon$, the CVAE row used against FedDP-Marginal is the best valid CVAE route on validation: M1-eps1, M3o-eps5 and M1o-eps10.
+Three configurations are the main ones of the framework: MG-eps1 is MGs-eps1, MG-eps5 is MGr-eps5, and MG-eps10 is MGs-eps10. MGs, MGr, MGd and MGl are the variants of Table~\ref{tab:mg_variants}. On the CVAE side, B3 has no protection, M2 adds SecAgg$^+$, M1 adds DP-SGD, and M3 combines both. The suffix ``o'' (M1o, M3o) marks the settings searched at full federated scale in round O1. For each $\varepsilon$, the CVAE row used against FedDP-Marginal is the valid CVAE route whose chosen classifier has the highest validation macro-F1: M1-eps1 (0.193), M3o-eps5 (0.244) and M1o-eps10 (0.261). The same three routes also have the highest test macro-F1 among the valid CVAE routes, so the choice would not change if it were read on test; the comparison was nevertheless fixed on validation.
 
 \subsubsection*{Organisation}
 Section~\ref{sec:res_data} presents the data as they were used, the leakage checks, the settings selected on validation, and the consolidated scorecard. Section~\ref{sec:res_analysis} answers each research question, with the answer first and the evidence after it, and closes with the settings in which synthetic data are worth using (Section~\ref{subsec:res_when_synthetic}). Section~\ref{sec:res_interpretation} explains the patterns, and Section~\ref{sec:res_literature} compares them with published work. The practical consequences, and the line between what is measured and what is proposed, are discussed in Chapter~\ref{chap:discussion}.
@@ -126,7 +126,7 @@ $\boldsymbol{\varepsilon}$ & \textbf{FedDP-Marginal setting} & \textbf{Coarse bi
 \end{tabularx}
 \end{table}
 
-At $\varepsilon = 5$ and $\varepsilon = 10$, the two best FedDP-Marginal candidates differ by only 0.000016 and 0.000008 on validation. Both gaps are below the weight of one validation packet in the macro-F1, which is $1/(6 \times 2{,}000) = 0.00008$. The selected settings at these budgets should therefore be read as members of a tied group, not as clear winners.
+At $\varepsilon = 5$ and $\varepsilon = 10$, the two best FedDP-Marginal candidates differ by only 0.000016 and 0.000008 on validation, while their standard deviations over seeds are between 0.004 and 0.009, several hundred times larger. The selected settings at these budgets should therefore be read as members of a tied group, not as clear winners.
 
 \subsection{Consolidated Scorecard}
 Table~\ref{tab:res_scorecard} gathers the main configurations. Appendix~\ref{app:scorecard} holds all rows of the scorecard. Figure~\ref{fig:res_f1_by_config} shows the matrix of the two classifiers under TAug and TSTR.
@@ -184,7 +184,7 @@ Figure~\ref{fig:res_tstr_eps} draws the TSTR macro-F1 of the main routes against
 \subsection{RQ1: Utility of the Synthetic Data for the IDS}\label{subsec:res_rq1}
 
 \begin{center}
-\fcolorbox{black!40}{black!3}{\parbox{0.95\textwidth}{\textbf{Answer to RQ1.} When raw traffic cannot be pooled, an IDS trained only on the data of FedDP-Marginal reaches a macro-F1 of 0.366 to 0.433 at $\varepsilon$ from 1 to 10, which is 82\% to 97\% of the RF on pooled real data (0.448). When real data can be pooled, synthetic rows add nothing that matters ($+0.001$ at most with the RF), and class weights or SMOTE do better. The clearest gain is at a single gateway that lacks some classes: about $+0.04$ of macro-F1. Section~\ref{subsec:res_when_synthetic} turns these results into the settings where synthetic data are, and are not, worth using.}}
+\fcolorbox{black!40}{black!3}{\parbox{0.95\textwidth}{\textbf{Answer to RQ1.} When raw traffic cannot be pooled, an IDS trained only on the data of FedDP-Marginal reaches a macro-F1 of 0.366 to 0.433 at $\varepsilon$ from 1 to 10, which is 82\% to 97\% of the RF on pooled real data (0.448). When real data can be pooled, synthetic rows offer no advantage over the tested simple baselines: they add at most $+0.001$ with the RF and up to $+0.038$ with the MLP, always less than class weights or SMOTE. The clearest gain is at a single gateway that lacks some classes: adding synthetic rows to its own rows raises its macro-F1 by about $+0.04$ over local training alone, and at $\varepsilon = 5$ and $10$ training on the synthetic rows alone does about as well or better. Section~\ref{subsec:res_when_synthetic} turns these results into the settings where synthetic data are, and are not, worth using.}}
 \end{center}
 The evidence follows: synthetic data alone, synthetic data added to pooled real data, local augmentation, and the alternative of training the detector directly.
 
@@ -237,15 +237,18 @@ Moving from the centralised CVAE (B2) to five non-IID clients (B3) costs $+0.025
 \subsubsection*{Local Augmentation at Each Gateway}
 Table~\ref{tab:res_local_aug} shows the setting where synthetic rows give the most. A gateway that has seen little of some classes trains its own RF and receives synthetic rows of the classes it holds fewer than 5,000 rows of. The mean macro-F1 of the 15 client models rises from $0.384 \pm 0.055$ to $0.423$, $0.426$ and $0.427$ with the main FedDP-Marginal configurations. Those are gains of $+0.039$, $+0.042$ and $+0.043$, with 11, 13 and 13 of the 15 client models gaining. Losses are at most 0.005 and gains reach 0.139.
 
+The lower part of the table gives the comparison that local augmentation must also beat: an RF trained on the synthetic rows alone (5,000 per class), one model per seed, the same for every client of that seed, so its spread reflects only the seeds. At $\varepsilon = 1$, augmentation is better (0.423 against 0.365). At $\varepsilon = 5$ the two are close (0.426 against 0.427), and at $\varepsilon = 10$ the synthetic rows alone score higher (0.446 against 0.427), with a higher rare-class recall. Augmentation therefore improves on local training alone, but it is not shown to be the best use of the generator at a gateway: synthetic-only training is a competitive option. These are means over the 15 client models; no paired comparison between the two arms was computed. The values come from the local follow-up protocol and do not replace the TSTR values of Table~\ref{tab:res_scorecard}.
+
 \begin{table}[htbp]
 \centering
 \small
-\caption{Local augmentation at each gateway (RF, 15 client models over 5 clients and 3 seeds, mean $\pm$ standard deviation)}
+\caption{Local augmentation at each gateway, and synthetic rows alone (RF, 15 client models over 5 clients and 3 seeds, mean $\pm$ standard deviation)}
 \label{tab:res_local_aug}
 \begin{tabularx}{\textwidth}{Xcccc}
 \toprule
 \textbf{Training data of a client} & \textbf{Macro-F1} & \textbf{Rare recall} & \textbf{Gain over local} & \textbf{Clients better} \\
 \midrule
+\multicolumn{5}{l}{\emph{Local rows, alone or with synthetic rows}} \\
 Local real rows only & $0.384 \pm 0.055$ & 0.297 & n/a & n/a \\
 Local + B3 (CVAE, no protection) & $0.425 \pm 0.044$ & 0.311 & $+0.041$ & 15 / 15 \\
 Local + M2 (CVAE, SecAgg$^+$) & $0.423 \pm 0.046$ & 0.310 & $+0.039$ & 15 / 15 \\
@@ -254,6 +257,15 @@ Local + MG-eps1 & $0.423 \pm 0.045$ & 0.308 & $+0.039$ & 11 / 15 \\
 Local + MG-eps5 & $0.426 \pm 0.044$ & 0.311 & $+0.042$ & 13 / 15 \\
 Local + MG-eps10 & $0.427 \pm 0.043$ & 0.313 & $+0.043$ & 13 / 15 \\
 Local + MGl-eps5 & $0.422 \pm 0.044$ & 0.307 & $+0.038$ & 12 / 15 \\
+\midrule
+\multicolumn{5}{l}{\emph{Synthetic rows only (same model for every client of a seed)}} \\
+B3 only & $0.399 \pm 0.010$ & 0.361 & $+0.015$ & 9 / 15 \\
+M2 only & $0.400 \pm 0.006$ & 0.363 & $+0.016$ & 9 / 15 \\
+M1o-eps5 only & $0.226 \pm 0.017$ & 0.100 & $-0.158$ & 0 / 15 \\
+MG-eps1 only & $0.365 \pm 0.006$ & 0.235 & $-0.019$ & 5 / 15 \\
+MG-eps5 only & $0.427 \pm 0.019$ & 0.320 & $+0.043$ & 10 / 15 \\
+MG-eps10 only & $0.446 \pm 0.008$ & 0.353 & $+0.062$ & 13 / 15 \\
+MGl-eps5 only & $0.387 \pm 0.006$ & 0.265 & $+0.003$ & 8 / 15 \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -262,7 +274,7 @@ Local + MGl-eps5 & $0.422 \pm 0.044$ & 0.307 & $+0.038$ & 12 / 15 \\
 Class-probability weights chosen on validation, and the use of all 20,000 synthetic rows per class, act on the classifier and leave the generator unchanged. Their effect depends on the generator. For MG-eps1, the RF rises from 0.365 to 0.406 and the rare-class recall from 0.235 to 0.311; the MLP rises from 0.344 to 0.414 with both options. For MG-eps5 and MG-eps10, the changes are small and mixed in sign. The weights correct the tendency of an IDS trained on synthetic rows to predict NORMAL too often. They need labelled real validation data, and they must be chosen again for another class mix, so they are reported as an option only.
 
 \subsubsection*{The Alternative of Training the Detector Directly}
-A federation that needs only a detector can train the classifier itself by FedAvg, with no generator. Table~\ref{tab:res_direct} compares this route with the generators at the same protection. With the first group of settings (DP at each client), the direct MLP is above the CVAE route under DP. With distributed DP, where the noise is split over the gateways as in FedDP-Marginal, the direct MLP (DP-FedSGD) is not different from the framework at $\varepsilon = 1$ and below it at $\varepsilon = 5$ and $\varepsilon = 10$.
+A federation that needs only a detector can train the classifier itself by FedAvg, with no generator. Table~\ref{tab:res_direct} compares this route with the generators at the same protection. With the first group of settings (DP at each client), the direct MLP is above the CVAE route under DP. With distributed DP, where the noise is split over the gateways as in FedDP-Marginal, the direct MLP (DP-FedSGD) shows no effect against the framework at $\varepsilon = 1$ and is below it at $\varepsilon = 5$ and $\varepsilon = 10$. The two groups of rows use different direct recipes, so they are not merged into one statement. Without any protection, the outcome depends on the recipe and the metric: the plain FedAvg MLP shows no effect against the CVAE route, while the DP-FedSGD recipe run without noise has a higher macro-F1 than FedDP-Marginal without DP but a lower rare-class recall.
 
 \begin{table}[htbp]
 \centering
@@ -282,6 +294,7 @@ DP at each client, $\varepsilon = 5$ & $0.276 \pm 0.022$ & 0.178 & $+0.098$ $[+0
 DP at each client, $\varepsilon = 10$ & $0.290 \pm 0.024$ & 0.189 & $+0.101$ $[+0.097, +0.106]$ & better \\
 \midrule
 \multicolumn{5}{l}{\emph{Against FedDP-Marginal, noise split over the gateways in both routes}} \\
+DP-FedSGD recipe, no noise & $0.467 \pm 0.008$ & 0.459 & $+0.008$ $[+0.004, +0.012]$ & better \\
 DP-FedSGD, $\varepsilon = 1$ & $0.350 \pm 0.010$ & 0.337 & $+0.013$ $[+0.010, +0.016]$ & no effect \\
 DP-FedSGD, $\varepsilon = 5$ & $0.369 \pm 0.001$ & 0.425 & $-0.057$ $[-0.060, -0.053]$ & worse \\
 DP-FedSGD, $\varepsilon = 10$ & $0.389 \pm 0.011$ & 0.433 & $-0.043$ $[-0.047, -0.040]$ & worse \\
@@ -289,24 +302,24 @@ DP-FedSGD, $\varepsilon = 10$ & $0.389 \pm 0.011$ & 0.433 & $-0.043$ $[-0.047, -
 \end{tabularx}
 \end{table}
 
-The two routes cost very different amounts of communication. DP-FedSGD needs 2,593 model rounds and about 7.7\,GB in total over the clients (an estimate from the bytes per parameter measured for M2), against three rounds and 0.48 to 0.53\,MB for FedDP-Marginal. Its epsilon with a single honest gateway grows to 3.1, 58.6 and 142.0, against 2.4, 14.2 and 33.1 for FedDP-Marginal. Without noise, the same recipe reaches $0.467 \pm 0.008$, against $0.459$ for FedDP-Marginal without DP. That difference of $+0.008$ $[+0.004, +0.012]$ passes the rule. Federated SMOTE, with no generator and no protection, reaches $0.445 \pm 0.016$.
+The two routes cost very different amounts of communication. DP-FedSGD needs 2,593 model rounds and about 7.7\,GB in total over the clients (an estimate from the bytes per parameter measured for M2), against three rounds and 0.48 to 0.53\,MB for FedDP-Marginal. Its epsilon with a single honest gateway grows to 3.1, 58.6 and 142.0, against 2.4, 14.2 and 33.1 for FedDP-Marginal. Without noise, the same recipe reaches $0.467 \pm 0.008$, against $0.459$ for FedDP-Marginal without DP. That difference of $+0.008$ $[+0.004, +0.012]$ passes the rule, but the rare-class recall moves the other way, $0.327$ against $0.367$ ($-0.040$ $[-0.045, -0.036]$, also passing the rule). Federated SMOTE, with no generator and no protection, reaches $0.445 \pm 0.016$.
 
 
 \subsection{RQ2: FedDP-Marginal Against the Federated CVAE}\label{subsec:res_rq2}
 
 \begin{center}
-\fcolorbox{black!40}{black!3}{\parbox{0.95\textwidth}{\textbf{Answer to RQ2.} At the same $(\varepsilon, \delta)$, FedDP-Marginal achieves a higher TSTR macro-F1 and a higher rare-class recall than the federated CVAE with DP at every tested budget, by $+0.092$ to $+0.191$ of macro-F1, and it needs three rounds and at most 1.33\,MB per run against 8.4 to 191\,MB. It also has a higher score without DP ($+0.044$ RF, $+0.046$ MLP against B3). The remaining advantage of the non-private CVAE is the binary F1, 0.904 against 0.885 for FedDP-Marginal without DP.}}
+\fcolorbox{black!40}{black!3}{\parbox{0.95\textwidth}{\textbf{Answer to RQ2.} At the same $(\varepsilon, \delta)$, the tested FedDP-Marginal pipelines achieve a higher TSTR macro-F1 and a higher rare-class recall than the federated CVAE route with DP chosen on validation, at every tested budget: by $+0.158$ to $+0.191$ of macro-F1 with the noise split over the gateways, and by $+0.092$ to $+0.143$ with local noise. The three matched runs with distributed noise send 0.48 to 0.53\,MB in three rounds, against 13.6 to 72.4\,MB for the CVAE routes they are compared with. The comparison is between implemented pipelines and does not isolate the architecture. It also has a higher score without DP ($+0.044$ RF, $+0.046$ MLP against B3). The remaining advantage of the non-private CVAE is the binary F1, 0.904 against 0.885 for FedDP-Marginal without DP.}}
 \end{center}
 The evidence follows: utility at the same budget, the cost of DP for each generator, the per-class behaviour against the working hypotheses, and fidelity.
 
 \subsubsection*{Utility at the Same Budget}
-Table~\ref{tab:res_rq2} applies the decision rule to the difference between FedDP-Marginal and the best CVAE route at each budget. All 12 comparisons are ``better'' under both the record and the stream bootstrap.
+Table~\ref{tab:res_rq2} applies the decision rule to the difference between FedDP-Marginal and the CVAE route chosen on validation at each budget. All 12 comparisons are ``better'' under both the record and the stream bootstrap.
 
 \begin{table}[htbp]
 \centering
 \small
 \setlength{\tabcolsep}{4pt}
-\caption{FedDP-Marginal minus the best CVAE route with DP (TSTR on the real test split). All verdicts are ``better'' under both bootstraps.}
+\caption{FedDP-Marginal minus the CVAE route with DP chosen on validation (TSTR on the real test split). All verdicts are ``better'' under both bootstraps.}
 \label{tab:res_rq2}
 \begin{tabularx}{\textwidth}{cXccc}
 \toprule
@@ -322,12 +335,12 @@ $\boldsymbol{\varepsilon}$ & \textbf{Comparison} & \textbf{$\Delta$ macro-F1 [95
 \end{tabularx}
 \end{table}
 
-The local variant (MGl) gives the cleanest comparison, because it adds noise at each gateway exactly as the CVAE does, so the difference comes from the generator and not from the noise split. Moving to distributed noise then adds about 0.03 to 0.10 of macro-F1 at the same $\varepsilon$.
+The local variant (MGl) gives the closer comparison of trust and noise placement, because it adds noise at each gateway as the CVAE does, which removes the noise split as a confound. It does not make the comparison one of architecture alone: the chosen classifier (RF for MGl-eps1, MLP for M1-eps1), the optimisation, the search effort, the noise mechanism and accountant (Gaussian with zCDP for MGl, DP-SGD with RDP for the CVAE) and the generator settings still differ. Moving to distributed noise then adds about 0.03 to 0.10 of macro-F1 at the same $\varepsilon$.
 
 \subsubsection*{What DP Costs Each Generator}
 DP costs the CVAE far more than it costs FedDP-Marginal. Against the CVAE without DP with the same plain decoder, M1 at $\varepsilon = 1, 5, 10$ is worse in 11 of 12 comparisons, and the loss in TSTR macro-F1 runs up to 58\%. Against its own $\varepsilon = \infty$, FedDP-Marginal loses $-0.076$ (RF) and $-0.122$ (MLP) at $\varepsilon = 1$, $-0.017$ and $-0.033$ at $\varepsilon = 5$, and changes by $+0.012$ (RF) and $-0.026$ (MLP) at $\varepsilon = 10$.
 
-Re-tuning the CVAE per budget at full federated scale (round O1) did not close this gap. It lifts the best valid CVAE route to 0.254 at $\varepsilon = 5$ and 0.275 at $\varepsilon = 10$, against 0.178 and 0.189 for the first search. At $\varepsilon = 1$, the setting chosen on validation does worse on the test split (0.167 for M1o-eps1 with the RF), so the baseline M1-eps1 remains the best CVAE route there.
+Re-tuning the CVAE per budget at full federated scale (round O1) did not close this gap. It lifts the CVAE route chosen on validation to 0.254 at $\varepsilon = 5$ and 0.275 at $\varepsilon = 10$, against 0.178 and 0.189 for the first search. At $\varepsilon = 1$, the re-tuned route M1o-eps1 has a lower validation macro-F1 than the baseline M1-eps1 (0.176 against 0.193), so M1-eps1 remains the CVAE route compared there; on test, M1o-eps1 reaches 0.167 with the RF.
 
 \subsubsection*{Per-Class Behaviour and the Working Hypotheses}
 Table~\ref{tab:res_per_class} and Figure~\ref{fig:res_per_class} break the scores down by class.
@@ -370,7 +383,7 @@ MGs-nodp & 0.585 & 0.485 & 0.379 & 0.429 & 0.432 & 0.440 \\
 \subsubsection*{Fidelity}
 Table~\ref{tab:res_fidelity} gives the fidelity measures. FedDP-Marginal is closer to the real numeric marginals than the CVAE with DP at the same budget: the Wasserstein distance at $\varepsilon = 5$ is 0.037 against 0.194, and at $\varepsilon = 10$ it is 0.049 against 0.176. The distance at $\varepsilon = 5$ is below the one at $\varepsilon = 10$; the two main configurations are not the same variant (MGr with fusion and 16 bins at $\varepsilon = 5$, MGs with 8 bins at $\varepsilon = 10$), so the two values are not points on one curve.
 
-No generator produces rows that a classifier cannot tell from real ones. The C2ST AUC is between 0.9995 and 1.0000 in every row, DP or not, deep or marginal. Utility for a detector therefore does not imply that the rows look real.
+No generator produces rows that a classifier cannot tell from real ones. The C2ST AUC, computed between the real training rows and the synthetic rows (Table~\ref{tab:metric_data}), is between 0.9995 and 1.0000 in every row, DP or not, deep or marginal. It measures how easily the two sets are told apart; it is neither an IDS score nor a membership-inference result. Utility for a detector therefore does not imply that the rows look real.
 
 \begin{table}[htbp]
 \centering
@@ -424,7 +437,9 @@ MGs-nodp / MGp-nodp & 21.6 s vs 20.4 s (run) & 0.158 vs 0.114 MB & 1.06, 1.39 \\
 \end{tabularx}
 \end{table}
 
-DP-SGD itself is the expensive part of the CVAE route: its median time per round is 3.76\,s, against 1.95\,s for B3, a ratio of 1.93. Over a whole run with $K = 5$, FedDP-Marginal stays at or below 1.33\,MB across all its configurations, while the CVAE routes take from 8.4 to 191\,MB. Figure~\ref{fig:res_traffic} shows the trade-off between total traffic and detection.
+DP-SGD is the expensive part of the CVAE route. In the controlled benchmark of one client-sized dataset with the same model and batch size, a DP-SGD epoch takes 5.77 times as long as a plain epoch. The observed median time per round of M1 (3.76\,s) against B3 (1.95\,s), a ratio of 1.93, compares two configurations whose settings differ, so it is a configuration-level ratio and not the isolated cost of DP-SGD.
+
+All traffic figures are protocol byte counts summed over the uploads and downloads of the whole federation, not the uplink or downlink budget of one gateway, and they do not measure latency, energy or congestion on a constrained link. For the three matched comparisons of Table~\ref{tab:res_rq2}, FedDP-Marginal sends 0.53, 0.51 and 0.48\,MB per run (MGs-eps1, MGr-eps5, MGs-eps10) against 16.9, 13.6 and 72.4\,MB for M1-eps1, M3o-eps5 and M1o-eps10, that is 32, 27 and 152 times less. Over all configurations, FedDP-Marginal stays at or below 1.33\,MB per run (the largest value is a capture-level configuration, MGs-cap25-eps1), while the CVAE routes take from 8.4\,MB (M1o-eps5) to 191\,MB (M2, without DP). Figure~\ref{fig:res_traffic} shows the trade-off between total traffic and detection.
 
 \begin{figure}[htbp]
 \centering
@@ -462,7 +477,7 @@ With distributed noise, the guarantee holds only if enough gateways add their sh
 \label{fig:res_honest}
 \end{figure}
 
-Table~\ref{tab:res_threshold} gives the effect of calibrating the noise for $t$ honest gateways instead of $K$. Each gateway then adds $1/t$ of the noise. Changing $t$ from 5 to 3 moves the macro-F1 by $-0.005$ to $+0.016$, and changing it to 2 moves it by $-0.022$ to $+0.000$, while the $\varepsilon$ with every gateway honest falls by 24\% to 44\%. On this data, the extra noise of a smaller $t$ is nearly free in utility. This holds for $K = 5$ only.
+Table~\ref{tab:res_threshold} gives the effect of calibrating the noise for $t$ honest gateways instead of $K$. Each gateway then adds $1/t$ of the noise. Changing $t$ from 5 to 3 moves the macro-F1 by $-0.005$ to $+0.016$, and changing it to 2 moves it by $-0.022$ to $+0.000$, while the $\varepsilon$ with every gateway honest falls by 24\% to 44\%. On this data, the extra noise of a smaller $t$ is nearly free in utility. This holds for $K = 5$ only. The $t = 2$ runs use the reconstruction threshold $T_{\text{recon}} = 4$ of Section~\ref{subsec:privacy_accounting}, so three colluding gateways cannot rebuild the mask of an honest one, at the price of tolerating one dropout instead of two. Because SecAgg$^+$ sums the integer counts exactly, raising $T_{\text{recon}}$ from 3 to 4 left every released table and score unchanged; only the byte counts moved, by a few tens of bytes, because they depend on random keys.
 
 \begin{table}[htbp]
 \centering
@@ -620,15 +635,15 @@ The results of RQ1 to RQ3 answer a practical question: in which situations is a 
 \toprule
 \textbf{Situation} & \textbf{Better choice} & \textbf{Evidence} \\
 \midrule
-Real data can be pooled in one place & Class weights or SMOTE; synthetic data not needed & Synthetic rows pass the decision rule for 2 of 13 generators with the RF, by at most $+0.001$, against $+0.057$ for SMOTE and $+0.048$ for class weights (Table~\ref{tab:res_taug}); TAug with the CVAE is worse than both in 6 of 6 comparisons \\
+Real data can be pooled in one place & Class weights or SMOTE; synthetic data offer no advantage over them & Synthetic rows pass the decision rule for 2 of 13 generators with the RF, by at most $+0.001$, against $+0.057$ for SMOTE and $+0.048$ for class weights; with the MLP they gain up to $+0.038$, against $+0.134$ for SMOTE (Table~\ref{tab:res_taug}); TAug with the CVAE is worse than both in 6 of 6 comparisons \\
 \midrule
-Raw data cannot be pooled, only a detector is needed, no formal guarantee & Either route: a generator or a detector trained directly by federated learning & The direct MLP reaches 0.467 against 0.459 for FedDP-Marginal without DP, and is not different from the CVAE without protection (Table~\ref{tab:res_direct}) \\
+Raw data cannot be pooled, only a detector is needed, no formal guarantee & Either route, depending on the metric & The DP-FedSGD recipe without noise has the higher macro-F1 (0.467 against 0.459 for FedDP-Marginal without DP) but the lower rare-class recall (0.327 against 0.367); the plain FedAvg MLP shows no effect against the CVAE without protection (Table~\ref{tab:res_direct}) \\
 \midrule
 Raw data cannot be pooled, formal DP at $\varepsilon = 1$ & Either route & DP-FedSGD 0.350 against 0.337 for the generator route: no effect (Table~\ref{tab:res_direct}) \\
 \midrule
 Raw data cannot be pooled, formal DP at $\varepsilon = 5$ or 10 & Generator (FedDP-Marginal) & 0.425 and 0.433 against 0.369 and 0.389 for DP-FedSGD; 0.5\,MB against about 7.7\,GB of traffic; effective $\varepsilon$ with one honest gateway 14.2 and 33.1 against 58.6 and 142.0 (Table~\ref{tab:res_direct}) \\
 \midrule
-A gateway holds few or no rows of some classes & Local augmentation with generated rows & Macro-F1 of a client model from 0.384 to 0.423--0.427, with 11 to 13 of 15 client models gaining; with the CVAE under DP the gain is only $+0.014$ (Table~\ref{tab:res_local_aug}) \\
+A gateway holds few or no rows of some classes & Generated rows, added to the local rows or used alone & Macro-F1 of a client model from 0.384 to 0.423--0.427 with augmentation, with 11 to 13 of 15 client models gaining; with the CVAE under DP the gain is only $+0.014$; synthetic rows alone reach 0.427 and 0.446 at $\varepsilon = 5$ and 10 (Table~\ref{tab:res_local_aug}) \\
 \midrule
 A dataset is needed that passes for real traffic & Not supported by any generator here & C2ST AUC between 0.9995 and 1.0000 for every generator (Table~\ref{tab:res_fidelity}) \\
 \bottomrule
@@ -637,14 +652,12 @@ A dataset is needed that passes for real traffic & Not supported by any generato
 
 In short, synthetic data are a substitute for pooling, not an addition to it. They are worth using when the raw traffic cannot leave the gateways and either a formal guarantee at a moderate budget is required, traffic must stay small, a shareable dataset is wanted, or one gateway lacks classes that others have. They are not needed when the real data can be pooled, and they are not the only option when only a detector is wanted without a formal guarantee. These statements hold for packet-level records of one dataset; a richer generator or another detector could move the boundaries between the rows.
 
-\FloatBarrier
-\clearpage
 \section{Interpretation of Results}\label{sec:res_interpretation}
 
 \subsubsection*{Why FedDP-Marginal Withstands DP Better Than the CVAE}
 The privacy budget of the CVAE is consumed through many noisy optimisation steps: each client runs local epochs in each round, and every step composes. FedDP-Marginal spends the budget on three count releases, which are sums with bounded sensitivity. Noise therefore lands directly on what the generator needs. In addition, the CVAE has to learn a joint distribution over 59 columns from noisy gradients, whereas the tree needs only low-order tables. These differences are consistent with the results and with the literature on marginal synthesis, but the study did not isolate them experimentally.
 
-The second structural factor is the noise split. Under secure addition, each gateway can add only $1/K$ of the noise, and the sum still carries the calibrated total. That is valid because each release is a single additive sum. It is not valid for multi-epoch DP-SGD, so SecAgg$^+$ hides the updates of M3 in transit but does not change the noise it needs. This explains why distributed noise raises FedDP-Marginal by up to 0.10 of macro-F1 at the same $\varepsilon$, while M3 and M1 are the same within the noise.
+The second structural factor is the noise split. Under secure addition, each gateway can add only $1/K$ of the noise, and the sum still carries the calibrated total. That is valid because each release is a single additive sum. It is not valid for multi-epoch DP-SGD, so SecAgg$^+$ hides the updates of M3 in transit but does not change the noise it needs. This is consistent with distributed noise raising FedDP-Marginal by up to 0.10 of macro-F1 at the same $\varepsilon$, while M3 and M1 are the same within the noise.
 
 \subsubsection*{Why the Curve Flattens Between $\varepsilon = 5$ and $\varepsilon = 10$}
 FedDP-Marginal without DP reaches 0.459, only 0.026 above MG-eps10. Beyond a moderate budget, the limiting factor is what a Chow--Liu tree over 37 attributes, sampled one packet at a time, can represent. The classifier is limited too: the real-data references show that per-packet separation of the rare classes is hard.
@@ -652,8 +665,8 @@ FedDP-Marginal without DP reaches 0.459, only 0.026 above MG-eps10. Beyond a mod
 \subsubsection*{Why Binary F1 and Macro-F1 Tell Different Stories}
 Across the main configurations of Table~\ref{tab:res_scorecard}, the binary F1 ranges from 0.75 to 0.90, and macro-F1 ranges from 0.18 to 0.46. Saying that a packet belongs to an attack is much easier than saying which attack. Most of the difficulty lies in separating the attack families, and part of the literature's high scores comes from reporting only the binary task (Section~\ref{sec:res_literature}).
 
-\subsubsection*{Why Synthetic Rows Add Nothing to Pooled Real Data}
-TAug adds synthetic rows to a classifier that already sees all the real rows of every class. A generator trained on those rows, and in particular one that models each packet independently, gives no new information about the boundary between classes. Local augmentation differs, since the client there receives classes it has rarely seen, and this accounts for its gain of about 0.04.
+\subsubsection*{Why Synthetic Rows Add Little to Pooled Real Data}
+TAug adds synthetic rows to a classifier that already sees all the real rows of every class. A generator trained on those rows, and in particular one that models each packet independently, adds little information about the boundary between classes: the gains are at most $+0.001$ for the RF and up to $+0.038$ for the MLP, whose imbalanced real baseline leaves more room, and they stay below class weights and SMOTE. Local augmentation differs, since the client there receives classes it has rarely seen, which is consistent with its gain of about 0.04.
 
 \subsubsection*{Why the Attacks Behave Differently}
 The attack on the synthetic set measures near-copies and sees none. The attack on the released CVAE sees nothing either, including in the unprotected B3, which suggests that the training regime of the federated CVAE leaves little membership signal for this attack family. The attack on the tables does see the release without DP, because a count table responds directly to the presence of a record, especially in the sparse cells of rare classes. DP then reduces the signal in a measurable way, and the ordering of the AUC follows $\varepsilon$. Secure aggregation alone does not affect this, since it hides each gateway's tables from the server but not what the released sum reveals.

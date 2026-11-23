@@ -426,6 +426,10 @@ A.~Strehl and J.~Ghosh, ``Cluster ensembles -- a knowledge reuse framework for
   \url{https://www.jmlr.org/papers/v3/strehl02a.html}
 \BIBentrySTDinterwordspacing
 
+\bibitem[Jaccard(1912)]{jaccard1912}
+P.~Jaccard, ``The distribution of the flora in the alpine zone,'' \emph{New
+  Phytologist}, vol.~11, no.~2, pp. 37--50, 1912.
+
 \bibitem[Csisz{\'a}r(1975)]{csiszar1975}
 I.~Csisz{\'a}r, ``I-divergence geometry of probability distributions and
   minimization problems,'' \emph{The Annals of Probability}, vol.~3, no.~1, pp.
@@ -480,10 +484,6 @@ J.~Liu and K.~Talwar, ``Private selection from private candidates,'' in
 N.~Papernot and T.~Steinke, ``Hyperparameter tuning with {R{\'e}nyi}
   differential privacy,'' in \emph{Proceedings of the 10th International
   Conference on Learning Representations (ICLR)}, 2022.
-
-\bibitem[Jaccard(1912)]{jaccard1912}
-P.~Jaccard, ``The distribution of the flora in the alpine zone,'' \emph{New
-  Phytologist}, vol.~11, no.~2, pp. 37--50, 1912.
 
 \bibitem[Hastie et~al.(2009)Hastie, Tibshirani, and Friedman]{hastie2009}
 T.~Hastie, R.~Tibshirani, and J.~Friedman, \emph{The Elements of Statistical

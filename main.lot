@@ -1,58 +1,58 @@
 \babel@toc {english}{}\relax 
 \addvspace {10pt}
 \addvspace {10pt}
-\contentsline {table}{\numberline {2.1}{\ignorespaces Unified comparison of the reviewed studies}}{22}{table.caption.10}%
+\contentsline {table}{\numberline {2.1}{\ignorespaces Unified comparison of the reviewed studies}}{22}{table.caption.12}%
 \addvspace {10pt}
-\contentsline {table}{\numberline {3.1}{\ignorespaces Research questions and their experimental design}}{30}{table.caption.11}%
-\contentsline {table}{\numberline {3.2}{\ignorespaces Comparison of the two generator routes}}{33}{table.caption.13}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces Parties of the threat model}}{35}{table.caption.15}%
-\contentsline {table}{\numberline {3.4}{\ignorespaces Comparison of protection mechanisms}}{37}{table.caption.16}%
-\contentsline {table}{\numberline {3.5}{\ignorespaces Experiment matrix of PP-FedData}}{40}{table.3.5}%
-\contentsline {table}{\numberline {3.6}{\ignorespaces Robustness and sensitivity branches}}{43}{table.caption.17}%
-\contentsline {table}{\numberline {3.7}{\ignorespaces Deployment scenarios (inputs only)}}{46}{table.caption.18}%
-\contentsline {table}{\numberline {3.8}{\ignorespaces Composition of the DoS/DDoS-MQTT-IoT dataset}}{47}{table.caption.19}%
-\contentsline {table}{\numberline {3.9}{\ignorespaces Data provenance verification}}{48}{table.caption.20}%
-\contentsline {table}{\numberline {3.10}{\ignorespaces Final feature schema ($D = 59$)}}{50}{table.caption.21}%
-\contentsline {table}{\numberline {3.11}{\ignorespaces Split of each sub-class}}{51}{table.caption.22}%
-\contentsline {table}{\numberline {3.12}{\ignorespaces Class quotas of the training, validation, and test splits}}{52}{table.caption.23}%
-\contentsline {table}{\numberline {3.13}{\ignorespaces Leakage and label-reliability checks}}{53}{table.caption.24}%
-\contentsline {table}{\numberline {3.14}{\ignorespaces Federated partition parameters}}{56}{table.caption.25}%
-\contentsline {table}{\numberline {3.15}{\ignorespaces Variants of FedDP-Marginal}}{64}{table.caption.27}%
-\contentsline {table}{\numberline {3.16}{\ignorespaces Configuration matrix of the baseline and proposed generators}}{71}{table.caption.28}%
-\contentsline {table}{\numberline {3.17}{\ignorespaces Hyper-parameter search spaces of the model components}}{74}{table.caption.29}%
-\contentsline {table}{\numberline {3.18}{\ignorespaces Evaluation protocols}}{76}{table.caption.30}%
-\contentsline {table}{\numberline {3.19}{\ignorespaces Experimental environment specification}}{79}{table.caption.31}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces Research questions and their experimental design}}{29}{table.caption.13}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Comparison of the two generator routes}}{32}{table.caption.15}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Parties of the threat model}}{34}{table.caption.17}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Comparison of protection mechanisms}}{36}{table.caption.18}%
+\contentsline {table}{\numberline {3.5}{\ignorespaces Experiment matrix of PP-FedData}}{39}{table.3.5}%
+\contentsline {table}{\numberline {3.6}{\ignorespaces Robustness and sensitivity branches}}{42}{table.caption.19}%
+\contentsline {table}{\numberline {3.7}{\ignorespaces Deployment scenarios (inputs only)}}{45}{table.caption.20}%
+\contentsline {table}{\numberline {3.8}{\ignorespaces Composition of the DoS/DDoS-MQTT-IoT dataset}}{46}{table.caption.21}%
+\contentsline {table}{\numberline {3.9}{\ignorespaces Data provenance verification}}{47}{table.caption.22}%
+\contentsline {table}{\numberline {3.10}{\ignorespaces Final feature schema ($D = 59$)}}{49}{table.caption.23}%
+\contentsline {table}{\numberline {3.11}{\ignorespaces Split of each sub-class}}{50}{table.caption.24}%
+\contentsline {table}{\numberline {3.12}{\ignorespaces Class quotas of the training, validation, and test splits}}{51}{table.caption.25}%
+\contentsline {table}{\numberline {3.13}{\ignorespaces Leakage and label-reliability checks}}{52}{table.caption.26}%
+\contentsline {table}{\numberline {3.14}{\ignorespaces Federated partition parameters}}{55}{table.caption.27}%
+\contentsline {table}{\numberline {3.15}{\ignorespaces Variants of FedDP-Marginal}}{63}{table.caption.29}%
+\contentsline {table}{\numberline {3.16}{\ignorespaces Configuration matrix of the baseline and proposed generators}}{72}{table.caption.30}%
+\contentsline {table}{\numberline {3.17}{\ignorespaces Hyper-parameter search spaces of the model components}}{74}{table.caption.31}%
+\contentsline {table}{\numberline {3.18}{\ignorespaces Reference data of each family of scores}}{76}{table.caption.32}%
+\contentsline {table}{\numberline {3.19}{\ignorespaces Evaluation protocols}}{77}{table.caption.33}%
+\contentsline {table}{\numberline {3.20}{\ignorespaces Experimental environment specification}}{81}{table.caption.34}%
 \addvspace {10pt}
-\contentsline {table}{\numberline {4.1}{\ignorespaces Results of the leakage and label-reliability checks (Random Forest with 100 trees, validation split, three seeds)}}{88}{table.caption.33}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Real-data RF with NORMAL and BCF tested on unseen captures or on a block of their training captures (three seeds)}}{89}{table.caption.34}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces References trained on the pooled real training split (TRTR)}}{90}{table.caption.35}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces Settings selected on the validation split}}{90}{table.caption.36}%
-\contentsline {table}{\numberline {4.5}{\ignorespaces Main configurations under TSTR. An asterisk marks byte counts estimated from the number of cells, because MGl runs in process.}}{91}{table.caption.37}%
-\contentsline {table}{\numberline {4.6}{\ignorespaces TAug: difference of test macro-F1 against real data only (B0), with the 95\% paired bootstrap interval}}{95}{table.caption.40}%
-\contentsline {table}{\numberline {4.7}{\ignorespaces Local augmentation at each gateway (RF, 15 client models over 5 clients and 3 seeds, mean $\pm $ standard deviation)}}{96}{table.caption.41}%
-\contentsline {table}{\numberline {4.8}{\ignorespaces The classifier trained directly by federated learning, compared with the generator routes at the same protection (TSTR with the MLP on the generator side)}}{97}{table.caption.42}%
-\contentsline {table}{\numberline {4.9}{\ignorespaces FedDP-Marginal minus the best CVAE route with DP (TSTR on the real test split). All verdicts are ``better'' under both bootstraps.}}{98}{table.caption.43}%
-\contentsline {table}{\numberline {4.10}{\ignorespaces Test F1 per class (mean over three seeds; classifier chosen on validation)}}{99}{table.caption.44}%
-\contentsline {table}{\numberline {4.11}{\ignorespaces Fidelity of the synthetic sets (mean over classes and seeds)}}{101}{table.caption.46}%
-\contentsline {table}{\numberline {4.12}{\ignorespaces Measured overhead of secure aggregation}}{102}{table.caption.47}%
-\contentsline {table}{\numberline {4.13}{\ignorespaces TSTR macro-F1 by protected unit (rows kept in brackets when capped)}}{103}{table.caption.49}%
-\contentsline {table}{\numberline {4.14}{\ignorespaces Effect of the honest-gateway threshold $t$ ($K = 5$)}}{104}{table.caption.51}%
-\contentsline {table}{\numberline {4.15}{\ignorespaces Membership inference on the released tables of FedDP-Marginal (calibrated attack, 1,000 bootstrap resamples)}}{105}{table.caption.52}%
-\contentsline {table}{\numberline {4.16}{\ignorespaces Robustness of FedDP-Marginal at $\varepsilon = 5$, and the eleven-class mode}}{106}{table.caption.54}%
-\contentsline {table}{\numberline {4.17}{\ignorespaces Sensitivity worlds: test macro-F1 (mean $\pm $ standard deviation over three seeds)}}{107}{table.caption.55}%
-\contentsline {table}{\numberline {4.18}{\ignorespaces Recommended configuration per deployment requirement. The value of $\varepsilon $ is the one that holds under the trust assumed by the requirement.}}{108}{table.caption.56}%
-\contentsline {table}{\numberline {4.19}{\ignorespaces When synthetic data are worth using, on this dataset}}{109}{table.caption.57}%
-\contentsline {table}{\numberline {4.20}{\ignorespaces Published results on the DoS/DDoS-MQTT-IoT dataset, with the task, input and split of each study}}{113}{table.caption.58}%
-\contentsline {table}{\numberline {4.21}{\ignorespaces Binary F1 on the closest tasks (mean of three seeds)}}{113}{table.caption.59}%
-\contentsline {table}{\numberline {4.22}{\ignorespaces Effect of the split and the identifier columns on the real-data RF (three seeds)}}{114}{table.caption.60}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Results of the leakage and label-reliability checks (Random Forest with 100 trees, validation split, three seeds)}}{90}{table.caption.36}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Real-data RF with NORMAL and BCF tested on unseen captures or on a block of their training captures (three seeds)}}{91}{table.caption.37}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces References trained on the pooled real training split (TRTR)}}{92}{table.caption.38}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Settings selected on the validation split}}{92}{table.caption.39}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Main configurations under TSTR. An asterisk marks byte counts estimated from the number of cells, because MGl runs in process.}}{93}{table.caption.40}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces TAug: difference of test macro-F1 against real data only (B0), with the 95\% paired bootstrap interval}}{97}{table.caption.43}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces Local augmentation at each gateway, and synthetic rows alone (RF, 15 client models over 5 clients and 3 seeds, mean $\pm $ standard deviation)}}{99}{table.caption.44}%
+\contentsline {table}{\numberline {4.8}{\ignorespaces The classifier trained directly by federated learning, compared with the generator routes at the same protection (TSTR with the MLP on the generator side)}}{100}{table.caption.45}%
+\contentsline {table}{\numberline {4.9}{\ignorespaces FedDP-Marginal minus the CVAE route with DP chosen on validation (TSTR on the real test split). All verdicts are ``better'' under both bootstraps.}}{101}{table.caption.46}%
+\contentsline {table}{\numberline {4.10}{\ignorespaces Test F1 per class (mean over three seeds; classifier chosen on validation)}}{103}{table.caption.47}%
+\contentsline {table}{\numberline {4.11}{\ignorespaces Fidelity of the synthetic sets (mean over classes and seeds)}}{104}{table.caption.49}%
+\contentsline {table}{\numberline {4.12}{\ignorespaces Measured overhead of secure aggregation}}{105}{table.caption.50}%
+\contentsline {table}{\numberline {4.13}{\ignorespaces TSTR macro-F1 by protected unit (rows kept in brackets when capped)}}{107}{table.caption.52}%
+\contentsline {table}{\numberline {4.14}{\ignorespaces Effect of the honest-gateway threshold $t$ ($K = 5$)}}{108}{table.caption.54}%
+\contentsline {table}{\numberline {4.15}{\ignorespaces Membership inference on the released tables of FedDP-Marginal (calibrated attack, 1,000 bootstrap resamples)}}{109}{table.caption.55}%
+\contentsline {table}{\numberline {4.16}{\ignorespaces Robustness of FedDP-Marginal at $\varepsilon = 5$, and the eleven-class mode}}{110}{table.caption.57}%
+\contentsline {table}{\numberline {4.17}{\ignorespaces Sensitivity worlds: test macro-F1 (mean $\pm $ standard deviation over three seeds)}}{111}{table.caption.58}%
+\contentsline {table}{\numberline {4.18}{\ignorespaces Recommended configuration per deployment requirement. The value of $\varepsilon $ is the one that holds under the trust assumed by the requirement.}}{112}{table.caption.59}%
+\contentsline {table}{\numberline {4.19}{\ignorespaces When synthetic data are worth using, on this dataset}}{113}{table.caption.60}%
+\contentsline {table}{\numberline {4.20}{\ignorespaces Published results on the DoS/DDoS-MQTT-IoT dataset, with the task, input and split of each study}}{117}{table.caption.61}%
+\contentsline {table}{\numberline {4.21}{\ignorespaces Binary F1 on the closest tasks (mean of three seeds)}}{117}{table.caption.62}%
+\contentsline {table}{\numberline {4.22}{\ignorespaces Effect of the split and the identifier columns on the real-data RF (three seeds)}}{118}{table.caption.63}%
 \addvspace {10pt}
-\contentsline {table}{\numberline {5.1}{\ignorespaces Answers to the research questions and the working hypotheses}}{116}{table.caption.61}%
-\contentsline {table}{\numberline {5.2}{\ignorespaces Status of the main statements of the thesis}}{119}{table.caption.62}%
-\contentsline {table}{\numberline {5.3}{\ignorespaces Main limitations, the findings they bound, and their measured effect}}{125}{table.caption.63}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces Answers to the research questions and the working hypotheses}}{121}{table.caption.64}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Status of the main statements of the thesis}}{122}{table.caption.65}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Main limitations, the findings they bound, and their measured effect}}{126}{table.5.3}%
 \addvspace {10pt}
 \addvspace {10pt}
-\contentsline {table}{\numberline {A.1}{\ignorespaces Scorecard of all configurations (TSTR on the real test split, classifier chosen on validation). Configurations marked with a dagger use statistics outside $\varepsilon $ and are excluded from the Pareto front.}}{130}{table.A.1}%
+\contentsline {table}{\numberline {A.1}{\ignorespaces Scorecard of all configurations (TSTR on the real test split, classifier chosen on validation). Configurations marked with a dagger use statistics outside $\varepsilon $ and are excluded from the Pareto front.}}{133}{table.A.1}%
 \addvspace {10pt}
-\contentsline {table}{\numberline {B.1}{\ignorespaces Effective $\varepsilon $ of the distributed configurations as a function of the number of honest gateways $h$ ($K = 5$)}}{133}{table.B.1}%
+\contentsline {table}{\numberline {B.1}{\ignorespaces Effective $\varepsilon $ of the distributed configurations as a function of the number of honest gateways $h$ ($K = 5$)}}{136}{table.B.1}%
 \addvspace {10pt}
-\contentsline {table}{\numberline {C.1}{\ignorespaces Commands that produce the results of Chapter~\ref {chap:results}}}{135}{table.caption.64}%
