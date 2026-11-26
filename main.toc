@@ -66,7 +66,7 @@
 \contentsline {section}{\numberline {4.5}Comparison with Literature}{116}{section.4.5}%
 \contentsline {subsection}{\numberline {4.5.1}Published Results on the Same Dataset}{116}{subsection.4.5.1}%
 \contentsline {subsection}{\numberline {4.5.2}How Much the Protocol Alone Moves a Score}{116}{subsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.5.3}Against Federated and Private Data Generation}{116}{subsection.4.5.3}%
+\contentsline {subsection}{\numberline {4.5.3}Against Federated and Private Data Generation}{118}{subsection.4.5.3}%
 \contentsline {chapter}{\chapternumberline {5}Discussion}{119}{chapter.5}%
 \contentsline {section}{\numberline {5.1}The Research Problem and Objectives}{119}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Key Findings}{120}{section.5.2}%

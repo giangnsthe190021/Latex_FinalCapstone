@@ -172,8 +172,8 @@ Figure~\ref{fig:res_tstr_eps} draws the TSTR macro-F1 of the main routes against
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.8\textwidth]{graphics/chapter4/tstr_vs_eps.pdf}
-\caption{TSTR macro-F1 against the privacy budget $\varepsilon$ for the main routes (mean over three seeds, with the seed standard deviation), with the reference levels on pooled real data.}
+\includegraphics[width=0.75\textwidth]{graphics/chapter4/tstr_vs_eps.pdf}
+\caption{TSTR macro-F1 against the privacy budget $\varepsilon$ for the main routes (mean over three seeds, with the seed standard deviation), with the reference levels on pooled real data. At each budget the CVAE curve takes the route chosen on validation (M1-eps1, M3o-eps5, M1o-eps10); the points at $\varepsilon = \infty$ are MGs-nodp and B3.}
 \label{fig:res_tstr_eps}
 \end{figure}
 
@@ -443,7 +443,7 @@ All traffic figures are protocol byte counts summed over the uploads and downloa
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.8\textwidth]{graphics/chapter4/f1_vs_traffic.pdf}
+\includegraphics[width=0.75\textwidth]{graphics/chapter4/f1_vs_traffic.pdf}
 \caption{TSTR macro-F1 against the total traffic of a run. Filled markers belong to the Pareto front.}
 \label{fig:res_traffic}
 \end{figure}
@@ -623,6 +623,8 @@ The rule of Section~\ref{subsec:req_rule} takes each requirement of Table~\ref{t
 
 Three remarks qualify the table. MGd is a comparator whose Gaussian noise and secure sum are simulated in one process, so a deployment that selects it needs a real implementation of the mechanism. The difference between MGd-eps5 and MGs-t3-eps5 (0.420) lies within the seed noise. The \texttt{capture-privacy} row is the best the data permit, and its macro-F1 of 0.177 does not make it a usable detector.
 
+The reference rule R6 of Section~\ref{subsec:req_rule} does not separate the candidates. Nine configurations pass its filters (B3, M2, M1-eps1, M1-eps5, M3-eps5, MG-eps1, MG-eps5, MGl-eps1 and MGl-eps5; FedDP-Marginal trains no model over rounds, so the time filter does not apply to it), and their TAug macro-F1 with the RF lies between 0.4465 and 0.4488. The literal rule picks B3, the decision rule finds B3, M1-eps5, M2 and M3-eps5 tied, and the tie-break by protection returns M3-eps5. TAug assumes that the real data can be pooled, the setting in which Section~\ref{subsec:res_when_synthetic} prefers class weights or SMOTE. Ranked by the TSTR macro-F1 of the RF, the score that matters when the synthetic data replace the real data, the same filters pick MG-eps5 (0.425, against 0.397 for B3), and every other candidate is worse under the decision rule. R6 is therefore reported as a reference and does not replace the requirement-driven rule.
+
 \subsection{When Synthetic Data Are Worth Using}\label{subsec:res_when_synthetic}
 The results of RQ1 to RQ3 answer a practical question: in which situations is a generator the right tool, and in which is it not needed? Table~\ref{tab:res_when_synthetic} collects the answer. Every row rests on a comparison measured in this chapter, on this dataset.
 
@@ -677,7 +679,6 @@ With one honest gateway and calibration at $t = K$, the effective $\varepsilon$ 
 \subsubsection*{Limits of These Interpretations}
 These explanations are consistent with the measured results, but only the comparisons in Section~\ref{sec:res_analysis} were tested. The causal statements in this section were not tested separately, and they apply to one dataset, packet-level features and three seeds.
 
-\clearpage
 \section{Comparison with Literature}\label{sec:res_literature}
 
 \subsection{Published Results on the Same Dataset}
