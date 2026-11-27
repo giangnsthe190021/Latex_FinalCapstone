@@ -694,9 +694,9 @@ Published scores on this dataset are far above the macro-F1 of this study, but t
 \toprule
 \textbf{Study} & \textbf{Task} & \textbf{Input} & \textbf{Split} & \textbf{Reported result} \\
 \midrule
-Alatram et al.~\cite{alatram2023} & Attack against normal & Packets; the 30-feature list contains source IP, stream index and time columns, and the paper does not say which columns the classifiers received & Not described; 3,654,560 records used & Accuracy of RF 92.69\% to 100\%; no F1 \\
+Alatram \textit{et al.}~\cite{alatram2023} & Attack against normal & Packets; the 30-feature list contains source IP, stream index and time columns, and the paper does not say which columns the classifiers received & Not described; 3,654,560 records used & Accuracy of RF 92.69\% to 100\%; no F1 \\
 \midrule
-Zhang et al.~\cite{zhang2026} & Binary, each attack against benign (DDoS variants of BF, Delay, Sub, WILL) & Packet payload: keywords from 30-packet windows, hashed to 8 integers & Contiguous part of the captures, balanced by selection & F1 (RF) 0.993 to 1.000 \\
+Zhang \textit{et al.}~\cite{zhang2026} & Binary, each attack against benign (DDoS variants of BF, Delay, Sub, WILL) & Packet payload: keywords from 30-packet windows, hashed to 8 integers & Contiguous part of the captures, balanced by selection & F1 (RF) 0.993 to 1.000 \\
 \midrule
 Parra and Bayas~\cite{parra2026} & Binary, normal against two flooding attacks & TCP flows in 1\,s windows; 4 statistics; no payload & Stratified 70/30 and 5-fold; no separation by capture stated & F1 0.846, AUC 0.876 (hold-out) \\
 \midrule
@@ -717,10 +717,10 @@ On the closest binary tasks, the saved predictions are re-scored with every atta
 \textbf{Task} & \textbf{Published (study)} & \textbf{F1} & \textbf{Real data (B1a, RF)} & \textbf{Synthetic, $\varepsilon = 10$} \\
 \midrule
 Normal / BCF + DELAYED & Parra and Bayas~\cite{parra2026} & 0.846 & 0.837 & 0.832 \\
-Normal / BCF & Zhang et al.~\cite{zhang2026} & 1.000 & 0.888 & 0.857 \\
-Normal / DELAYED & Zhang et al.~\cite{zhang2026} & 1.000 & 0.738 & 0.723 \\
-Normal / INVALID & Zhang et al.~\cite{zhang2026} & 0.993 & 0.786 & 0.728 \\
-Normal / WILL & Zhang et al.~\cite{zhang2026} & 0.999 & 0.853 & 0.836 \\
+Normal / BCF & Zhang \textit{et al.}~\cite{zhang2026} & 1.000 & 0.888 & 0.857 \\
+Normal / DELAYED & Zhang \textit{et al.}~\cite{zhang2026} & 1.000 & 0.738 & 0.723 \\
+Normal / INVALID & Zhang \textit{et al.}~\cite{zhang2026} & 0.993 & 0.786 & 0.728 \\
+Normal / WILL & Zhang \textit{et al.}~\cite{zhang2026} & 0.999 & 0.853 & 0.836 \\
 \bottomrule
 \end{tabularx}
 \end{table}

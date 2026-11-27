@@ -515,7 +515,7 @@ Table~\ref{tab:scenarios} defines eleven illustrative requirements. Only the inp
 \section{Data Collection Methods}\label{sec:data_collection}
 
 \subsection{Dataset}\label{subsec:dataset}
-The data source is the DoS/DDoS-MQTT-IoT dataset of Alatram et~al.~\cite{alatram2023}, obtained from the authors' official Kaggle release~\cite{alatram2023kaggle}. It contains normal IoT traffic and several denial-of-service (DoS) and distributed denial-of-service (DDoS) attacks that abuse the MQTT protocol~\cite{mqtt311}. The release is distributed in several formats; this study works on CSV exports that total 39,000,601 rows.
+The data source is the DoS/DDoS-MQTT-IoT dataset of Alatram \textit{et~al.}~\cite{alatram2023}, obtained from the authors' official Kaggle release~\cite{alatram2023kaggle}. It contains normal IoT traffic and several denial-of-service (DoS) and distributed denial-of-service (DDoS) attacks that abuse the MQTT protocol~\cite{mqtt311}. The release is distributed in several formats; this study works on CSV exports that total 39,000,601 rows.
 
 Each row is one network packet described by 33 feature columns. The Normal traffic has two additional columns, \texttt{Label} and \texttt{Capture\_ID}; \texttt{Capture\_ID} assigns the \texttt{group\_id} used for splitting, whereas attack rows take their \texttt{group\_id} from the name of the source file. An inventory step confirms that the row counts match the expected totals. Table~\ref{tab:dataset_composition} gives the composition by class.
 
@@ -713,7 +713,7 @@ C5 & Binary task separating the DoS and DDoS variants of the same attack family 
 \subsection{Federated Partitioning}\label{subsec:partitioning}
 
 \subsubsection*{Dirichlet Partition of the Training Data}
-To model non-identically distributed (non-IID) traffic across edge gateways, the training split is partitioned over a federation of $K$ gateways, indexed by $k \in \{1, 2, \dots, K\}$, with $K = 5$ in the main study. The partition follows the Dirichlet label-skew model of Hsu et~al.~\cite[Sec.~3]{hsu2019}, with a symmetric Dirichlet distribution of concentration parameter $\alpha_{\text{dir}}$. Hsu et~al.\ draw the class proportions of each client; this study uses the transposed form and draws, for each class $c \in \{1, \dots, C\}$ ($C = 6$ in the six-class mode), the proportions assigned to the $K$ gateways independently:
+To model non-identically distributed (non-IID) traffic across edge gateways, the training split is partitioned over a federation of $K$ gateways, indexed by $k \in \{1, 2, \dots, K\}$, with $K = 5$ in the main study. The partition follows the Dirichlet label-skew model of Hsu \textit{et~al.}~\cite[Sec.~3]{hsu2019}, with a symmetric Dirichlet distribution of concentration parameter $\alpha_{\text{dir}}$. Hsu \textit{et~al.}\ draw the class proportions of each client; this study uses the transposed form and draws, for each class $c \in \{1, \dots, C\}$ ($C = 6$ in the six-class mode), the proportions assigned to the $K$ gateways independently:
 \begin{equation}
 p_c = (p_{c,1}, p_{c,2}, \dots, p_{c,K}) \sim \mathrm{Dir}(\alpha_{\text{dir}}, \dots, \alpha_{\text{dir}}).
 \label{eq:dirichlet}
@@ -780,7 +780,7 @@ Running FedDP-Marginal with $\alpha_{\text{dir}} \in \{0.1, 0.5, 10\}$ is theref
 \subsection{FedDP-Marginal}\label{subsec:feddp_marginal}
 
 \subsubsection*{Positioning and Overview}
-FedDP-Marginal adapts private marginal-based synthesis of tabular data, namely the MST method of McKenna et~al.~\cite{mckenna2021mst} and the graphical-model principles of PrivBayes~\cite{zhang2017privbayes}, to a federated setting. It is not a new generative method; it adapts marginal-based dependency modelling to federation through secure integer aggregation. Unlike deep federated models, which need many rounds of weight exchange, FedDP-Marginal uses three query releases coordinated through SecAgg$^+$~\cite{bell2020} in Flower~\cite{beutel2020} (Figure~\ref{fig:three_release}).
+FedDP-Marginal adapts private marginal-based synthesis of tabular data, namely the MST method of McKenna \textit{et~al.}~\cite{mckenna2021mst} and the graphical-model principles of PrivBayes~\cite{zhang2017privbayes}, to a federated setting. It is not a new generative method; it adapts marginal-based dependency modelling to federation through secure integer aggregation. Unlike deep federated models, which need many rounds of weight exchange, FedDP-Marginal uses three query releases coordinated through SecAgg$^+$~\cite{bell2020} in Flower~\cite{beutel2020} (Figure~\ref{fig:three_release}).
 
 \begin{figure}[htbp]
 \centering
@@ -962,12 +962,12 @@ $\rho$ is divided between the three releases by the split $\omega = (\omega_1, \
 \subsubsection*{Skellam Mechanism and Accounting (MGs, MGr)}
 The nominal guarantees are $\varepsilon \in \{1, 5, 10\}$ with $\delta = 10^{-5}$. The Skellam distribution $\mathrm{Sk}(\mu_{\text{sk}}) = \mathrm{Pois}(\mu_{\text{sk}}/2) - \mathrm{Pois}(\mu_{\text{sk}}/2)$ is the difference of two independent Poisson variables with parameter $\mu_{\text{sk}}/2$; it has zero mean and variance $\mu_{\text{sk}}$~\cite{skellam1946}, \cite[Definition~3.1]{agarwal2021}. Because it is closed under summation, the integer noise shares drawn by the gateways add up exactly under addition modulo $2^{32}$~\cite{agarwal2021}.
 
-The accounting uses the Rényi differential privacy (RDP) bound of Agarwal et~al.~\cite[Corollary~3.6, eq.~(3.2)]{agarwal2021}. For an integer order $\lambda > 1$:
+The accounting uses the Rényi differential privacy (RDP) bound of Agarwal \textit{et~al.}~\cite[Corollary~3.6, eq.~(3.2)]{agarwal2021}. For an integer order $\lambda > 1$:
 \begin{equation}
 \varepsilon(\lambda) \le \frac{\lambda \Delta_2^2}{2\mu_{\text{sk}}} + \min\left( \frac{(2\lambda - 1)\Delta_2^2 + 6\Delta_1}{4\mu_{\text{sk}}^2}, \frac{3\Delta_1}{2\mu_{\text{sk}}} \right).
 \label{eq:skellam_rdp}
 \end{equation}
-Over the three releases, RDP composes additively~\cite[Proposition~1]{mironov2017rdp}: $\varepsilon_{\text{total}}(\lambda) = \sum_{r=1}^{3} \varepsilon_r(\lambda)$. The composed RDP curve is converted to $(\varepsilon, \delta)$ with the bound of Balle et~al.~\cite[Th.~21]{balle2020}, the conversion used by the RDP accountant of Opacus~\cite{yousefpour2021}:
+Over the three releases, RDP composes additively~\cite[Proposition~1]{mironov2017rdp}: $\varepsilon_{\text{total}}(\lambda) = \sum_{r=1}^{3} \varepsilon_r(\lambda)$. The composed RDP curve is converted to $(\varepsilon, \delta)$ with the bound of Balle \textit{et~al.}~\cite[Th.~21]{balle2020}, the conversion used by the RDP accountant of Opacus~\cite{yousefpour2021}:
 \begin{equation}
 \varepsilon = \min_{\lambda} \left[ \varepsilon_{\text{total}}(\lambda) + \ln\frac{\lambda - 1}{\lambda} - \frac{\ln \delta + \ln \lambda}{\lambda - 1} \right].
 \label{eq:rdp_to_dp}
@@ -1353,7 +1353,7 @@ The limitations below arise from the design of the study and the scope of the te
     \item Normalisation statistics are computed centrally on the pooled training split, as if each client had shared its data once. A real federation would have to compute them securely or fix them beforehand.
     \item Hyper-parameter selection on the real validation split is not private and lies outside $\varepsilon$.
     \item Distributed DP assumes that enough clients add their noise share; the guarantee degrades as the number of honest clients falls, which is why $\varepsilon$ is reported as a function of $h$.
-    \item Accounting differs between variants: the Skellam variant uses the RDP bound of Agarwal et~al.~\cite{agarwal2021} and the RDP-to-$(\varepsilon, \delta)$ conversion~\cite[Th.~21]{balle2020} used by Opacus~\cite{yousefpour2021}, while the Gaussian variant uses zCDP~\cite{bun2016} with a looser conversion, so part of the difference between the two at the same $\varepsilon$ comes from the conversion and not from the mechanism.
+    \item Accounting differs between variants: the Skellam variant uses the RDP bound of Agarwal \textit{et~al.}~\cite{agarwal2021} and the RDP-to-$(\varepsilon, \delta)$ conversion~\cite[Th.~21]{balle2020} used by Opacus~\cite{yousefpour2021}, while the Gaussian variant uses zCDP~\cite{bun2016} with a looser conversion, so part of the difference between the two at the same $\varepsilon$ comes from the conversion and not from the mechanism.
     \item Malicious gateways (poisoning, Byzantine behaviour) are outside the threat model.
     \item \textbf{Ideal randomness versus the research simulation:} the reported $\varepsilon$ describes the accounted mechanism under the assumption that the noise is secret and independent. The simulation does not meet that assumption. For reproducibility, the noise of FedDP-Marginal is drawn from a generator seeded with the public experiment seed, the gateway index and the release, and the DP-SGD noise of the CVAE comes from a seeded generator with the secure random-number mode of Opacus turned off~\cite{yousefpour2021}. An observer who knows the seeds can regenerate the noise and remove it from the released counts. The simulation also writes each gateway's noisy vector to the shared run directory for an off-protocol check. The experiments therefore evaluate utility and nominal accounting under the ideal secret-randomness model; they are not an operational private release. A deployment needs private, independent randomness at every gateway (a cryptographically secure generator) and must keep diagnostic files out of storage the server can read.
 \end{itemize}
