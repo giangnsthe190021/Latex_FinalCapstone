@@ -1,9 +1,4 @@
 % !TeX root = ../../main.tex
-% Every number is read from the PP-FedData repository, round R (Normal traffic extracted with the dataset authors' export settings):
-% results/reports/final_report.md (sections 4, 5, 9.0-9.12, 10), results/scorecard.json, results/recommend.json,
-% results/reports/robustness.md, privacy_units.md, ids_followup.md, mg_nodp.md, results/fed_classifier.json,
-% results/mia_marginal.json, results/ids_followup.json, and analysis/rule9_rq2.json, analysis/mia_bootstrap.json of this repository.
-% Means over seeds {0, 1, 2} on the real test split; +- is the seed standard deviation.
 \section{Results and Discussion}\label{sec:results}
 
 \subsection{RQ1: Utility of Federated Synthetic Data}\label{subsec:rq1}
@@ -55,7 +50,6 @@ $\boldsymbol{\varepsilon}$ & \textbf{Configuration} & \textbf{Macro-F1} & \textb
 
 \begin{figure}[!t]
 \centering
-% Drawn by scripts/make_paper_figures.py (Python); included by its full name, so no hand-drawn Fig3 export can replace it.
 \includegraphics[width=\columnwidth]{graphics/paper/Fig3_python.pdf}
 \caption{TSTR macro-F1 (bars: one seed standard deviation) against the privacy budget for FedDP-Marginal with distributed noise (MG) and client-side noise (MGl), and for the best CVAE configuration. The $\varepsilon$ axis is categorical (equal spacing). Dashed lines: RFs trained on pooled real data.}
 \label{fig:tstr_eps}
@@ -132,7 +126,6 @@ Fig.~\ref{fig:pareto} places every valid configuration by utility and total traf
 
 \begin{figure}[!t]
 \centering
-% Drawn by scripts/make_paper_figures.py (Python), like Fig. 3.
 \includegraphics[width=\columnwidth]{graphics/paper/Fig4_python.pdf}
 \caption{TSTR macro-F1 against total traffic per run (log scale) for all valid configurations. MG: FedDP-Marginal, including its Gaussian ablation (MGd, summed in-process) and second-order ablation (MGb); MGp: plain Flower sum without SecAgg$^+$. The traffic of the client-side variants (MGl) is estimated, as in Table~\ref{tab:main}. Filled markers: Pareto front over utility, $\varepsilon$ and cost.}
 \label{fig:pareto}

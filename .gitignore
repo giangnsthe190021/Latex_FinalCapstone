@@ -1,4 +1,7 @@
-# LaTeX build artifacts
+# LaTeX build artifacts (main.pdf and main.bbl are kept for the submission)
+*.aux
+*.log
+*.blg
 *.fdb_latexmk
 *.fls
 *.synctex.gz
@@ -9,7 +12,9 @@
 # Upload package for Overleaf (rebuilt from the sources)
 overleaf_upload.zip
 
-# Fig. 3-4 are drawn only by scripts/make_paper_figures.py (Fig3_python.pdf, Fig4_python.pdf);
-# keep hand-drawn exports under the old names out of the repository
+# Editor settings
+.vscode/
+
+# Fig. 3-4 are Fig3_python.pdf and Fig4_python.pdf; keep hand-drawn exports under the old names out of the repository
 graphics/paper/Fig3.*
 graphics/paper/Fig4.*

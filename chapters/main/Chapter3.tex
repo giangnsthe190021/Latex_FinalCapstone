@@ -1,7 +1,4 @@
 % !TeX root = ../../main.tex
-% Sources (PP-FedData repository): docs/PP-FedData_Implementation_Spec.md, docs/SPEC_DEVIATIONS.md (O2.1-O4.2, P1.1-P1.2),
-% src/ppfeddata/models/marginal.py (releases, accounting), src/ppfeddata/fl/mg_app.py (SecAgg+ uint32), src/ppfeddata/group_dp.py.
-% Equations are typed in LaTeX; the same code for MathType is listed in huong_dan/HUONG_DAN_CONG_THUC_MATHTYPE.md.
 \section{System Model and Methodology}\label{sec:methodology}
 
 \subsection{Architecture and Threat Model}\label{subsec:system}
@@ -18,7 +15,7 @@ and each record of class $c$ goes to gateway $k$ with probability $p_{c,k}$. Wit
 
 \begin{figure*}[!t]
 \centering
-\cdfigure{graphics/paper/fig1_architecture}{\textwidth}{2.36in}
+\includegraphics[width=\textwidth]{graphics/paper/fig1_architecture.pdf}
 \caption{PP-FedData architecture. Gateways keep raw traffic; FedDP-Marginal sends three releases of noisy count tables and the federated CVAE sends model updates, both through SecAgg$^+$ to an honest-but-curious server, which samples synthetic packets for the downstream IDS.}
 \label{fig:architecture}
 \end{figure*}
@@ -48,7 +45,7 @@ where $r$ is the root attribute and every edge $(u,v)$ of $T^\star$ is oriented 
 
 \begin{figure*}[!t]
 \centering
-\cdfigure{graphics/paper/Fig2}{\textwidth}{2.36in}
+\includegraphics[width=\textwidth]{graphics/paper/Fig2.pdf}
 \caption{Three-release protocol of FedDP-Marginal. Each release is a sum of count tables plus Skellam noise shares, computed with SecAgg$^+$ over $\mathbb{Z}_{2^{32}}$. The coarse cut points (after Release~1) and the tree $T^\star$ (after Release~2) are broadcast back before the next release.}
 \label{fig:three_release}
 \end{figure*}
