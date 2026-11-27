@@ -7,7 +7,7 @@
 \subsection{Architecture and Threat Model}\label{subsec:system}
 Fig.~\ref{fig:architecture} shows the three parties of PP-FedData. A federation of $K$ edge gateways $\mathcal{K} = \{1, \dots, K\}$ observes MQTT traffic; gateway $k$ keeps its packets $\mathcal{D}_k$ locally. An aggregation server coordinates the rounds, reconstructs a global generator from the aggregated releases and samples synthetic packets for every class. A downstream IDS is trained on the synthetic packets, alone or with real ones, and is evaluated on real traffic. Two generator routes share this architecture: FedDP-Marginal, which exchanges count tables in three releases, and a federated CVAE, which exchanges model weights over tens of FedAvg rounds.
 
-To model non-IID gateways, the training data are partitioned with the label-skew scheme of Hsu et~al.~\cite{hsu2019}: for each class $c \in \{1, \dots, C\}$ the shares of the $K$ gateways are drawn as
+To model non-IID gateways, the training data are partitioned with the label-skew scheme of Hsu \textit{et~al.}~\cite{hsu2019}: for each class $c \in \{1, \dots, C\}$ the shares of the $K$ gateways are drawn as
 \begin{equation}
 \mathbf{p}_c = (p_{c,1}, \dots, p_{c,K}) \sim \mathrm{Dir}(\alpha_{\mathrm{dir}} \mathbf{1}_K),
 \label{eq:dirichlet}
@@ -60,7 +60,7 @@ where $r$ is the root attribute and every edge $(u,v)$ of $T^\star$ is oriented 
 \label{eq:sensitivity}
 \end{equation}
 
-\textit{Skellam mechanism.} The noise of each cell follows the Skellam distribution $\mathrm{Sk}(\mu) = \mathrm{Pois}(\mu/2) - \mathrm{Pois}(\mu/2)$, which has zero mean and variance $\mu$ and is closed under summation~\cite{agarwal2021}. Agarwal et~al.\ write the symmetric Skellam as $\mathrm{Sk}_{\mu,\mu}$, with variance $2\mu$; \eqref{eq:skellam_rdp} is their bound rewritten in terms of the variance. For an integer order $\lambda > 1$, a release with variance $\mu_r$ per cell satisfies the RDP bound of Agarwal et~al.~\cite[Cor.~3.6]{agarwal2021}:
+\textit{Skellam mechanism.} The noise of each cell follows the Skellam distribution $\mathrm{Sk}(\mu) = \mathrm{Pois}(\mu/2) - \mathrm{Pois}(\mu/2)$, which has zero mean and variance $\mu$ and is closed under summation~\cite{agarwal2021}. Agarwal \textit{et~al.}\ write the symmetric Skellam as $\mathrm{Sk}_{\mu,\mu}$, with variance $2\mu$; \eqref{eq:skellam_rdp} is their bound rewritten in terms of the variance. For an integer order $\lambda > 1$, a release with variance $\mu_r$ per cell satisfies the RDP bound of Agarwal \textit{et~al.}~\cite[Cor.~3.6]{agarwal2021}:
 \begin{equation}
 \begin{aligned}
 \varepsilon_r(\lambda) \le{}& \frac{\lambda \Delta_{2,r}^2}{2\mu_r} \\
